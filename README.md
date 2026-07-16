@@ -1,2 +1,3 @@
-# LLM-document-intelligence-pipeline
-An evaluated LLM pipeline for evidence-linked structured extraction from PDF, PowerPoint and email-style documents.
+# LLM Document Intelligence & Knowledge Extraction Pipeline
+
+Work in progress. This repository is being developed incrementally as an evaluated portfolio prototype.
