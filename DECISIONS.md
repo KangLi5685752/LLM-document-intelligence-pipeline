@@ -12,11 +12,11 @@ All decisions below were accepted on 2026-07-16 for the Stage 0A foundation. The
 
 ## DEC-002: Repository name
 
-- **Context:** The repository needs a concise, stable identifier aligned with the project title.
-- **Alternatives:** document-ai-pipeline; knowledge-extraction-rag; llm-document-intelligence-pipeline.
-- **Chosen option:** llm-document-intelligence-pipeline.
-- **Reason:** It is descriptive, searchable, and leaves room for extraction, validation, evaluation, and later retrieval work.
-- **Trade-off:** The name does not explicitly mention knowledge extraction and is still relatively long.
+- **Context:** The GitHub repository and portfolio need a stable display convention that remains distinct from Python packaging and import conventions.
+- **Alternatives:** document-ai-pipeline; llm-document-intelligence-pipeline; LLM-document-intelligence-pipeline.
+- **Chosen option:** Use LLM-document-intelligence-pipeline as the exact GitHub repository and portfolio display name. Keep llm-document-intelligence-pipeline as the Python distribution name and document_intelligence as the Python import package.
+- **Reason:** Uppercase “LLM” is the chosen GitHub and portfolio display convention, while the lowercase distribution and snake-case import names follow their respective Python conventions.
+- **Trade-off:** Contributors must preserve three related naming forms and use the correct form for each context.
 
 ## DEC-003: Replace the standalone RAG project
 

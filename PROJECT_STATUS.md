@@ -1,7 +1,7 @@
 # Project Status
 
 - **Current stage:** Stage 0A - project foundation and charter
-- **Last updated:** 2026-07-16
+- **Last updated:** 2026-07-17
 - **Latest commit:** Pending - replace this placeholder after the Stage 0A foundation commit
 - **AG News replacement status:** Not yet eligible
 
@@ -16,15 +16,15 @@
 ## In progress
 
 - Stage 0A review and handoff.
-- Preparation of the initial evaluation questions and dataset-selection criteria.
+- Preparation for the Stage 1 corpus audit and data-governance records.
 
 ## Next tasks
 
-1. Define the common Document Object and evidence-location model.
-2. Specify the extraction schema and validation rules.
-3. Design an evaluation plan, including baseline comparisons and review-routing measures.
-4. Select representative public documents and design synthetic edge cases.
-5. Implement one MVP parser only after the contracts and evaluation plan are reviewed.
+1. Produce a shortlist of candidate public-document sources for the MVP formats and project domains.
+2. Create a source and licence register covering provenance, permitted use, and access conditions.
+3. Design synthetic edge-case documents for ambiguity, conflicts, missing fields, and unsupported claims.
+4. Build the corpus inventory and define explicit inclusion and exclusion criteria.
+5. Assess parser feasibility and document a preprocessing plan before any parser implementation begins.
 
 ## Blockers
 

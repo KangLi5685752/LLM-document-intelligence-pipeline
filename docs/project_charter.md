@@ -10,10 +10,10 @@ An evaluated portfolio prototype that turns heterogeneous project documents into
 
 ## Target users
 
-- Analysts consolidating project facts from mixed document collections.
-- Project and knowledge-management professionals reviewing extracted decisions, risks, actions, milestones, and entities.
-- Data and AI practitioners assessing document extraction quality and provenance.
-- Portfolio reviewers evaluating practical LLM engineering, testing, and responsible-use decisions.
+- AI / Digital Transformation Analyst
+- Project or Portfolio Manager
+- Knowledge Management / Research Analyst
+- AI Governance Reviewer
 
 ## Core use cases
 
@@ -21,7 +21,7 @@ An evaluated portfolio prototype that turns heterogeneous project documents into
 2. Extract defined project-intelligence fields into schema-valid records.
 3. Trace an extracted claim to its page, slide, or section-level source evidence.
 4. Flag unsupported, conflicting, incomplete, or ambiguous outputs for human review instead of silently accepting them.
-5. Compare a deterministic baseline with structured LLM extraction using a reproducible evaluation set.
+5. Search and compare projects using structured metadata such as organisation, sector, technology, project stage and risk, while retaining source evidence.
 
 ## Non-goals
 

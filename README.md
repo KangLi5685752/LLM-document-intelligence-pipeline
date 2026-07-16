@@ -27,12 +27,16 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Planned stages
 
-1. **Stage 0 - Foundation:** define scope, architecture, decisions, packaging, and evaluation intent.
-2. **Stage 1 - Document model and parsing:** introduce the common Document Object and MVP format parsers.
-3. **Stage 2 - Extraction and trust controls:** add preprocessing, baseline and LLM extraction, validation, evidence alignment, and review routing.
-4. **Stage 3 - Evaluation and local persistence:** build a reproducible benchmark and store validated local outputs.
-5. **Stage 4 - Query and grounded retrieval:** add structured search and, only after evaluation, grounded RAG.
-6. **Stage 5 - Interface and deployment:** consider an API, containerisation, BigQuery, and Cloud Run after the local prototype is justified.
+1. **Stage 0 — Project Charter and Repo Setup**: **Current: Stage 0A.** Define the scope, architecture, decisions, packaging, and evaluation intent.
+2. **Stage 1 — Corpus Audit**: **Planned.** Shortlist public sources, register licences, design synthetic edge cases, and define corpus inclusion and exclusion criteria.
+3. **Stage 2 — Document Ingestion**: **Planned.** Add format-specific parsing, a common Document Object, preprocessing, and segmentation for the MVP formats.
+4. **Stage 3 — Baseline and Structured Extraction**: **Planned.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.
+5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
+6. **Stage 5 — Storage and Data Model**: **Planned.** Define the validated knowledge model and local persistence before considering BigQuery.
+7. **Stage 6 — Interface**: **Planned.** Add an interface or API only for capabilities supported by evaluation evidence.
+8. **Stage 7 — Retrieval and RAG**: **Planned.** Add structured retrieval and grounded RAG over validated, evidence-linked records.
+9. **Stage 8 — Cloud Deployment**: **Planned.** Consider Docker, Cloud Run, and cloud data services after the local prototype is justified.
+10. **Stage 9 — Portfolio Packaging**: **Planned.** Consolidate reproducible results, limitations, documentation, and demonstration materials without overstating outcomes.
 
 ## Local development
 
