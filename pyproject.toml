@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-document-intelligence-pipeline"
+version = "0.1.0"
+description = "An evaluated portfolio prototype for traceable document intelligence extraction."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["document_intelligence*"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
