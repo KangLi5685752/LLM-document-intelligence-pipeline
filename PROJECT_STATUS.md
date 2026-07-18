@@ -1,36 +1,39 @@
 # Project Status
 
-- **Current stage:** Stage 1B - source verification and technical corpus audit setup
+- **Current stage:** Stage 1B - pilot source audit and audit automation design
 - **Last updated:** 2026-07-18
-- **Latest milestone:** Stage 1A corpus strategy and licence register merged via PR #2
+- **Latest milestone:** S001–S003 pilot source audit recorded with verified direct URLs and file evidence
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
 
-- Stage 0A project foundation merged via PR #1.
-- Stage 1A corpus strategy, licence policy, source register, and local-audit workflow merged via PR #2.
-- Defined the project purpose, portfolio boundary, intended use, and non-goals.
-- Documented the planned high-level architecture without claiming implementation.
-- Recorded the initial project decisions and trade-offs.
-- Established minimal Python packaging with a deterministic smoke test.
-- Added environment and ignore-file safeguards for local secrets and generated data.
+- Stage 0A project foundation.
+- Stage 1A corpus strategy and licence register.
+- Stage 1B audit protocol.
+- Source and direct-file verification for S001–S003.
+- Pilot technical audit for S001–S003.
+- Integrity, page-count, text-extractability, document-structure, and licence-notice observations recorded.
+- S001–S003 approved for documented local corpus and future evaluation use.
+- Original source PDFs remain local and uncommitted.
 
 ## In progress
 
-- Stage 1B manual audit protocol and pilot audit-record template for S001–S003.
-- Pilot setup only; no source audit has started and no source is approved.
+- Designing an automated PDF corpus-audit utility.
+- Preparing S004–S007 for batch acquisition and audit.
+- Defining the synthetic challenge set.
+- Planning future development and held-out document-family splits.
 
 ## Next tasks
 
-1. Manually verify the S001–S003 direct PDF URLs.
-2. Acquire the verified files locally under data/raw.
-3. Record hashes, actual page counts, and structure observations.
-4. Review document-level licence notices and third-party material.
-5. Update the source and audit registers from observed evidence.
+1. Implement a small batch PDF audit utility for SHA-256, file size, page count, text-density, and empty-page warnings.
+2. Validate the utility against S001–S003.
+3. Acquire and audit S004–S007 using automation plus targeted manual review.
+4. Review the expanded corpus for publisher, role, and document-family imbalance.
+5. Design and register the synthetic PPTX and email-style challenge set.
 
 ## Blockers
 
-No repository blocker is identified. S001–S003 remain candidates until their official URLs, exact files, licence and rights evidence, content risks, and technical suitability have been manually reviewed.
+No repository blocker is identified. S004–S007 remain candidates pending official-source verification, local acquisition, licence and risk review, and technical audit.
 
 ## AG News replacement status
 
