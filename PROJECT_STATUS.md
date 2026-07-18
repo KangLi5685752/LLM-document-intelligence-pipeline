@@ -1,12 +1,13 @@
 # Project Status
 
-- **Current stage:** Stage 0A - project foundation and charter
+- **Current stage:** Stage 1A - public document source strategy and licence register
 - **Last updated:** 2026-07-17
-- **Latest commit:** Pending - replace this placeholder after the Stage 0A foundation commit
+- **Latest milestone:** Stage 0A foundation merged via PR #1
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
 
+- Stage 0A project foundation merged via PR #1.
 - Defined the project purpose, portfolio boundary, intended use, and non-goals.
 - Documented the planned high-level architecture without claiming implementation.
 - Recorded the initial project decisions and trade-offs.
@@ -15,20 +16,20 @@
 
 ## In progress
 
-- Stage 0A review and handoff.
-- Preparation for the Stage 1 corpus audit and data-governance records.
+- Corpus strategy and portfolio licence-policy review.
+- Candidate source and licence register preparation; no source is approved yet.
 
 ## Next tasks
 
-1. Produce a shortlist of candidate public-document sources for the MVP formats and project domains.
-2. Create a source and licence register covering provenance, permitted use, and access conditions.
-3. Design synthetic edge-case documents for ambiguity, conflicts, missing fields, and unsupported claims.
-4. Build the corpus inventory and define explicit inclusion and exclusion criteria.
-5. Assess parser feasibility and document a preprocessing plan before any parser implementation begins.
+1. Manually verify PDF copyright and licence notices.
+2. Verify direct download URLs without inventing or inferring file locations.
+3. Inspect document structure and text extractability.
+4. Approve, defer, or reject sources using the documented criteria.
+5. Design the synthetic challenge set.
 
 ## Blockers
 
-None identified for Stage 0A. Dataset suitability, licensing, and provider selection remain future decisions rather than current blockers.
+No repository blocker is identified. Individual candidates remain blocked from approval until their source, licence, content-risk, and technical checks are complete.
 
 ## AG News replacement status
 

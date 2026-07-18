@@ -1,6 +1,6 @@
 # Decision Log
 
-All decisions below were accepted on 2026-07-16 for the Stage 0A foundation. They may be revisited when evidence from implementation or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -81,3 +81,43 @@ All decisions below were accepted on 2026-07-16 for the Stage 0A foundation. The
 - **Chosen option:** Use appropriately licensed public documents and clearly labelled synthetic edge cases only.
 - **Reason:** This supports safe sharing, reproducibility, and deliberate testing of ambiguity, conflicts, and unsupported claims.
 - **Trade-off:** Synthetic cases may not capture the full messiness of confidential enterprise collections, and public data may introduce domain bias.
+
+## DEC-011: Focus the corpus on UK public-sector AI
+
+- **Context:** Stage 1 needs a coherent domain that contains strategies, programmes, governance, adoption research, and evaluations relevant to the planned extraction schema.
+- **Alternatives:** Mix unrelated public-sector domains; use private enterprise documents; focus on UK public-sector AI initiatives, adoption, evaluation, and governance.
+- **Chosen option:** Use UK public-sector AI as the primary corpus domain.
+- **Reason:** It offers traceable public sources and recurring project-intelligence concepts while keeping the evaluation narrative coherent.
+- **Trade-off:** Findings may reflect UK institutions and AI policy language rather than generalising to every sector or jurisdiction.
+
+## DEC-012: Use public PDFs as the primary real-document source
+
+- **Context:** The real corpus needs stable evidence locations and a format that is common across the selected domain.
+- **Alternatives:** Give PDF, PPTX, email, and HTML equal priority; use HTML first; use public PDFs as the primary real source with controlled tests for other formats.
+- **Chosen option:** Use public PDFs as the primary real-document source for the MVP.
+- **Reason:** PDFs are common in official publication workflows and provide page-level evidence boundaries for later evaluation.
+- **Trade-off:** PDF layout complexity remains significant, and the real corpus will initially underrepresent slide and message formats.
+
+## DEC-013: Keep original public source files local by default
+
+- **Context:** Public accessibility does not by itself settle redistribution rights, third-party content, personal-data risk, repository size, or source-version changes.
+- **Alternatives:** Commit every public file; commit files unless a restriction is found; keep originals local unless redistribution is explicitly approved.
+- **Chosen option:** Store original source files locally by default and commit only metadata and URLs until a source-specific redistribution review approves otherwise.
+- **Reason:** This reduces legal and data-governance risk while preserving a traceable route back to the publisher.
+- **Trade-off:** Contributors must acquire approved files independently, so reproducibility depends on stable sources, checksums, and clear acquisition records.
+
+## DEC-014: Do not force inclusion of unrelated PPTX files
+
+- **Context:** PPTX is a planned MVP format, but convenient public slide decks may not match the corpus domain or extraction schema.
+- **Alternatives:** Include any available PPTX; omit PPTX entirely; use relevant public PPTX when reviewable and synthetic PPTX for controlled format testing.
+- **Chosen option:** Do not add unrelated PPTX files solely to create format diversity; use relevant public or clearly labelled synthetic PPTX when justified.
+- **Reason:** Domain coherence and controlled test design are more valuable than an arbitrary format quota.
+- **Trade-off:** Real-world PPTX coverage may remain limited until suitable sources are found.
+
+## DEC-015: Defer HTML sources until explicitly supported
+
+- **Context:** Some relevant evaluations are available primarily as HTML, while the current MVP ingestion scope does not include HTML.
+- **Alternatives:** Add HTML ingestion now; convert HTML manually and treat it as another format; record relevant HTML sources but defer their use.
+- **Chosen option:** Register relevant HTML sources as deferred until HTML ingestion is explicitly added and evaluated.
+- **Reason:** This preserves useful source leads without expanding implementation scope or implying unsupported ingestion capability.
+- **Trade-off:** Relevant project-evaluation evidence may be absent from the initial corpus.
