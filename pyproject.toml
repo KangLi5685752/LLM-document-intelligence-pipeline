@@ -8,7 +8,12 @@ version = "0.1.0"
 description = "An evaluated portfolio prototype for traceable document intelligence extraction."
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "pypdf>=6,<7",
+]
+
+[project.scripts]
+audit-pdfs = "document_intelligence.audit.pdf_audit:main"
 
 [project.optional-dependencies]
 dev = [
