@@ -27,7 +27,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Planned stages
 
-1. **Stage 0 — Project Charter and Repo Setup**: **Current: Stage 0A.** Define the scope, architecture, decisions, packaging, and evaluation intent.
+1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
 2. **Stage 1 — Corpus Audit**: **In progress: Stage 1A.** Shortlist public sources, register licences, design synthetic edge cases, and define corpus inclusion and exclusion criteria.
 3. **Stage 2 — Document Ingestion**: **Planned.** Add format-specific parsing, a common Document Object, preprocessing, and segmentation for the MVP formats.
 4. **Stage 3 — Baseline and Structured Extraction**: **Planned.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.

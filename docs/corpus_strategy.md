@@ -69,7 +69,7 @@ A source should be rejected or deferred when any applicable condition holds:
 
 ## Corpus-status values
 
-- **candidate:** identified for review; not approved for download, extraction, or evaluation.
+- **candidate:** identified for controlled review. After its official direct-file URL is manually verified, it may be downloaded only into the Git-ignored local `data/raw/` directory for licence, structure, and technical audit. It is not approved for evaluation-corpus inclusion, its original source file must not be committed, and it must not produce committed derived text. It remains a candidate until scope, licence, risk, and technical reviews are complete.
 - **approved:** all required scope, licence, risk, and technical reviews are complete for the documented use.
 - **deferred:** potentially relevant, but blocked by format, timing, licence review, duplication, or another recorded dependency.
 - **rejected:** excluded with a documented reason.

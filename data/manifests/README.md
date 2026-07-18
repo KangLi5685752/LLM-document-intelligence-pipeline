@@ -16,11 +16,11 @@ Record the following from the authoritative landing page before any download:
 - initial licence-verification status, third-party-material risk, and personal-data risk;
 - redistribution decision, corpus status, exclusion reason, and notes.
 
-A direct-file URL should be added only after it has been manually verified. A page or slide count copied from authoritative metadata may be recorded provisionally, but it must be checked against the acquired file before approval.
+A direct-file URL must be manually verified against an official source before local acquisition. After verification, a candidate may be acquired only into the Git-ignored local `data/raw/` directory for licence, structure, and technical audit. A page or slide count copied from authoritative metadata may be recorded provisionally, but it must be checked against the acquired file before approval.
 
 ## Fields completed after download and inspection
 
-When a source is approved for local acquisition, complete or confirm:
+After a manually verified candidate is acquired locally for audit, complete or confirm:
 
 - direct-file URL and access date;
 - page or slide count and local filename;
@@ -34,7 +34,7 @@ Blank fields mean not yet verified; they must not be interpreted as approval or 
 
 ## Local files
 
-Downloaded source files belong under `data/raw/`. That directory is local and ignored by Git. Do not commit source binaries merely because they are publicly accessible. Follow the project licence policy and record an explicit redistribution decision first.
+Audit-only source files remain under `data/raw/`. That directory is local and ignored by Git, and original source files must not be committed. Local audit acquisition does not change `corpus_status` to `approved`. Approval requires completion of the documented scope, licence, risk, and technical checks. Follow the project licence policy and record an explicit redistribution decision before any broader handling.
 
 ## Updating source status
 
