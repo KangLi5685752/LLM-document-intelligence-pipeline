@@ -1,8 +1,8 @@
 # Project Status
 
 - **Current stage:** Stage 1B - pilot source audit and audit automation design
-- **Last updated:** 2026-07-18
-- **Latest milestone:** S001–S003 pilot source audit recorded with verified direct URLs and file evidence
+- **Last updated:** 2026-07-19
+- **Latest milestone:** Deterministic PDF audit utility validated against S001–S003 with matching hashes, sizes, and page counts
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -15,21 +15,26 @@
 - Integrity, page-count, text-extractability, document-structure, and licence-notice observations recorded.
 - S001–S003 approved for documented local corpus and future evaluation use.
 - Original source PDFs remain local and uncommitted.
+- Deterministic batch PDF audit utility implemented.
+- Unit tests added for hashing, sampling, scan-risk screening, PDF failures, CSV output, and CLI validation.
+- Utility validated locally against S001–S003.
+- Hashes, file sizes, and page counts reconciled with recorded evidence.
 
 ## In progress
 
-- Designing an automated PDF corpus-audit utility.
 - Preparing S004–S007 for batch acquisition and audit.
+- Targeted manual licence review for S004–S007.
 - Defining the synthetic challenge set.
 - Planning future development and held-out document-family splits.
 
 ## Next tasks
 
-1. Implement a small batch PDF audit utility for SHA-256, file size, page count, text-density, and empty-page warnings.
-2. Validate the utility against S001–S003.
-3. Acquire and audit S004–S007 using automation plus targeted manual review.
-4. Review the expanded corpus for publisher, role, and document-family imbalance.
-5. Design and register the synthetic PPTX and email-style challenge set.
+1. Acquire S004–S007 from manually verified official URLs.
+2. Run the batch audit utility over S001–S007.
+3. Investigate only generated warnings and structural exceptions.
+4. Complete targeted licence and third-party-material review for S004–S007.
+5. Update the source and document-audit registers using observed evidence.
+6. Design the synthetic PPTX and email-style challenge set.
 
 ## Blockers
 

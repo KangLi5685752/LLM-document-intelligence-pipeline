@@ -23,7 +23,17 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 1B: pilot source audit protocol and template (in progress).** Stage 1A corpus strategy and licence-register work is complete. S001–S003 form the pilot audit set described by the [source audit protocol](docs/source_audit_protocol.md), but no source has yet been approved through Stage 1B. No parser or extraction evaluation exists, and no evaluation results exist yet.
+**Stage 1B: pilot source audit and audit automation design (in progress).** Stage 1A corpus strategy and licence-register work is complete. S001–S003 form the pilot audit set described by the [source audit protocol](docs/source_audit_protocol.md) and are approved for documented local corpus and future evaluation use; their original PDFs remain local and uncommitted. No Stage 2 parser or extraction evaluation exists, and no extraction evaluation results exist yet.
+
+## Stage 1B audit utility
+
+The deterministic PDF audit utility records file integrity, page counts, and screening-level text-density warnings during local corpus review. It is not the production ingestion parser and does not perform OCR, licence decisions, or semantic extraction evaluation.
+
+~~~powershell
+audit-pdfs --input-dir data/raw --output artifacts/audits/pdf_audit.csv
+~~~
+
+Source files under data/raw and generated audit artefacts under artifacts/audits remain local and ignored by Git. See the [pilot utility validation](docs/stage_1b_audit_utility_validation.md) for observed Stage 1B results and limitations.
 
 ## Planned stages
 
