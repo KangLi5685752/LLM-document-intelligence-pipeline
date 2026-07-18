@@ -6,6 +6,15 @@ The source register is the audit trail for corpus candidates. It records provena
 
 The initial rows are metadata-only candidates or deferred sources. They are not an approved evaluation corpus.
 
+## Source register and document audit
+
+- **source_register.csv** records source provenance, publication metadata, licence state, data-risk state, redistribution decisions, and corpus decisions.
+- **document_audit.csv** records integrity facts and technical observations for an exact locally acquired file, including its local filename, checksum, page count, structure, and extraction risks.
+
+The files serve different control points: a document audit does not replace the source-level licence and corpus decision, and a source-register candidate does not imply that an exact file has been inspected. Blank audit fields mean not yet inspected, not “false”, “none”, or “passed”.
+
+Local filenames and hashes in document_audit.csv refer to files held under the Git-ignored local data/raw directory; they do not indicate that source binaries are committed. Related documents must share a stable related_source_group so they can be kept in the same future development or held-out evaluation split and reduce cross-document information leakage.
+
 ## Fields completed before download
 
 Record the following from the authoritative landing page before any download:

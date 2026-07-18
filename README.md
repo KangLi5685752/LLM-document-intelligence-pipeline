@@ -23,12 +23,12 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 1A: public document source strategy and licence register (in progress).** The Stage 0 foundation is complete. The [corpus strategy](docs/corpus_strategy.md) and [licence policy](docs/licence_policy.md) now define how candidate sources will be reviewed, but those candidates are not yet an approved evaluation corpus. No document-processing pipeline has been implemented and no evaluation results exist yet.
+**Stage 1B: pilot source audit protocol and template (in progress).** Stage 1A corpus strategy and licence-register work is complete. S001–S003 form the pilot audit set described by the [source audit protocol](docs/source_audit_protocol.md), but no source has yet been approved through Stage 1B. No parser or extraction evaluation exists, and no evaluation results exist yet.
 
 ## Planned stages
 
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
-2. **Stage 1 — Corpus Audit**: **In progress: Stage 1A.** Shortlist public sources, register licences, design synthetic edge cases, and define corpus inclusion and exclusion criteria.
+2. **Stage 1 — Corpus Audit**: **In progress: Stage 1B.** Verify pilot sources, audit exact local files, record rights and technical evidence, and decide corpus suitability without treating acquisition as approval.
 3. **Stage 2 — Document Ingestion**: **Planned.** Add format-specific parsing, a common Document Object, preprocessing, and segmentation for the MVP formats.
 4. **Stage 3 — Baseline and Structured Extraction**: **Planned.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.

@@ -1,13 +1,14 @@
 # Project Status
 
-- **Current stage:** Stage 1A - public document source strategy and licence register
-- **Last updated:** 2026-07-17
-- **Latest milestone:** Stage 0A foundation merged via PR #1
+- **Current stage:** Stage 1B - source verification and technical corpus audit setup
+- **Last updated:** 2026-07-18
+- **Latest milestone:** Stage 1A corpus strategy and licence register merged via PR #2
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
 
 - Stage 0A project foundation merged via PR #1.
+- Stage 1A corpus strategy, licence policy, source register, and local-audit workflow merged via PR #2.
 - Defined the project purpose, portfolio boundary, intended use, and non-goals.
 - Documented the planned high-level architecture without claiming implementation.
 - Recorded the initial project decisions and trade-offs.
@@ -16,20 +17,20 @@
 
 ## In progress
 
-- Corpus strategy and portfolio licence-policy review.
-- Candidate source and licence register preparation; no source is approved yet.
+- Stage 1B manual audit protocol and pilot audit-record template for S001–S003.
+- Pilot setup only; no source audit has started and no source is approved.
 
 ## Next tasks
 
-1. Manually verify PDF copyright and licence notices.
-2. Verify direct download URLs without inventing or inferring file locations.
-3. Inspect document structure and text extractability.
-4. Approve, defer, or reject sources using the documented criteria.
-5. Design the synthetic challenge set.
+1. Manually verify the S001–S003 direct PDF URLs.
+2. Acquire the verified files locally under data/raw.
+3. Record hashes, actual page counts, and structure observations.
+4. Review document-level licence notices and third-party material.
+5. Update the source and audit registers from observed evidence.
 
 ## Blockers
 
-No repository blocker is identified. Individual candidates remain blocked from approval until their source, licence, content-risk, and technical checks are complete.
+No repository blocker is identified. S001–S003 remain candidates until their official URLs, exact files, licence and rights evidence, content risks, and technical suitability have been manually reviewed.
 
 ## AG News replacement status
 
