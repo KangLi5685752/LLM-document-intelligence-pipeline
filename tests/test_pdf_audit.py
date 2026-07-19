@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -27,6 +29,70 @@ def _write_blank_pdf(path: Path, page_count: int = 1) -> None:
         writer.add_blank_page(width=72, height=72)
     with path.open("wb") as handle:
         writer.write(handle)
+
+
+def test_package_import_does_not_preload_pdf_audit_module() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import sys\n"
+                "import document_intelligence.audit\n"
+                "print('document_intelligence.audit.pdf_audit' in sys.modules)\n"
+            ),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == "False\n"
+    assert "RuntimeWarning" not in result.stderr
+
+
+def test_module_cli_does_not_emit_runpy_warning_for_empty_directory(
+    tmp_path: Path,
+) -> None:
+    input_dir = tmp_path / "empty"
+    output_path = tmp_path / "audit.csv"
+    input_dir.mkdir()
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "document_intelligence.audit.pdf_audit",
+            "--input-dir",
+            str(input_dir),
+            "--output",
+            str(output_path),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    assert "error: no files matched '*.pdf' in" in result.stderr
+    assert "RuntimeWarning" not in result.stderr
+    assert "found in sys.modules" not in result.stderr
+    assert "prior to execution" not in result.stderr
+    assert not output_path.exists()
+
+
+def test_package_level_lazy_exports_match_pdf_audit_module() -> None:
+    from document_intelligence.audit import (
+        PdfAuditResult as exported_result,
+        audit_directory as exported_directory,
+        audit_pdf as exported_pdf,
+    )
+    from document_intelligence.audit import pdf_audit
+
+    assert exported_result is pdf_audit.PdfAuditResult
+    assert exported_directory is pdf_audit.audit_directory
+    assert exported_pdf is pdf_audit.audit_pdf
 
 
 def test_calculate_sha256_returns_uppercase_known_digest(tmp_path: Path) -> None:

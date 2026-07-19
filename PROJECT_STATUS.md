@@ -1,44 +1,44 @@
 # Project Status
 
-- **Current stage:** Stage 1B - pilot source audit and audit automation design
+- **Current stage:** Stage 1B - expanded corpus audit and synthetic challenge-set design
 - **Last updated:** 2026-07-19
-- **Latest milestone:** Deterministic PDF audit utility validated against S001–S003 with matching hashes, sizes, and page counts
+- **Latest milestone:** S001-S007 public-PDF corpus audit completed with verified file integrity, licence evidence and technical caveats
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
 
 - Stage 0A project foundation.
-- Stage 1A corpus strategy and licence register.
+- Stage 1A corpus and licence strategy.
 - Stage 1B audit protocol.
-- Source and direct-file verification for S001–S003.
-- Pilot technical audit for S001–S003.
-- Integrity, page-count, text-extractability, document-structure, and licence-notice observations recorded.
-- S001–S003 approved for documented local corpus and future evaluation use.
-- Original source PDFs remain local and uncommitted.
-- Deterministic batch PDF audit utility implemented.
-- Unit tests added for hashing, sampling, scan-risk screening, PDF failures, CSV output, and CLI validation.
-- Utility validated locally against S001–S003.
-- Hashes, file sizes, and page counts reconciled with recorded evidence.
+- S001-S003 pilot audit.
+- Deterministic PDF audit utility.
+- Utility tests and pilot validation.
+- S004-S007 expanded source verification.
+- Automated integrity audit for S001-S007.
+- Structural and licence review for S004-S007.
+- Public-PDF corpus S001-S007 approved for documented local use.
+- Original PDFs remain local and uncommitted.
 
 ## In progress
 
-- Preparing S004–S007 for batch acquisition and audit.
-- Targeted manual licence review for S004–S007.
-- Defining the synthetic challenge set.
-- Planning future development and held-out document-family splits.
+- Synthetic PPTX challenge-set design.
+- Synthetic email-style challenge-set design.
+- Synthetic-source manifest registration.
+- Final document-family split planning.
+- Corpus freeze criteria.
 
 ## Next tasks
 
-1. Acquire S004–S007 from manually verified official URLs.
-2. Run the batch audit utility over S001–S007.
-3. Investigate only generated warnings and structural exceptions.
-4. Complete targeted licence and third-party-material review for S004–S007.
-5. Update the source and document-audit registers using observed evidence.
-6. Design the synthetic PPTX and email-style challenge set.
+1. Design a small synthetic PPTX corpus containing tables, diagrams, duplicated facts and conflicting status statements.
+2. Design synthetic email-style threads containing reply chains, quoted history, signatures, dates and contradictions.
+3. Register synthetic sources and generation rules without pretending they are real public records.
+4. Finalise development and held-out document-family assignments.
+5. Freeze the Stage 1 corpus.
+6. Begin Stage 2 document-ingestion design only after the corpus freeze.
 
 ## Blockers
 
-No repository blocker is identified. S004–S007 remain candidates pending official-source verification, local acquisition, licence and risk review, and technical audit.
+No repository blocker is identified. Stage 1B remains in progress until the synthetic challenge set, document-family split plan, and corpus freeze criteria are complete.
 
 ## AG News replacement status
 

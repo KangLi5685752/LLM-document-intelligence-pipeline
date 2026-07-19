@@ -23,7 +23,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 1B: pilot source audit and audit automation design (in progress).** Stage 1A corpus strategy and licence-register work is complete. S001–S003 form the pilot audit set described by the [source audit protocol](docs/source_audit_protocol.md) and are approved for documented local corpus and future evaluation use; their original PDFs remain local and uncommitted. No Stage 2 parser or extraction evaluation exists, and no extraction evaluation results exist yet.
+**Stage 1B: expanded corpus audit and synthetic challenge-set design (in progress).** S001–S007 have completed public-PDF source and technical review and are approved for documented local corpus and future evaluation use. All seven original PDFs remain local and uncommitted. S004–S007 add complex visual, tabular, statistical, and multi-column cases. Synthetic PPTX and email-style challenge sets remain outstanding. No Stage 2 parser or extraction evaluation exists, and no extraction evaluation results exist yet.
 
 ## Stage 1B audit utility
 
