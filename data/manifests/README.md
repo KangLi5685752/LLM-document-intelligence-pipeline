@@ -10,8 +10,11 @@ The initial rows are metadata-only candidates or deferred sources. They are not 
 
 - **source_register.csv** records source provenance, publication metadata, licence state, data-risk state, redistribution decisions, and corpus decisions.
 - **document_audit.csv** records integrity facts and technical observations for an exact locally acquired file, including its local filename, checksum, page count, structure, and extraction risks.
+- **synthetic_ground_truth.jsonl** records one evaluation record per synthetic document family, including expected current facts, superseded facts, unresolved conflicts, duplicate groups, and evidence locations.
 
 The files serve different control points: a document audit does not replace the source-level licence and corpus decision, and a source-register candidate does not imply that an exact file has been inspected. Blank audit fields mean not yet inspected, not “false”, “none”, or “passed”.
+
+Synthetic ground truth is evaluation metadata and must not be passed into a source parser. `source_register.csv` remains the source-level provenance record for both public and synthetic sources.
 
 Local filenames and hashes in document_audit.csv refer to files held under the Git-ignored local data/raw directory; they do not indicate that source binaries are committed. Related documents must share a stable related_source_group so they can be kept in the same future development or held-out evaluation split and reduce cross-document information leakage.
 
