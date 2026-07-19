@@ -17,6 +17,7 @@ audit-pdfs = "document_intelligence.audit.pdf_audit:main"
 
 [project.optional-dependencies]
 dev = [
+    "python-pptx==1.0.2",
     "pytest>=7",
 ]
 
