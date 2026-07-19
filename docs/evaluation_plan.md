@@ -1,0 +1,223 @@
+# Evaluation Plan
+
+All targets in this document are design acceptance gates, not achieved results.
+
+## Evaluation questions
+
+1. Can all supported documents be ingested without losing provenance?
+2. Can the system extract expected facts into a valid schema?
+3. Can it distinguish current and superseded facts?
+4. Can it preserve unresolved conflicts?
+5. Can every accepted fact be linked to valid evidence?
+6. Can unsupported or ambiguous outputs be routed for review?
+7. Does an LLM-assisted approach improve over a reasonable deterministic baseline?
+
+## Evaluation layers
+
+### Parsing evaluation
+
+Metrics:
+
+- document-ingestion success rate;
+- non-empty output rate;
+- metadata completeness;
+- page- or slide-locator preservation;
+- email-header preservation;
+- quoted-history separation;
+- parser-warning rate;
+- parser-error taxonomy.
+
+Stage 2 acceptance gates:
+
+- 15 of 15 frozen sources ingested successfully;
+- 100% schema-valid common Document Objects;
+- 100% correct source-format classification;
+- 100% PPTX slide-number preservation;
+- 100% EML Message-ID, date, sender, and thread-header preservation;
+- no test reads ignored `data/raw` unless explicitly running local corpus validation;
+- failures return explicit structured errors rather than crashing the batch.
+
+### Extraction evaluation
+
+Fact matching uses:
+
+- normalized subject;
+- predicate;
+- normalized value;
+- fact state.
+
+Metrics:
+
+- current-fact precision;
+- current-fact recall;
+- current-fact F1;
+- normalized-value exact match;
+- superseded-fact recall;
+- duplicate-group accuracy;
+- schema-valid output rate;
+- unsupported current-fact rate.
+
+### Conflict evaluation
+
+Metrics:
+
+- conflict precision;
+- conflict recall;
+- unresolved-conflict preservation rate;
+- false-resolution count;
+- candidate-value coverage.
+
+Held-out synthetic gates:
+
+- both designed held-out conflict families detected;
+- zero fabricated conflict resolutions;
+- all candidate values retained;
+- all unresolved conflicts routed to review.
+
+Exact numerators and denominators must be reported because the benchmark is small.
+
+### Evidence evaluation
+
+Metrics:
+
+- evidence-source accuracy;
+- evidence-location accuracy;
+- evidence coverage;
+- unsupported-claim count.
+
+Gates:
+
+- at least 90% evidence-location accuracy on synthetic ground truth;
+- zero unsupported current facts on held-out synthetic sources.
+
+### Review-routing evaluation
+
+Metrics:
+
+- review-routing recall;
+- review-routing precision;
+- unresolved-conflict routing recall;
+- missing-evidence routing recall.
+
+Gates:
+
+- 100% of unresolved conflicts routed to review;
+- 100% of unsupported current facts routed or rejected;
+- over-routing reported as an error, not as harmless conservatism.
+
+## Synthetic benchmark targets
+
+| Measure | Design acceptance gate |
+| --- | ---: |
+| Final schema-valid rate | 100% |
+| Held-out current-fact precision | at least 0.90 |
+| Held-out current-fact recall | at least 0.85 |
+| Superseded-fact recall | at least 0.80 |
+| Evidence-location accuracy | at least 0.90 |
+| Held-out unresolved-conflict recall | 1.00 |
+| False conflict resolutions | 0 |
+| Unsupported current facts on held-out synthetic data | 0 |
+
+These are acceptance gates and not current results.
+
+## Public-PDF evaluation plan
+
+The seven public PDFs provide realistic format and language coverage but do not yet have complete fact-level labels.
+
+Before structured extraction experiments begin:
+
+- create a versioned public gold subset;
+- annotate at least 35 evidence-linked facts across S001-S007;
+- include development and held-out PDFs;
+- include recommendations, governance requirements, findings, metrics, risks, or decisions;
+- record raw and normalized values;
+- record page-level evidence;
+- record missing, ambiguous, and unsupported cases;
+- document annotation date and schema version.
+
+At least 10 labelled facts must come from held-out S005 and S007 combined.
+
+Limitations:
+
+- one annotator;
+- no inter-annotator agreement;
+- interpretation bias;
+- small sample;
+- public documents are not a representative enterprise corpus.
+
+Public gold labels are not created in this task.
+
+## Development and held-out use
+
+- Development sources may be used for parser debugging, rule design, and prompt iteration.
+- Held-out sources may be used only for final evaluation after an experiment version is frozen.
+- No rule or prompt may be changed in response to a held-out result without declaring a new experiment cycle.
+- Family members cannot cross splits.
+- Results must be reported separately for development and held-out data.
+
+## Baselines and proposed system
+
+### Baseline A
+
+Deterministic extraction using:
+
+- metadata;
+- regex;
+- date and money patterns;
+- heading and table cues;
+- fixed keyword rules.
+
+### Baseline B
+
+Basic structured LLM extraction using:
+
+- a fixed JSON target;
+- limited validation;
+- no advanced reconciliation.
+
+### Proposed system
+
+- versioned schema;
+- structured extraction;
+- evidence requirement;
+- normalization;
+- duplicate detection;
+- temporal and status reconciliation;
+- conflict checks;
+- bounded retry;
+- review routing.
+
+All approaches must use the same frozen corpus and evaluation labels.
+
+## Reproducibility
+
+Later reports must record:
+
+- corpus version;
+- split version;
+- schema version;
+- code commit;
+- parser version;
+- prompt version;
+- model/provider version;
+- run date;
+- mock or live mode;
+- cost and latency where applicable.
+
+## Failure analysis
+
+Qualitative failure analysis must use categories including:
+
+- parser loss;
+- reading-order error;
+- table-relationship loss;
+- email quoted-history confusion;
+- alias failure;
+- value-normalisation error;
+- stale fact selected as current;
+- false conflict;
+- missed conflict;
+- unsupported value;
+- incorrect evidence;
+- over-routing;
+- under-routing.
