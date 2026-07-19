@@ -23,7 +23,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 1B: expanded corpus audit and synthetic challenge-set design (in progress).** S001–S007 have completed public-PDF source and technical review and are approved for documented local corpus and future evaluation use. All seven original PDFs remain local and uncommitted. S004–S007 add complex visual, tabular, statistical, and multi-column cases. Synthetic PPTX and email-style challenge sets remain outstanding. No Stage 2 parser or extraction evaluation exists, and no extraction evaluation results exist yet.
+**Stage 1B: synthetic challenge-set implementation and corpus-freeze preparation (in progress).** Public-PDF source and technical review for S001–S007 is complete. The synthetic corpus now contains two PPTX decks and two three-message email threads; all are fictional and intentionally committed. Provisional development and held-out family assignments are recorded, but the final corpus freeze is still pending. No Stage 2 parser or extraction evaluation exists, and no extraction evaluation results exist yet.
 
 ## Stage 1B audit utility
 
@@ -34,6 +34,16 @@ audit-pdfs --input-dir data/raw --output artifacts/audits/pdf_audit.csv
 ~~~
 
 Source files under data/raw and generated audit artefacts under artifacts/audits remain local and ignored by Git. See the [pilot utility validation](docs/stage_1b_audit_utility_validation.md) for observed Stage 1B results and limitations.
+
+## Synthetic challenge corpus
+
+The deterministic generator creates the committed PPTX and EML fixtures from fixed project-authored data:
+
+~~~powershell
+python scripts/generate_synthetic_corpus.py --output-root data/synthetic --force
+~~~
+
+See the [synthetic challenge-set specification](docs/synthetic_challenge_set_spec.md) and [synthetic data policy](docs/synthetic_data_policy.md) for family definitions, provisional splits, redistribution rules, and leakage controls.
 
 ## Planned stages
 

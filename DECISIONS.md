@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 were accepted on 2026-07-20. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -137,3 +137,27 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Assign all members of a related document family to the same future development or held-out evaluation split.
 - **Reason:** Family-level grouping reduces cross-document information leakage and makes held-out evaluation more credible.
 - **Trade-off:** Fewer independent document groups may be available for each split, which can limit balancing options.
+
+## DEC-018: Commit project-created synthetic fixtures
+
+- **Context:** The PPTX and EML challenge files are created specifically for this project and need to support reproducible tests and inspectable portfolio evidence.
+- **Alternatives:** Generate fixtures only at test time; store fixtures outside the repository; commit the project-created synthetic files.
+- **Chosen option:** Commit the project-created synthetic PPTX and EML fixtures.
+- **Reason:** The fixtures are safe to redistribute, make tests reproducible, and allow portfolio reviewers to inspect the challenge documents directly.
+- **Trade-off:** Binary PPTX files increase repository size slightly.
+
+## DEC-019: Use family-level split assignments
+
+- **Context:** Email threads, quoted history, repeated facts, and multiple documents from one scenario can leak information when related sources are separated.
+- **Alternatives:** Split sources independently; assign complete document families to one split; omit held-out synthetic sources.
+- **Chosen option:** Assign every member of a synthetic document family to the same development or held-out split.
+- **Reason:** Family-level assignment prevents quoted-history, duplicated-fact, and same-scenario leakage.
+- **Trade-off:** The held-out set is small.
+
+## DEC-020: Use no external assets in synthetic PPTX
+
+- **Context:** External images, logos, and templates would add rights uncertainty and could make deterministic regeneration dependent on unavailable files.
+- **Alternatives:** Use downloaded corporate-style assets; embed third-party templates; build the fixtures only from project-authored text and vector objects.
+- **Chosen option:** Use no external assets in synthetic PPTX files.
+- **Reason:** This removes third-party rights uncertainty and keeps generation reproducible.
+- **Trade-off:** Visual realism is lower than in externally designed corporate decks.

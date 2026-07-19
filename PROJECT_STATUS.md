@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 1B - expanded corpus audit and synthetic challenge-set design
-- **Last updated:** 2026-07-19
-- **Latest milestone:** S001-S007 public-PDF corpus audit completed with verified file integrity, licence evidence and technical caveats
+- **Current stage:** Stage 1B - synthetic challenge-set implementation and corpus-freeze preparation
+- **Last updated:** 2026-07-20
+- **Latest milestone:** Synthetic PPTX and email challenge corpus generated with explicit ground truth and provisional family-level splits
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -18,27 +18,32 @@
 - Structural and licence review for S004-S007.
 - Public-PDF corpus S001-S007 approved for documented local use.
 - Original PDFs remain local and uncommitted.
+- Two synthetic PPTX decks generated.
+- Two synthetic three-message email threads generated.
+- Synthetic data policy documented.
+- Family-level ground truth registered.
+- Deterministic generation tested.
+- S010-S017 added to the source register.
 
 ## In progress
 
-- Synthetic PPTX challenge-set design.
-- Synthetic email-style challenge-set design.
-- Synthetic-source manifest registration.
-- Final document-family split planning.
+- Manual visual and content review of committed synthetic fixtures.
+- Final family-level split confirmation.
 - Corpus freeze criteria.
+- Stage 1 completion report.
 
 ## Next tasks
 
-1. Design a small synthetic PPTX corpus containing tables, diagrams, duplicated facts and conflicting status statements.
-2. Design synthetic email-style threads containing reply chains, quoted history, signatures, dates and contradictions.
-3. Register synthetic sources and generation rules without pretending they are real public records.
-4. Finalise development and held-out document-family assignments.
-5. Freeze the Stage 1 corpus.
-6. Begin Stage 2 document-ingestion design only after the corpus freeze.
+1. Review S010 and S011 visually.
+2. Review one complete message chain from each email family.
+3. Confirm source hashes and committed fixture paths.
+4. Freeze development and held-out family assignments.
+5. Publish the Stage 1 corpus-freeze report.
+6. Begin Stage 2 ingestion design only after the freeze.
 
 ## Blockers
 
-No repository blocker is identified. Stage 1B remains in progress until the synthetic challenge set, document-family split plan, and corpus freeze criteria are complete.
+No repository blocker is identified. Stage 1B remains in progress until manual fixture review, final family-level split confirmation, and the corpus-freeze report are complete.
 
 ## AG News replacement status
 
