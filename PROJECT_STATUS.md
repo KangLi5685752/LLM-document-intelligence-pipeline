@@ -1,49 +1,43 @@
 # Project Status
 
-- **Current stage:** Stage 1B - synthetic challenge-set implementation and corpus-freeze preparation
+- **Current stage:** Stage 1 complete - product contract and corpus v1.0 frozen; Stage 2 ingestion next
 - **Last updated:** 2026-07-20
-- **Latest milestone:** Synthetic PPTX and email challenge corpus generated with explicit ground truth and provisional family-level splits
+- **Latest milestone:** Frozen a 15-source PDF, PPTX and EML corpus with family-level development and held-out splits, synthetic ground truth, and documented evaluation gates
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
 
-- Stage 0A project foundation.
+- Stage 0 foundation.
 - Stage 1A corpus and licence strategy.
-- Stage 1B audit protocol.
-- S001-S003 pilot audit.
+- Stage 1B public-PDF audit.
 - Deterministic PDF audit utility.
-- Utility tests and pilot validation.
-- S004-S007 expanded source verification.
-- Automated integrity audit for S001-S007.
-- Structural and licence review for S004-S007.
-- Public-PDF corpus S001-S007 approved for documented local use.
-- Original PDFs remain local and uncommitted.
-- Two synthetic PPTX decks generated.
-- Two synthetic three-message email threads generated.
-- Synthetic data policy documented.
-- Family-level ground truth registered.
-- Deterministic generation tested.
-- S010-S017 added to the source register.
+- S001-S007 source and technical review.
+- Synthetic PPTX and EML fixtures.
+- Synthetic ground truth.
+- Product definition.
+- Extraction-schema design.
+- Evaluation plan.
+- Corpus-split manifest.
+- `stage1-corpus-v1.0` freeze.
+- Stage 1 completion report.
 
 ## In progress
 
-- Manual visual and content review of committed synthetic fixtures.
-- Final family-level split confirmation.
-- Corpus freeze criteria.
-- Stage 1 completion report.
+None for Stage 1.
 
 ## Next tasks
 
-1. Review S010 and S011 visually.
-2. Review one complete message chain from each email family.
-3. Confirm source hashes and committed fixture paths.
-4. Freeze development and held-out family assignments.
-5. Publish the Stage 1 corpus-freeze report.
-6. Begin Stage 2 ingestion design only after the freeze.
+1. Create the Stage 2 common Document Object.
+2. Implement PDF parsing with page-level provenance.
+3. Implement PPTX parsing with slide-level provenance.
+4. Implement EML parsing with message headers and quoted-history separation.
+5. Add parser tests across development fixtures.
+6. Validate all 15 frozen sources without changing corpus membership.
+7. Do not begin extraction until ingestion acceptance gates are met.
 
 ## Blockers
 
-No repository blocker is identified. Stage 1B remains in progress until manual fixture review, final family-level split confirmation, and the corpus-freeze report are complete.
+No Stage 2 blocker is identified.
 
 ## AG News replacement status
 

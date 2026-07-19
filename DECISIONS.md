@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 were accepted on 2026-07-20. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -161,3 +161,43 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Use no external assets in synthetic PPTX files.
 - **Reason:** This removes third-party rights uncertainty and keeps generation reproducible.
 - **Trade-off:** Visual realism is lower than in externally designed corporate decks.
+
+## DEC-021: Generic evidence-linked fact contract with derived initiative views
+
+- **Context:** The frozen corpus contains project, policy, research, governance, guidance, and programme sources that must share an evaluable output contract.
+- **Alternatives:** Use a project-only schema; define an unrestricted enterprise ontology; use a generic evidence-linked fact contract with bounded derived views.
+- **Chosen option:** Use one generic evidence-linked `FactRecord` and `ConflictRecord` model for policy, research, governance, and project sources. Produce initiative summaries only as derived views.
+- **Reason:** A project-only schema would not represent the public-PDF corpus, while a completely unrestricted ontology would make evaluation unmanageable.
+- **Trade-off:** The generic fact model requires careful predicate and normalization rules.
+
+## DEC-022: Freeze corpus v1.0 at 15 active sources
+
+- **Context:** Stage 2 needs stable source membership, hashes, families, and splits before parser implementation begins.
+- **Alternatives:** Keep adding sources during ingestion; freeze only the synthetic corpus; freeze the reviewed active corpus.
+- **Chosen option:** Freeze S001-S007 and S010-S017 with the assignments in `corpus_split.csv`.
+- **Reason:** The corpus now covers realistic PDFs, controlled PPTX and EML challenges, development and held-out cases, and exact synthetic ground truth.
+- **Trade-off:** The corpus remains small and does not represent enterprise-scale diversity.
+
+## DEC-023: Use family-level development and held-out splits
+
+- **Context:** Related documents and complete email threads repeat language, facts, and quoted history.
+- **Alternatives:** Split individual sources independently; use one development-only corpus; keep related documents and complete threads within one split.
+- **Chosen option:** Keep related documents and complete email threads within one split.
+- **Reason:** This prevents repeated text, quoted history, and related-document facts from leaking across development and held-out evaluation.
+- **Trade-off:** The number of independent held-out families is small.
+
+## DEC-024: Treat held-out evaluation as procedural rather than blind
+
+- **Context:** The repository is public and the project uses a single-developer workflow, so a truly secret benchmark is not possible.
+- **Alternatives:** Claim a blind benchmark; use no held-out set; document procedural held-out controls and prohibit source-specific tuning.
+- **Chosen option:** Document that the public repository and single-developer workflow make a truly secret benchmark impossible, while prohibiting held-out-specific tuning.
+- **Reason:** This is more honest than claiming blind evaluation.
+- **Trade-off:** Results may still contain implicit familiarity bias.
+
+## DEC-025: Fix evaluation gates before extraction experiments
+
+- **Context:** Extraction metrics and thresholds chosen after experiments could reward observed behavior rather than test the intended product contract.
+- **Alternatives:** Select metrics after implementation; report only qualitative examples; define acceptance gates before extraction experiments.
+- **Chosen option:** Use `docs/evaluation_plan.md` as the pre-experiment acceptance contract.
+- **Reason:** This prevents retrospective metric selection and unsupported claims.
+- **Trade-off:** Thresholds may later require a versioned revision if the corpus proves materially harder than expected.
