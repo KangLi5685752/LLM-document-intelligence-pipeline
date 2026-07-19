@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -121,3 +121,19 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Register relevant HTML sources as deferred until HTML ingestion is explicitly added and evaluated.
 - **Reason:** This preserves useful source leads without expanding implementation scope or implying unsupported ingestion capability.
 - **Trade-off:** Relevant project-evaluation evidence may be absent from the initial corpus.
+
+## DEC-016: Pilot S001–S003 before the remaining PDF candidates
+
+- **Context:** The manual audit method should be tested on a bounded set before it is applied to all candidate PDFs, including substantially longer documents.
+- **Alternatives:** Audit all PDF candidates together; start with the longest or most complex files; pilot S001–S003 as one related document family.
+- **Chosen option:** Audit S001–S003 as the Stage 1B pilot before reviewing the remaining PDF candidates.
+- **Reason:** The three-source pilot is a small, related document family that can validate the audit method before longer-file review and support later strategy, government-response, and progress-report comparisons.
+- **Trade-off:** The first pilot is concentrated on one publisher and topic, so it will not expose the full range of corpus variation.
+
+## DEC-017: Keep related document families in the same evaluation split
+
+- **Context:** Closely related strategies, responses, updates, and progress reports may repeat facts or language across documents.
+- **Alternatives:** Split documents independently at random; keep each related family in one split; exclude related documents from evaluation.
+- **Chosen option:** Assign all members of a related document family to the same future development or held-out evaluation split.
+- **Reason:** Family-level grouping reduces cross-document information leakage and makes held-out evaluation more credible.
+- **Trade-off:** Fewer independent document groups may be available for each split, which can limit balancing options.

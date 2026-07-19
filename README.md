@@ -23,12 +23,22 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 1A: public document source strategy and licence register (in progress).** The Stage 0 foundation is complete. The [corpus strategy](docs/corpus_strategy.md) and [licence policy](docs/licence_policy.md) now define how candidate sources will be reviewed, but those candidates are not yet an approved evaluation corpus. No document-processing pipeline has been implemented and no evaluation results exist yet.
+**Stage 1B: pilot source audit and audit automation design (in progress).** Stage 1A corpus strategy and licence-register work is complete. S001–S003 form the pilot audit set described by the [source audit protocol](docs/source_audit_protocol.md) and are approved for documented local corpus and future evaluation use; their original PDFs remain local and uncommitted. No Stage 2 parser or extraction evaluation exists, and no extraction evaluation results exist yet.
+
+## Stage 1B audit utility
+
+The deterministic PDF audit utility records file integrity, page counts, and screening-level text-density warnings during local corpus review. It is not the production ingestion parser and does not perform OCR, licence decisions, or semantic extraction evaluation.
+
+~~~powershell
+audit-pdfs --input-dir data/raw --output artifacts/audits/pdf_audit.csv
+~~~
+
+Source files under data/raw and generated audit artefacts under artifacts/audits remain local and ignored by Git. See the [pilot utility validation](docs/stage_1b_audit_utility_validation.md) for observed Stage 1B results and limitations.
 
 ## Planned stages
 
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
-2. **Stage 1 — Corpus Audit**: **In progress: Stage 1A.** Shortlist public sources, register licences, design synthetic edge cases, and define corpus inclusion and exclusion criteria.
+2. **Stage 1 — Corpus Audit**: **In progress: Stage 1B.** Verify pilot sources, audit exact local files, record rights and technical evidence, and decide corpus suitability without treating acquisition as approval.
 3. **Stage 2 — Document Ingestion**: **Planned.** Add format-specific parsing, a common Document Object, preprocessing, and segmentation for the MVP formats.
 4. **Stage 3 — Baseline and Structured Extraction**: **Planned.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
