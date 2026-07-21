@@ -16,6 +16,7 @@ dependencies = [
 
 [project.scripts]
 audit-pdfs = "document_intelligence.audit.pdf_audit:main"
+ingest-corpus = "document_intelligence.ingestion.batch_cli:main"
 ingest-document = "document_intelligence.ingestion.cli:main"
 
 [project.optional-dependencies]

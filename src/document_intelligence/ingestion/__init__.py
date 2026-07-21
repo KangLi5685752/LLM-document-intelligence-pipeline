@@ -6,6 +6,13 @@ from importlib import import_module
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
+    from document_intelligence.ingestion.batch import (
+        BatchIngestionItem,
+        BatchIngestionReport,
+        BatchItemStatus,
+        ingest_corpus,
+        load_active_source_specs,
+    )
     from document_intelligence.ingestion.dispatcher import parse_document
     from document_intelligence.ingestion.eml_parser import parse_eml
     from document_intelligence.ingestion.exceptions import (
@@ -41,6 +48,11 @@ __all__ = [
     "parse_pdf",
     "parse_pptx",
     "parse_eml",
+    "BatchItemStatus",
+    "BatchIngestionItem",
+    "BatchIngestionReport",
+    "ingest_corpus",
+    "load_active_source_specs",
 ]
 
 
@@ -59,6 +71,11 @@ _EXPORT_MODULES = {
     "parse_pdf": "document_intelligence.ingestion.pdf_parser",
     "parse_pptx": "document_intelligence.ingestion.pptx_parser",
     "parse_eml": "document_intelligence.ingestion.eml_parser",
+    "BatchItemStatus": "document_intelligence.ingestion.batch",
+    "BatchIngestionItem": "document_intelligence.ingestion.batch",
+    "BatchIngestionReport": "document_intelligence.ingestion.batch",
+    "ingest_corpus": "document_intelligence.ingestion.batch",
+    "load_active_source_specs": "document_intelligence.ingestion.batch",
 }
 
 
