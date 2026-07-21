@@ -8,6 +8,8 @@ Project knowledge is commonly distributed across PDF reports, presentation decks
 
 An evaluated portfolio prototype that turns heterogeneous project documents into schema-validated, evidence-linked records and routes ambiguous or unsupported outputs for human review.
 
+The detailed product contract is documented in the [product definition](product_definition.md).
+
 ## Target users
 
 - AI / Digital Transformation Analyst
@@ -56,7 +58,7 @@ The evaluation corpus will use appropriately licensed public documents plus clea
 
 ## Initial success criteria
 
-These are design targets, not achieved results. Quantitative thresholds will be fixed in the evaluation plan before model experiments begin.
+These are design targets, not achieved results. Design acceptance gates are now documented in the [evaluation plan](evaluation_plan.md), but none has been achieved through ingestion or extraction experiments.
 
 - Supported documents can be represented without losing the page, slide, or section identity needed for evidence links.
 - The extraction contract is explicit, versioned, and automatically schema-validated.

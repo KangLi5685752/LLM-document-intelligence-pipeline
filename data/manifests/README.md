@@ -4,14 +4,20 @@
 
 The source register is the audit trail for corpus candidates. It records provenance, scope, licence-review state, data risks, local-file handling, and corpus decisions without committing the source documents themselves. One row represents one identifiable source version.
 
-The initial rows are metadata-only candidates or deferred sources. They are not an approved evaluation corpus.
+The register contains approved active sources and deferred source leads. Active evaluation membership is controlled separately by the frozen corpus-split manifest.
 
 ## Source register and document audit
 
 - **source_register.csv** records source provenance, publication metadata, licence state, data-risk state, redistribution decisions, and corpus decisions.
 - **document_audit.csv** records integrity facts and technical observations for an exact locally acquired file, including its local filename, checksum, page count, structure, and extraction risks.
+- **synthetic_ground_truth.jsonl** records one evaluation record per synthetic document family, including expected current facts, superseded facts, unresolved conflicts, duplicate groups, and evidence locations.
+- **corpus_split.csv** records one row per active source, its family grouping, development or held-out split, corpus role, ground-truth status, leakage group, and freeze status.
 
 The files serve different control points: a document audit does not replace the source-level licence and corpus decision, and a source-register candidate does not imply that an exact file has been inspected. Blank audit fields mean not yet inspected, not “false”, “none”, or “passed”.
+
+`source_register.csv` remains the source-level provenance and licence record. `corpus_split.csv` is the active evaluation-membership record. S008-S009 are absent from the split manifest because they remain deferred.
+
+`synthetic_ground_truth.jsonl` is evaluation metadata. No ground truth may be passed into parsers or extractors.
 
 Local filenames and hashes in document_audit.csv refer to files held under the Git-ignored local data/raw directory; they do not indicate that source binaries are committed. Related documents must share a stable related_source_group so they can be kept in the same future development or held-out evaluation split and reduce cross-document information leakage.
 

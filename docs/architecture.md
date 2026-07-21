@@ -2,12 +2,30 @@
 
 ## Current implementation status
 
-Only the **Stage 0 repository foundation** is implemented: scope and architecture documentation, decision and status records, minimal package metadata, and a smoke test. Every pipeline and deployment component below is **planned** and is not implemented in Stage 0A.
+Implemented repository and corpus-control layers:
+
+- Stage 0 repository foundation;
+- Stage 1 source strategy;
+- public-PDF audit;
+- deterministic PDF audit utility;
+- synthetic PPTX and EML fixtures;
+- synthetic ground truth;
+- frozen corpus split;
+- product and evaluation contracts.
+
+Stage 2 and every later pipeline component remain planned. No parser, common Document Object, extraction system, or evaluation result currently exists.
+
+Design contracts:
+
+- [Product definition](product_definition.md)
+- [Evidence-linked extraction schema](extraction_schema.md)
+- [Evaluation plan](evaluation_plan.md)
+- [Stage 1 corpus freeze](corpus_freeze.md)
 
 ## Planned flow
 
 ~~~text
-[Planned] Documents
+[Implemented Stage 1 corpus] PDF / PPTX / EML documents
     -> [Planned] format-specific parsing
     -> [Planned] common Document Object
     -> [Planned] preprocessing and segmentation
@@ -30,7 +48,7 @@ Only the **Stage 0 repository foundation** is implemented: scope and architectur
 
 | Component | Planned responsibility | Status |
 | --- | --- | --- |
-| Documents | Supply supported PDF, PPTX, and email-style text inputs. | Planned |
+| Documents | Supply frozen PDF, PPTX, and EML corpus inputs. | Stage 1 corpus implemented |
 | Format-specific parsing | Preserve format structure and source locations while reading content. | Planned |
 | Common Document Object | Provide one format-neutral contract with evidence-location metadata. | Planned |
 | Preprocessing and segmentation | Normalise and divide content without losing provenance. | Planned |

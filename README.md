@@ -23,7 +23,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 1B: expanded corpus audit and synthetic challenge-set design (in progress).** S001–S007 have completed public-PDF source and technical review and are approved for documented local corpus and future evaluation use. All seven original PDFs remain local and uncommitted. S004–S007 add complex visual, tabular, statistical, and multi-column cases. Synthetic PPTX and email-style challenge sets remain outstanding. No Stage 2 parser or extraction evaluation exists, and no extraction evaluation results exist yet.
+**Stage 1 corpus preparation is complete.** `stage1-corpus-v1.0` contains 15 active sources: 7 public PDFs, 2 synthetic PPTX decks, and 6 synthetic EML messages. Development and held-out family splits are frozen, and the product, extraction, and evaluation contracts are documented. No Stage 2 parser or extraction system exists; the next stage is document ingestion.
 
 ## Stage 1B audit utility
 
@@ -35,10 +35,29 @@ audit-pdfs --input-dir data/raw --output artifacts/audits/pdf_audit.csv
 
 Source files under data/raw and generated audit artefacts under artifacts/audits remain local and ignored by Git. See the [pilot utility validation](docs/stage_1b_audit_utility_validation.md) for observed Stage 1B results and limitations.
 
+## Synthetic challenge corpus
+
+The deterministic generator creates the committed PPTX and EML fixtures from fixed project-authored data:
+
+~~~powershell
+python scripts/generate_synthetic_corpus.py --output-root data/synthetic --force
+~~~
+
+See the [synthetic challenge-set specification](docs/synthetic_challenge_set_spec.md) and [synthetic data policy](docs/synthetic_data_policy.md) for family definitions, provisional splits, redistribution rules, and leakage controls.
+
+## Stage 1 contract and freeze
+
+- [Product definition](docs/product_definition.md)
+- [Evidence-linked extraction schema](docs/extraction_schema.md)
+- [Evaluation plan](docs/evaluation_plan.md)
+- [End-to-end product example](docs/end_to_end_example.md)
+- [Stage 1 corpus freeze](docs/corpus_freeze.md)
+- [Stage 1 completion report](docs/stage_1_completion_report.md)
+
 ## Planned stages
 
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
-2. **Stage 1 — Corpus Audit**: **In progress: Stage 1B.** Verify pilot sources, audit exact local files, record rights and technical evidence, and decide corpus suitability without treating acquisition as approval.
+2. **Stage 1 – Corpus Audit**: **Completed.** Audited and froze the versioned public and synthetic corpus, family splits, ground truth, product contract, and evaluation gates.
 3. **Stage 2 — Document Ingestion**: **Planned.** Add format-specific parsing, a common Document Object, preprocessing, and segmentation for the MVP formats.
 4. **Stage 3 — Baseline and Structured Extraction**: **Planned.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
