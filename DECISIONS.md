@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 were accepted on 2026-07-21. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -241,3 +241,35 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Limit Stage 2A content assertions to S010 and S012-S014, alongside temporary format fixtures.
 - **Reason:** This prevents held-out values from shaping content-specific parser rules before the parser version is frozen.
 - **Trade-off:** Some format-general failures will only appear in Stage 2B.
+
+## DEC-031: Use manifest-driven batch ingestion
+
+- **Context:** Full-corpus validation must use frozen membership, filenames, formats, families, splits, and checksums without embedding source-specific rules in code.
+- **Alternatives:** Maintain a hard-coded source list; discover arbitrary files from directories; join the source register and corpus-split manifest.
+- **Chosen option:** Drive batch ingestion from the joined frozen source register and corpus-split manifest, with caller-supplied raw, synthetic, and output roots.
+- **Reason:** This preserves manifest order and corpus controls while keeping path resolution format-based and reproducible.
+- **Trade-off:** Batch runs depend on consistent manifests and correctly prepared local source roots.
+
+## DEC-032: Isolate failures per source
+
+- **Context:** One malformed, missing, or checksum-mismatched source must not hide the outcomes for the rest of the frozen corpus.
+- **Alternatives:** Abort on the first error; retry every error indefinitely; record each item independently and complete the report.
+- **Chosen option:** Isolate parser, checksum, input, output, and validation failures per source and return a complete batch report.
+- **Reason:** A complete report supports an explicit failure taxonomy and prevents one source from crashing the batch.
+- **Trade-off:** Callers must inspect the batch exit code and item-level failures rather than assuming report creation means success.
+
+## DEC-033: Preserve first held-out run evidence
+
+- **Context:** Replacing the first held-out report after parser changes would conceal whether the frozen parser initially generalized.
+- **Alternatives:** Keep only the latest run; overwrite failed runs after fixes; preserve the first report and write any later run separately.
+- **Chosen option:** Preserve the first held-out report and use different output paths for any after-fix rerun.
+- **Reason:** This keeps the sequence of evidence auditable and prevents retrospective presentation of a corrected run as the original result.
+- **Trade-off:** Local validation artifacts require clearer naming and additional storage.
+
+## DEC-034: Prohibit held-out-specific parser tuning
+
+- **Context:** Held-out document values or filenames could otherwise influence rules and weaken the generalization claim.
+- **Alternatives:** Tune directly to every held-out failure; prohibit all post-held-out fixes; allow only documented format-general fixes with temporary regression fixtures.
+- **Chosen option:** Prohibit source-ID, filename, expected-value, and held-out-keyword rules; permit only documented format-general parser fixes.
+- **Reason:** This preserves the purpose of the frozen held-out split while allowing legitimate general parser defects to be corrected transparently.
+- **Trade-off:** Some unsupported held-out cases may remain documented limitations instead of being made to pass.

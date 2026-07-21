@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 2A - Common Document Object and development-source parsing
+- **Current stage:** Stage 2 complete - frozen-corpus ingestion validated; Stage 3 extraction next
 - **Last updated:** 2026-07-21
-- **Latest milestone:** Implemented the initial provenance-preserving PDF, PPTX and EML ingestion boundary for frozen development sources
+- **Latest milestone:** Validated all 15 frozen PDF, PPTX and EML sources as schema-valid provenance-preserving ParsedDocument outputs
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -28,26 +28,27 @@
 - Single-document CLI.
 - Ingestion tests.
 - Development-source validation.
+- Manifest-driven batch ingestion.
+- First held-out ingestion validation.
+- Full frozen-corpus ingestion validation.
+- Stage 2 acceptance report.
 
 ## In progress
 
-- Held-out ingestion validation.
-- Full frozen-corpus ingestion report.
-- Parser hardening based on format-general defects.
-- Stage 2 acceptance report.
+None for Stage 2.
 
 ## Next tasks
 
-1. Freeze the Stage 2A parser commit.
-2. Run all six held-out sources without content-specific tuning.
-3. Run all 15 frozen sources through a batch validator.
-4. Record structured parser failures and warnings.
-5. Complete the Stage 2 acceptance report.
-6. Do not begin extraction until all Stage 2 gates are satisfied.
+1. Define the versioned Stage 3 predicate vocabulary.
+2. Create the public-PDF gold annotation subset.
+3. Implement a deterministic extraction baseline.
+4. Evaluate the baseline on development labels.
+5. Freeze the baseline before held-out extraction evaluation.
+6. Do not begin RAG before extraction evaluation.
 
 ## Blockers
 
-No Stage 2 blocker is identified.
+No Stage 3 planning blocker is identified.
 
 ## AG News replacement status
 

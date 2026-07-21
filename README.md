@@ -23,9 +23,9 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 2A document ingestion is in progress.** The versioned Common Document Object and initial PDF, PPTX, and EML parsers convert the frozen development sources into provenance-preserving JSON. Ingestion does not extract or reconcile facts. `stage1-corpus-v1.0` remains frozen, and held-out ingestion validation is pending.
+**Stage 2 document ingestion is complete.** All 15 sources in `stage1-corpus-v1.0` were validated as schema-valid, provenance-preserving `ParsedDocument` JSON using the frozen parser. Ingestion does not extract or reconcile facts. Stage 3 baseline and structured extraction is next.
 
-## Stage 2A document ingestion
+## Stage 2 document ingestion
 
 Parse one supported local document through the installed command:
 
@@ -39,7 +39,13 @@ or through the Python module:
 python -m document_intelligence.ingestion.cli <file> --source-id <SOURCE_ID> --output <output.json>
 ~~~
 
-The output contains document and block records with page, slide, header, body, or quoted-history provenance. It does not contain extracted facts. See the [Stage 2 ingestion design](docs/stage_2_ingestion_design.md) and [Stage 2A development validation](docs/stage_2a_development_validation.md).
+Run manifest-driven validation over a frozen split:
+
+~~~powershell
+python -m document_intelligence.ingestion.batch_cli --output-root <output-directory> --split all --parser-commit <PARSER_COMMIT> --run-type full_corpus_validation --report <report.json>
+~~~
+
+The output contains document and block records with page, slide, header, body, or quoted-history provenance. It does not contain extracted facts. See the [Stage 2 ingestion design](docs/stage_2_ingestion_design.md), [Stage 2A development validation](docs/stage_2a_development_validation.md), [Stage 2B held-out validation](docs/stage_2b_held_out_validation.md), and [Stage 2 acceptance report](docs/stage_2_acceptance_report.md).
 
 ## Stage 1B audit utility
 
@@ -74,8 +80,8 @@ See the [synthetic challenge-set specification](docs/synthetic_challenge_set_spe
 
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
 2. **Stage 1 – Corpus Audit**: **Completed.** Audited and froze the versioned public and synthetic corpus, family splits, ground truth, product contract, and evaluation gates.
-3. **Stage 2 — Document Ingestion**: **In progress: Stage 2A.** The Common Document Object and development-source PDF, PPTX, and EML parsing are implemented; held-out and full-corpus validation remain planned.
-4. **Stage 3 — Baseline and Structured Extraction**: **Planned.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.
+3. **Stage 2 — Document Ingestion**: **Completed.** The Common Document Object, PDF/PPTX/EML parsers, single-document and batch CLIs, and full frozen-corpus validation are implemented.
+4. **Stage 3 — Baseline and Structured Extraction**: **Planned next.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
 6. **Stage 5 — Storage and Data Model**: **Planned.** Define the validated knowledge model and local persistence before considering BigQuery.
 7. **Stage 6 — Interface**: **Planned.** Add an interface or API only for capabilities supported by evaluation evidence.

@@ -2,7 +2,7 @@
 
 ## Current implementation status
 
-Implemented repository, corpus-control, and Stage 2A ingestion layers:
+Implemented repository, corpus-control, and Stage 2 ingestion layers:
 
 - Stage 0 repository foundation;
 - Stage 1 source strategy;
@@ -14,9 +14,11 @@ Implemented repository, corpus-control, and Stage 2A ingestion layers:
 - product and evaluation contracts;
 - Common Document Object v0.1;
 - PDF, PPTX, and EML parsers;
-- single-document dispatch and JSON serialisation.
+- single-document dispatch and JSON serialisation;
+- manifest-driven batch ingestion with per-source failure isolation;
+- development, held-out, and full frozen-corpus validation.
 
-Held-out and full-corpus ingestion validation remain planned for Stage 2. No semantic segmentation, extraction, reconciliation, extraction evaluation, storage, retrieval, interface, or deployment layer exists.
+Stage 2 ingestion is complete for `stage1-corpus-v1.0`. No semantic segmentation, extraction, reconciliation, extraction evaluation, storage, retrieval, interface, or deployment layer exists.
 
 Design contracts:
 
@@ -26,6 +28,8 @@ Design contracts:
 - [Stage 1 corpus freeze](corpus_freeze.md)
 - [Stage 2 ingestion design](stage_2_ingestion_design.md)
 - [Stage 2A development validation](stage_2a_development_validation.md)
+- [Stage 2B held-out validation](stage_2b_held_out_validation.md)
+- [Stage 2 acceptance report](stage_2_acceptance_report.md)
 
 ## Ingestion and extraction boundary
 
@@ -36,8 +40,9 @@ Design contracts:
 
 ~~~text
 [Implemented Stage 1 corpus] PDF / PPTX / EML documents
-    -> [Implemented Stage 2A] format-specific parsing
-    -> [Implemented Stage 2A] Common Document Object v0.1 and JSON serialisation
+    -> [Implemented Stage 2] manifest-driven single/batch dispatch
+    -> [Implemented Stage 2] format-specific parsing
+    -> [Implemented Stage 2] Common Document Object v0.1 and JSON serialisation
     -> [Planned] preprocessing beyond basic text normalisation
     -> [Planned] semantic segmentation
     -> [Planned] baseline extraction
@@ -60,8 +65,9 @@ Design contracts:
 | Component | Planned responsibility | Status |
 | --- | --- | --- |
 | Documents | Supply frozen PDF, PPTX, and EML corpus inputs. | Stage 1 corpus implemented |
-| Format-specific parsing | Preserve page, slide, shape, header, body, and quoted-history locations while reading content. | Stage 2A implemented for development sources |
-| Common Document Object | Provide the strict v0.1 `ParsedDocument` and `DocumentBlock` JSON contract. | Stage 2A implemented |
+| Batch ingestion | Join frozen manifests, resolve format paths, isolate failures, validate checksums, and produce machine-readable reports. | Stage 2 implemented and validated on 15 sources |
+| Format-specific parsing | Preserve page, slide, shape, header, body, and quoted-history locations while reading content. | Stage 2 implemented and validated on 15 sources |
+| Common Document Object | Provide the strict v0.1 `ParsedDocument` and `DocumentBlock` JSON contract. | Stage 2 implemented |
 | Preprocessing and segmentation | Extend basic line-ending and trailing-space normalisation and divide content without losing provenance. | Planned |
 | Baseline extraction | Supply a deterministic comparison point for defined fields. | Planned |
 | LLM structured extraction | Produce schema-targeted candidate records through one future provider. | Planned |
