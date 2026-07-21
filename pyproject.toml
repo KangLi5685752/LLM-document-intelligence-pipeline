@@ -9,15 +9,17 @@ description = "An evaluated portfolio prototype for traceable document intellige
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "pydantic>=2.12,<3",
     "pypdf>=6,<7",
+    "python-pptx==1.0.2",
 ]
 
 [project.scripts]
 audit-pdfs = "document_intelligence.audit.pdf_audit:main"
+ingest-document = "document_intelligence.ingestion.cli:main"
 
 [project.optional-dependencies]
 dev = [
-    "python-pptx==1.0.2",
     "pytest>=7",
 ]
 
