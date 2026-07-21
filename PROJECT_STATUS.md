@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 1 complete - product contract and corpus v1.0 frozen; Stage 2 ingestion next
-- **Last updated:** 2026-07-20
-- **Latest milestone:** Frozen a 15-source PDF, PPTX and EML corpus with family-level development and held-out splits, synthetic ground truth, and documented evaluation gates
+- **Current stage:** Stage 2A - Common Document Object and development-source parsing
+- **Last updated:** 2026-07-21
+- **Latest milestone:** Implemented the initial provenance-preserving PDF, PPTX and EML ingestion boundary for frozen development sources
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -20,20 +20,30 @@
 - Corpus-split manifest.
 - `stage1-corpus-v1.0` freeze.
 - Stage 1 completion report.
+- Versioned Common Document Object.
+- PDF parser.
+- PPTX parser.
+- EML parser.
+- Parser dispatcher.
+- Single-document CLI.
+- Ingestion tests.
+- Development-source validation.
 
 ## In progress
 
-None for Stage 1.
+- Held-out ingestion validation.
+- Full frozen-corpus ingestion report.
+- Parser hardening based on format-general defects.
+- Stage 2 acceptance report.
 
 ## Next tasks
 
-1. Create the Stage 2 common Document Object.
-2. Implement PDF parsing with page-level provenance.
-3. Implement PPTX parsing with slide-level provenance.
-4. Implement EML parsing with message headers and quoted-history separation.
-5. Add parser tests across development fixtures.
-6. Validate all 15 frozen sources without changing corpus membership.
-7. Do not begin extraction until ingestion acceptance gates are met.
+1. Freeze the Stage 2A parser commit.
+2. Run all six held-out sources without content-specific tuning.
+3. Run all 15 frozen sources through a batch validator.
+4. Record structured parser failures and warnings.
+5. Complete the Stage 2 acceptance report.
+6. Do not begin extraction until all Stage 2 gates are satisfied.
 
 ## Blockers
 

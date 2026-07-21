@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 were accepted on 2026-07-21. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -201,3 +201,43 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Use `docs/evaluation_plan.md` as the pre-experiment acceptance contract.
 - **Reason:** This prevents retrospective metric selection and unsupported claims.
 - **Trade-off:** Thresholds may later require a versioned revision if the corpus proves materially harder than expected.
+
+## DEC-026: Use Pydantic v2 for the Common Document Object
+
+- **Context:** Format-specific parsers need one explicit, versioned, JSON-serialisable boundary that rejects invalid and unexpected data.
+- **Alternatives:** Plain dictionaries; standard-library dataclasses with manual validation; Pydantic v2 models.
+- **Chosen option:** Use Pydantic v2 for the Common Document Object.
+- **Reason:** It provides strict field validation, an explicit JSON contract, nested model validation, and future schema generation.
+- **Trade-off:** It adds a runtime dependency, and validation models require version discipline.
+
+## DEC-027: Use page-level PDF blocks for the initial parser
+
+- **Context:** PDF text extraction can expose uncertain reading order, columns, and tables that the initial ingestion layer cannot reliably reconstruct.
+- **Alternatives:** One block per document; heuristic paragraph or table reconstruction; one ordered text block per page.
+- **Chosen option:** Emit one page-text block per PDF page for Stage 2A.
+- **Reason:** Page blocks provide stable provenance, avoid pretending to reconstruct columns or tables, and support later segmentation without losing page identity.
+- **Trade-off:** Page blocks may be too coarse for extraction.
+
+## DEC-028: Preserve PPTX shape and table blocks without semantic reconstruction
+
+- **Context:** Slides combine positioned text, tables, charts, diagrams, pictures, and decorative objects whose semantic relationships are not always explicit.
+- **Alternatives:** Flatten each slide to one text string; infer complete visual meaning; preserve supported shapes and tables with positions.
+- **Chosen option:** Preserve slide titles, text shapes, and direct table structures with slide and element provenance, without interpreting unsupported visual objects.
+- **Reason:** This retains visible structure and slide-level provenance without making unsupported chart or diagram claims.
+- **Trade-off:** Reading order remains an approximation, and SmartArt and charts are not interpreted.
+
+## DEC-029: Separate current EML body from quoted history
+
+- **Context:** Replies and forwards commonly repeat earlier values that later processing must not mistake for the latest assertion.
+- **Alternatives:** Treat the whole message as current content; discard all history; preserve current body and quoted history as separate blocks.
+- **Chosen option:** Separate the current EML body from recognized quoted or forwarded history.
+- **Reason:** Later reconciliation must not treat quoted stale values as latest assertions.
+- **Trade-off:** Separator-based detection cannot cover every email client format.
+
+## DEC-030: Keep Stage 2A content tests development-only
+
+- **Context:** Frozen held-out sources must not shape content-specific parser behavior before the initial parser version is fixed.
+- **Alternatives:** Assert content across all sources immediately; avoid committed-source tests; use development fixtures for Stage 2A content assertions.
+- **Chosen option:** Limit Stage 2A content assertions to S010 and S012-S014, alongside temporary format fixtures.
+- **Reason:** This prevents held-out values from shaping content-specific parser rules before the parser version is frozen.
+- **Trade-off:** Some format-general failures will only appear in Stage 2B.
