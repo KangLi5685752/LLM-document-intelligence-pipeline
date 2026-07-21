@@ -273,3 +273,43 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Prohibit source-ID, filename, expected-value, and held-out-keyword rules; permit only documented format-general parser fixes.
 - **Reason:** This preserves the purpose of the frozen held-out split while allowing legitimate general parser defects to be corrected transparently.
 - **Trade-off:** Some unsupported held-out cases may remain documented limitations instead of being made to pass.
+
+## DEC-035: Separate candidate extraction from final reconciliation
+
+- **Context:** A source-level extraction can propose a fact without establishing whether it is current, superseded, duplicated, or in conflict with another source.
+- **Alternatives:** Assign final states during extraction; represent all outputs as final facts; preserve candidates in a separate pre-reconciliation contract.
+- **Chosen option:** Use `CandidateExtractionResult` for source-level candidates and reserve final states for a later reconciliation layer.
+- **Reason:** This prevents extraction confidence, source order, or recency from silently deciding authority.
+- **Trade-off:** Later processing must explicitly transform candidates into reconciled knowledge records.
+
+## DEC-036: Use a bounded predicate vocabulary v0.1
+
+- **Context:** Unrestricted predicate creation would make labels, deterministic rules, and future LLM outputs difficult to compare.
+- **Alternatives:** Allow arbitrary strings; adopt a broad external ontology immediately; define a small versioned vocabulary with declared aliases and qualifiers.
+- **Chosen option:** Use exactly 20 canonical predicates in vocabulary v0.1 and reject unknown names.
+- **Reason:** A bounded registry makes annotation and later extraction evaluation reproducible without pretending to define a complete enterprise ontology.
+- **Trade-off:** New relationships require an explicit versioned vocabulary change.
+
+## DEC-037: Treat public annotations as AI-assisted drafts until owner review
+
+- **Context:** Local source inspection and structural validation do not provide independent semantic approval.
+- **Alternatives:** Label AI-assisted records as verified; omit review status; retain draft status until the project owner records a decision.
+- **Chosen option:** Initialize every public fact and challenge case as `draft_ai_assisted` and require documented owner review before approval.
+- **Reason:** This makes single-annotator and AI-assistance limitations visible and prevents fabricated verification claims.
+- **Trade-off:** Public-gold extraction results cannot be claimed until review and correction are complete.
+
+## DEC-038: Preserve procedural held-out labels but prohibit their use in tuning
+
+- **Context:** The public repository cannot keep S005 and S007 labels secret, yet a held-out procedure is still useful for separating rule design from final evaluation.
+- **Alternatives:** Omit held-out labels; claim a blind benchmark; publish labels while prohibiting their use in predicate, rule, or prompt tuning.
+- **Chosen option:** Commit and structurally validate held-out labels, but exclude their values from extractor design and freeze development behavior before later held-out evaluation.
+- **Reason:** This is transparent about visibility while preserving a reproducible procedural boundary.
+- **Trade-off:** Familiarity bias cannot be eliminated in a public single-developer workflow.
+
+## DEC-039: Require evidence block and page validation for every public fact
+
+- **Context:** A page citation alone does not prove that an annotation points to the exact parsed evidence later extractors will receive.
+- **Alternatives:** Store only page numbers; store free-text excerpts without referential checks; validate block ID, page, excerpt, source, family, and split.
+- **Chosen option:** Require every public fact to reference an existing PDF `PAGE_TEXT` block whose page matches and whose normalized text contains the excerpt.
+- **Reason:** This makes the annotation-to-ingestion boundary deterministic and catches stale or mistyped evidence links before experiments.
+- **Trade-off:** Parser-version changes may require explicit annotation migration even when the source fact is unchanged.

@@ -122,20 +122,21 @@ These are acceptance gates and not current results.
 
 ## Public-PDF evaluation plan
 
-The seven public PDFs provide realistic format and language coverage but do not yet have complete fact-level labels.
+The seven public PDFs provide realistic format and language coverage. Stage 3A now supplies a versioned annotation schema and structurally validated AI-assisted draft subset, but owner verification remains pending.
 
-Before structured extraction experiments begin:
+The draft contains exactly 35 fact annotations:
 
-- create a versioned public gold subset;
-- annotate at least 35 evidence-linked facts across S001-S007;
-- include development and held-out PDFs;
-- include recommendations, governance requirements, findings, metrics, risks, or decisions;
-- record raw and normalized values;
-- record page-level evidence;
-- record missing, ambiguous, and unsupported cases;
-- document annotation date and schema version.
+- S001: 5;
+- S002: 5;
+- S003: 4;
+- S004: 6;
+- S005: 5;
+- S006: 5;
+- S007: 5.
 
-At least 10 labelled facts must come from held-out S005 and S007 combined.
+This yields 25 development facts and 10 held-out facts. The draft also records ambiguous, unsupported, and missing-value challenge cases with page-level evidence.
+
+Extraction experiments cannot claim public-gold results until the project owner records review decisions, rejected or ambiguous records are corrected, accepted records are marked `owner_verified`, and public-gold v0.1 is frozen. Structural validation alone is not approval.
 
 Limitations:
 
@@ -145,7 +146,7 @@ Limitations:
 - small sample;
 - public documents are not a representative enterprise corpus.
 
-Public gold labels are not created in this task.
+Stage 3A does not run extraction against held-out labels or use their values for rule, prompt, or predicate tuning.
 
 ## Development and held-out use
 

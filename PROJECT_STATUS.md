@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 2 complete - frozen-corpus ingestion validated; Stage 3 extraction next
-- **Last updated:** 2026-07-21
-- **Latest milestone:** Validated all 15 frozen PDF, PPTX and EML sources as schema-valid provenance-preserving ParsedDocument outputs
+- **Current stage:** Stage 3A - candidate extraction contract and public-gold preparation
+- **Last updated:** 2026-07-22
+- **Latest milestone:** Created the versioned candidate-extraction contract, predicate vocabulary and 35-fact public-PDF annotation draft
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -32,23 +32,33 @@
 - First held-out ingestion validation.
 - Full frozen-corpus ingestion validation.
 - Stage 2 acceptance report.
+- Candidate extraction models.
+- Predicate vocabulary v0.1.
+- Public annotation models and deterministic validator.
+- 35 draft public-PDF fact annotations.
+- Ambiguous, unsupported, and missing-value challenge cases.
+- Structural public annotation validation.
+- Owner review checklist.
 
 ## In progress
 
-None for Stage 2.
+- Owner review of the public annotation sample.
+- Correction and verification of annotation records.
+- Public-gold v0.1 approval.
+- Deterministic baseline design.
 
 ## Next tasks
 
-1. Define the versioned Stage 3 predicate vocabulary.
-2. Create the public-PDF gold annotation subset.
-3. Implement a deterministic extraction baseline.
-4. Evaluate the baseline on development labels.
-5. Freeze the baseline before held-out extraction evaluation.
-6. Do not begin RAG before extraction evaluation.
+1. Complete owner review.
+2. Correct rejected or ambiguous annotations.
+3. Mark accepted records `owner_verified`.
+4. Freeze public-gold v0.1.
+5. Implement deterministic extraction on development sources only.
+6. Do not access held-out annotations during baseline rule design.
 
 ## Blockers
 
-No Stage 3 planning blocker is identified.
+No technical blocker is identified. Public-gold approval depends on project-owner review.
 
 ## AG News replacement status
 

@@ -23,7 +23,17 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 2 document ingestion is complete.** All 15 sources in `stage1-corpus-v1.0` were validated as schema-valid, provenance-preserving `ParsedDocument` JSON using the frozen parser. Ingestion does not extract or reconcile facts. Stage 3 baseline and structured extraction is next.
+**Stage 3A is in progress.** Stage 2 ingestion remains complete for all 15 sources in `stage1-corpus-v1.0`. The versioned candidate-extraction contracts, bounded predicate vocabulary v0.1, annotation models, validator, and a structurally valid 35-fact public-PDF annotation draft now exist. Owner review is pending. No extractor, extraction metric, reconciliation implementation, or LLM call exists.
+
+## Stage 3A public annotation validation
+
+Generate fresh ignored `ParsedDocument` JSON with the frozen Stage 2 batch command, then validate the committed draft:
+
+~~~powershell
+python -m document_intelligence.extraction.annotation_cli --parsed-root artifacts/annotations/public_gold_parsed --report artifacts/annotations/public_gold_validation_report.json
+~~~
+
+The command validates schemas, frozen split metadata, evidence blocks, page locators, excerpts, value types, and required counts. Structural success does not mean owner approval or provide an extraction result. See the [Stage 3 design](docs/stage_3_extraction_design.md), [annotation guide](docs/public_gold_annotation_guide.md), [Stage 3A report](docs/stage_3a_annotation_report.md), and [owner review checklist](docs/public_gold_owner_review.md).
 
 ## Stage 2 document ingestion
 
@@ -81,7 +91,7 @@ See the [synthetic challenge-set specification](docs/synthetic_challenge_set_spe
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
 2. **Stage 1 – Corpus Audit**: **Completed.** Audited and froze the versioned public and synthetic corpus, family splits, ground truth, product contract, and evaluation gates.
 3. **Stage 2 — Document Ingestion**: **Completed.** The Common Document Object, PDF/PPTX/EML parsers, single-document and batch CLIs, and full frozen-corpus validation are implemented.
-4. **Stage 3 — Baseline and Structured Extraction**: **Planned next.** Add deterministic baseline and structured LLM extraction, schema validation, evidence alignment, conflict checks, and review routing.
+4. **Stage 3 — Baseline and Structured Extraction**: **In progress: Stage 3A.** Candidate contracts, predicate vocabulary, and public annotation validation are implemented; owner review is pending. Deterministic and LLM extractors, reconciliation, conflict checks, metrics, and review routing remain planned.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
 6. **Stage 5 — Storage and Data Model**: **Planned.** Define the validated knowledge model and local persistence before considering BigQuery.
 7. **Stage 6 — Interface**: **Planned.** Add an interface or API only for capabilities supported by evaluation evidence.
