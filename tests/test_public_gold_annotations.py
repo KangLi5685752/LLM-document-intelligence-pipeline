@@ -191,13 +191,17 @@ def test_source_stated_metric_context_is_retained(
     assert by_id["PG-V01-S006-001"].qualifiers == {
         "metric_name": "businesses_currently_using_ai",
         "unit": "percent",
-        "population": "UK private-sector businesses",
+        "population": "surveyed UK private-sector businesses with at least five employees",
         "period": "survey reporting period",
     }
     assert by_id["PG-V01-S006-003"].qualifiers == {
         "metric_name": "ethical_concerns_significance",
         "unit": "percent",
-        "population": "businesses evaluating the cited adoption barrier",
+        "population": (
+            "businesses that identified ethical concerns as an AI-adoption "
+            "barrier and rated its significance"
+        ),
+        "period": "survey reporting period",
     }
 
 
@@ -237,8 +241,9 @@ def test_s005_false_precision_is_replaced_by_supported_action(
 ) -> None:
     fact = next(item for item in facts if item.annotation_id == "PG-V01-S005-001")
     expected = (
-        "Position AI Scotland as the national flagship programme driving strategy "
-        "delivery and showcasing Scotland’s AI strengths on the global stage."
+        "Before the end of March 2027, position AI Scotland as the national "
+        "flagship programme driving strategy delivery and showcasing Scotland’s "
+        "AI strengths on the global stage."
     )
 
     assert fact.subject_text == "Scottish Government"
@@ -262,7 +267,7 @@ def test_s007_owner_review_uses_exact_normalized_value(
     assert "Same bounded statement." not in owner_review
 
 
-def test_full_owner_review_covers_every_fact_without_approval(
+def test_full_owner_review_covers_every_approved_fact(
     facts: list[GoldFactAnnotation],
 ) -> None:
     full_review = (ROOT / "docs" / "public_gold_full_review.md").read_text(
@@ -270,15 +275,14 @@ def test_full_owner_review_covers_every_fact_without_approval(
     )
 
     assert all(f"- Annotation ID: {fact.annotation_id}" in full_review for fact in facts)
-    assert full_review.count("- [ ] Page verified") == 35
-    assert full_review.count("- [ ] Subject verified") == 35
-    assert full_review.count("- [ ] Predicate verified") == 35
-    assert full_review.count("- [ ] Qualifiers verified") == 35
-    assert full_review.count("- [ ] Raw value verified") == 35
-    assert full_review.count("- [ ] Normalization verified") == 35
-    assert full_review.count("- [ ] Approve") == 35
+    assert full_review.count("- [x] Page verified") == 35
+    assert full_review.count("- [x] Subject verified") == 35
+    assert full_review.count("- [x] Predicate verified") == 35
+    assert full_review.count("- [x] Qualifiers verified") == 35
+    assert full_review.count("- [x] Raw value verified") == 35
+    assert full_review.count("- [x] Normalization verified") == 35
+    assert full_review.count("- [x] Approve") == 35
     assert full_review.count("- [ ] Reject") == 35
-    assert "- [x]" not in full_review.casefold()
 
 
 def test_excerpts_have_bounded_lengths(facts: list[GoldFactAnnotation]) -> None:
@@ -291,15 +295,17 @@ def test_expected_fact_state_is_always_unknown(
     assert {fact.expected_fact_state for fact in facts} == {"unknown"}
 
 
-def test_all_initial_records_are_ai_assisted_drafts(
+def test_all_records_are_owner_verified(
     facts: list[GoldFactAnnotation], cases: list[GoldChallengeCase]
 ) -> None:
     assert {
         fact.review_status for fact in facts
-    } == {AnnotationReviewStatus.DRAFT_AI_ASSISTED}
+    } == {AnnotationReviewStatus.OWNER_VERIFIED}
     assert {
         case.review_status for case in cases
-    } == {AnnotationReviewStatus.DRAFT_AI_ASSISTED}
+    } == {AnnotationReviewStatus.OWNER_VERIFIED}
+    assert all(fact.notes.strip() for fact in facts)
+    assert all(case.notes.strip() for case in cases)
 
 
 def test_annotation_method_is_fixed(facts: list[GoldFactAnnotation]) -> None:
@@ -317,7 +323,6 @@ def test_required_content_predicates_are_covered(
         "recommendation",
         "commitment",
         "requirement",
-        "finding",
         "metric",
         "action_status",
         "risk",
@@ -325,13 +330,15 @@ def test_required_content_predicates_are_covered(
     }.issubset(predicates)
 
 
-def test_challenge_case_category_minimums(cases: list[GoldChallengeCase]) -> None:
+def test_challenge_case_category_counts(cases: list[GoldChallengeCase]) -> None:
     counts = Counter(case.case_type for case in cases)
 
-    assert len(cases) >= 6
-    assert counts["ambiguous"] >= 2
-    assert counts["unsupported"] >= 2
-    assert counts["missing_expected_value"] >= 2
+    assert len(cases) == 6
+    assert counts == {
+        "ambiguous": 2,
+        "unsupported": 2,
+        "missing_expected_value": 2,
+    }
     assert {case.split for case in cases} == {"development", "held_out"}
 
 
@@ -361,11 +368,13 @@ def test_structural_validator_passes_on_consistent_documents(
 
     assert report.passed
     assert report.invalid_evidence_count == 0
-    assert report.draft_count == 35
-    assert report.owner_verified_count == 0
-    assert report.warnings == [
-        "owner verification is pending for 35 draft fact annotations"
-    ]
+    assert report.draft_count == 0
+    assert report.owner_verified_count == 35
+    assert report.rejected_count == 0
+    assert report.draft_case_count == 0
+    assert report.owner_verified_case_count == 6
+    assert report.rejected_case_count == 0
+    assert report.warnings == []
 
 
 @pytest.mark.skipif(
@@ -378,6 +387,7 @@ def test_all_facts_validate_against_real_local_parsed_documents() -> None:
         case_path=CASE_PATH,
         corpus_split_path=SPLIT_PATH,
         parsed_document_root=REAL_PARSED_ROOT,
+        require_owner_verified=True,
     )
 
     assert report.passed, report.errors
@@ -539,6 +549,16 @@ def test_owner_verified_annotation_requires_notes(
         GoldFactAnnotation.model_validate(payload)
 
 
+def test_owner_verified_challenge_case_requires_notes(
+    cases: list[GoldChallengeCase],
+) -> None:
+    payload = cases[0].model_dump()
+    payload["notes"] = ""
+
+    with pytest.raises(ValidationError, match="require review notes"):
+        GoldChallengeCase.model_validate(payload)
+
+
 def test_mismatched_challenge_behavior_is_rejected(
     cases: list[GoldChallengeCase],
 ) -> None:
@@ -572,6 +592,7 @@ def test_cli_help_has_no_runtime_warning() -> None:
 
     assert result.returncode == 0, result.stderr
     assert "usage:" in result.stdout
+    assert "--require-owner-verified" in result.stdout
     assert "RuntimeWarning" not in result.stderr
     assert "found in sys.modules" not in result.stderr
     assert "prior to execution" not in result.stderr

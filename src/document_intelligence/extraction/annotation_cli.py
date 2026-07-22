@@ -33,6 +33,11 @@ def _build_argument_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--parsed-root", type=Path, required=True)
     parser.add_argument("--report", type=Path, required=True)
+    parser.add_argument(
+        "--require-owner-verified",
+        action="store_true",
+        help="Fail unless every fact and challenge case is owner verified.",
+    )
     return parser
 
 
@@ -68,6 +73,7 @@ def main(argv: list[str] | None = None) -> int:
             case_path=args.cases,
             corpus_split_path=args.corpus_split,
             parsed_document_root=args.parsed_root,
+            require_owner_verified=args.require_owner_verified,
         )
         _write_report(args.report, report)
     except (OSError, ValueError) as error:
@@ -75,12 +81,17 @@ def main(argv: list[str] | None = None) -> int:
         print(f"error: {message[:500]}", file=sys.stderr)
         return 1
 
-    verification = "pending" if report.draft_count else "recorded"
     print(
         f"facts={report.fact_count} cases={report.challenge_case_count} "
         f"development={report.development_fact_count} "
-        f"held_out={report.held_out_fact_count} drafts={report.draft_count} "
-        f"owner_verification={verification} passed={str(report.passed).lower()} "
+        f"held_out={report.held_out_fact_count} "
+        f"fact_drafts={report.draft_count} "
+        f"fact_owner_verified={report.owner_verified_count} "
+        f"fact_rejected={report.rejected_count} "
+        f"case_drafts={report.draft_case_count} "
+        f"case_owner_verified={report.owner_verified_case_count} "
+        f"case_rejected={report.rejected_case_count} "
+        f"passed={str(report.passed).lower()} "
         f"report={args.report.resolve()}"
     )
     if not report.passed:

@@ -188,6 +188,9 @@ class PublicGoldValidationReport(BaseModel):
     draft_count: int = Field(ge=0)
     owner_verified_count: int = Field(ge=0)
     rejected_count: int = Field(ge=0)
+    draft_case_count: int = Field(ge=0)
+    owner_verified_case_count: int = Field(ge=0)
+    rejected_case_count: int = Field(ge=0)
     passed: bool
     errors: list[str]
     warnings: list[str]
@@ -202,6 +205,13 @@ class PublicGoldValidationReport(BaseModel):
             != self.fact_count
         ):
             raise ValueError("fact review-status counts must reconcile")
+        if (
+            self.draft_case_count
+            + self.owner_verified_case_count
+            + self.rejected_case_count
+            != self.challenge_case_count
+        ):
+            raise ValueError("challenge-case review-status counts must reconcile")
         return self
 
 
@@ -336,6 +346,7 @@ def validate_public_gold_dataset(
     case_path: Path,
     corpus_split_path: Path,
     parsed_document_root: Path,
+    require_owner_verified: bool = False,
 ) -> PublicGoldValidationReport:
     """Validate public annotations against manifests and ParsedDocument evidence."""
     facts = load_gold_fact_annotations(fact_path)
@@ -385,12 +396,19 @@ def validate_public_gold_dataset(
         errors.append(f"duplicate annotation or case IDs: {duplicate_ids}")
     if missing_sources:
         errors.append(f"missing public source IDs: {missing_sources}")
-    if len(cases) < 6:
-        errors.append(f"expected at least six challenge cases; found {len(cases)}")
+    if len(cases) != 6:
+        errors.append(f"expected exactly six challenge cases; found {len(cases)}")
     case_counts = Counter(case.case_type for case in cases)
-    for case_type in ("ambiguous", "unsupported", "missing_expected_value"):
-        if case_counts[case_type] < 2:
-            errors.append(f"expected at least two {case_type} challenge cases")
+    expected_case_counts = {
+        "ambiguous": 2,
+        "unsupported": 2,
+        "missing_expected_value": 2,
+    }
+    if dict(sorted(case_counts.items())) != expected_case_counts:
+        errors.append(
+            "challenge-case distribution must be ambiguous=2, unsupported=2, "
+            "missing_expected_value=2"
+        )
 
     parsed_cache: dict[str, ParsedDocument] = {}
     for fact in facts:
@@ -490,10 +508,38 @@ def validate_public_gold_dataset(
     rejected_count = sum(
         fact.review_status is AnnotationReviewStatus.REJECTED for fact in facts
     )
+    draft_case_count = sum(
+        case.review_status is AnnotationReviewStatus.DRAFT_AI_ASSISTED
+        for case in cases
+    )
+    owner_verified_case_count = sum(
+        case.review_status is AnnotationReviewStatus.OWNER_VERIFIED for case in cases
+    )
+    rejected_case_count = sum(
+        case.review_status is AnnotationReviewStatus.REJECTED for case in cases
+    )
     if draft_count:
         warnings.append(
             f"owner verification is pending for {draft_count} draft fact annotations"
         )
+    if draft_case_count:
+        warnings.append(
+            "owner verification is pending for "
+            f"{draft_case_count} draft challenge cases"
+        )
+    if require_owner_verified:
+        if owner_verified_count != len(facts):
+            errors.append(
+                "freeze validation requires every fact annotation to be owner_verified"
+            )
+        if owner_verified_case_count != len(cases):
+            errors.append(
+                "freeze validation requires every challenge case to be owner_verified"
+            )
+        if rejected_count:
+            errors.append("freeze validation prohibits rejected fact annotations")
+        if rejected_case_count:
+            errors.append("freeze validation prohibits rejected challenge cases")
 
     return PublicGoldValidationReport(
         fact_count=len(facts),
@@ -508,6 +554,9 @@ def validate_public_gold_dataset(
         draft_count=draft_count,
         owner_verified_count=owner_verified_count,
         rejected_count=rejected_count,
+        draft_case_count=draft_case_count,
+        owner_verified_case_count=owner_verified_case_count,
+        rejected_case_count=rejected_case_count,
         passed=not errors,
         errors=errors,
         warnings=warnings,
