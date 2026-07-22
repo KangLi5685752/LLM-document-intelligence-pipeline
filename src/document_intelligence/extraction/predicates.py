@@ -7,7 +7,11 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from document_intelligence.extraction.models import SubjectType, ValueType
+from document_intelligence.extraction.models import (
+    QualifierValue,
+    SubjectType,
+    ValueType,
+)
 
 
 PREDICATE_VOCABULARY_VERSION: Literal["0.1"] = "0.1"
@@ -222,3 +226,55 @@ def normalize_predicate(name: str) -> str:
         return _ALIAS_TO_CANONICAL[normalized]
     except KeyError as error:
         raise ValueError(f"unknown predicate: {name!r}") from error
+
+
+def _is_meaningful_qualifier(value: QualifierValue) -> bool:
+    if value is None:
+        return False
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, list):
+        return bool(value) and all(bool(item.strip()) for item in value)
+    return True
+
+
+def validate_predicate_usage(
+    *,
+    predicate: str,
+    subject_type: SubjectType,
+    value_type: ValueType,
+    qualifiers: dict[str, QualifierValue],
+) -> str:
+    """Validate one predicate use and return its canonical registered name."""
+    canonical = normalize_predicate(predicate)
+    definition = PREDICATE_REGISTRY[canonical]
+    if subject_type not in definition.allowed_subject_types:
+        raise ValueError(
+            f"predicate {canonical!r} does not allow subject_type "
+            f"{subject_type.value!r}"
+        )
+    if value_type not in definition.allowed_value_types:
+        raise ValueError(
+            f"predicate {canonical!r} does not allow value_type {value_type.value!r}"
+        )
+
+    declared = set(definition.required_qualifiers) | set(
+        definition.optional_qualifiers
+    )
+    unknown = sorted(set(qualifiers) - declared)
+    if unknown:
+        raise ValueError(
+            f"predicate {canonical!r} received undeclared qualifiers: "
+            f"{', '.join(unknown)}"
+        )
+    missing = sorted(
+        name
+        for name in definition.required_qualifiers
+        if name not in qualifiers or not _is_meaningful_qualifier(qualifiers[name])
+    )
+    if missing:
+        raise ValueError(
+            f"predicate {canonical!r} requires meaningful qualifiers: "
+            f"{', '.join(missing)}"
+        )
+    return canonical

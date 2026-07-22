@@ -11,7 +11,6 @@ from pydantic import (
     ConfigDict,
     Field,
     field_serializer,
-    field_validator,
     model_validator,
 )
 
@@ -183,17 +182,19 @@ class CandidateFact(BaseModel):
     extraction_method: ExtractionMethod
     warnings: list[str] = Field(default_factory=list)
 
-    @field_validator("predicate")
-    @classmethod
-    def normalize_registered_predicate(cls, value: str) -> str:
-        """Resolve canonical or declared legacy predicate names."""
-        from document_intelligence.extraction.predicates import normalize_predicate
-
-        return normalize_predicate(value)
-
     @model_validator(mode="after")
     def validate_candidate(self) -> CandidateFact:
         """Validate identifiers, evidence links, and review semantics."""
+        from document_intelligence.extraction.predicates import (
+            validate_predicate_usage,
+        )
+
+        self.predicate = validate_predicate_usage(
+            predicate=self.predicate,
+            subject_type=self.subject_type,
+            value_type=self.value_type,
+            qualifiers=self.qualifiers,
+        )
         for field_name in (
             "candidate_id",
             "source_id",

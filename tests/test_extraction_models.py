@@ -246,3 +246,61 @@ def test_candidate_warnings_cannot_be_blank() -> None:
 
     with pytest.raises(ValidationError, match="warnings"):
         CandidateFact.model_validate(payload)
+
+
+def test_candidate_fact_rejects_invalid_predicate_subject_type() -> None:
+    payload = _fact().model_dump()
+    payload.update(predicate="status", subject_type="recommendation")
+
+    with pytest.raises(ValidationError, match="does not allow subject_type"):
+        CandidateFact.model_validate(payload)
+
+
+def test_candidate_fact_rejects_invalid_predicate_value_type() -> None:
+    payload = _fact().model_dump()
+    payload.update(predicate="status", value_type="date")
+
+    with pytest.raises(ValidationError, match="does not allow value_type"):
+        CandidateFact.model_validate(payload)
+
+
+def test_candidate_fact_rejects_missing_required_qualifier() -> None:
+    payload = _fact().model_dump()
+    payload.update(
+        predicate="metric",
+        subject_type="metric",
+        value_type="percentage",
+        qualifiers={},
+    )
+
+    with pytest.raises(ValidationError, match="requires meaningful qualifiers"):
+        CandidateFact.model_validate(payload)
+
+
+def test_candidate_fact_rejects_undeclared_qualifier() -> None:
+    payload = _fact().model_dump()
+    payload["qualifiers"] = {"unbounded_context": "not registered"}
+
+    with pytest.raises(ValidationError, match="undeclared qualifiers"):
+        CandidateFact.model_validate(payload)
+
+
+def test_candidate_fact_accepts_valid_metric_qualifiers() -> None:
+    payload = _fact().model_dump()
+    payload.update(
+        predicate="metric",
+        subject_type="metric",
+        normalized_value=42,
+        value_type="percentage",
+        qualifiers={
+            "metric_name": "example_adoption_rate",
+            "unit": "percent",
+            "population": "survey respondents",
+            "period": "survey reporting period",
+        },
+    )
+
+    fact = CandidateFact.model_validate(payload)
+
+    assert fact.predicate == "metric"
+    assert fact.qualifiers["metric_name"] == "example_adoption_rate"

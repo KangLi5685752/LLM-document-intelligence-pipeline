@@ -13,6 +13,7 @@ from document_intelligence.extraction.predicates import (
     PREDICATE_REGISTRY,
     PREDICATE_VOCABULARY_VERSION,
     normalize_predicate,
+    validate_predicate_usage,
 )
 
 
@@ -164,3 +165,28 @@ def test_vocabulary_serialises_deterministically() -> None:
     )
 
     assert first == second
+
+
+def test_usage_validation_normalizes_alias_and_returns_canonical_name() -> None:
+    assert (
+        validate_predicate_usage(
+            predicate="Programme Status",
+            subject_type=SubjectType.PROGRAMME,
+            value_type=ValueType.STATUS,
+            qualifiers={},
+        )
+        == "status"
+    )
+
+
+@pytest.mark.parametrize("metric_name", [None, "", "   ", []])
+def test_usage_validation_requires_meaningful_qualifier(
+    metric_name: object,
+) -> None:
+    with pytest.raises(ValueError, match="requires meaningful qualifiers"):
+        validate_predicate_usage(
+            predicate="metric",
+            subject_type=SubjectType.METRIC,
+            value_type=ValueType.PERCENTAGE,
+            qualifiers={"metric_name": metric_name},  # type: ignore[dict-item]
+        )

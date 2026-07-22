@@ -11,17 +11,18 @@ from enum import Enum
 from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from document_intelligence.extraction.models import (
     NormalizedMoney,
     NormalizedValue,
+    QualifierValue,
     SubjectType,
     ValueType,
 )
 from document_intelligence.extraction.predicates import (
     PREDICATE_REGISTRY,
-    normalize_predicate,
+    validate_predicate_usage,
 )
 from document_intelligence.ingestion.models import (
     BlockType,
@@ -61,6 +62,7 @@ class GoldFactAnnotation(BaseModel):
     raw_value: str
     normalized_value: NormalizedValue
     value_type: ValueType
+    qualifiers: dict[str, QualifierValue] = Field(default_factory=dict)
     expected_fact_state: Literal["unknown"]
     evidence_block_id: str
     evidence_location_type: LocationType
@@ -70,15 +72,15 @@ class GoldFactAnnotation(BaseModel):
     annotation_method: Literal["AI-assisted draft with local source review"]
     notes: str
 
-    @field_validator("predicate")
-    @classmethod
-    def normalize_registered_predicate(cls, value: str) -> str:
-        """Store only a canonical registered predicate."""
-        return normalize_predicate(value)
-
     @model_validator(mode="after")
     def validate_annotation(self) -> GoldFactAnnotation:
         """Enforce the public-PDF v0.1 annotation boundary."""
+        self.predicate = validate_predicate_usage(
+            predicate=self.predicate,
+            subject_type=self.subject_type,
+            value_type=self.value_type,
+            qualifiers=self.qualifiers,
+        )
         if not _ANNOTATION_ID.fullmatch(self.annotation_id):
             raise ValueError("annotation_id must use PG-V01-S001-001 style")
         if self.source_id not in PUBLIC_SOURCE_IDS:
