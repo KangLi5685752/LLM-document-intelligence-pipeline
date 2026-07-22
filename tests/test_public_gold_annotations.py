@@ -37,6 +37,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FACT_PATH = ROOT / "data" / "annotations" / "public_gold_facts_v0.1.jsonl"
 CASE_PATH = ROOT / "data" / "annotations" / "public_gold_cases_v0.1.jsonl"
 SPLIT_PATH = ROOT / "data" / "manifests" / "corpus_split.csv"
+REAL_PARSED_ROOT = ROOT / "artifacts" / "annotations" / "public_gold_parsed"
 EXPECTED_DISTRIBUTION = {
     "S001": 5,
     "S002": 5,
@@ -167,6 +168,119 @@ def test_predicates_are_registered(facts: list[GoldFactAnnotation]) -> None:
     assert all(fact.predicate in PREDICATE_REGISTRY for fact in facts)
 
 
+def test_every_metric_has_a_meaningful_metric_name(
+    facts: list[GoldFactAnnotation],
+) -> None:
+    metrics = [fact for fact in facts if fact.predicate == "metric"]
+
+    assert metrics
+    assert all(str(fact.qualifiers["metric_name"]).strip() for fact in metrics)
+
+
+def test_source_stated_metric_context_is_retained(
+    facts: list[GoldFactAnnotation],
+) -> None:
+    by_id = {fact.annotation_id: fact for fact in facts}
+
+    assert by_id["PG-V01-S005-003"].qualifiers == {
+        "metric_name": "smes_not_using_ai",
+        "unit": "percent",
+        "population": "Scottish SMEs responding to BICS",
+        "period": "2025-03",
+    }
+    assert by_id["PG-V01-S006-001"].qualifiers == {
+        "metric_name": "businesses_currently_using_ai",
+        "unit": "percent",
+        "population": "UK private-sector businesses",
+        "period": "survey reporting period",
+    }
+    assert by_id["PG-V01-S006-003"].qualifiers == {
+        "metric_name": "ethical_concerns_significance",
+        "unit": "percent",
+        "population": "businesses evaluating the cited adoption barrier",
+    }
+
+
+def test_numbered_recommendations_retain_recommendation_ids(
+    facts: list[GoldFactAnnotation],
+) -> None:
+    expected = {
+        "PG-V01-S001-001": 2,
+        "PG-V01-S001-002": 7,
+        "PG-V01-S001-005": 46,
+        "PG-V01-S007-001": 2,
+        "PG-V01-S007-002": 4,
+        "PG-V01-S007-003": 7,
+        "PG-V01-S007-004": 10,
+        "PG-V01-S007-005": 14,
+    }
+    by_id = {fact.annotation_id: fact for fact in facts}
+
+    assert {
+        annotation_id: by_id[annotation_id].qualifiers["recommendation_id"]
+        for annotation_id in expected
+    } == expected
+
+
+def test_s001_recommendation_subject_is_not_attributed_to_government(
+    facts: list[GoldFactAnnotation],
+) -> None:
+    fact = next(item for item in facts if item.annotation_id == "PG-V01-S001-001")
+
+    assert fact.subject_text == "AI Opportunities Action Plan recommendation 2"
+    assert fact.subject_type.value == "recommendation"
+    assert fact.qualifiers == {"recommendation_id": 2}
+
+
+def test_s005_false_precision_is_replaced_by_supported_action(
+    facts: list[GoldFactAnnotation],
+) -> None:
+    fact = next(item for item in facts if item.annotation_id == "PG-V01-S005-001")
+    expected = (
+        "Position AI Scotland as the national flagship programme driving strategy "
+        "delivery and showcasing Scotland’s AI strengths on the global stage."
+    )
+
+    assert fact.subject_text == "Scottish Government"
+    assert fact.subject_type.value == "organisation"
+    assert fact.predicate == "commitment"
+    assert fact.value_type.value == "string"
+    assert fact.raw_value == expected
+    assert fact.normalized_value == expected
+    assert "2027-03-31" not in FACT_PATH.read_text(encoding="utf-8")
+
+
+def test_s007_owner_review_uses_exact_normalized_value(
+    facts: list[GoldFactAnnotation],
+) -> None:
+    fact = next(item for item in facts if item.annotation_id == "PG-V01-S007-001")
+    owner_review = (ROOT / "docs" / "public_gold_owner_review.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert f"- Normalized value: {fact.normalized_value}" in owner_review
+    assert "Same bounded statement." not in owner_review
+
+
+def test_full_owner_review_covers_every_fact_without_approval(
+    facts: list[GoldFactAnnotation],
+) -> None:
+    full_review = (ROOT / "docs" / "public_gold_full_review.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert all(f"- Annotation ID: {fact.annotation_id}" in full_review for fact in facts)
+    assert full_review.count("- [ ] Page verified") == 35
+    assert full_review.count("- [ ] Subject verified") == 35
+    assert full_review.count("- [ ] Predicate verified") == 35
+    assert full_review.count("- [ ] Qualifiers verified") == 35
+    assert full_review.count("- [ ] Raw value verified") == 35
+    assert full_review.count("- [ ] Normalization verified") == 35
+    assert full_review.count("- [ ] Approve") == 35
+    assert full_review.count("- [ ] Reject") == 35
+    assert "- [x]" not in full_review.casefold()
+
+
 def test_excerpts_have_bounded_lengths(facts: list[GoldFactAnnotation]) -> None:
     assert all(20 <= len(fact.evidence_excerpt) <= 240 for fact in facts)
 
@@ -252,6 +366,23 @@ def test_structural_validator_passes_on_consistent_documents(
     assert report.warnings == [
         "owner verification is pending for 35 draft fact annotations"
     ]
+
+
+@pytest.mark.skipif(
+    not all((REAL_PARSED_ROOT / f"S{number:03d}.json").is_file() for number in range(1, 8)),
+    reason="ignored local ParsedDocument validation artifacts are unavailable",
+)
+def test_all_facts_validate_against_real_local_parsed_documents() -> None:
+    report = validate_public_gold_dataset(
+        fact_path=FACT_PATH,
+        case_path=CASE_PATH,
+        corpus_split_path=SPLIT_PATH,
+        parsed_document_root=REAL_PARSED_ROOT,
+    )
+
+    assert report.passed, report.errors
+    assert report.fact_count == 35
+    assert report.invalid_evidence_count == 0
 
 
 @pytest.mark.parametrize("damage", ["block", "page", "excerpt"])
@@ -356,6 +487,44 @@ def test_unknown_annotation_fields_are_rejected(
     payload["unexpected"] = True
 
     with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        GoldFactAnnotation.model_validate(payload)
+
+
+@pytest.mark.parametrize(
+    ("updates", "message"),
+    [
+        (
+            {"predicate": "status", "value_type": "status", "qualifiers": {}},
+            "does not allow subject_type",
+        ),
+        (
+            {"predicate": "recommendation", "value_type": "date", "qualifiers": {}},
+            "does not allow value_type",
+        ),
+        (
+            {
+                "predicate": "metric",
+                "subject_type": "metric",
+                "value_type": "percentage",
+                "qualifiers": {},
+            },
+            "requires meaningful qualifiers",
+        ),
+        (
+            {"predicate": "recommendation", "qualifiers": {"unknown": "value"}},
+            "undeclared qualifiers",
+        ),
+    ],
+)
+def test_gold_annotations_enforce_predicate_usage_contract(
+    facts: list[GoldFactAnnotation],
+    updates: dict[str, object],
+    message: str,
+) -> None:
+    payload = facts[0].model_dump()
+    payload.update(updates)
+
+    with pytest.raises(ValidationError, match=message):
         GoldFactAnnotation.model_validate(payload)
 
 

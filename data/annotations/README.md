@@ -7,6 +7,8 @@ This directory contains the versioned Stage 3A public-PDF annotation draft:
 
 Every record is an AI-assisted draft created through local source review. The files are structurally validated, but they are not approved public gold until the project owner records review decisions and updates accepted fact records to `owner_verified`.
 
+Fact records use the runtime predicate contract. Each predicate must support the stated subject and value types, required qualifiers must be meaningful, and undeclared qualifiers are rejected. Metric records retain a stable `metric_name` plus source-supported unit, population, or period context; numbered recommendations and stated budget status retain their corresponding qualifiers.
+
 ## Validation inputs
 
 Validation requires fresh Stage 2 `ParsedDocument` JSON. Generate it under the ignored artifacts directory with the frozen parser:
@@ -25,4 +27,4 @@ Generated `ParsedDocument` files and validation reports remain ignored and must 
 
 ## Review boundary
 
-Structural validation checks schemas, counts, source assignments, predicates, evidence blocks, page numbers, excerpts, and normalized-value types. It does not establish annotation correctness or owner approval. Complete the deterministic sample in `docs/public_gold_owner_review.md`, correct rejected or ambiguous records, record owner review, and freeze a later approved version before claiming public-gold extraction results.
+Structural validation checks schemas, counts, source assignments, runtime predicate-use constraints, qualifiers, evidence blocks, page numbers, excerpts, and normalized-value types. It does not establish annotation correctness or owner approval. The ten-record sample remains in `docs/public_gold_owner_review.md`; `docs/public_gold_full_review.md` is the deterministic worksheet for all 35 facts. Complete the full review, correct rejected or ambiguous records, record owner decisions, and freeze a later approved version before claiming public-gold extraction results.
