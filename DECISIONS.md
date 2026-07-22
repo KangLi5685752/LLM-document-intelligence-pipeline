@@ -313,3 +313,35 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Require every public fact to reference an existing PDF `PAGE_TEXT` block whose page matches and whose normalized text contains the excerpt.
 - **Reason:** This makes the annotation-to-ingestion boundary deterministic and catches stale or mistyped evidence links before experiments.
 - **Trade-off:** Parser-version changes may require explicit annotation migration even when the source fact is unchanged.
+
+## DEC-040: Enforce predicate usage in runtime models
+
+- **Context:** Normalizing a registered predicate name did not prevent an incompatible subject type, value type, missing required qualifier, or undeclared qualifier from entering a candidate or gold annotation.
+- **Alternatives:** Validate only during dataset reporting; duplicate checks in each model; centralize the vocabulary constraints in one runtime function used by both models.
+- **Chosen option:** Use `validate_predicate_usage` from both `CandidateFact` and `GoldFactAnnotation`.
+- **Reason:** One source-independent contract prevents production candidates and evaluation labels from accepting different predicate semantics.
+- **Trade-off:** Existing records must satisfy newly enforced qualifier and type constraints when loaded.
+
+## DEC-041: Require structured qualifiers for metrics
+
+- **Context:** A numeric value without its measure, unit, population, or period can compare unlike observations and obscure the source denominator.
+- **Alternatives:** Encode context in subject text only; allow unstructured notes; require a stable metric name and retain other source-supported context in predicate-scoped qualifiers.
+- **Chosen option:** Require `metric_name` for every metric and use `unit`, `population`, and `period` when supported by the source.
+- **Reason:** Structured context makes later matching and evaluation explicit without inventing a broader ontology.
+- **Trade-off:** Annotation review must verify both the numeric normalization and its qualifiers.
+
+## DEC-042: Reject false day-level precision from month-level deadlines
+
+- **Context:** A phrase bounded to the end of a month does not state a specific calendar day, even when that month's last day can be calculated.
+- **Alternatives:** Normalize to the final calendar day; store an exact date with a warning; preserve only the precision supported by the source or exclude the ambiguous normalization.
+- **Chosen option:** Do not create an exact `YYYY-MM-DD` value from month-level deadline wording unless the source states the day.
+- **Reason:** Computable calendar detail is not source evidence and would create false precision in the gold set.
+- **Trade-off:** Some date-like phrases cannot participate in exact-date matching without a precision-aware future model.
+
+## DEC-043: Expand owner review from the sample to all 35 facts
+
+- **Context:** Review of the ten-record sample exposed subject-attribution and date-normalization defects that structural checks could not detect.
+- **Alternatives:** Retain sample-only review; treat corrected samples as sufficient; provide a deterministic checklist for every annotation.
+- **Chosen option:** Keep the sample for convenience and require owner review through a full 35-record worksheet before approval.
+- **Reason:** Every draft needs semantic scrutiny before the dataset can be frozen as public gold.
+- **Trade-off:** Approval requires more manual review effort before extraction experiments begin.

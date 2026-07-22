@@ -35,17 +35,31 @@ Represent these conditions as challenge cases when they test expected review, re
 
 Choose the narrowest source-stated subject that remains intelligible outside the sentence. Use only a predicate registered in vocabulary v0.1. Do not introduce a new relationship because it appears convenient for one source. When several predicates could apply, prefer the one that preserves the source's speech act: for example, a recommendation remains a `recommendation`, while an organisation's explicit undertaking may be a `commitment`.
 
+Runtime validation applies the same predicate-use rules to candidate facts and gold annotations. It normalizes aliases, checks the subject and value types against the registered definition, requires meaningful required qualifiers, and rejects undeclared qualifier names. The validation is vocabulary-based and contains no source-specific exception.
+
+## Qualifiers
+
+Use qualifiers only when declared by the selected predicate and supported by the source:
+
+- every `metric` requires a stable `metric_name`;
+- add metric `unit`, `population`, and `period` when the source supports them;
+- retain `recommendation_id` for numbered recommendations;
+- retain `budget_status` when the source states committed, proposed, draft, advisory, approved, or another explicit status;
+- retain `date_type` only when it is applicable to a supported `target_date`.
+
+An empty qualifier object is valid only when the predicate has no required qualifier. Do not use qualifiers to carry inferred context.
+
 ## Raw and normalized values
 
 `raw_value` preserves the source meaning and important qualifiers in readable form. `normalized_value` supplies the bounded machine-comparable representation allowed by the declared `value_type`:
 
 - percentages are numeric percentages;
 - money contains a non-negative decimal amount and three-letter uppercase currency;
-- exact dates use ISO 8601;
+- exact dates use ISO 8601 only at the precision stated by the source;
 - strings retain material scope and attribution;
 - uncertain or absent values are not invented.
 
-If a date phrase has more than one reasonable normalization, record the issue in notes and route it through owner review.
+Do not infer a day from a month-level deadline. In particular, “before the end of” a named month does not support substituting the month's final calendar day as an exact date. Preserve the source precision or route the phrase through owner review; if the annotation cannot be normalized without false precision, select a different unambiguous fact or exclude it.
 
 ## Evidence excerpts
 
@@ -61,9 +75,11 @@ Challenge cases contain no invented expected value.
 
 ## Two-pass procedure
 
-Pass 1 drafts a bounded subject, canonical predicate, raw value, normalized value, and excerpt from the relevant `ParsedDocument` page block.
+Pass 1 drafts a bounded subject, canonical predicate, structured qualifiers, raw value, normalized value, and excerpt from the relevant `ParsedDocument` page block.
 
 Pass 2 reopens the original PDF page, the parsed block, and the record. Check the page, subject, predicate, raw and normalized values, excerpt, and material qualifiers. Record any normalization or scope concern in `notes`. Pass 2 does not confer owner approval.
+
+If sample review exposes a semantic defect, correct the draft and extend the owner worksheet to the complete annotation set. The current `docs/public_gold_full_review.md` therefore covers all 35 facts; the original ten-record sample remains a convenience view, not an approval substitute.
 
 ## Review status
 
@@ -71,7 +87,7 @@ Pass 2 reopens the original PDF page, the parsed block, and the record. Check th
 - `owner_verified`: the project owner has checked the record and documented the decision.
 - `rejected`: the owner has rejected the proposed label, with the reason recorded.
 
-All initial v0.1 records remain `draft_ai_assisted`.
+All 35 v0.1 fact records remain `draft_ai_assisted`. Structural checks and AI-assisted corrections do not change that status.
 
 ## Held-out controls
 
@@ -79,4 +95,4 @@ Public held-out labels are visible because the benchmark is procedural, not secr
 
 ## Limitations
 
-The draft has one annotator, AI assistance, no inter-annotator agreement, a small corpus, coarse page-level blocks, and possible interpretation bias. Structural validation proves referential consistency, not semantic correctness. Owner verification and documented corrections are required before public-gold approval.
+The draft has one annotator, AI assistance, no inter-annotator agreement, a small corpus, coarse page-level blocks, and possible interpretation bias. Semantic review has corrected one subject-attribution defect and one false-precision date normalization, demonstrating that structural validation alone does not prove correctness. Full owner verification and documented decisions remain required before public-gold approval.

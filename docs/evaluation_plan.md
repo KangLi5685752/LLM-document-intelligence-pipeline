@@ -44,6 +44,7 @@ Fact matching uses:
 - normalized subject;
 - predicate;
 - normalized value;
+- predicate-scoped qualifiers when they materially define the metric or recommendation context;
 - fact state.
 
 Metrics:
@@ -122,7 +123,7 @@ These are acceptance gates and not current results.
 
 ## Public-PDF evaluation plan
 
-The seven public PDFs provide realistic format and language coverage. Stage 3A now supplies a versioned annotation schema and structurally validated AI-assisted draft subset, but owner verification remains pending.
+The seven public PDFs provide realistic format and language coverage. Stage 3A now supplies a versioned annotation schema and structurally validated AI-assisted draft subset. Stage 3A.1 adds runtime predicate-use enforcement, structured qualifiers, and semantic corrections for subject attribution and date false precision, but full owner verification remains pending.
 
 The draft contains exactly 35 fact annotations:
 
@@ -136,7 +137,7 @@ The draft contains exactly 35 fact annotations:
 
 This yields 25 development facts and 10 held-out facts. The draft also records ambiguous, unsupported, and missing-value challenge cases with page-level evidence.
 
-Extraction experiments cannot claim public-gold results until the project owner records review decisions, rejected or ambiguous records are corrected, accepted records are marked `owner_verified`, and public-gold v0.1 is frozen. Structural validation alone is not approval.
+All 35 facts remain `draft_ai_assisted`. The full deterministic owner worksheet must be completed before accepted records are marked `owner_verified` and public-gold v0.1 is frozen. Extraction experiments cannot claim public-gold results until that work is complete; structural validation and AI-assisted semantic correction are not approval. No extractor or extraction metric exists at this stage.
 
 Limitations:
 

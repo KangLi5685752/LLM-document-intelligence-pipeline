@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, and deterministic annotation validation. It does not implement an extractor, reconciliation, extraction metrics, an LLM call, or held-out extraction.
+Stage 3A implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, and deterministic annotation validation. Stage 3A.1 hardens predicate use and corrects identified draft-annotation defects. It does not implement an extractor, reconciliation, extraction metrics, an LLM call, or held-out extraction.
 
 ## Three distinct data layers
 
@@ -43,17 +43,17 @@ Schema version `0.1` uses strict Pydantic v2 models with unknown fields forbidde
 - evidence IDs;
 - confidence, review status, method, and warnings.
 
-Candidate evidence preserves a short excerpt plus the existing block ID, source ID, location type, and location value. Paths are not part of the contract. References to missing evidence or sources are invalid.
+Candidate evidence preserves a short excerpt plus the existing block ID, source ID, location type, and location value. Paths are not part of the contract. References to missing evidence or sources are invalid. `CandidateFact` and `GoldFactAnnotation` call the same runtime predicate-use validator, so registered subject types, value types, required qualifiers, and declared qualifier names cannot diverge between production candidates and evaluation labels.
 
 ## Predicate vocabulary
 
-Vocabulary v0.1 contains exactly 20 canonical predicates. It is intentionally bounded rather than a general ontology. Definitions constrain subject types, value types, aliases, and contextual qualifiers. Normalization handles spacing, hyphens, case, and documented legacy synthetic names; unknown predicates fail instead of extending the registry implicitly.
+Vocabulary v0.1 contains exactly 20 canonical predicates. It is intentionally bounded rather than a general ontology. Definitions constrain subject types, value types, aliases, and contextual qualifiers. Normalization handles spacing, hyphens, case, and documented legacy synthetic names; unknown predicates fail instead of extending the registry implicitly. Runtime validation also rejects incompatible subject or value types, missing or empty required qualifiers, and qualifiers not declared for the canonical predicate.
 
 The vocabulary contains no source IDs, filenames, held-out values, or source-specific rules.
 
 ## Evidence and annotation requirements
 
-Every public fact draft points to one existing Stage 2 `PAGE_TEXT` block, the correct 1-based PDF page, and a short excerpt that occurs in normalized block text. Structural validation also reconciles the source split and document family against the frozen manifest.
+Every public fact draft points to one existing Stage 2 `PAGE_TEXT` block, the correct 1-based PDF page, and a short excerpt that occurs in normalized block text. Structural validation also reconciles the source split and document family against the frozen manifest. Semantic review separately corrected a recommendation subject-attribution error and removed unsupported day-level precision from a month-level deadline; these defects illustrate why the 35-item owner review remains necessary after structural validation passes.
 
 Ambiguous, unsupported, and missing-value examples are separate challenge cases. They specify review, rejection, or missing-value preservation without inventing an expected value.
 
@@ -64,7 +64,7 @@ The public benchmark is procedural because labels are visible in the repository.
 ## Current limitations
 
 - No deterministic or LLM extractor emits `CandidateExtractionResult` yet.
-- Public annotations are AI-assisted drafts and owner verification is pending.
+- All 35 public annotations are AI-assisted drafts and full owner verification is pending.
 - Page-level blocks can preserve awkward PDF whitespace and coarse evidence spans.
 - No public-gold extraction score exists.
 - Final reconciliation, duplicate handling, conflict handling, and review workflow remain planned.

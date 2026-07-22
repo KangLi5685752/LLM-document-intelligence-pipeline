@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3A - candidate extraction contract and public-gold preparation
+- **Current stage:** Stage 3A.1 - candidate contract hardening and public-gold correction
 - **Last updated:** 2026-07-22
-- **Latest milestone:** Created the versioned candidate-extraction contract, predicate vocabulary and 35-fact public-PDF annotation draft
+- **Latest milestone:** Enforced runtime predicate usage, corrected two semantic annotation defects and expanded owner review to all 35 draft facts
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -39,17 +39,21 @@
 - Ambiguous, unsupported, and missing-value challenge cases.
 - Structural public annotation validation.
 - Owner review checklist.
+- Shared runtime predicate-use validation for candidate and gold fact models.
+- Structured metric, recommendation and budget qualifiers across the 35-fact draft.
+- Corrected recommendation subject attribution and removed false day-level date precision.
+- Full 35-fact owner review worksheet.
 
 ## In progress
 
-- Owner review of the public annotation sample.
-- Correction and verification of annotation records.
+- Full owner review of all 35 public annotations.
+- Any further correction and verification identified by owner review.
 - Public-gold v0.1 approval.
 - Deterministic baseline design.
 
 ## Next tasks
 
-1. Complete owner review.
+1. Complete the full 35-fact owner review.
 2. Correct rejected or ambiguous annotations.
 3. Mark accepted records `owner_verified`.
 4. Freeze public-gold v0.1.
