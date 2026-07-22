@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, and deterministic annotation validation. Stage 3A.1 hardens predicate use and corrects identified draft-annotation defects. It does not implement an extractor, reconciliation, extraction metrics, an LLM call, or held-out extraction.
+Stage 3A is complete. It implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation and frozen `public-gold-v0.1`. It does not implement an extractor, reconciliation, extraction metrics, an LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -53,18 +53,18 @@ The vocabulary contains no source IDs, filenames, held-out values, or source-spe
 
 ## Evidence and annotation requirements
 
-Every public fact draft points to one existing Stage 2 `PAGE_TEXT` block, the correct 1-based PDF page, and a short excerpt that occurs in normalized block text. Structural validation also reconciles the source split and document family against the frozen manifest. Semantic review separately corrected a recommendation subject-attribution error and removed unsupported day-level precision from a month-level deadline; these defects illustrate why the 35-item owner review remains necessary after structural validation passes.
+Every frozen public fact points to one existing Stage 2 `PAGE_TEXT` block, the correct 1-based PDF page, and a short excerpt that occurs in normalized block text. Structural validation also reconciles the source split and document family. Project-owner semantic review is complete for all 35 facts and six challenge cases, and the manifest protects both JSONL files with SHA-256 hashes.
 
 Ambiguous, unsupported, and missing-value examples are separate challenge cases. They specify review, rejection, or missing-value preservation without inventing an expected value.
 
 ## Stage 3A held-out control
 
-The public benchmark is procedural because labels are visible in the repository. Stage 3A may create and structurally validate held-out labels, but it does not run extraction on held-out sources. Held-out values cannot influence predicate definitions, deterministic rules, prompt design, or development assertions. A future deterministic baseline must be designed using development sources only and frozen before held-out evaluation.
+The public benchmark is procedural because labels are visible in the repository. Stage 3B may load development labels during deterministic-baseline design and development evaluation. Held-out facts and cases cannot be loaded by rule-design code, tests or tuning; the experiment version, rules and code must be frozen before held-out evaluation.
 
 ## Current limitations
 
 - No deterministic or LLM extractor emits `CandidateExtractionResult` yet.
-- All 35 public annotations are AI-assisted drafts and full owner verification is pending.
+- Frozen `public-gold-v0.1` has 35 owner-verified facts and six owner-verified challenge cases, but only one project-owner reviewer and no inter-annotator agreement.
 - Page-level blocks can preserve awkward PDF whitespace and coarse evidence spans.
 - No public-gold extraction score exists.
 - Final reconciliation, duplicate handling, conflict handling, and review workflow remain planned.

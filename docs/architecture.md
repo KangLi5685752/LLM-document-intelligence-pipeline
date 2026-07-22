@@ -19,9 +19,11 @@ Implemented repository, corpus-control, Stage 2 ingestion, and Stage 3A contract
 - development, held-out, and full frozen-corpus validation;
 - candidate-extraction contract v0.1;
 - bounded predicate vocabulary v0.1;
-- public-PDF annotation models and structural validation.
+- public-PDF annotation models and structural validation;
+- frozen `public-gold-v0.1` with 35 owner-verified facts and six owner-verified challenge cases;
+- project-owner review controls and checksummed freeze manifest.
 
-Stage 2 ingestion is complete for `stage1-corpus-v1.0`. Stage 3A contracts and annotation validation are implemented, but owner review is pending. No deterministic or LLM extractor, reconciliation, extraction evaluation, storage, retrieval, interface, or deployment layer exists.
+Stage 2 ingestion and Stage 3A evaluation-data preparation are complete. Candidate models exist and `public-gold-v0.1` is frozen. Deterministic extraction, LLM extraction, reconciliation, extraction evaluation, storage, retrieval, interface and deployment remain planned.
 
 Design contracts:
 
@@ -36,6 +38,8 @@ Design contracts:
 - [Stage 3 candidate-extraction design](stage_3_extraction_design.md)
 - [Public gold annotation guide](public_gold_annotation_guide.md)
 - [Stage 3A annotation report](stage_3a_annotation_report.md)
+- [Public gold freeze](public_gold_freeze.md)
+- [Stage 3A completion report](stage_3a_completion_report.md)
 
 ## Ingestion and extraction boundary
 
@@ -51,7 +55,7 @@ Design contracts:
     -> [Implemented Stage 2] format-specific parsing
     -> [Implemented Stage 2] Common Document Object v0.1 and JSON serialisation
     -> [Implemented Stage 3A] candidate-extraction contract and predicate vocabulary
-    -> [Implemented Stage 3A] public annotation structural validation
+    -> [Implemented Stage 3A] owner-reviewed and checksummed public-gold-v0.1
     -> [Planned] preprocessing beyond basic text normalisation
     -> [Planned] semantic segmentation
     -> [Planned] baseline extraction
@@ -79,7 +83,7 @@ Design contracts:
 | Common Document Object | Provide the strict v0.1 `ParsedDocument` and `DocumentBlock` JSON contract. | Stage 2 implemented |
 | Candidate extraction contract | Provide strict pre-reconciliation candidates and evidence references without final fact states. | Stage 3A implemented |
 | Predicate vocabulary | Constrain candidate relationships, value types, aliases, and qualifiers. | Stage 3A v0.1 implemented |
-| Public annotation validation | Validate draft labels against frozen split metadata and `ParsedDocument` block/page evidence. | Stage 3A implemented; owner review pending |
+| Public annotation and freeze controls | Validate owner-reviewed labels against frozen split metadata and `ParsedDocument` block/page evidence; protect frozen JSONL files with hashes. | Stage 3A complete; `public-gold-v0.1` frozen |
 | Preprocessing and segmentation | Extend basic line-ending and trailing-space normalisation and divide content without losing provenance. | Planned |
 | Baseline extraction | Supply a deterministic comparison point for defined fields. | Planned |
 | LLM structured extraction | Produce schema-targeted candidate records through one future provider. | Planned |

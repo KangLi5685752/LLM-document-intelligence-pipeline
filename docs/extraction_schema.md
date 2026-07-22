@@ -3,7 +3,7 @@
 - **Schema design version:** 0.1
 - **Status:** Candidate extraction models implemented; final `KnowledgeExtractionResult` remains a planned design contract.
 
-The candidate layer is implemented in Stage 3A. Final reconciliation models remain planned. The schema may evolve only through explicit versioning.
+The candidate layer is implemented in Stage 3A and `public-gold-v0.1` is frozen for later evaluation. No extractor emits the candidate schema yet. Final reconciliation models remain planned, and the schema may evolve only through explicit versioning.
 
 ## Top-level result
 

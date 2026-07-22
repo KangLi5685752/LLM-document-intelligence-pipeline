@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-22. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -345,3 +345,43 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Keep the sample for convenience and require owner review through a full 35-record worksheet before approval.
 - **Reason:** Every draft needs semantic scrutiny before the dataset can be frozen as public gold.
 - **Trade-off:** Approval requires more manual review effort before extraction experiments begin.
+
+## DEC-044: Freeze public-gold-v0.1 with content hashes
+
+- **Context:** Stage 3B needs a stable evaluation asset whose exact annotation content can be verified before experiments.
+- **Alternatives:** Rely on version control alone; record counts without content identity; freeze both JSONL files with SHA-256 hashes in a versioned manifest.
+- **Chosen option:** Freeze `public-gold-v0.1` with uppercase SHA-256 hashes for the fact and challenge-case JSONL files.
+- **Reason:** Content hashes make accidental or unversioned changes fail deterministically.
+- **Trade-off:** Any permitted frozen-file change requires coordinated manifest and version maintenance.
+
+## DEC-045: Require a new dataset version for semantic label changes
+
+- **Context:** Silent changes to labels, evidence, review decisions, splits, or schema meaning would make experiment results incomparable.
+- **Alternatives:** Edit the frozen version in place; track only major changes; require a new dataset version for semantic changes.
+- **Chosen option:** Require a new dataset version for any semantic annotation, challenge-case, evidence, review, distribution, split, schema, or predicate-meaning change.
+- **Reason:** Versioned changes preserve the interpretation and reproducibility of results produced against `public-gold-v0.1`.
+- **Trade-off:** Even small semantic corrections require a deliberate versioning and revalidation cycle.
+
+## DEC-046: Separate owner semantic verification from AI-assisted drafting
+
+- **Context:** AI assistance produced the initial drafts, while semantic approval required project-owner comparison with original PDF pages and frozen parsed evidence.
+- **Alternatives:** Treat drafting as verification; replace the original annotation method; record drafting method and owner review status separately.
+- **Chosen option:** Preserve `annotation_method` and record project-owner semantic verification independently through `review_status` and owner notes.
+- **Reason:** This distinguishes provenance from approval without implying independent double annotation or inter-annotator agreement.
+- **Trade-off:** Consumers must interpret both annotation method and review status.
+
+## DEC-047: Prohibit held-out label loading during deterministic rule design
+
+- **Context:** Public held-out labels are visible in the repository, so programmatic access during rule design would weaken the procedural evaluation boundary.
+- **Alternatives:** Load all labels during development; hide labels outside the repository; enforce development-only loading until code and rules are frozen.
+- **Chosen option:** Prohibit loading held-out fact and challenge-case labels during deterministic rule design, rule tests, and tuning.
+- **Reason:** Development-only access preserves the strongest practical held-out control available in a public single-developer project.
+- **Trade-off:** The control is procedural and cannot eliminate prior familiarity with public labels.
+
+## DEC-048: Freeze challenge cases with the evaluation asset
+
+- **Context:** Ambiguous, unsupported, and missing-value cases define required abstention and review behavior alongside positive facts.
+- **Alternatives:** Keep challenge cases as informal documentation; version them separately; include them in the same frozen evaluation asset.
+- **Chosen option:** Treat the six owner-verified challenge cases as part of `public-gold-v0.1` and protect their JSONL content with the freeze manifest.
+- **Reason:** Negative and ambiguous behavior is part of the evaluation contract and must remain reproducible with the fact labels.
+- **Trade-off:** Challenge-case corrections follow the same dataset-version discipline as fact annotations.
