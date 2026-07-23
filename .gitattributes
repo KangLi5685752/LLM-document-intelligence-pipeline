@@ -1,0 +1,2 @@
+# Preserve canonical RFC email bytes used by fixture checksum validation.
+data/synthetic/email/*.eml binary
