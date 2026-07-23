@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -273,3 +273,115 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Prohibit source-ID, filename, expected-value, and held-out-keyword rules; permit only documented format-general parser fixes.
 - **Reason:** This preserves the purpose of the frozen held-out split while allowing legitimate general parser defects to be corrected transparently.
 - **Trade-off:** Some unsupported held-out cases may remain documented limitations instead of being made to pass.
+
+## DEC-035: Separate candidate extraction from final reconciliation
+
+- **Context:** A source-level extraction can propose a fact without establishing whether it is current, superseded, duplicated, or in conflict with another source.
+- **Alternatives:** Assign final states during extraction; represent all outputs as final facts; preserve candidates in a separate pre-reconciliation contract.
+- **Chosen option:** Use `CandidateExtractionResult` for source-level candidates and reserve final states for a later reconciliation layer.
+- **Reason:** This prevents extraction confidence, source order, or recency from silently deciding authority.
+- **Trade-off:** Later processing must explicitly transform candidates into reconciled knowledge records.
+
+## DEC-036: Use a bounded predicate vocabulary v0.1
+
+- **Context:** Unrestricted predicate creation would make labels, deterministic rules, and future LLM outputs difficult to compare.
+- **Alternatives:** Allow arbitrary strings; adopt a broad external ontology immediately; define a small versioned vocabulary with declared aliases and qualifiers.
+- **Chosen option:** Use exactly 20 canonical predicates in vocabulary v0.1 and reject unknown names.
+- **Reason:** A bounded registry makes annotation and later extraction evaluation reproducible without pretending to define a complete enterprise ontology.
+- **Trade-off:** New relationships require an explicit versioned vocabulary change.
+
+## DEC-037: Treat public annotations as AI-assisted drafts until owner review
+
+- **Context:** Local source inspection and structural validation do not provide independent semantic approval.
+- **Alternatives:** Label AI-assisted records as verified; omit review status; retain draft status until the project owner records a decision.
+- **Chosen option:** Initialize every public fact and challenge case as `draft_ai_assisted` and require documented owner review before approval.
+- **Reason:** This makes single-annotator and AI-assistance limitations visible and prevents fabricated verification claims.
+- **Trade-off:** Public-gold extraction results cannot be claimed until review and correction are complete.
+
+## DEC-038: Preserve procedural held-out labels but prohibit their use in tuning
+
+- **Context:** The public repository cannot keep S005 and S007 labels secret, yet a held-out procedure is still useful for separating rule design from final evaluation.
+- **Alternatives:** Omit held-out labels; claim a blind benchmark; publish labels while prohibiting their use in predicate, rule, or prompt tuning.
+- **Chosen option:** Commit and structurally validate held-out labels, but exclude their values from extractor design and freeze development behavior before later held-out evaluation.
+- **Reason:** This is transparent about visibility while preserving a reproducible procedural boundary.
+- **Trade-off:** Familiarity bias cannot be eliminated in a public single-developer workflow.
+
+## DEC-039: Require evidence block and page validation for every public fact
+
+- **Context:** A page citation alone does not prove that an annotation points to the exact parsed evidence later extractors will receive.
+- **Alternatives:** Store only page numbers; store free-text excerpts without referential checks; validate block ID, page, excerpt, source, family, and split.
+- **Chosen option:** Require every public fact to reference an existing PDF `PAGE_TEXT` block whose page matches and whose normalized text contains the excerpt.
+- **Reason:** This makes the annotation-to-ingestion boundary deterministic and catches stale or mistyped evidence links before experiments.
+- **Trade-off:** Parser-version changes may require explicit annotation migration even when the source fact is unchanged.
+
+## DEC-040: Enforce predicate usage in runtime models
+
+- **Context:** Normalizing a registered predicate name did not prevent an incompatible subject type, value type, missing required qualifier, or undeclared qualifier from entering a candidate or gold annotation.
+- **Alternatives:** Validate only during dataset reporting; duplicate checks in each model; centralize the vocabulary constraints in one runtime function used by both models.
+- **Chosen option:** Use `validate_predicate_usage` from both `CandidateFact` and `GoldFactAnnotation`.
+- **Reason:** One source-independent contract prevents production candidates and evaluation labels from accepting different predicate semantics.
+- **Trade-off:** Existing records must satisfy newly enforced qualifier and type constraints when loaded.
+
+## DEC-041: Require structured qualifiers for metrics
+
+- **Context:** A numeric value without its measure, unit, population, or period can compare unlike observations and obscure the source denominator.
+- **Alternatives:** Encode context in subject text only; allow unstructured notes; require a stable metric name and retain other source-supported context in predicate-scoped qualifiers.
+- **Chosen option:** Require `metric_name` for every metric and use `unit`, `population`, and `period` when supported by the source.
+- **Reason:** Structured context makes later matching and evaluation explicit without inventing a broader ontology.
+- **Trade-off:** Annotation review must verify both the numeric normalization and its qualifiers.
+
+## DEC-042: Reject false day-level precision from month-level deadlines
+
+- **Context:** A phrase bounded to the end of a month does not state a specific calendar day, even when that month's last day can be calculated.
+- **Alternatives:** Normalize to the final calendar day; store an exact date with a warning; preserve only the precision supported by the source or exclude the ambiguous normalization.
+- **Chosen option:** Do not create an exact `YYYY-MM-DD` value from month-level deadline wording unless the source states the day.
+- **Reason:** Computable calendar detail is not source evidence and would create false precision in the gold set.
+- **Trade-off:** Some date-like phrases cannot participate in exact-date matching without a precision-aware future model.
+
+## DEC-043: Expand owner review from the sample to all 35 facts
+
+- **Context:** Review of the ten-record sample exposed subject-attribution and date-normalization defects that structural checks could not detect.
+- **Alternatives:** Retain sample-only review; treat corrected samples as sufficient; provide a deterministic checklist for every annotation.
+- **Chosen option:** Keep the sample for convenience and require owner review through a full 35-record worksheet before approval.
+- **Reason:** Every draft needs semantic scrutiny before the dataset can be frozen as public gold.
+- **Trade-off:** Approval requires more manual review effort before extraction experiments begin.
+
+## DEC-044: Freeze public-gold-v0.1 with content hashes
+
+- **Context:** Stage 3B needs a stable evaluation asset whose exact annotation content can be verified before experiments.
+- **Alternatives:** Rely on version control alone; record counts without content identity; freeze both JSONL files with SHA-256 hashes in a versioned manifest.
+- **Chosen option:** Freeze `public-gold-v0.1` with uppercase SHA-256 hashes for the fact and challenge-case JSONL files.
+- **Reason:** Content hashes make accidental or unversioned changes fail deterministically.
+- **Trade-off:** Any permitted frozen-file change requires coordinated manifest and version maintenance.
+
+## DEC-045: Require a new dataset version for semantic label changes
+
+- **Context:** Silent changes to labels, evidence, review decisions, splits, or schema meaning would make experiment results incomparable.
+- **Alternatives:** Edit the frozen version in place; track only major changes; require a new dataset version for semantic changes.
+- **Chosen option:** Require a new dataset version for any semantic annotation, challenge-case, evidence, review, distribution, split, schema, or predicate-meaning change.
+- **Reason:** Versioned changes preserve the interpretation and reproducibility of results produced against `public-gold-v0.1`.
+- **Trade-off:** Even small semantic corrections require a deliberate versioning and revalidation cycle.
+
+## DEC-046: Separate owner semantic verification from AI-assisted drafting
+
+- **Context:** AI assistance produced the initial drafts, while semantic approval required project-owner comparison with original PDF pages and frozen parsed evidence.
+- **Alternatives:** Treat drafting as verification; replace the original annotation method; record drafting method and owner review status separately.
+- **Chosen option:** Preserve `annotation_method` and record project-owner semantic verification independently through `review_status` and owner notes.
+- **Reason:** This distinguishes provenance from approval without implying independent double annotation or inter-annotator agreement.
+- **Trade-off:** Consumers must interpret both annotation method and review status.
+
+## DEC-047: Prohibit held-out label loading during deterministic rule design
+
+- **Context:** Public held-out labels are visible in the repository, so programmatic access during rule design would weaken the procedural evaluation boundary.
+- **Alternatives:** Load all labels during development; hide labels outside the repository; enforce development-only loading until code and rules are frozen.
+- **Chosen option:** Prohibit loading held-out fact and challenge-case labels during deterministic rule design, rule tests, and tuning.
+- **Reason:** Development-only access preserves the strongest practical held-out control available in a public single-developer project.
+- **Trade-off:** The control is procedural and cannot eliminate prior familiarity with public labels.
+
+## DEC-048: Freeze challenge cases with the evaluation asset
+
+- **Context:** Ambiguous, unsupported, and missing-value cases define required abstention and review behavior alongside positive facts.
+- **Alternatives:** Keep challenge cases as informal documentation; version them separately; include them in the same frozen evaluation asset.
+- **Chosen option:** Treat the six owner-verified challenge cases as part of `public-gold-v0.1` and protect their JSONL content with the freeze manifest.
+- **Reason:** Negative and ambiguous behavior is part of the evaluation contract and must remain reproducible with the fact labels.
+- **Trade-off:** Challenge-case corrections follow the same dataset-version discipline as fact annotations.

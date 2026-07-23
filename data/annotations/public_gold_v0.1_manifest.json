@@ -1,0 +1,47 @@
+{
+  "annotation_schema_version": "0.1",
+  "candidate_extraction_schema_version": "0.1",
+  "case_schema_version": "0.1",
+  "cases_file": "data/annotations/public_gold_cases_v0.1.jsonl",
+  "cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+  "challenge_case_count": 6,
+  "challenge_case_type_counts": {
+    "ambiguous": 2,
+    "missing_expected_value": 2,
+    "unsupported": 2
+  },
+  "corpus_version": "stage1-corpus-v1.0",
+  "dataset_version": "public-gold-v0.1",
+  "development_fact_count": 25,
+  "fact_count": 35,
+  "facts_file": "data/annotations/public_gold_facts_v0.1.jsonl",
+  "facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+  "freeze_date": "2026-07-23",
+  "freeze_schema_version": "0.1",
+  "held_out_fact_count": 10,
+  "ingestion_schema_version": "0.1",
+  "limitations": [
+    "Single project-owner review",
+    "No independent second annotator",
+    "No inter-annotator agreement",
+    "Held-out evaluation is procedural rather than secret blind"
+  ],
+  "owner_verified_case_count": 6,
+  "owner_verified_fact_count": 35,
+  "parser_commit": "71148262f094d54ec7d95e45958bd1aaefc64793",
+  "predicate_vocabulary_version": "0.1",
+  "rejected_case_count": 0,
+  "rejected_fact_count": 0,
+  "review_method": "AI-assisted drafting followed by project-owner semantic review against original PDF pages and frozen ParsedDocument evidence.",
+  "source_counts": {
+    "S001": 5,
+    "S002": 5,
+    "S003": 4,
+    "S004": 6,
+    "S005": 5,
+    "S006": 5,
+    "S007": 5
+  },
+  "split_policy": "Development labels may be used for baseline design and evaluation; held-out labels must not be loaded during rule design or tuning.",
+  "status": "frozen"
+}

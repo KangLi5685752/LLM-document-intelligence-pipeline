@@ -1,9 +1,9 @@
 # Evidence-Linked Extraction Schema
 
 - **Schema design version:** 0.1
-- **Status:** Design contract, not an implemented Pydantic model.
+- **Status:** Candidate extraction models implemented; final `KnowledgeExtractionResult` remains a planned design contract.
 
-Implementation begins in later stages. The schema may evolve only through explicit versioning.
+The candidate layer is implemented in Stage 3A and `public-gold-v0.1` is frozen for later evaluation. No extractor emits the candidate schema yet. Final reconciliation models remain planned, and the schema may evolve only through explicit versioning.
 
 ## Top-level result
 
@@ -101,6 +101,18 @@ Rules:
 - An evidence reference must point to an existing source.
 - Unsupported facts cannot be marked `current`.
 - Quoted history must be distinguishable from the latest message body.
+
+## Candidate extraction layer
+
+`CandidateExtractionResult` is the implemented Stage 3 pre-reconciliation contract. It accepts candidate entities, candidate evidence references, candidate facts, and warnings from a future deterministic extractor, future LLM extractor, or manual annotation process.
+
+`CandidateFact` preserves the source, document family, source-stated subject, bounded predicate, raw and normalized values, qualifiers, evidence IDs, confidence, review status, extraction method, and warnings. It deliberately has no final `fact_state`. Runtime construction normalizes the predicate and verifies its subject type, value type, required qualifiers, and declared qualifier names against vocabulary v0.1. `GoldFactAnnotation` uses the same validation function.
+
+Candidate evidence must point to an existing `ParsedDocument` block and preserve its source and location. Missing or cross-source evidence references are invalid. Page and slide locations remain positive and 1-based; email-body and quoted-history references preserve the existing ingestion block ID.
+
+Qualifier objects are predicate-scoped. Metrics require a meaningful `metric_name` and may retain source-supported `unit`, `population`, and `period`; numbered recommendations may retain `recommendation_id`; budgets may retain a source-stated `budget_status`; and target dates may retain `date_type`. Undeclared names and empty required values are invalid.
+
+Current, superseded, duplicate, and unresolved-conflict states are assigned only by a later reconciliation layer. Candidate confidence or document order cannot assign those states implicitly. Candidate schema version `0.1` remains unchanged unless an incompatible contract change is made.
 
 ## FactRecord
 
@@ -244,7 +256,7 @@ Fields:
 
 ## Normalisation rules
 
-- Dates become ISO 8601 `YYYY-MM-DD` where possible.
+- Dates become ISO 8601 `YYYY-MM-DD` only when the source supports day-level precision; a month-level deadline must not be converted to an inferred month-end day.
 - Money becomes a numeric amount plus an ISO-style currency code.
 - Percentages become numeric percentages.
 - Whitespace is normalized.

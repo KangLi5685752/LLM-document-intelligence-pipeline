@@ -2,7 +2,7 @@
 
 ## Current implementation status
 
-Implemented repository, corpus-control, and Stage 2 ingestion layers:
+Implemented repository, corpus-control, Stage 2 ingestion, and Stage 3A contract layers:
 
 - Stage 0 repository foundation;
 - Stage 1 source strategy;
@@ -16,9 +16,14 @@ Implemented repository, corpus-control, and Stage 2 ingestion layers:
 - PDF, PPTX, and EML parsers;
 - single-document dispatch and JSON serialisation;
 - manifest-driven batch ingestion with per-source failure isolation;
-- development, held-out, and full frozen-corpus validation.
+- development, held-out, and full frozen-corpus validation;
+- candidate-extraction contract v0.1;
+- bounded predicate vocabulary v0.1;
+- public-PDF annotation models and structural validation;
+- frozen `public-gold-v0.1` with 35 owner-verified facts and six owner-verified challenge cases;
+- project-owner review controls and checksummed freeze manifest.
 
-Stage 2 ingestion is complete for `stage1-corpus-v1.0`. No semantic segmentation, extraction, reconciliation, extraction evaluation, storage, retrieval, interface, or deployment layer exists.
+Stage 2 ingestion and Stage 3A evaluation-data preparation are complete. Candidate models exist and `public-gold-v0.1` is frozen. Deterministic extraction, LLM extraction, reconciliation, extraction evaluation, storage, retrieval, interface and deployment remain planned.
 
 Design contracts:
 
@@ -30,11 +35,17 @@ Design contracts:
 - [Stage 2A development validation](stage_2a_development_validation.md)
 - [Stage 2B held-out validation](stage_2b_held_out_validation.md)
 - [Stage 2 acceptance report](stage_2_acceptance_report.md)
+- [Stage 3 candidate-extraction design](stage_3_extraction_design.md)
+- [Public gold annotation guide](public_gold_annotation_guide.md)
+- [Stage 3A annotation report](stage_3a_annotation_report.md)
+- [Public gold freeze](public_gold_freeze.md)
+- [Stage 3A completion report](stage_3a_completion_report.md)
 
 ## Ingestion and extraction boundary
 
 - **Ingestion output:** implemented `ParsedDocument` and `DocumentBlock` records containing normalized source text, metadata, warnings, and provenance.
-- **Extraction output:** future `FactRecord`, `ConflictRecord`, and `ReviewItem` records derived from ingestion output and evaluated separately.
+- **Candidate extraction output:** implemented `CandidateExtractionResult` contract containing unreconciled candidates and block-linked evidence. No extractor emits it yet.
+- **Reconciled extraction output:** future `KnowledgeExtractionResult`, `FactRecord`, `ConflictRecord`, and `ReviewItem` records derived from candidates and evaluated separately.
 
 ## Planned flow
 
@@ -43,6 +54,8 @@ Design contracts:
     -> [Implemented Stage 2] manifest-driven single/batch dispatch
     -> [Implemented Stage 2] format-specific parsing
     -> [Implemented Stage 2] Common Document Object v0.1 and JSON serialisation
+    -> [Implemented Stage 3A] candidate-extraction contract and predicate vocabulary
+    -> [Implemented Stage 3A] owner-reviewed and checksummed public-gold-v0.1
     -> [Planned] preprocessing beyond basic text normalisation
     -> [Planned] semantic segmentation
     -> [Planned] baseline extraction
@@ -68,10 +81,13 @@ Design contracts:
 | Batch ingestion | Join frozen manifests, resolve format paths, isolate failures, validate checksums, and produce machine-readable reports. | Stage 2 implemented and validated on 15 sources |
 | Format-specific parsing | Preserve page, slide, shape, header, body, and quoted-history locations while reading content. | Stage 2 implemented and validated on 15 sources |
 | Common Document Object | Provide the strict v0.1 `ParsedDocument` and `DocumentBlock` JSON contract. | Stage 2 implemented |
+| Candidate extraction contract | Provide strict pre-reconciliation candidates and evidence references without final fact states. | Stage 3A implemented |
+| Predicate vocabulary | Constrain candidate relationships, value types, aliases, and qualifiers. | Stage 3A v0.1 implemented |
+| Public annotation and freeze controls | Validate owner-reviewed labels against frozen split metadata and `ParsedDocument` block/page evidence; protect frozen JSONL files with hashes. | Stage 3A complete; `public-gold-v0.1` frozen |
 | Preprocessing and segmentation | Extend basic line-ending and trailing-space normalisation and divide content without losing provenance. | Planned |
 | Baseline extraction | Supply a deterministic comparison point for defined fields. | Planned |
 | LLM structured extraction | Produce schema-targeted candidate records through one future provider. | Planned |
-| Schema validation | Reject or report structurally invalid candidate records. | Planned |
+| Extractor-output schema validation | Validate records emitted by future extraction runs against the candidate contract. | Planned with the extractor; contract implemented |
 | Source evidence alignment | Connect extracted claims to page, slide, or section-level evidence. | Planned |
 | Unsupported/conflict checks | Detect missing support, contradictions, and ambiguous claims. | Planned |
 | Human-review routing | Send defined uncertain cases to an inspectable review queue. | Planned |

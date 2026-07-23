@@ -44,6 +44,7 @@ Fact matching uses:
 - normalized subject;
 - predicate;
 - normalized value;
+- predicate-scoped qualifiers when they materially define the metric or recommendation context;
 - fact state.
 
 Metrics:
@@ -122,20 +123,21 @@ These are acceptance gates and not current results.
 
 ## Public-PDF evaluation plan
 
-The seven public PDFs provide realistic format and language coverage but do not yet have complete fact-level labels.
+The seven public PDFs provide realistic format and language coverage. Stage 3A preparation and project-owner review are complete: frozen `public-gold-v0.1` supplies 35 owner-verified facts, six owner-verified challenge cases, runtime predicate-use enforcement, structured qualifiers and checksummed file identity.
 
-Before structured extraction experiments begin:
+The frozen asset contains exactly 35 fact annotations:
 
-- create a versioned public gold subset;
-- annotate at least 35 evidence-linked facts across S001-S007;
-- include development and held-out PDFs;
-- include recommendations, governance requirements, findings, metrics, risks, or decisions;
-- record raw and normalized values;
-- record page-level evidence;
-- record missing, ambiguous, and unsupported cases;
-- document annotation date and schema version.
+- S001: 5;
+- S002: 5;
+- S003: 4;
+- S004: 6;
+- S005: 5;
+- S006: 5;
+- S007: 5.
 
-At least 10 labelled facts must come from held-out S005 and S007 combined.
+This yields 25 development facts and 10 held-out facts. The frozen asset also records ambiguous, unsupported, and missing-value challenge cases with page-level evidence.
+
+All 35 facts and six challenge cases are `owner_verified`, with zero drafts or rejections. This completes evaluation-data preparation, not extraction evaluation. No extractor has run and no extraction metric or public-gold result exists.
 
 Limitations:
 
@@ -145,12 +147,12 @@ Limitations:
 - small sample;
 - public documents are not a representative enterprise corpus.
 
-Public gold labels are not created in this task.
+Stage 3A did not run extraction. During Stage 3B, held-out labels and held-out challenge cases must not be loaded during deterministic rule design, rule tests or tuning.
 
 ## Development and held-out use
 
 - Development sources may be used for parser debugging, rule design, and prompt iteration.
-- Held-out sources may be used only for final evaluation after an experiment version is frozen.
+- Held-out facts and challenge cases may be loaded only for evaluation after the baseline experiment version, rules and code are frozen.
 - No rule or prompt may be changed in response to a held-out result without declaring a new experiment cycle.
 - Family members cannot cross splits.
 - Results must be reported separately for development and held-out data.
