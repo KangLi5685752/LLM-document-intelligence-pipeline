@@ -1,6 +1,6 @@
 # Public Gold Owner Decision Log
 
-Project-owner semantic review was completed on 2026-07-22. Fact outcomes: 12 approved without correction, 23 corrected before approval and 0 rejected. Challenge-case outcomes: 5 approved without correction, 1 corrected before approval and 0 rejected.
+Project-owner semantic review was completed on 2026-07-23. Fact outcomes: 12 approved without correction, 23 corrected before approval and 0 rejected. Challenge-case outcomes: 5 approved without correction, 1 corrected before approval and 0 rejected.
 
 ## Fact decisions
 

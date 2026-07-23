@@ -1,7 +1,7 @@
 # Project Status
 
 - **Current stage:** Stage 3A complete - public-gold-v0.1 frozen; deterministic baseline next
-- **Last updated:** 2026-07-22
+- **Last updated:** 2026-07-23
 - **Latest milestone:** Completed project-owner semantic review and froze 35 evidence-linked public facts plus 6 challenge cases
 - **AG News replacement status:** Not yet eligible
 

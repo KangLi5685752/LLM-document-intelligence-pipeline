@@ -1,6 +1,6 @@
 # Public Gold Owner Review Sample
 
-This ten-record convenience sample reflects the completed project-owner review recorded on 2026-07-22. The authoritative review covers all 35 facts in `docs/public_gold_full_review.md`. All sample records below are approved as `owner_verified`; no independent second annotation or inter-annotator agreement is claimed.
+This ten-record convenience sample reflects the completed project-owner review recorded on 2026-07-23. The authoritative review covers all 35 facts in `docs/public_gold_full_review.md`. All sample records below are approved as `owner_verified`; no independent second annotation or inter-annotator agreement is claimed.
 
 ## 1. PG-V01-S001-001
 
@@ -23,7 +23,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Recommendation 2, its recommendation subject, the 20x target, 2030 horizon and six-month start condition were verified on page 9.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Recommendation 2, its recommendation subject, the 20x target, 2030 horizon and six-month start condition were verified on page 9.
 
 ## 2. PG-V01-S002-001
 
@@ -46,7 +46,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The explicit government commitment, 20x scale and 2030 horizon were confirmed on page 6.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The explicit government commitment, 20x scale and 2030 horizon were confirmed on page 6.
 
 ## 3. PG-V01-S003-001
 
@@ -69,7 +69,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The reported status of 38 out of 50 commitments met was confirmed.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The reported status of 38 out of 50 commitments met was confirmed.
 
 ## 4. PG-V01-S004-001
 
@@ -92,7 +92,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The multidisciplinary-team and diverse-expertise requirement was confirmed on page 28.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The multidisciplinary-team and diverse-expertise requirement was confirmed on page 28.
 
 ## 5. PG-V01-S005-001
 
@@ -115,7 +115,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the month-level deadline was preserved without inventing an exact day. The bounded excerpt spans the deadline lead-in and first action because the page inserts a strategy-purpose line between them.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the month-level deadline was preserved without inventing an exact day. The bounded excerpt spans the deadline lead-in and first action because the page inserts a strategy-purpose line between them.
 ## 6. PG-V01-S006-001
 
 - Source: S006
@@ -137,7 +137,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the survey population was narrowed to surveyed UK private-sector businesses with at least five employees and was not generalized to every UK private-sector business.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the survey population was narrowed to surveyed UK private-sector businesses with at least five employees and was not generalized to every UK private-sector business.
 
 ## 7. PG-V01-S007-001
 
@@ -160,7 +160,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; 'all', the relevant-laws-and-regulations scope and the pre-deployment timing boundary were restored.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; 'all', the relevant-laws-and-regulations scope and the pre-deployment timing boundary were restored.
 
 ## 8. PG-V01-S006-003
 
@@ -183,7 +183,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the denominator was corrected to businesses that first identified ethical concerns as a barrier and then rated its significance.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the denominator was corrected to businesses that first identified ethical concerns as a barrier and then rated its significance.
 
 ## 9. PG-V01-S002-003
 
@@ -206,7 +206,7 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Spring 2025 remains at source precision and was not converted into an exact date.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Spring 2025 remains at source precision and was not converted into an exact date.
 
 ## 10. PG-V01-S005-003
 
@@ -229,4 +229,4 @@ This ten-record convenience sample reflects the completed project-owner review r
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the BICS respondent population, March 2025 period and AI non-use result were verified and preserved.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the BICS respondent population, March 2025 period and AI non-use result were verified and preserved.

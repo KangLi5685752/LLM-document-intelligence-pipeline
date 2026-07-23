@@ -6,14 +6,14 @@
 
 ## Freeze date
 
-The dataset was frozen on 2026-07-22 after project-owner semantic review.
+The dataset was frozen on 2026-07-23 after project-owner semantic review.
 
 ## Frozen files and SHA-256 hashes
 
 | Frozen file | SHA-256 |
 | --- | --- |
-| `data/annotations/public_gold_facts_v0.1.jsonl` | `8640C7C4D2E6A244661BEE73679D1AD964FEAC3BED937E7399D39AC75AFE96EC` |
-| `data/annotations/public_gold_cases_v0.1.jsonl` | `435AEFDB93EBFEC17C5CCC0D088EEBFB567B928D346CAF58C6A6692023BB7181` |
+| `data/annotations/public_gold_facts_v0.1.jsonl` | `CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690` |
+| `data/annotations/public_gold_cases_v0.1.jsonl` | `328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237` |
 
 The freeze tests recompute both hashes. Any byte change to either JSONL file fails validation until an intentional new dataset version and manifest are created.
 

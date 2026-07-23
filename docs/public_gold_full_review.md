@@ -1,6 +1,6 @@
 # Public Gold Full Review
 
-Project-owner semantic review was completed on 2026-07-22 for all 35 public fact annotations. Every item below was checked against the original PDF page and frozen ParsedDocument evidence. All final records are approved as `owner_verified`; this review does not imply independent double annotation or inter-annotator agreement.
+Project-owner semantic review was completed on 2026-07-23 for all 35 public fact annotations. Every item below was checked against the original PDF page and frozen ParsedDocument evidence. All final records are approved as `owner_verified`; this review does not imply independent double annotation or inter-annotator agreement.
 
 ## 1. PG-V01-S001-001
 
@@ -24,7 +24,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Recommendation 2, its recommendation subject, the 20x target, 2030 horizon and six-month start condition were verified on page 9.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Recommendation 2, its recommendation subject, the 20x target, 2030 horizon and six-month start condition were verified on page 9.
 
 ## 2. PG-V01-S001-002
 
@@ -48,7 +48,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the words 'seek to make available' were restored to avoid strengthening the recommendation into a definite delivery commitment.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the words 'seek to make available' were restored to avoid strengthening the recommendation into a definite delivery commitment.
 
 ## 3. PG-V01-S001-003
 
@@ -72,7 +72,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The 22% value, percentage unit and AI/data-science workforce population were confirmed, and no period was inferred from the footnote.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The 22% value, percentage unit and AI/data-science workforce population were confirmed, and no period was inferred from the footnote.
 
 ## 4. PG-V01-S001-004
 
@@ -96,7 +96,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the record was corrected from an existing regulatory requirement to AI Opportunities Action Plan recommendation 28.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the record was corrected from an existing regulatory requirement to AI Opportunities Action Plan recommendation 28.
 
 ## 5. PG-V01-S001-005
 
@@ -120,7 +120,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the three-month timeframe and public-private reinforcement objective were restored.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the three-month timeframe and public-private reinforcement objective were restored.
 ## 6. PG-V01-S002-001
 
 - Annotation ID: PG-V01-S002-001
@@ -143,7 +143,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The explicit government commitment, 20x scale and 2030 horizon were confirmed on page 6.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The explicit government commitment, 20x scale and 2030 horizon were confirmed on page 6.
 
 ## 7. PG-V01-S002-002
 
@@ -167,7 +167,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the UK Government was restored as the committing subject and the national AI Research Resource as the capacity being doubled.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the UK Government was restored as the committing subject and the national AI Research Resource as the capacity being doubled.
 
 ## 8. PG-V01-S002-003
 
@@ -191,7 +191,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Spring 2025 remains at source precision and was not converted into an exact date.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. Spring 2025 remains at source precision and was not converted into an exact date.
 
 ## 9. PG-V01-S002-004
 
@@ -215,7 +215,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The government commitment to create AI Growth Zones and accelerate AI infrastructure buildout was confirmed.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The government commitment to create AI Growth Zones and accelerate AI infrastructure buildout was confirmed.
 
 ## 10. PG-V01-S002-005
 
@@ -239,7 +239,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; decision was changed to commitment, modal wording was restored, and the initial public-interest pilot-scaling priority was retained.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; decision was changed to commitment, modal wording was restored, and the initial public-interest pilot-scaling priority was retained.
 ## 11. PG-V01-S003-001
 
 - Annotation ID: PG-V01-S003-001
@@ -262,7 +262,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The reported status of 38 out of 50 commitments met was confirmed.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The reported status of 38 out of 50 commitments met was confirmed.
 
 ## 12. PG-V01-S003-002
 
@@ -286,7 +286,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. GBP 600 million is an 'up to' committed funding ceiling, not confirmed expenditure of the entire amount.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. GBP 600 million is an 'up to' committed funding ceiling, not confirmed expenditure of the entire amount.
 
 ## 13. PG-V01-S003-003
 
@@ -310,7 +310,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. TechFirst and the committed GBP 187 million amount were confirmed.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. TechFirst and the committed GBP 187 million amount were confirmed.
 
 ## 14. PG-V01-S003-004
 
@@ -334,7 +334,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the 50% value was clarified as an initial target rather than achieved performance.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the 50% value was clarified as an initial target rather than achieved performance.
 ## 15. PG-V01-S004-001
 
 - Annotation ID: PG-V01-S004-001
@@ -357,7 +357,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The multidisciplinary-team and diverse-expertise requirement was confirmed on page 28.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The multidisciplinary-team and diverse-expertise requirement was confirmed on page 28.
 
 ## 16. PG-V01-S004-002
 
@@ -381,7 +381,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the project team was restored as the actor and the AI solution retained as the object being built.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the project team was restored as the actor and the AI solution retained as the object being built.
 
 ## 17. PG-V01-S004-003
 
@@ -405,7 +405,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the material 'society at large' and 'as much as possible' scope qualifications were restored.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the material 'society at large' and 'as much as possible' scope qualifications were restored.
 
 ## 18. PG-V01-S004-004
 
@@ -429,7 +429,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The mandatory pre-deployment Secure by Design requirement was confirmed.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The mandatory pre-deployment Secure by Design requirement was confirmed.
 
 ## 19. PG-V01-S004-005
 
@@ -453,7 +453,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. This is one bounded impact from the deepfake identity-verification scenario, not all impacts or the full scenario rating.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. This is one bounded impact from the deepfake identity-verification scenario, not all impacts or the full scenario rating.
 
 ## 20. PG-V01-S004-006
 
@@ -477,7 +477,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the Digital Sensitivity Review project was restored as the decision-making subject and the toolset treated as the resulting system.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the Digital Sensitivity Review project was restored as the decision-making subject and the toolset treated as the resulting system.
 ## 21. PG-V01-S005-001
 
 - Annotation ID: PG-V01-S005-001
@@ -500,7 +500,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the month-level deadline was preserved without inventing an exact day. The bounded excerpt spans the deadline lead-in and first action because the page inserts a strategy-purpose line between them.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the month-level deadline was preserved without inventing an exact day. The bounded excerpt spans the deadline lead-in and first action because the page inserts a strategy-purpose line between them.
 
 ## 22. PG-V01-S005-002
 
@@ -524,7 +524,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the Board's role was corrected to advice and direction rather than direct management authority.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the Board's role was corrected to advice and direction rather than direct management authority.
 
 ## 23. PG-V01-S005-003
 
@@ -548,7 +548,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the BICS respondent population, March 2025 period and AI non-use result were verified and preserved.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the BICS respondent population, March 2025 period and AI non-use result were verified and preserved.
 
 ## 24. PG-V01-S005-004
 
@@ -572,7 +572,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the equality, human-rights, privacy and environmental-sustainability scope was restored.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the equality, human-rights, privacy and environmental-sustainability scope was restored.
 
 ## 25. PG-V01-S005-005
 
@@ -596,7 +596,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the fact was confirmed and the evidence excerpt expanded to include accountability.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the fact was confirmed and the evidence excerpt expanded to include accountability.
 ## 26. PG-V01-S006-001
 
 - Annotation ID: PG-V01-S006-001
@@ -619,7 +619,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the survey population was narrowed to surveyed UK private-sector businesses with at least five employees and was not generalized to every UK private-sector business.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the survey population was narrowed to surveyed UK private-sector businesses with at least five employees and was not generalized to every UK private-sector business.
 
 ## 27. PG-V01-S006-002
 
@@ -643,7 +643,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the 77% value was confirmed as a proportion of AI-using businesses rather than a proportion of individual staff.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the 77% value was confirmed as a proportion of AI-using businesses rather than a proportion of individual staff.
 
 ## 28. PG-V01-S006-003
 
@@ -667,7 +667,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the denominator was corrected to businesses that first identified ethical concerns as a barrier and then rated its significance.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the denominator was corrected to businesses that first identified ethical concerns as a barrier and then rated its significance.
 
 ## 29. PG-V01-S006-004
 
@@ -691,7 +691,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the 75% value was confirmed as a self-reported impact distinct from the separate 56% productivity-change measure elsewhere in the report.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the 75% value was confirmed as a self-reported impact distinct from the separate 56% productivity-change measure elsewhere in the report.
 
 ## 30. PG-V01-S006-005
 
@@ -715,7 +715,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the record was corrected from a general finding to a quantified metric with an explicit AI-using-business population.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the record was corrected from a general finding to a quantified metric with an explicit AI-using-business population.
 ## 31. PG-V01-S007-001
 
 - Annotation ID: PG-V01-S007-001
@@ -738,7 +738,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; 'all', the relevant-laws-and-regulations scope and the pre-deployment timing boundary were restored.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; 'all', the relevant-laws-and-regulations scope and the pre-deployment timing boundary were restored.
 
 ## 32. PG-V01-S007-002
 
@@ -762,7 +762,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the regulatory-landscape, individual-regulator and AI-specific advisory scope were restored while retaining one bounded component of recommendation 4.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the regulatory-landscape, individual-regulator and AI-specific advisory scope were restored while retaining one bounded component of recommendation 4.
 
 ## 33. PG-V01-S007-003
 
@@ -786,7 +786,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The record intentionally captures the bounded mandatory-publication component of recommendation 7, not its separate process-integration component.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; no semantic field correction was required. The record intentionally captures the bounded mandatory-publication component of recommendation 7, not its separate process-integration component.
 
 ## 34. PG-V01-S007-004
 
@@ -810,7 +810,7 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; public-and-private provider scope was restored while the record remains bounded to the first component of recommendation 10.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; public-and-private provider scope was restored while the record remains bounded to the first component of recommendation 10.
 
 ## 35. PG-V01-S007-005
 
@@ -834,4 +834,4 @@ Project-owner semantic review was completed on 2026-07-22 for all 35 public fact
 - [x] Normalization verified
 - [x] Approve
 - [ ] Reject
-- Reviewer notes: Owner verified on 2026-07-22 against the original PDF page and ParsedDocument evidence; the public/private provider scope, 'always' requirement and full automated-and-AI-assisted decision context were restored.
+- Reviewer notes: Owner verified on 2026-07-23 against the original PDF page and ParsedDocument evidence; the public/private provider scope, 'always' requirement and full automated-and-AI-assisted decision context were restored.

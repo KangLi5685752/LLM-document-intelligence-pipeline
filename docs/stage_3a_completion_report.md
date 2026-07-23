@@ -22,7 +22,7 @@ The asset contains six owner-verified cases: two ambiguous, two unsupported and 
 
 ## Owner-review results
 
-Project-owner semantic review completed on 2026-07-22. Twelve facts were approved without correction and 23 were corrected before approval. Five challenge cases were approved without correction and one was corrected before approval. No fact or case was rejected, and no draft record remains.
+Project-owner semantic review completed on 2026-07-23. Twelve facts were approved without correction and 23 were corrected before approval. Five challenge cases were approved without correction and one was corrected before approval. No fact or case was rejected, and no draft record remains.
 
 ## Corrections made
 
@@ -56,7 +56,7 @@ Corrections restored source speech acts, actor attribution, modal wording, mater
 - All fact evidence references valid against frozen ParsedDocument output: passed.
 - Freeze-level validator with `--require-owner-verified`: passed.
 - Checksummed deterministic manifest: passed.
-- Full repository test suite: passed (256 tests on 2026-07-22).
+- Full repository test suite: passed (256 tests on 2026-07-23).
 
 ## Limitations
 

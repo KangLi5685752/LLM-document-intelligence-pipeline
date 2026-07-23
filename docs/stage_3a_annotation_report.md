@@ -15,7 +15,7 @@ See the [Stage 3A completion report](stage_3a_completion_report.md) and [public-
 - Candidate extraction schema: `0.1`
 - Annotation and case schema: `0.1`
 - Predicate vocabulary: `0.1`
-- Owner-review completion date: 2026-07-22
+- Owner-review completion date: 2026-07-23
 - Network or LLM calls: none
 - Synthetic ground truth used: no
 
@@ -67,7 +67,7 @@ Five cases were approved without correction. The S005 risk-table case was correc
 
 ## Owner-review results
 
-Project-owner review completed on 2026-07-22:
+Project-owner review completed on 2026-07-23:
 
 - facts approved without correction: 12;
 - facts corrected before approval: 23;

@@ -99,7 +99,7 @@ def test_frozen_hashes_are_uppercase_sha256(manifest: dict[str, Any]) -> None:
 def test_dataset_identity_and_status(manifest: dict[str, Any]) -> None:
     assert manifest["freeze_schema_version"] == "0.1"
     assert manifest["dataset_version"] == "public-gold-v0.1"
-    assert manifest["freeze_date"] == "2026-07-22"
+    assert manifest["freeze_date"] == "2026-07-23"
     assert manifest["status"] == "frozen"
 
 

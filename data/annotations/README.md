@@ -6,7 +6,7 @@ This directory contains frozen `public-gold-v0.1`:
 - `public_gold_cases_v0.1.jsonl`: six owner-verified ambiguity, unsupported-claim and missing-value cases;
 - `public_gold_v0.1_manifest.json`: fixed versions, inventory and uppercase SHA-256 hashes for both JSONL files.
 
-The project-owner review was completed on 2026-07-22. Review decisions are documented in `docs/public_gold_owner_decision_log.md`; dataset identity and change controls are documented in `docs/public_gold_freeze.md`.
+The project-owner review was completed on 2026-07-23. Review decisions are documented in `docs/public_gold_owner_decision_log.md`; dataset identity and change controls are documented in `docs/public_gold_freeze.md`.
 
 ## Hash protection
 
