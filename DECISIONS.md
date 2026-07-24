@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. Stage 3B.3 deterministic-rule decisions DEC-058 to DEC-061 were accepted on 2026-07-25. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -457,3 +457,35 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Stage 3B.2 rejects held-out mode before opening files and provides no bypass until the versioned baseline freeze manifest and validator are implemented.
 - **Reason:** Immediate denial avoids accidental reads through partially implemented authorization logic and makes the missing future gate explicit.
 - **Trade-off:** Held-out evaluation is intentionally impossible through this API until a separate reviewed implementation is completed.
+
+## DEC-058: Keep deterministic extraction as a pure ParsedDocument transform
+
+- **Context:** The deterministic baseline must be evaluated against labels without allowing those labels, raw source files or repository layout to influence runtime extraction.
+- **Alternatives:** Let the extractor open parser outputs and labels itself; pass file paths plus optional evaluation context; accept one validated `ParsedDocument` and perform a pure in-memory transform.
+- **Chosen option:** The rule engine accepts a `ParsedDocument` object and performs no file, network or gold-label access.
+- **Reason:** A narrow typed boundary keeps extraction independent from evaluation data, prevents path and filename conditions, and makes I/O isolation directly testable.
+- **Trade-off:** Callers must load and validate `ParsedDocument` data before invoking the API, and the extractor cannot recover information absent from that object.
+
+## DEC-059: Prefer conservative bounded rules and explicit abstention
+
+- **Context:** Page-level text and flattened layouts can make subject, value and evidence relationships uncertain, while unsupported extraction is more damaging than an explicit miss in this transparent baseline.
+- **Alternatives:** Join nearby blocks heuristically; emit low-confidence candidates for every trigger; require subject, trigger, value and evidence to remain bounded and otherwise review or abstain.
+- **Chosen option:** Emit only when subject, trigger, value and evidence are bounded within one block; otherwise route to review or abstain.
+- **Reason:** Same-block boundaries and stable warning codes expose uncertainty without fabricating cross-page context, missing subjects, values or precision.
+- **Trade-off:** Conservative rules may have lower recall and may over-abstain on layouts that a richer parser or language model could interpret.
+
+## DEC-060: Use hash-derived IDs and canonical output
+
+- **Context:** Baseline reproducibility requires identical source input to produce identical IDs, order and serialized bytes across runs and platforms.
+- **Alternatives:** Use UUID4 identifiers; use process-local counters; derive identifiers from stable inputs and serialize a canonical model dump.
+- **Chosen option:** Derive batch, evidence and candidate IDs from stable source and provenance content and serialize with sorted deterministic JSON.
+- **Reason:** SHA-256 inputs, fixed ordering and canonical JSON make repeated output comparison transparent without timestamps, filesystem paths or process state.
+- **Trade-off:** IDs are content-sensitive and change when bounded source text or provenance changes, even when a reader considers the semantic meaning similar.
+
+## DEC-061: Defer standalone candidate-entity generation
+
+- **Context:** Candidate facts already retain source-stated subjects, while a separate entity heuristic would introduce aliasing and consolidation decisions beyond the frozen deterministic candidate scope.
+- **Alternatives:** Generate an entity for every subject string; add source-specific alias mappings; return no standalone entities and defer consolidation.
+- **Chosen option:** Return an empty entity list in `deterministic-baseline-v0.1` and retain source-stated subject fields on `CandidateFact`. Entity consolidation remains future work.
+- **Reason:** This preserves the candidate schema without pretending that lexical subject detection solves entity identity or cross-document resolution.
+- **Trade-off:** Consumers cannot use standalone candidate entities from this baseline and must wait for later extraction or reconciliation work.
