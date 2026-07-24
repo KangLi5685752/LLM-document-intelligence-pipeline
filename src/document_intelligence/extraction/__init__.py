@@ -16,6 +16,16 @@ if TYPE_CHECKING:
         load_baseline_gold,
         summarize_development_gold,
     )
+    from document_intelligence.extraction.deterministic import (
+        DETERMINISTIC_BASELINE_VERSION,
+        DeterministicExtractionError,
+        canonical_candidate_result_json,
+        extract_deterministic_candidates,
+    )
+    from document_intelligence.extraction.deterministic_rules import (
+        DeterministicRuleDefinition,
+        get_deterministic_rule_inventory,
+    )
     from document_intelligence.extraction.annotations import (
         AnnotationReviewStatus,
         GoldChallengeCase,
@@ -71,6 +81,12 @@ __all__ = [
     "DevelopmentGoldSummary",
     "load_baseline_gold",
     "summarize_development_gold",
+    "DETERMINISTIC_BASELINE_VERSION",
+    "DeterministicExtractionError",
+    "DeterministicRuleDefinition",
+    "extract_deterministic_candidates",
+    "canonical_candidate_result_json",
+    "get_deterministic_rule_inventory",
 ]
 
 
@@ -102,6 +118,12 @@ _EXPORT_MODULES = {
     "DevelopmentGoldSummary": "document_intelligence.extraction.baseline_gold",
     "load_baseline_gold": "document_intelligence.extraction.baseline_gold",
     "summarize_development_gold": "document_intelligence.extraction.baseline_gold",
+    "DETERMINISTIC_BASELINE_VERSION": "document_intelligence.extraction.deterministic",
+    "DeterministicExtractionError": "document_intelligence.extraction.deterministic",
+    "DeterministicRuleDefinition": "document_intelligence.extraction.deterministic_rules",
+    "extract_deterministic_candidates": "document_intelligence.extraction.deterministic",
+    "canonical_candidate_result_json": "document_intelligence.extraction.deterministic",
+    "get_deterministic_rule_inventory": "document_intelligence.extraction.deterministic_rules",
 }
 
 
