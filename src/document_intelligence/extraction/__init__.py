@@ -6,6 +6,16 @@ from importlib import import_module
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
+    from document_intelligence.extraction.baseline_gold import (
+        BaselineGoldAccessError,
+        BaselineGoldAccessMode,
+        BaselineGoldIntegrityError,
+        DevelopmentGoldBundle,
+        DevelopmentGoldSummary,
+        HeldOutAccessDenied,
+        load_baseline_gold,
+        summarize_development_gold,
+    )
     from document_intelligence.extraction.annotations import (
         AnnotationReviewStatus,
         GoldChallengeCase,
@@ -53,6 +63,14 @@ __all__ = [
     "load_gold_fact_annotations",
     "load_gold_challenge_cases",
     "validate_public_gold_dataset",
+    "BaselineGoldAccessMode",
+    "BaselineGoldAccessError",
+    "BaselineGoldIntegrityError",
+    "HeldOutAccessDenied",
+    "DevelopmentGoldBundle",
+    "DevelopmentGoldSummary",
+    "load_baseline_gold",
+    "summarize_development_gold",
 ]
 
 
@@ -76,6 +94,14 @@ _EXPORT_MODULES = {
     "load_gold_fact_annotations": "document_intelligence.extraction.annotations",
     "load_gold_challenge_cases": "document_intelligence.extraction.annotations",
     "validate_public_gold_dataset": "document_intelligence.extraction.annotations",
+    "BaselineGoldAccessMode": "document_intelligence.extraction.baseline_gold",
+    "BaselineGoldAccessError": "document_intelligence.extraction.baseline_gold",
+    "BaselineGoldIntegrityError": "document_intelligence.extraction.baseline_gold",
+    "HeldOutAccessDenied": "document_intelligence.extraction.baseline_gold",
+    "DevelopmentGoldBundle": "document_intelligence.extraction.baseline_gold",
+    "DevelopmentGoldSummary": "document_intelligence.extraction.baseline_gold",
+    "load_baseline_gold": "document_intelligence.extraction.baseline_gold",
+    "summarize_development_gold": "document_intelligence.extraction.baseline_gold",
 }
 
 
