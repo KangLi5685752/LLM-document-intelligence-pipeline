@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 were accepted on 2026-07-24. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -433,3 +433,27 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Development code must not return held-out fact or challenge-case semantics. Held-out access will later require an explicit flag and a valid baseline freeze manifest.
 - **Reason:** A fail-closed loader reduces accidental leakage and makes the first held-out run contingent on recorded code, rules and development results.
 - **Trade-off:** The control remains procedural and future evaluation requires additional manifest validation and explicit access handling.
+
+## DEC-055: Use a dedicated baseline gold access boundary
+
+- **Context:** The Stage 3A loaders intentionally deserialize the complete public-gold dataset for structural and freeze validation, while deterministic-baseline development must not receive held-out semantics.
+- **Alternatives:** Reuse the complete loaders and filter after deserialization; add an optional bypass to the existing loaders; retain complete validation loaders and introduce a separate development-only API.
+- **Chosen option:** Keep complete Stage 3A loaders for dataset validation, but require baseline evaluation code to use a separate development-only API.
+- **Reason:** A dedicated API makes the narrower access policy explicit, testable and fail closed without weakening complete-dataset validation.
+- **Trade-off:** Two loader purposes must remain clearly documented, and future extractor code must not import either gold-loading path.
+
+## DEC-056: Route by metadata before semantic deserialisation
+
+- **Context:** Integrity verification requires reading the frozen files, but constructing held-out semantic objects during development would violate the experiment access boundary.
+- **Alternatives:** Deserialize every record and filter afterward; store a separate development copy; verify hashes, route on bounded metadata and deserialize development semantics only.
+- **Chosen option:** Verify hashes, inspect ID/source/split metadata and semantically deserialize only development records. Held-out bytes are still read for integrity hashing and metadata routing.
+- **Reason:** Metadata-first routing preserves one checksummed dataset while preventing held-out values, evidence and notes from entering semantic development objects.
+- **Trade-off:** The control is procedural rather than secret, and the metadata scanner requires its own strict validation and regression tests.
+
+## DEC-057: Deny held-out access before repository I/O
+
+- **Context:** Stage 3B.2 has no implemented baseline freeze-manifest schema or validator that could authorize the first held-out run.
+- **Alternatives:** Accept a placeholder manifest; rely on an environment variable or boolean flag; reject held-out mode before repository access until the authorization contract exists.
+- **Chosen option:** Stage 3B.2 rejects held-out mode before opening files and provides no bypass until the versioned baseline freeze manifest and validator are implemented.
+- **Reason:** Immediate denial avoids accidental reads through partially implemented authorization logic and makes the missing future gate explicit.
+- **Trade-off:** Held-out evaluation is intentionally impossible through this API until a separate reviewed implementation is completed.

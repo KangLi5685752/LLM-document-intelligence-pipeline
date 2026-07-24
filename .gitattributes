@@ -1,2 +1,11 @@
 # Preserve canonical RFC email bytes used by fixture checksum validation.
 data/synthetic/email/*.eml binary
+
+# Keep Stage 3B frozen inputs byte-identical across platforms.
+configs/experiments/deterministic_baseline_v0.1.json text eol=lf
+docs/stage_3b_deterministic_baseline_plan.md text eol=lf
+docs/stage_3b_matching_protocol.md text eol=lf
+data/annotations/public_gold_facts_v0.1.jsonl text eol=lf
+data/annotations/public_gold_cases_v0.1.jsonl text eol=lf
+data/annotations/public_gold_v0.1_manifest.json text eol=lf
+data/manifests/corpus_split.csv text eol=lf

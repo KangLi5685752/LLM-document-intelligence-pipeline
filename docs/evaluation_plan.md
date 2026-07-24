@@ -160,6 +160,8 @@ The [deterministic baseline plan](stage_3b_deterministic_baseline_plan.md), [mat
 - Baseline acceptance has no minimum development F1 gate; it requires reproducible execution and complete reporting.
 - No deterministic extraction result or metric exists yet.
 
+Stage 3B.2 now enforces development-only evaluation-label access through the guarded baseline API. Public development labels may be loaded by evaluation and failure-analysis tooling only; extractor runtime must receive `ParsedDocument` without labels. Held-out access remains unavailable until a future baseline freeze manifest and validator exist. No development or held-out extraction result exists.
+
 The existing synthetic held-out gates apply to later reconciliation and final-state evaluation. They do not apply to this candidate-only public-PDF baseline, and synthetic records must not be mixed into public-gold fact F1.
 
 ## Development and held-out use
