@@ -23,7 +23,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 3B.1 experiment planning is complete.** `deterministic-baseline-v0.1` is frozen as the next implementation contract over the existing Stage 3A candidate schema and `public-gold-v0.1`. Stage 3B.2 development-only annotation loading and its held-out access guard are next. No deterministic or LLM extractor, extraction result, extraction metric or reconciliation implementation exists yet.
+**Stage 3B.2 development-only gold access is implemented.** The guarded API loads exactly 25 development facts and three development challenge cases from frozen `public-gold-v0.1`; held-out access remains blocked before repository I/O. The Stage 3B.3 deterministic extractor is next. No deterministic or LLM extractor, extraction result, extraction metric or reconciliation implementation exists yet.
 
 ## Stage 3B.1 deterministic baseline contract
 
@@ -32,6 +32,22 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 - [Matching protocol](docs/stage_3b_matching_protocol.md)
 
 These documents freeze the development scope, supported predicates, matching rules, acceptance gates and future held-out controls before implementation. They contain no achieved extraction or performance result.
+
+## Stage 3B.2 development-only gold access
+
+Validate the access contract and print its deterministic non-semantic development summary:
+
+~~~powershell
+python -m document_intelligence.extraction.baseline_gold_cli --repository-root . --access development
+~~~
+
+The held-out form is documented as an expected rejection, not a routine command. It exits 1 because Stage 3B.2 has no baseline freeze-manifest bypass:
+
+~~~powershell
+python -m document_intelligence.extraction.baseline_gold_cli --repository-root . --access held_out
+~~~
+
+See the [development-only public-gold loader design](docs/stage_3b_development_gold_loader.md). The loader is for evaluation and failure-analysis tooling; the future extractor must receive only `ParsedDocument` input.
 
 ## Stage 3A public annotation validation
 
@@ -99,7 +115,7 @@ See the [synthetic challenge-set specification](docs/synthetic_challenge_set_spe
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
 2. **Stage 1 – Corpus Audit**: **Completed.** Audited and froze the versioned public and synthetic corpus, family splits, ground truth, product contract, and evaluation gates.
 3. **Stage 2 — Document Ingestion**: **Completed.** The Common Document Object, PDF/PPTX/EML parsers, single-document and batch CLIs, and full frozen-corpus validation are implemented.
-4. **Stage 3 — Baseline and Structured Extraction**: **In progress: Stage 3A and Stage 3B.1 complete; Stage 3B.2 next.** Candidate contracts, frozen owner-reviewed `public-gold-v0.1` and the deterministic-baseline experiment plan are complete. Deterministic and LLM extractors, reconciliation, conflict checks, metrics and review routing remain planned.
+4. **Stage 3 — Baseline and Structured Extraction**: **In progress: Stage 3A through Stage 3B.2 complete; Stage 3B.3 next.** Candidate contracts, frozen owner-reviewed `public-gold-v0.1`, the deterministic-baseline plan and guarded development-label access are implemented. Deterministic and LLM extractors, reconciliation, conflict checks, metrics and review routing remain planned.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
 6. **Stage 5 — Storage and Data Model**: **Planned.** Define the validated knowledge model and local persistence before considering BigQuery.
 7. **Stage 6 — Interface**: **Planned.** Add an interface or API only for capabilities supported by evaluation evidence.

@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A is complete, and the Stage 3B.1 deterministic-baseline plan is frozen. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation and frozen `public-gold-v0.1`. It does not implement an extractor, reconciliation, extraction metrics, an LLM call or held-out extraction.
+Stage 3A, Stage 3B.1 planning and the Stage 3B.2 development-only gold access boundary are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1` and guarded development-label loading. It does not implement an extractor, reconciliation, extraction metrics, an LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -67,7 +67,15 @@ The baseline contract was frozen before implementation in the [Stage 3B determin
 
 Baseline v0.1 scores candidate extraction for eight predicates: `action_status`, `budget`, `commitment`, `decision`, `metric`, `recommendation`, `requirement` and `risk`. Its primary scored scope is development-only public-PDF data. Development synthetic documents may later provide non-scored format and contract smoke tests, while reconciliation and synthetic final-state evaluation remain separate future work.
 
-Stage 3B.2 development-only annotation loading and a fail-closed held-out access guard are next. No extractor or metric result exists yet.
+Stage 3B.2 development-only annotation loading and its fail-closed held-out access guard are implemented. No extractor or metric result exists yet.
+
+## Stage 3B.2 development-only gold access
+
+The [development-only public-gold loader](stage_3b_development_gold_loader.md) validates the frozen experiment configuration, public-gold manifest, repository-relative paths, corpus split and binary content hashes before returning labels. It metadata-scans ID, source and split fields from bounded binary JSONL lines, semantically validates only the 25 development facts and three development challenge cases, and returns them in deterministic experiment-source order.
+
+Held-out or unknown access modes fail before repository-root resolution or file I/O. Held-out lines are read only for content hashing and metadata routing; no held-out semantic model is constructed. The generic complete-dataset loaders remain available for Stage 3A validation only. Baseline implementation and evaluation code must use the guarded API, while the future extractor must receive only `ParsedDocument` and must not import any gold loader.
+
+No extractor or metric exists. Stage 3B.3 source-independent deterministic rule implementation is next.
 
 ## Current limitations
 
