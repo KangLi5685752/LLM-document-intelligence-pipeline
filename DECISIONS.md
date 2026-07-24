@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 were accepted on 2026-07-24. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -385,3 +385,51 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Treat the six owner-verified challenge cases as part of `public-gold-v0.1` and protect their JSONL content with the freeze manifest.
 - **Reason:** Negative and ambiguous behavior is part of the evaluation contract and must remain reproducible with the fact labels.
 - **Trade-off:** Challenge-case corrections follow the same dataset-version discipline as fact annotations.
+
+## DEC-049: Freeze the deterministic baseline plan before implementation
+
+- **Context:** Writing extraction rules before fixing the experiment inputs, metrics, matching rules and access boundary would allow the evaluation contract to drift in response to observed behaviour.
+- **Alternatives:** Define the plan during implementation; document the experiment after development; freeze the complete experiment contract before writing extraction rules.
+- **Chosen option:** Freeze `deterministic-baseline-v0.1`, its inputs, metrics, matching and access policy before writing extraction rules.
+- **Reason:** A pre-implementation contract makes later development and evaluation reproducible and exposes deviations explicitly.
+- **Trade-off:** Implementation must follow a deliberately bounded contract or declare a new experiment version.
+
+## DEC-050: Score baseline v0.1 on owner-reviewed public PDF candidates
+
+- **Context:** The project contains owner-reviewed public-PDF candidate labels and synthetic records intended to test later cross-document states, formats and conflicts.
+- **Alternatives:** Score public and synthetic records together; use synthetic records as the primary baseline score; score public candidates and reserve synthetic records for bounded smoke tests until reconciliation evaluation is defined.
+- **Chosen option:** Use the 25 development public facts as the primary scored baseline dataset. Use development synthetic documents only for non-scored format and contract smoke tests until candidate and reconciliation ground truth are evaluated separately.
+- **Reason:** Public documents test realistic candidate extraction while keeping synthetic current, superseded and conflict semantics out of candidate-only F1.
+- **Trade-off:** Initial scores cover a small PDF-focused development set and do not yet measure PPTX/EML reconciliation behaviour.
+
+## DEC-051: Limit baseline v0.1 to eight development-supported predicates
+
+- **Context:** The predicate registry is broader than the predicates supported by the frozen development annotations and the first deterministic rule families.
+- **Alternatives:** Attempt all 20 predicates; allow rules to create new predicates; scope the first baseline to predicates supported by development evidence.
+- **Chosen option:** Support `action_status`, `budget`, `commitment`, `decision`, `metric`, `recommendation`, `requirement` and `risk` in the first deterministic baseline. This does not change the 20-predicate vocabulary.
+- **Reason:** A fixed supported subset prevents silent invention and makes false positives and omissions interpretable.
+- **Trade-off:** Registered predicates outside the eight-predicate subset are not evaluated in baseline v0.1.
+
+## DEC-052: Use strict reproducible matching before fuzzy matching
+
+- **Context:** Semantic or fuzzy matching can grant useful credit but introduces thresholds, model dependencies and harder-to-audit pairings in a small first benchmark.
+- **Alternatives:** Use embedding similarity; use fuzzy subject aliases and numeric tolerances; start with exact typed, normalized and source-bounded one-to-one matching.
+- **Chosen option:** Use exact typed, normalized, source-bounded one-to-one matching in v0.1, with no embeddings, fuzzy subject matching or external entity resolution.
+- **Reason:** Strict matching produces transparent counts, deterministic duplicate handling and reproducible failure analysis.
+- **Trade-off:** Semantically equivalent wording may be under-credited until a separately versioned matching approach is justified.
+
+## DEC-053: Treat deterministic confidence as a heuristic rule-strength band
+
+- **Context:** Deterministic rules can express evidence strength, but the small development set cannot support probability calibration.
+- **Alternatives:** Omit confidence; estimate calibrated probabilities; use fixed, explicitly heuristic strength bands.
+- **Chosen option:** Use fixed `0.90`, `0.70` and `0.50` bands, explicitly not calibrated probabilities.
+- **Reason:** Fixed bands distinguish explicit, bounded-context and ambiguous candidates without making a statistical calibration claim.
+- **Trade-off:** Confidence values support routing and analysis only and must not be interpreted as empirical likelihoods.
+
+## DEC-054: Fail closed on held-out access until baseline freeze
+
+- **Context:** Held-out labels are committed in a public repository, so loader behaviour must provide the enforceable procedural boundary before the first evaluation.
+- **Alternatives:** Trust callers not to load held-out records; remove held-out labels from the repository; block held-out semantics by default and require a frozen experiment record for later access.
+- **Chosen option:** Development code must not return held-out fact or challenge-case semantics. Held-out access will later require an explicit flag and a valid baseline freeze manifest.
+- **Reason:** A fail-closed loader reduces accidental leakage and makes the first held-out run contingent on recorded code, rules and development results.
+- **Trade-off:** The control remains procedural and future evaluation requires additional manifest validation and explicit access handling.

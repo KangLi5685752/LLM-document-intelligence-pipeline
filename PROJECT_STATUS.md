@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3A complete - public-gold-v0.1 frozen; deterministic baseline next
-- **Last updated:** 2026-07-23
-- **Latest milestone:** Completed project-owner semantic review and froze 35 evidence-linked public facts plus 6 challenge cases
+- **Current stage:** Stage 3B.1 complete - `deterministic-baseline-v0.1` plan frozen; development-only loader next
+- **Last updated:** 2026-07-24
+- **Latest milestone:** Froze the deterministic candidate-extraction experiment, matching and held-out-access contract before implementation
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -10,35 +10,32 @@
 - Stage 0 foundation.
 - Stage 1 corpus strategy, audit, synthetic fixtures, evaluation design and `stage1-corpus-v1.0` freeze.
 - Stage 2 Common Document Object, PDF/PPTX/EML parsers, dispatcher, CLIs, batch ingestion and frozen-corpus validation.
-- Candidate extraction contract schema `0.1`.
-- Predicate vocabulary `0.1` and runtime predicate-usage validation.
-- Public annotation and challenge-case models.
-- 35 owner-verified, evidence-linked public facts.
-- Six owner-verified challenge cases.
-- Exact block, page and excerpt validation against frozen ParsedDocument output.
-- Project-owner decision log and completed fact/case review worksheets.
-- Checksummed `public-gold-v0.1` freeze manifest.
-- Freeze regression tests.
-- Stage 3A completion report.
+- Stage 3A candidate extraction schema `0.1`, predicate vocabulary `0.1`, public annotation models and checksummed `public-gold-v0.1` freeze.
+- `deterministic-baseline-v0.1` machine-readable plan.
+- Public-PDF development/held-out boundary.
+- Supported predicate scope.
+- Matching protocol v0.1.
+- Confidence and review-routing contract.
+- Baseline freeze and first-held-out-run protocol.
 
 ## In progress
 
-- Stage 3B deterministic-baseline experiment planning.
+- Stage 3B.2 development-only annotation loader and held-out access guard.
 
-No deterministic or LLM extractor, reconciliation layer or extraction metric exists yet.
+No deterministic or LLM extractor, reconciliation layer, extraction result or extraction metric exists yet.
 
 ## Next tasks
 
-1. Freeze the exact deterministic-baseline experiment plan.
-2. Ensure baseline code can load development annotations only.
-3. Implement deterministic candidate extraction.
-4. Evaluate only on development labels during rule design.
-5. Freeze rules and code before held-out evaluation.
-6. Do not implement reconciliation or RAG yet.
+1. Implement metadata-first development-only annotation loading.
+2. Fail closed on held-out access by default.
+3. Add tests proving held-out values are not returned to rule-design code.
+4. Implement source-independent deterministic rules only after loader review.
+5. Evaluate on development labels.
+6. Freeze code and rules before held-out evaluation.
 
 ## Blockers
 
-No technical blocker is identified. Stage 3B must enforce the frozen development/held-out loading boundary.
+No technical blocker. Held-out access must remain disabled until a future baseline freeze manifest exists.
 
 ## AG News replacement status
 

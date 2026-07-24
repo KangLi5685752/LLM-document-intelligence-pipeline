@@ -1,0 +1,125 @@
+{
+  "acceptance_gates": [
+    "all five development public-PDF sources complete without an unhandled exception",
+    "all emitted CandidateExtractionResult records validate against schema version 0.1",
+    "development metrics report exact numerators and denominators",
+    "repeated runs over identical inputs produce byte-identical canonical outputs",
+    "no held-out fact or challenge-case semantic content is loaded during rule design or tuning",
+    "no source-specific, filename-specific, page-specific or expected-value-specific extraction rules are used",
+    "all three development challenge cases receive an explicit case-level outcome",
+    "no minimum development F1 is required for baseline acceptance"
+  ],
+  "allowed_input_fields": [
+    "ParsedDocument metadata",
+    "DocumentBlock text",
+    "DocumentBlock type",
+    "DocumentBlock order",
+    "DocumentBlock location type",
+    "DocumentBlock location value"
+  ],
+  "allowed_rule_families": [
+    "numbered recommendation detection",
+    "explicit commitment language",
+    "mandatory requirement language",
+    "explicit decision language",
+    "risk or impact statement detection",
+    "quantitative metric detection",
+    "monetary budget detection",
+    "action progress status detection",
+    "heading and same-block subject attribution",
+    "exact evidence-span preservation"
+  ],
+  "candidate_extraction_schema_version": "0.1",
+  "confidence_bands": {
+    "ambiguous_review": 0.5,
+    "bounded_context": 0.7,
+    "high_specificity": 0.9
+  },
+  "corpus_version": "stage1-corpus-v1.0",
+  "development_challenge_case_ids": [
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001"
+  ],
+  "development_fact_count": 25,
+  "development_public_source_ids": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S006"
+  ],
+  "development_synthetic_source_ids": [
+    "S010",
+    "S012",
+    "S013",
+    "S014"
+  ],
+  "experiment_id": "deterministic-baseline-v0.1",
+  "experiment_schema_version": "0.1",
+  "held_out_access": "blocked_until_baseline_freeze_manifest",
+  "held_out_challenge_case_ids": [
+    "PGC-V01-S005-001",
+    "PGC-V01-S005-002",
+    "PGC-V01-S007-001"
+  ],
+  "held_out_fact_count": 10,
+  "held_out_public_source_ids": [
+    "S005",
+    "S007"
+  ],
+  "held_out_synthetic_source_ids": [
+    "S011",
+    "S015",
+    "S016",
+    "S017"
+  ],
+  "llm_enabled": false,
+  "matching_protocol_version": "0.1",
+  "network_enabled": false,
+  "plan_date": "2026-07-24",
+  "planning_base_commit": "65eb31fa07865e9fb6e18955503a06a3a57df186",
+  "predicate_vocabulary_version": "0.1",
+  "primary_metrics": [
+    "fact_precision",
+    "fact_recall",
+    "fact_f1",
+    "normalized_value_exact_match",
+    "schema_valid_result_rate",
+    "evidence_source_accuracy",
+    "evidence_location_accuracy",
+    "development_challenge_case_pass_rate"
+  ],
+  "prohibited_rule_inputs": [
+    "held-out fact values",
+    "held-out challenge-case semantic descriptions",
+    "annotation IDs as extraction conditions",
+    "source IDs as extraction conditions",
+    "filenames as extraction conditions",
+    "document-title-specific conditions",
+    "fixed page numbers",
+    "known expected values",
+    "per-document exceptions",
+    "raw PDF bytes",
+    "LLM or network responses"
+  ],
+  "public_gold_cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+  "public_gold_facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+  "public_gold_version": "public-gold-v0.1",
+  "reconciliation_enabled": false,
+  "result_scope": "candidate_extraction_only",
+  "scored_corpus_role": "public_realism",
+  "scored_input_format": "PDF",
+  "status": "frozen_before_implementation",
+  "supported_predicates": [
+    "action_status",
+    "budget",
+    "commitment",
+    "decision",
+    "metric",
+    "recommendation",
+    "requirement",
+    "risk"
+  ],
+  "synthetic_role": "non-scored format and contract smoke tests until later reconciliation evaluation"
+}

@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A is complete. It implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation and frozen `public-gold-v0.1`. It does not implement an extractor, reconciliation, extraction metrics, an LLM call or held-out extraction.
+Stage 3A is complete, and the Stage 3B.1 deterministic-baseline plan is frozen. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation and frozen `public-gold-v0.1`. It does not implement an extractor, reconciliation, extraction metrics, an LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -60,6 +60,14 @@ Ambiguous, unsupported, and missing-value examples are separate challenge cases.
 ## Stage 3A held-out control
 
 The public benchmark is procedural because labels are visible in the repository. Stage 3B may load development labels during deterministic-baseline design and development evaluation. Held-out facts and cases cannot be loaded by rule-design code, tests or tuning; the experiment version, rules and code must be frozen before held-out evaluation.
+
+## Stage 3B.1 deterministic-baseline plan
+
+The baseline contract was frozen before implementation in the [Stage 3B deterministic baseline plan](stage_3b_deterministic_baseline_plan.md), [machine-readable experiment configuration](../configs/experiments/deterministic_baseline_v0.1.json), and [matching protocol v0.1](stage_3b_matching_protocol.md).
+
+Baseline v0.1 scores candidate extraction for eight predicates: `action_status`, `budget`, `commitment`, `decision`, `metric`, `recommendation`, `requirement` and `risk`. Its primary scored scope is development-only public-PDF data. Development synthetic documents may later provide non-scored format and contract smoke tests, while reconciliation and synthetic final-state evaluation remain separate future work.
+
+Stage 3B.2 development-only annotation loading and a fail-closed held-out access guard are next. No extractor or metric result exists yet.
 
 ## Current limitations
 
