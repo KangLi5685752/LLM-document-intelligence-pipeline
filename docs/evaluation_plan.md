@@ -149,6 +149,19 @@ Limitations:
 
 Stage 3A did not run extraction. During Stage 3B, held-out labels and held-out challenge cases must not be loaded during deterministic rule design, rule tests or tuning.
 
+### Deterministic baseline v0.1 pre-experiment contract
+
+The [deterministic baseline plan](stage_3b_deterministic_baseline_plan.md), [matching protocol](stage_3b_matching_protocol.md), and [machine-readable experiment configuration](../configs/experiments/deterministic_baseline_v0.1.json) freeze the candidate-only public-PDF evaluation contract before implementation.
+
+- The scored development sources are exactly S001, S002, S003, S004 and S006: 25 facts and three challenge cases.
+- The held-out sources are exactly S005 and S007: 10 facts and three challenge cases.
+- Rule design, testing and tuning are restricted to development labels; held-out semantics remain blocked until a future baseline freeze manifest exists.
+- Every metric must report exact numerators and denominators.
+- Baseline acceptance has no minimum development F1 gate; it requires reproducible execution and complete reporting.
+- No deterministic extraction result or metric exists yet.
+
+The existing synthetic held-out gates apply to later reconciliation and final-state evaluation. They do not apply to this candidate-only public-PDF baseline, and synthetic records must not be mixed into public-gold fact F1.
+
 ## Development and held-out use
 
 - Development sources may be used for parser debugging, rule design, and prompt iteration.
