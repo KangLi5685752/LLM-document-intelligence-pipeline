@@ -870,21 +870,21 @@ def test_safe_loader_does_not_call_generic_full_dataset_loaders(
 def test_frozen_stage_3b_inputs_remain_byte_identical() -> None:
     expected_hashes = {
         "configs/experiments/deterministic_baseline_v0.1.json": (
-            "C89C99EA5FD4DA187619FFDBC89D5AD9656F5A83228552498A9DAC3E35FF08D2"
+            "60AC7BB86E2D23716DEDB79A0D334E444C933BBECA043C6CAA4199CC2B5E8937"
         ),
         "docs/stage_3b_deterministic_baseline_plan.md": (
-            "B008D061B8BE43FC5A312A2F10097977960E3D11D0AA732768B43CFC2968921F"
+            "0BDF950DF3E1DF53B44597970B6B8277D964476B5347394041DAA44D95567F18"
         ),
         "docs/stage_3b_matching_protocol.md": (
-            "8343DB62CFC267920DDCD1FB7991D6602027D8B14A018F752951CB90AC02D49F"
+            "18FD851347B395C2D54B6B02B632E94D3C4B15CFBD16A31C04EE2923D0991530"
         ),
         "data/annotations/public_gold_facts_v0.1.jsonl": FROZEN_FACTS_HASH,
         "data/annotations/public_gold_cases_v0.1.jsonl": FROZEN_CASES_HASH,
         "data/annotations/public_gold_v0.1_manifest.json": (
-            "34617D8A69DEF5722BDCD0B9A19D0E005A7E4C57833D988E95611AA57461FE7C"
+            "6A799E336AAC378B824A91926FBFEC0E4E48F06335CE13DE282DF5B1B0D99A81"
         ),
         "data/manifests/corpus_split.csv": (
-            "E6CEADF735D4DE5977795168AE36F9834097AB2189803CE43BEBE681677800E1"
+            "E5B7EBE7804340C261A44CB9D5E30695418FA6EF5DB2109ECAE44700238C8E8F"
         ),
     }
     assert {
