@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.2 complete - development-only public-gold loader and held-out guard implemented; deterministic rule engine next
-- **Last updated:** 2026-07-24
-- **Latest milestone:** Implemented hash-verified, metadata-first access to 25 development facts and three development challenge cases while denying held-out access before I/O
+- **Current stage:** Stage 3B.3 complete - deterministic candidate-extraction rule engine implemented; development evaluation and baseline freeze next
+- **Last updated:** 2026-07-25
+- **Latest milestone:** Implemented source-independent ParsedDocument-to-CandidateExtractionResult rules for eight predicates with exact evidence, deterministic IDs and conservative abstention
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -19,25 +19,35 @@
 - Development-only semantic validation.
 - Deterministic non-semantic summary CLI.
 - Held-out denial tests.
+- Ten-family deterministic rule inventory.
+- Eight candidate-producing predicates.
+- Bounded statement segmentation.
+- Same-block subject attribution.
+- Typed percentage and money normalization.
+- Exact evidence references.
+- Fixed confidence and review contract.
+- Deterministic IDs and canonical JSON.
+- ParsedDocument-only deterministic CLI.
+- Neutral source-independent rule tests.
 
 ## In progress
 
-- Stage 3B.3 deterministic candidate-extraction rule engine.
+- Stage 3B.4 development evaluation, error analysis and baseline freeze.
 
-No deterministic or LLM extractor, reconciliation layer, extraction result or extraction metric exists yet.
+No public-gold extraction metric, held-out extraction result, LLM extractor or reconciliation layer exists yet.
 
 ## Next tasks
 
-1. Define source-independent rule modules for the eight supported predicates.
-2. Ensure extractor inputs contain `ParsedDocument` only.
-3. Generate deterministic `CandidateExtractionResult` records.
-4. Add unit fixtures without held-out values.
-5. Do not compute public-gold metrics until rule implementation is reviewed.
-6. Do not enable held-out access.
+1. Build the strict matching implementation from protocol v0.1.
+2. Run extraction on the five development public-PDF ParsedDocuments.
+3. Compute development-only metrics with exact numerators and denominators.
+4. Produce per-predicate and failure-taxonomy analysis.
+5. Freeze code, rules, outputs and metrics.
+6. Keep held-out access disabled.
 
 ## Blockers
 
-No technical blocker. Held-out access remains intentionally unavailable.
+No technical blocker. Held-out access remains unavailable until the Stage 3B.4 freeze manifest is completed and reviewed.
 
 ## AG News replacement status
 

@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A, Stage 3B.1 planning and the Stage 3B.2 development-only gold access boundary are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1` and guarded development-label loading. It does not implement an extractor, reconciliation, extraction metrics, an LLM call or held-out extraction.
+Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary and the Stage 3B.3 deterministic rule engine are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1`, guarded development-label loading and source-independent deterministic candidate generation. It does not implement reconciliation, extraction metrics, an LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -75,11 +75,21 @@ The [development-only public-gold loader](stage_3b_development_gold_loader.md) v
 
 Held-out or unknown access modes fail before repository-root resolution or file I/O. Held-out lines are read only for content hashing and metadata routing; no held-out semantic model is constructed. The generic complete-dataset loaders remain available for Stage 3A validation only. Baseline implementation and evaluation code must use the guarded API, while the future extractor must receive only `ParsedDocument` and must not import any gold loader.
 
-No extractor or metric exists. Stage 3B.3 source-independent deterministic rule implementation is next.
+The gold loader remains evaluation-only and is not imported by the extractor. Stage 3B.3 implements candidate generation without enabling held-out access or computing a metric.
+
+## Stage 3B.3 deterministic rule engine
+
+The [deterministic rule engine](stage_3b_deterministic_rule_engine.md) is a pure `ParsedDocument`-to-`CandidateExtractionResult` transform. It emits only the eight baseline predicates: `action_status`, `budget`, `commitment`, `decision`, `metric`, `recommendation`, `requirement` and `risk`.
+
+The implementation has a frozen ten-family inventory: eight candidate-producing rules plus shared same-block subject-attribution and exact-evidence policies. It segments bounded statements inside individual blocks, never crosses a source location, preserves exact evidence excerpts of at most 240 characters and derives batch, evidence and candidate IDs from stable SHA-256 inputs. Canonical serialization uses sorted, two-space-indented JSON with no timestamp.
+
+Explicit same-statement candidates use the `0.90` confidence band, eligible same-block contextual candidates use `0.70`, and bounded flattened-layout ambiguity uses `0.50` with required review. Unsafe subjects, multiple plausible values, unbounded table relationships and overlong evidence cause deterministic abstention warnings. Candidate entities remain empty; each fact retains the source-stated subject, while entity consolidation remains future work.
+
+No public-gold matching or metric has run. Stage 3B.4 development-only evaluation, error analysis and baseline freeze is next, and held-out access remains blocked.
 
 ## Current limitations
 
-- No deterministic or LLM extractor emits `CandidateExtractionResult` yet.
+- The deterministic extractor uses shallow English-language regex and structural heuristics; no LLM extractor exists.
 - Frozen `public-gold-v0.1` has 35 owner-verified facts and six owner-verified challenge cases, but only one project-owner reviewer and no inter-annotator agreement.
 - Page-level blocks can preserve awkward PDF whitespace and coarse evidence spans.
 - No public-gold extraction score exists.
