@@ -26,6 +26,26 @@ if TYPE_CHECKING:
         DeterministicRuleDefinition,
         get_deterministic_rule_inventory,
     )
+    from document_intelligence.extraction.development_evaluation import (
+        DevelopmentEvaluationError,
+        canonical_development_evaluation_json,
+        evaluate_development_candidates,
+    )
+    from document_intelligence.extraction.evaluation_models import (
+        ChallengeCaseAssessment,
+        DevelopmentEvaluationReport,
+        DevelopmentExtractionAttempt,
+        MetricFraction,
+        PredicateCounts,
+        ReproducibilityCheck,
+        StrictFactMatch,
+        ValueAlignment,
+    )
+    from document_intelligence.extraction.matching import (
+        align_normalized_values,
+        match_strict_facts,
+        normalize_comparison_text,
+    )
     from document_intelligence.extraction.annotations import (
         AnnotationReviewStatus,
         GoldChallengeCase,
@@ -87,6 +107,20 @@ __all__ = [
     "extract_deterministic_candidates",
     "canonical_candidate_result_json",
     "get_deterministic_rule_inventory",
+    "MetricFraction",
+    "DevelopmentExtractionAttempt",
+    "ReproducibilityCheck",
+    "StrictFactMatch",
+    "ValueAlignment",
+    "PredicateCounts",
+    "ChallengeCaseAssessment",
+    "DevelopmentEvaluationReport",
+    "DevelopmentEvaluationError",
+    "normalize_comparison_text",
+    "match_strict_facts",
+    "align_normalized_values",
+    "evaluate_development_candidates",
+    "canonical_development_evaluation_json",
 ]
 
 
@@ -124,6 +158,20 @@ _EXPORT_MODULES = {
     "extract_deterministic_candidates": "document_intelligence.extraction.deterministic",
     "canonical_candidate_result_json": "document_intelligence.extraction.deterministic",
     "get_deterministic_rule_inventory": "document_intelligence.extraction.deterministic_rules",
+    "MetricFraction": "document_intelligence.extraction.evaluation_models",
+    "DevelopmentExtractionAttempt": "document_intelligence.extraction.evaluation_models",
+    "ReproducibilityCheck": "document_intelligence.extraction.evaluation_models",
+    "StrictFactMatch": "document_intelligence.extraction.evaluation_models",
+    "ValueAlignment": "document_intelligence.extraction.evaluation_models",
+    "PredicateCounts": "document_intelligence.extraction.evaluation_models",
+    "ChallengeCaseAssessment": "document_intelligence.extraction.evaluation_models",
+    "DevelopmentEvaluationReport": "document_intelligence.extraction.evaluation_models",
+    "DevelopmentEvaluationError": "document_intelligence.extraction.development_evaluation",
+    "normalize_comparison_text": "document_intelligence.extraction.matching",
+    "match_strict_facts": "document_intelligence.extraction.matching",
+    "align_normalized_values": "document_intelligence.extraction.matching",
+    "evaluate_development_candidates": "document_intelligence.extraction.development_evaluation",
+    "canonical_development_evaluation_json": "document_intelligence.extraction.development_evaluation",
 }
 
 
