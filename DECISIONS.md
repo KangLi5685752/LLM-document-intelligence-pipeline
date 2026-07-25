@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. Stage 3B.3 deterministic-rule decisions DEC-058 to DEC-061 were accepted on 2026-07-25. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. Stage 3B.3 deterministic-rule decisions DEC-058 to DEC-061 and Stage 3B.4A evaluator decisions DEC-062 to DEC-065 were accepted on 2026-07-25. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -489,3 +489,35 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Return an empty entity list in `deterministic-baseline-v0.1` and retain source-stated subject fields on `CandidateFact`. Entity consolidation remains future work.
 - **Reason:** This preserves the candidate schema without pretending that lexical subject detection solves entity identity or cross-document resolution.
 - **Trade-off:** Consumers cannot use standalone candidate entities from this baseline and must wait for later extraction or reconciliation work.
+
+## DEC-062: Implement and review the evaluator before observing scores
+
+- **Context:** Matching normalization, pairing and denominator choices can materially change a small development score, creating a risk that implementation is adjusted after seeing the result.
+- **Alternatives:** Implement and tune the evaluator while viewing development scores; use a manual spreadsheet after extraction; merge a reviewed executable contract before running the real benchmark.
+- **Chosen option:** Merge the executable matching and metric contract before running the real development benchmark.
+- **Reason:** Pre-observation review makes the first score traceable to rules fixed independently of its outcome and exposes later semantic changes as explicit experiment changes.
+- **Trade-off:** Defects found during the first execution require a documented pre-freeze correction or a new experiment version rather than an unrecorded matching adjustment.
+
+## DEC-063: Use strict source-bounded one-to-one fact matching
+
+- **Context:** Candidate and gold counts can contain repeated or similar facts, while fuzzy or many-to-one credit would make exact TP, FP and FN attribution difficult to audit.
+- **Alternatives:** Allow one candidate to satisfy multiple annotations; use fuzzy semantic thresholds; require a strict source-bounded key and consume each candidate and annotation at most once.
+- **Chosen option:** Require normalized subject, subject type, predicate, value type, typed value and all gold-material qualifiers, with deterministic one-to-one pairing.
+- **Reason:** Source boundaries, exact typed semantics and lexical pairing make duplicate handling and unmatched records reproducible without source-specific judgment.
+- **Trade-off:** Semantically equivalent wording and reasonable aliases may be under-credited as an FP/FN pair.
+
+## DEC-064: Keep value normalization as a separate alignment metric
+
+- **Context:** Strict fact matching includes normalized value, so a normalization error would otherwise prevent direct measurement of whether an otherwise compatible candidate normalized its value correctly.
+- **Alternatives:** Report only strict fact F1; align from strict matches; align without normalized value and report typed-value equality separately.
+- **Chosen option:** Align without normalized value and then report exact typed-value correctness.
+- **Reason:** A distinct one-to-one alignment isolates value-normalization quality while retaining strict fact counts as the primary semantic result.
+- **Trade-off:** The report contains a second pairing process whose deterministic tie-breakers must be reviewed and interpreted separately from strict matching.
+
+## DEC-065: Require explicit owner assessment for challenge cases
+
+- **Context:** The three development challenge cases test ambiguity, unsupported extraction and preservation of missing values, whose outcomes cannot be safely inferred from a generic fact-match count alone.
+- **Alternatives:** Add source-specific automatic pass rules; omit challenge outcomes; require explicit case-level owner assessments against precomputed candidates and warnings.
+- **Chosen option:** Do not add source-specific automatic challenge rules; require three case-level owner outcomes with traceable candidate/warning references.
+- **Reason:** Explicit assessments preserve the generic evaluator boundary and keep context-dependent judgments visible without encoding known document answers into runtime rules.
+- **Trade-off:** Completing a development report requires a separate owner-review step and cannot be fully automated.

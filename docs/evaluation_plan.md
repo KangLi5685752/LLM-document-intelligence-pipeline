@@ -158,11 +158,14 @@ The [deterministic baseline plan](stage_3b_deterministic_baseline_plan.md), [mat
 - Rule design, testing and tuning are restricted to development labels; held-out semantics remain blocked until a future baseline freeze manifest exists.
 - Every metric must report exact numerators and denominators.
 - Baseline acceptance has no minimum development F1 gate; it requires reproducible execution and complete reporting.
-- No deterministic extraction result or metric exists yet.
+- The executable matching and metric protocol v0.1 implementation is complete and was reviewed before observing any development metric.
+- No real development extraction report or metric exists yet.
 
 Stage 3B.2 enforces development-only evaluation-label access through the guarded baseline API. Public development labels may be loaded by evaluation and failure-analysis tooling only; extractor runtime receives `ParsedDocument` without labels. Held-out access remains unavailable until a future baseline freeze manifest and validator exist.
 
-Stage 3B.3 implements the source-independent deterministic candidate rule engine for the eight frozen predicates. Implementation completion is not evaluation completion: it has not been run against the development public-PDF set through a matcher, and no precision, recall, F1 or other public-gold score is claimed. Stage 3B.4 will implement the strict matching protocol, execute extraction only on the five development public-PDF sources, report exact numerators and denominators, perform failure analysis and freeze the reviewed baseline. Held-out access and evaluation remain blocked throughout that work until the freeze manifest is completed and reviewed.
+Stage 3B.3 implements the source-independent deterministic candidate rule engine for the eight frozen predicates. Stage 3B.4A implements the [strict development evaluator](stage_3b_development_evaluator.md), including source-bounded one-to-one fact matching, separate typed-value alignment, evidence metrics, explicit failed attempts, owner challenge assessments, reproducibility checks and canonical report serialization. The executable protocol was implemented and reviewed before observing a development score.
+
+Implementation completion is not evaluation completion: the extractor and evaluator have not been run together over the five real development public-PDF sources, and no precision, recall, F1 or other public-gold score is claimed. Stage 3B.4B will perform the first development execution, report exact numerators and denominators, classify errors and freeze the reviewed baseline. Held-out access and evaluation remain blocked until the freeze manifest is completed and reviewed.
 
 The existing synthetic held-out gates apply to later reconciliation and final-state evaluation. They do not apply to this candidate-only public-PDF baseline, and synthetic records must not be mixed into public-gold fact F1.
 

@@ -23,7 +23,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 3B.3 deterministic candidate extraction is implemented.** The source-independent rule engine transforms one `ParsedDocument` into a schema-valid `CandidateExtractionResult` for eight supported predicates, with exact same-block evidence, deterministic IDs, canonical output and conservative review or abstention. Development evaluation is next. No public-gold metric, held-out extraction result, LLM extractor or reconciliation implementation exists yet.
+**Stage 3B.4A strict development evaluation semantics are implemented.** The source-independent deterministic extractor and the in-memory strict evaluator now exist. The evaluator provides source-bounded one-to-one matching, typed value alignment, evidence metrics, explicit failed attempts, owner challenge assessments, reproducibility checks and canonical report serialization. No real development run or score exists; Stage 3B.4B execution, error analysis and baseline freeze are next. No held-out extraction result, LLM extractor or reconciliation implementation exists yet.
 
 ## Stage 3B.1 deterministic baseline contract
 
@@ -58,6 +58,12 @@ python -m document_intelligence.extraction.deterministic_cli --input path/to/par
 ~~~
 
 The engine covers `action_status`, `budget`, `commitment`, `decision`, `metric`, `recommendation`, `requirement` and `risk`. It preserves exact bounded evidence and emits canonical deterministic JSON without a timestamp. It does not parse a raw source document, load gold labels, compute a metric or enable held-out access. See the [Stage 3B.3 deterministic rule-engine design](docs/stage_3b_deterministic_rule_engine.md).
+
+## Stage 3B.4A strict development evaluator
+
+The [Stage 3B.4A evaluator contract](docs/stage_3b_development_evaluator.md) implements the frozen protocol-v0.1 comparison, one-to-one matching and exact metric semantics before any development score is observed. It accepts already loaded development gold, precomputed successful or failed candidate attempts and explicit owner challenge assessments. It does not invoke the extractor, load files or provide a CLI for running the real benchmark.
+
+No development metric or report has been generated. The next step is the separately reviewed Stage 3B.4B execution and baseline freeze.
 
 ## Stage 3A public annotation validation
 
@@ -125,7 +131,7 @@ See the [synthetic challenge-set specification](docs/synthetic_challenge_set_spe
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
 2. **Stage 1 – Corpus Audit**: **Completed.** Audited and froze the versioned public and synthetic corpus, family splits, ground truth, product contract, and evaluation gates.
 3. **Stage 2 — Document Ingestion**: **Completed.** The Common Document Object, PDF/PPTX/EML parsers, single-document and batch CLIs, and full frozen-corpus validation are implemented.
-4. **Stage 3 — Baseline and Structured Extraction**: **In progress: Stage 3A through Stage 3B.3 complete; Stage 3B.4 next.** Candidate contracts, frozen owner-reviewed `public-gold-v0.1`, the deterministic-baseline plan, guarded development-label access and the deterministic candidate rule engine are implemented. Development evaluation, LLM extraction, reconciliation, conflict checks and measured review-routing results remain planned.
+4. **Stage 3 — Baseline and Structured Extraction**: **In progress: Stage 3A through Stage 3B.4A complete; Stage 3B.4B next.** Candidate contracts, frozen owner-reviewed `public-gold-v0.1`, the deterministic-baseline plan, guarded development-label access, the deterministic candidate rule engine and strict development evaluator are implemented. Real development execution, baseline freeze, LLM extraction, reconciliation, conflict checks and measured review-routing results remain planned.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
 6. **Stage 5 — Storage and Data Model**: **Planned.** Define the validated knowledge model and local persistence before considering BigQuery.
 7. **Stage 6 — Interface**: **Planned.** Add an interface or API only for capabilities supported by evaluation evidence.
