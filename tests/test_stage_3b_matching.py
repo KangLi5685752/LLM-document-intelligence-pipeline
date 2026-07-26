@@ -60,6 +60,14 @@ FROZEN_HASHES = {
         "E5B7EBE7804340C261A44CB9D5E30695418FA6EF5DB2109ECAE44700238C8E8F"
     ),
 }
+DETERMINISTIC_EXTRACTOR_BLOB_IDS = {
+    "src/document_intelligence/extraction/deterministic.py": (
+        "22c0f4219e0aba84622d22ca1735f922078eef6e"
+    ),
+    "src/document_intelligence/extraction/deterministic_rules.py": (
+        "69da4acbab2e9ff3b49f170f709131b9bcccaee0"
+    ),
+}
 
 
 def _gold(
@@ -573,25 +581,16 @@ def test_frozen_stage_3b_inputs_remain_byte_identical() -> None:
 
 
 def test_deterministic_extractor_sources_are_identical_to_main() -> None:
-    for path in (
-        "src/document_intelligence/extraction/deterministic.py",
-        "src/document_intelligence/extraction/deterministic_rules.py",
-    ):
-        baseline_blob_id = subprocess.run(
-            ["git", "rev-parse", f"main:{path}"],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout.strip()
-        working_blob_id = subprocess.run(
+    assert {
+        path: subprocess.run(
             ["git", "hash-object", "--path", path, path],
             cwd=ROOT,
             capture_output=True,
             text=True,
             check=True,
         ).stdout.strip()
-        assert working_blob_id == baseline_blob_id
+        for path in DETERMINISTIC_EXTRACTOR_BLOB_IDS
+    } == DETERMINISTIC_EXTRACTOR_BLOB_IDS
 
 
 def test_new_sources_and_tests_contain_no_non_development_source_ids() -> None:
