@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary, the Stage 3B.3 deterministic rule engine, the Stage 3B.4A strict evaluator and the Stage 3B.4B execution/freeze workflow implementation are complete. The first `deterministic-baseline-v0.1` development observation is also preserved: four sources produced reproducible outputs and S004 failed reproducibly. The run did not satisfy five-source acceptance and produced no complete report or baseline freeze. The repository does not contain reconciliation, an LLM call or held-out extraction.
+Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary, the Stage 3B.3 deterministic rule engine, the Stage 3B.4A strict evaluator, the Stage 3B.4B execution/freeze workflow implementation and the Stage 3B.4C v0.2 planning freeze are complete. The first `deterministic-baseline-v0.1` development observation is preserved: four sources produced reproducible outputs and S004 failed reproducibly. The run did not satisfy five-source acceptance and produced no complete report or baseline freeze. The source-independent `deterministic-baseline-v0.2` scope is frozen before implementation, with candidate schema, predicate vocabulary and matching unchanged. The repository contains no v0.2 extractor or score, reconciliation, LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -85,7 +85,7 @@ The implementation has a frozen ten-family inventory: eight candidate-producing 
 
 Explicit same-statement candidates use the `0.90` confidence band, eligible same-block contextual candidates use `0.70`, and bounded flattened-layout ambiguity uses `0.50` with required review. Unsafe subjects, multiple plausible values, unbounded table relationships and overlong evidence cause deterministic abstention warnings. Candidate entities remain empty; each fact retains the source-stated subject, while entity consolidation remains future work.
 
-The v0.1 rule engine and observation are now immutable. A separately reviewed and frozen v0.2 experiment plan is required before any source-independent correction or tuning, and held-out access remains blocked.
+The v0.1 rule engine and observation are immutable. The separately reviewed v0.2 experiment plan now freezes the permitted source-independent correction and tuning scope; implementation remains future work and held-out access remains blocked.
 
 ## Stage 3B.4A strict development evaluator
 
@@ -113,7 +113,17 @@ The first real v0.1 workflow execution parsed all nine development sources and a
 
 The immutable observation lock records preliminary strict diagnostics of 0 TP, 288 FP and 25 FN. They are not accepted extraction metrics. No complete report, owner-assessed challenge result or baseline freeze exists. The [failed first-observation report](stage_3b_v0_1_first_observation_failure.md) records the sanitized diagnosis and claim boundary.
 
-The v0.1 implementation and observation must not be modified or overwritten. The diagnosed failure is source-independent, but correcting it would change extraction output semantics. Work therefore transitions to a separately planned and frozen `deterministic-baseline-v0.2`; formal owner challenge review resumes only after a complete versioned run. Held-out sources and labels remain inaccessible.
+The v0.1 implementation and observation must not be modified or overwritten. The diagnosed failure is source-independent, but correcting it changes extraction output semantics. Work therefore transitions to the separately planned and frozen `deterministic-baseline-v0.2`; formal owner challenge review resumes only after a complete versioned run. Held-out sources and labels remain inaccessible.
+
+## Stage 3B.4C v0.2 planning and freeze
+
+The [v0.2 experiment plan](stage_3b_v0_2_experiment_plan.md), [error matrix](stage_3b_v0_2_error_matrix.md), [versioning and freeze record](stage_3b_v0_2_versioning_and_freeze.md), and machine-readable configuration freeze the next experiment before implementation. The evidence base is limited to the immutable v0.1 development observation, four published outputs, structural diagnostics, guarded development gold and source-independent implementation review.
+
+The required v0.2 behavior is candidate-level predicate-contract abstention with a stable warning, neutral reproduction of the diagnosed incompatible commitment draft, bounded commitment trigger eligibility, ambiguous metric review routing and additive version isolation. Optional changes are limited to directly evidenced action-status coverage, actor validation, metric qualifiers, requirement narrowing, exact duplicate suppression and subject-span trimming.
+
+Candidate schema `0.1`, predicate vocabulary `0.1`, matching protocol `0.1`, strict normalization, metric denominators, public gold, splits and parser behavior remain frozen. The v0.2 report/run/freeze stack must use additive versioned models because the v0.1 contracts hard-code their experiment identity. Shared candidate models, predicates, guarded gold loading and matching may be reused unchanged.
+
+The plan separates twelve mandatory process gates from seven non-binding quality targets. Implementation must be committed before its first real development execution; the first diagnostics must be locked before owner review; and any later semantic change requires v0.3. No v0.2 execution or score is produced by Stage 3B.4C.
 
 ## Current limitations
 
@@ -121,4 +131,5 @@ The v0.1 implementation and observation must not be modified or overwritten. The
 - Frozen `public-gold-v0.1` has 35 owner-verified facts and six owner-verified challenge cases, but only one project-owner reviewer and no inter-annotator agreement.
 - Page-level blocks can preserve awkward PDF whitespace and coarse evidence spans.
 - The v0.1 preliminary observation is limited to its immutable lock and four successful outputs; the S004 failure prevents finalization and no final public-gold report is implied.
+- The v0.2 plan is frozen, but its additive modules, neutral regressions, real development execution, owner review and final freeze remain unimplemented.
 - Final reconciliation, duplicate handling, conflict handling, and review workflow remain planned.

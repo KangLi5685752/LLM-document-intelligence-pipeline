@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. Stage 3B.3 deterministic-rule decisions DEC-058 to DEC-061 and Stage 3B.4A evaluator decisions DEC-062 to DEC-065 were accepted on 2026-07-25. Stage 3B.4B execution and failed-observation decisions DEC-066 to DEC-072 were accepted on 2026-07-26. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. Stage 3B.3 deterministic-rule decisions DEC-058 to DEC-061 and Stage 3B.4A evaluator decisions DEC-062 to DEC-065 were accepted on 2026-07-25. Stage 3B.4B execution and failed-observation decisions DEC-066 to DEC-072 and Stage 3B.4C v0.2 planning decisions DEC-073 to DEC-078 were accepted on 2026-07-26. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -577,3 +577,51 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Diagnose v0.1 without semantic modification, then freeze a separate v0.2 plan before correcting the extractor or tuning source-independent rules.
 - **Reason:** Versioning keeps the original code and observation immutable while allowing a reviewed, neutral correction to be evaluated transparently.
 - **Trade-off:** A new planning and review cycle is required before the complete five-source run can be attempted again.
+
+## DEC-073: Preserve v0.1 implementation files and add v0.2 modules
+
+- **Context:** The v0.1 observation is immutable, and its report, run, observation, review, inventory and freeze contracts hard-code the v0.1 experiment identity.
+- **Alternatives:** Patch v0.1 modules in place; parameterize and rewrite the observed v0.1 stack; add versioned v0.2 modules while reusing only unchanged shared contracts.
+- **Chosen option:** Preserve v0.1 implementation files byte-identically and add versioned v0.2 extractor, rule, CLI, report, run and freeze modules.
+- **Reason:** Additive modules keep the observed v0.1 code reconstructable and prevent v0.2 evidence from serializing a v0.1 identity.
+- **Trade-off:** Some orchestration and model logic is duplicated and must be kept deliberately version-scoped.
+
+## DEC-074: Abstain at candidate level on incompatible predicate contracts
+
+- **Context:** One v0.1 commitment draft used an incompatible `metric` subject and caused all S004 candidate output construction to fail.
+- **Alternatives:** Weaken the predicate schema; coerce the subject type; silently drop invalid drafts; validate each draft and preserve an explicit abstention warning.
+- **Chosen option:** Validate predicate, subject type, value type and qualifiers before `CandidateFact` construction, omit only an incompatible draft and emit `abstained_incompatible_predicate_contract`.
+- **Reason:** Candidate-level abstention preserves the unchanged schema and other valid document candidates while making the loss observable.
+- **Trade-off:** A recoverable but incompatible draft is not emitted, and warning handling becomes part of the deterministic contract.
+
+## DEC-075: Permit only development-evidence-backed source-independent tuning
+
+- **Context:** The failed v0.1 observation exposes large commitment over-triggering and bounded gaps, but post-observation tuning creates a leakage risk.
+- **Alternatives:** Make broad heuristic improvements; tune per source; permit only families supported by aggregate development diagnostics and neutral tests.
+- **Chosen option:** Restrict v0.2 tuning to the required corrections and optional families explicitly included in the frozen error matrix, with source-independent behavior and neutral positive and negative tests.
+- **Reason:** The restriction permits a transparent correction cycle without encoding document identity, expected answers or speculative coverage.
+- **Trade-off:** Known misses remain where the development evidence does not establish a safe generic rule.
+
+## DEC-076: Keep matching protocol, gold and candidate schema unchanged
+
+- **Context:** The v0.1 nearest pairs fail semantic subject and value fields, and no candidate is hidden by a single matching-normalization defect.
+- **Alternatives:** Relax strict matching; revise annotations; change candidate schema; improve only the versioned extractor and retain evaluation contracts.
+- **Chosen option:** Keep matching protocol `0.1`, strict normalization, metric denominators, `public-gold-v0.1`, predicate vocabulary `0.1` and `CandidateExtractionResult` schema `0.1` unchanged for v0.2.
+- **Reason:** Stable evaluation contracts make v0.1 and v0.2 comparable and prevent apparent gains from relabeling or weaker credit.
+- **Trade-off:** Strict matching may continue to under-credit some semantic near-equivalents, which must be reported through structural diagnostics rather than rescored.
+
+## DEC-077: Separate process acceptance from non-binding quality targets
+
+- **Context:** A deterministic baseline must be reproducible and fully reported even if its development accuracy is weak, while observed quality still needs explicit diagnostics.
+- **Alternatives:** Require a minimum F1; omit quality expectations; use mandatory process gates plus separate non-binding quality targets.
+- **Chosen option:** Freeze twelve process acceptance gates with no minimum F1 and report seven non-binding quality targets independently.
+- **Reason:** This permits an honest weak baseline to be frozen for later comparison while keeping over-triggering, review routing and duplicate behavior visible.
+- **Trade-off:** A process-valid baseline may still perform poorly and must be described carefully.
+
+## DEC-078: Require v0.3 after any post-observation v0.2 semantic change
+
+- **Context:** Once the first v0.2 diagnostics are visible, changing extraction or evaluation behavior under the same identity would repeat the provenance problem the v0.2 boundary prevents.
+- **Alternatives:** Allow bounded fixes within v0.2; overwrite a failed observation; preserve v0.2 and create v0.3 for every later semantic change.
+- **Chosen option:** Require `deterministic-baseline-v0.3` after any post-observation change to triggers, candidates, qualifiers, confidence, review routing, duplicate policy, schema use, matching or metrics.
+- **Reason:** A new experiment identity keeps first observations and their implementation commits auditable.
+- **Trade-off:** Even a small semantic fix requires another plan, versioned implementation and execution cycle.

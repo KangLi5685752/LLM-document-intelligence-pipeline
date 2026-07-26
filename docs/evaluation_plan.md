@@ -173,6 +173,16 @@ The first development observation occurred only after the executable evaluator a
 
 Formal challenge outcomes are deferred because a crashed S004 attempt cannot be assessed as successful do-not-extract behaviour. The [failed first-observation report](stage_3b_v0_1_first_observation_failure.md) preserves the claim boundary and read-only diagnosis. Any correction or rule tuning must be documented in a separately reviewed and frozen `deterministic-baseline-v0.2` plan; v0.1 code and observation evidence remain unchanged.
 
+### Deterministic baseline v0.2 frozen plan
+
+Stage 3B.4C freezes the [v0.2 experiment plan](stage_3b_v0_2_experiment_plan.md), [development-only error matrix](stage_3b_v0_2_error_matrix.md), [versioning and freeze boundaries](stage_3b_v0_2_versioning_and_freeze.md), and [machine-readable configuration](../configs/experiments/deterministic_baseline_v0.2.json) before implementation. The scope is based only on the immutable v0.1 development observation and guarded development gold.
+
+Required corrections are candidate-level predicate-contract abstention, neutral regression coverage for the diagnosed incompatibility, bounded commitment eligibility and confidence, ambiguous metric review routing, and additive v0.2 version isolation. Six optional families are admitted only where v0.1 diagnostics provide direct source-independent evidence. Speculative recommendation, budget, risk and decision changes are excluded.
+
+Candidate schema `0.1`, predicate vocabulary `0.1`, matching protocol `0.1`, strict normalization, metric denominators, public gold, splits and parser behavior remain unchanged. Twelve process gates have no minimum F1 requirement; seven separate quality targets are diagnostic and non-binding. Implementation must be committed before the first real v0.2 development run, and any semantic change after that observation requires v0.3.
+
+This planning milestone generated no v0.2 output, score, owner assessment, observation lock or freeze manifest. Held-out semantics remain blocked until a successful future v0.2 development freeze and a separately reviewed guard.
+
 The existing synthetic held-out gates apply to later reconciliation and final-state evaluation. They do not apply to this candidate-only public-PDF baseline, and synthetic records must not be mixed into public-gold fact F1.
 
 ## Development and held-out use
@@ -196,6 +206,8 @@ The implemented Stage 3B.3 deterministic candidate extractor uses:
 - fixed keyword rules.
 
 Its implementation scope is listed here independently of the preliminary observation. The failed v0.1 process gates prevent Stage 3B.4B finalization, so no complete reviewed development report is available.
+
+The separately frozen v0.2 plan does not replace this observed v0.1 implementation or result. It defines a future additive deterministic baseline version; no v0.2 implementation or performance result exists yet.
 
 ### Baseline B
 
