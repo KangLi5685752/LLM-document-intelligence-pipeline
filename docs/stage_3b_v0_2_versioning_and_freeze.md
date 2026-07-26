@@ -8,7 +8,7 @@ This record freezes the additive implementation and evidence boundaries for `det
 
 `deterministic-baseline-v0.1` has an observed, checksummed execution history. Four published outputs are repeat-identical, S004 failed reproducibly, and the observation lock records the first preliminary diagnostics. Changing the implementation or artifacts after that observation would make the retained evidence describe different semantics.
 
-The following v0.1 source and configuration files therefore remain byte-identical:
+The following v0.1-specific source and configuration files therefore remain byte-identical:
 
 - `src/document_intelligence/extraction/deterministic.py`;
 - `src/document_intelligence/extraction/deterministic_rules.py`;
@@ -16,10 +16,12 @@ The following v0.1 source and configuration files therefore remain byte-identica
 - `src/document_intelligence/extraction/development_evaluation.py`;
 - `src/document_intelligence/extraction/development_run_models.py`;
 - `src/document_intelligence/extraction/development_run.py`;
+- `src/document_intelligence/extraction/deterministic_cli.py`;
+- `src/document_intelligence/extraction/development_run_cli.py`;
 - `src/document_intelligence/extraction/baseline_freeze.py`; and
 - `configs/experiments/deterministic_baseline_v0.1.json`.
 
-The v0.1 planning documents and all nine files below `evaluation/baselines/deterministic-baseline-v0.1/development/` are also immutable. The v0.2 validator verifies the exact committed artifact inventory and SHA-256 values without loading semantic content or running extraction.
+The package export layer, annotation contracts, candidate schema, predicate vocabulary, guarded gold loader and CLI, matching implementation, seven v0.1 planning/diagnosis documents and all nine files below `evaluation/baselines/deterministic-baseline-v0.1/development/` are also immutable. The validator freezes exact SHA-256 values for 24 semantic/planning files from base commit `ad8ef2d40a10c16047ebec37acaa2b890310c0f4`. It checks their committed HEAD bytes, working-tree presence, unstaged state and staged state while retaining the separate exact nine-artifact inventory. It loads no semantic content into an extraction model and runs no extraction.
 
 ## Why v0.2 requires additive models
 
@@ -38,13 +40,15 @@ The future implementation PR is limited to these planned versioned files, subjec
 - `src/document_intelligence/extraction/development_evaluation_v0_2.py`;
 - `src/document_intelligence/extraction/development_run_models_v0_2.py`;
 - `src/document_intelligence/extraction/development_run_v0_2.py`;
+- `src/document_intelligence/extraction/development_run_v0_2_cli.py`;
 - `src/document_intelligence/extraction/baseline_freeze_v0_2.py`;
 - `tests/test_deterministic_extractor_v0_2.py`;
 - `tests/test_development_evaluation_v0_2.py`;
+- `tests/test_development_run_v0_2_cli.py`;
 - `tests/test_stage_3b_development_run_v0_2.py`; and
 - `tests/test_baseline_freeze_v0_2.py`.
 
-The modules may call unchanged public helpers from `models.py`, `predicates.py`, the guarded baseline-gold loader and `matching.py`. They must not modify, monkey-patch or write through v0.1 modules. The v0.2 CLI must have a distinct module entry point and the v0.2 workflow must use a distinct output root.
+The modules may call unchanged public helpers from `models.py`, `predicates.py`, the guarded baseline-gold loader and `matching.py`. They must not modify, monkey-patch or write through v0.1 modules. `deterministic_v0_2_cli.py` is the one-`ParsedDocument` entry point and may only produce one canonical candidate result. `development_run_v0_2_cli.py` is the prepare/finalize entry point and owns exact five-source execution, primary/repeat attempts, observation locking, owner-review handoff and final freeze. The workflow must use a distinct output root.
 
 ## Preparation commit boundary
 
@@ -56,11 +60,11 @@ Before a real development document is run through v0.2:
 4. the full implementation is reviewed; and
 5. one immutable implementation commit is recorded in the future v0.2 run manifest.
 
-No real v0.2 development extraction may be used to select, adjust or add rules before this commit. Planning diagnostics from v0.1 are the only real-source evidence allowed for v0.2 design.
+No real v0.2 development extraction may be used to select, adjust or add rules before this commit. Planning diagnostics from v0.1 are the only real-source evidence allowed for v0.2 design. The single-document CLI is not an alternative path around this boundary; the first real five-source execution must use the reviewed workflow CLI.
 
 ## First-observation lock boundary
 
-The v0.2 workflow must execute primary and repeat attempts for exactly S001, S002, S003, S004 and S006. As soon as candidate counts, TP/FP/FN or derived metrics are first visible, it must write a v0.2 observation lock containing:
+The future `development_run_v0_2_cli.py prepare` workflow must execute primary and repeat attempts for exactly S001, S002, S003, S004 and S006. As soon as candidate counts, TP/FP/FN or derived metrics are first visible, it must write a v0.2 observation lock containing:
 
 - experiment and preparation-commit identity;
 - unchanged corpus, parser, gold, schema, predicate and matching versions;
@@ -80,7 +84,7 @@ The assessment artifact is separate from deterministic code. Updating an incompl
 
 ## Final freeze boundary
 
-Finalization must reload and verify the preparation commit, observation lock, five primary outputs, repeat hashes, structural diagnostics, owner packet and completed assessments. A v0.2 freeze manifest is legal only if every process acceptance gate passes. Exact metric numerators and denominators must reconcile with the observation lock and final report.
+The future `development_run_v0_2_cli.py finalize` workflow must reload and verify the preparation commit, observation lock, five primary outputs, repeat hashes, structural diagnostics, owner packet and completed assessments. A v0.2 freeze manifest is legal only if every process acceptance gate passes. Exact metric numerators and denominators must reconcile with the observation lock and final report.
 
 No minimum F1 is required. A complete but weak baseline may be frozen so it can be compared honestly later. Non-binding quality targets must be reported independently and cannot be converted into authorization for more v0.2 tuning.
 

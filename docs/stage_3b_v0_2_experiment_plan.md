@@ -6,6 +6,8 @@ Frozen before implementation on 2026-07-26. This plan defines a development-only
 
 The parent is the immutable failed first observation of `deterministic-baseline-v0.1`. Candidate schema `0.1`, predicate vocabulary `0.1`, matching protocol `0.1`, `public-gold-v0.1`, corpus `stage1-corpus-v1.0` and parser commit `71148262f094d54ec7d95e45958bd1aaefc64793` remain fixed.
 
+The machine-readable plan freezes its exact 33-key top-level shape, every ordered array, all policy text, the complete future file inventory and the nested behavior contracts. The validator also anchors 24 v0.1 semantic and planning files to their SHA-256 values at planning base `ad8ef2d40a10c16047ebec37acaa2b890310c0f4`, in addition to the nine published artifacts.
+
 ## Motivation
 
 The v0.1 workflow preserved repeat-identical outputs for S001, S002, S003 and S006 but failed reproducibly on S004. Read-only diagnosis isolated one commitment draft whose `metric` subject type is incompatible with the frozen commitment predicate contract. The schema correctly rejected it, but aggregate result construction allowed one invalid draft to fail the document.
@@ -23,7 +25,7 @@ The incomplete observation also provides bounded tuning evidence: 243 of 288 pub
 - Formal challenge outcomes: deliberately deferred because S004 did not complete.
 - Freeze state: v0.1 cannot be finalized and no accepted development result exists.
 
-All nine published v0.1 artifacts, v0.1 source modules and v0.1 planning documents remain immutable.
+All nine published v0.1 artifacts and all 24 protected v0.1 semantic, shared-contract and planning files remain immutable.
 
 ## Scope
 
@@ -37,7 +39,7 @@ The implementation scope is limited to the five required change families and six
 
 ### Candidate-level predicate-contract guard
 
-Each proposed draft must be checked against the unchanged predicate contract before `CandidateFact` construction, including predicate, subject type, value type, required qualifiers and declared qualifier names. An incompatible draft must be omitted, the result must receive the stable warning `abstained_incompatible_predicate_contract`, and unrelated valid candidates must remain in the document result.
+Each proposed draft must be checked against the unchanged predicate contract before `CandidateFact` construction. The exact validation order is predicate, subject type, value type, required qualifiers and declared qualifier names. An incompatible draft must be omitted, the result must receive the stable warning `abstained_incompatible_predicate_contract`, and unrelated valid candidates must remain in the document result.
 
 The guard must not weaken schema validation, coerce `metric` to `organisation`, invent a substitute subject type, or silently discard the draft. Unexpected programming or result-level validation errors must still fail explicitly; the guard is bounded to candidate predicate-contract incompatibility.
 
@@ -53,14 +55,16 @@ A future neutral one-block fixture must combine a commitment trigger with a subj
 
 ### Commitment trigger eligibility and confidence
 
-The v0.1 trigger inventory is split into two groups:
+The frozen trigger inventories are:
 
-- explicit commitment: `commits to`, `commit to`, `has committed to`;
-- weaker future intent: `will`, `intends to`, `intend to`, `plans to`, `plan to`.
+- explicit commitment: `commit to`, `commits to`, `has committed to`;
+- weaker future intent: `intend to`, `intends to`, `plan to`, `plans to`, `will`, `will not`.
 
-Explicit commitment receives confidence `0.9` only with a bounded active actor classified as an organisation, programme, policy or initiative, or with a bounded actor noun phrase that passes the approved generic actor check. Weaker future intent is eligible at confidence `0.7` only when the same statement supplies an active, bounded actor and a non-copular action. A heading-context actor may supply context only when it independently satisfies the actor check; contextual extraction remains confidence `0.7`.
+Explicit commitment receives confidence `0.9`; weaker future intent receives `0.7`. Eligible subject types are exactly `initiative`, `organisation`, `other`, `policy` and `programme`. An `other` subject must pass the generic noun-phrase actor contract: 1-12 normalized tokens, at most 79 characters, at least one ASCII letter, no clause boundary or finite subordinate/relative clause, no impersonal demonstrative, and no metric/population head from the frozen inventory.
 
-Generic `will be` descriptions and forecasts are ineligible. Passive constructions without an attributable actor, metric or population phrases used as actors, excessively long clause-like subjects and unvalidated `other` subjects must abstain with a stable structural warning. Negation remains preserved. Subject-span trimming may remove only deterministic leading structural residue and must not rewrite semantic noun content.
+The exact weak copular/passive exclusions are `intend to be`, `intends to be`, `plan to be`, `plans to be`, `will be` and `will not be`; passive constructions without a named actor abstain. Clause-like rejection covers `:`, `;`, `?`, `!`, a newline, coordinated finite clauses, and the markers `although`, `because`, `if`, `that`, `when`, `where`, `which`, `while` and `who`. A heading-context actor is same-block only, must be the one unique eligible heading, must pass the actor contract and receives confidence `0.7`. Trigger negation is retained in both raw and normalized values.
+
+Exact commitment warning codes are `abstained_commitment_ambiguous_heading_context`, `abstained_commitment_clause_like_subject`, `abstained_commitment_copular_or_passive`, `abstained_commitment_ineligible_subject` and `abstained_commitment_subject_too_long`. Subject-span trimming may remove one frozen bullet/enumeration marker only; semantic word removal is forbidden.
 
 These rules are source-independent. They contain no identifier, title, filename, page or expected value.
 
@@ -74,11 +78,11 @@ When one bounded statement contains multiple nearby values and the population/va
 - warning `ambiguous_metric_value_relationship`; and
 - the same bounded evidence span.
 
-Ordering must be deterministic and duplicate candidate identities must be suppressed. If the bounded inventory or relationship constraints are not met, the extractor must abstain with a stable result warning. The unchanged candidate schema therefore represents plausible values separately rather than inventing a missing value or changing value types.
+Ordering is frozen as evidence block sequence, evidence start offset, normalized subject text, typed normalized value and candidate ID. Duplicate candidate identities must be suppressed. If either maximum is exceeded, the extractor emits no ambiguous candidate and records `abstained_ambiguous_metric_bounds_exceeded`. The unchanged candidate schema therefore represents every bounded plausible interpretation separately rather than inventing a missing value, changing value types or choosing one value.
 
 ### Additive version isolation
 
-Implementation must use new `_v0_2` modules and a v0.2 CLI. The existing candidate schema, predicate vocabulary, guarded development gold loader and strict matching functions may be reused unchanged. Report, run, observation, owner-review, unmatched-inventory and freeze models require additive v0.2 forms because the v0.1 models hard-code `deterministic-baseline-v0.1`.
+Implementation must use new `_v0_2` modules and two distinct v0.2 CLIs. `deterministic_v0_2_cli.py` handles exactly one `ParsedDocument`. `development_run_v0_2_cli.py` handles prepare/finalize, exact five-source execution, primary/repeat attempts, first-observation locking, owner review and final freeze. The existing candidate schema, predicate vocabulary, guarded development gold loader and strict matching functions may be reused unchanged. Report, run, observation, owner-review, unmatched-inventory and freeze models require additive v0.2 forms because the v0.1 models hard-code `deterministic-baseline-v0.1`.
 
 The exact future inventory and immutable boundary are in the [versioning and freeze record](stage_3b_v0_2_versioning_and_freeze.md). No implementation file is created by this planning task.
 
@@ -86,12 +90,12 @@ The exact future inventory and immutable boundary are in the [versioning and fre
 
 | Family | v0.1 evidence | Predicate | Approved behavior and neutral test | FP risk | FN risk | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| `action_status_phrase_coverage` | PG-V01-S003-001 had no same-source candidate; its bounded evidence contains an explicit progress cue but no action-noun form recognized by v0.1 | `action_status` | Permit explicit progress/status phrases only with an allowed policy, programme or initiative actor; test positive active progress and negative overall-project description | A generic progress phrase could be misread as an action | Narrow actor eligibility may retain the miss | Include |
-| `generic_noun_phrase_actor_validation` | 216 candidates used `subject_type=other`; commitments contributed 201, requirements 10 and decisions 5 | `commitment`, `requirement`, `decision` | Require a bounded noun-phrase actor with no clause boundary, metric/population head or impersonal construction; test allowed generic actor and clause/metric negatives | A weak noun phrase could still pass | Legitimate unusual actors may abstain | Include |
-| `metric_qualifier_extraction` | Six metric annotations and 24 candidate diagnostics had `qualifier_missing` and `qualifier_mismatch`; 19 metric candidates were confidence `0.7` | `metric` | Derive only explicit same-statement metric name, population, unit and period; route multiple plausible pairings to review; test explicit, missing and ambiguous cases | Nearby qualifiers could attach incorrectly | Conservative attachment may leave qualifiers missing | Include |
-| `requirement_trigger_narrowing` | 15 requirement candidates were FP; 10 used `other` subjects and 6 had clause-like subjects | `requirement` | Retain mandatory triggers only with a bounded eligible actor and action; test true obligation, guidance, impersonal and clause-like negatives | A formal-looking sentence may still over-trigger | Passive but genuine requirements may abstain | Include |
-| `semantic_duplicate_suppression` | Seven extra semantic duplicates were observed; 13 candidate rows belonged to duplicate groups in structural diagnostics | all approved predicates | Before result emission, suppress only candidates with the exact existing semantic duplicate key and retain deterministic first order; test exact duplicate and near-distinct candidates | Over-broad keys could hide distinct facts | Exact-key policy leaves paraphrase duplicates | Include |
-| `subject_span_trimming` | 86 commitment, 6 requirement and 2 decision subjects met the bounded clause-like diagnostic; 5 commitment subjects were at least 80 characters | `commitment`, `requirement`, `decision` | Trim only recognized structural prefixes and reject spans that remain clause-like or excessive; test removable prefix, semantic-prefix preservation and rejection | Trimming could remove meaningful actor text | Strict limits may abstain on long valid actors | Include |
+| `action_status_phrase_coverage` | PG-V01-S003-001 had no same-source candidate; its bounded evidence contains an explicit progress cue but no action-noun form recognized by v0.1 | `action_status` | Same-statement status values are exactly `completed`, `delayed`, `delivered`, `in progress`, `met`, `not started`, `on track`; require an `initiative`, `policy` or `programme` subject, shared bounds and one frozen action cue | A generic progress phrase could be misread as an action | Narrow actor eligibility may retain the miss | Include |
+| `generic_noun_phrase_actor_validation` | 216 candidates used `subject_type=other`; commitments contributed 201, requirements 10 and decisions 5 | `commitment`, `requirement`, `decision` | For `other` only, require 1-12 tokens, at most 79 characters, an ASCII letter, no clause/impersonal form and no frozen metric/population head | A weak noun phrase could still pass | Legitimate unusual actors may abstain | Include |
+| `metric_qualifier_extraction` | Six metric annotations and 24 candidate diagnostics had `qualifier_missing` and `qualifier_mismatch`; 19 metric candidates were confidence `0.7` | `metric` | Same-statement only: one explicitly linked metric-name noun phrase, frozen population cues, adjacent literal percentage unit and one four-digit year; competing pairings use the ambiguous-metric contract | Nearby qualifiers could attach incorrectly | Conservative attachment may leave qualifiers missing | Include |
+| `requirement_trigger_narrowing` | 15 requirement candidates were FP; 10 used `other` subjects and 6 had clause-like subjects | `requirement` | Exact triggers are `are required to`, `is required to`, `must`, `must not`, `required to`, `shall`, `shall not`; require an eligible bounded actor and a 1-40-token, at-most-240-character action; exclude `could`, `may`, `might`, `should` | A formal-looking sentence may still over-trigger | Passive but genuine requirements may abstain | Include |
+| `semantic_duplicate_suppression` | Seven extra semantic duplicates were observed; 13 candidate rows belonged to duplicate groups in structural diagnostics | all approved predicates | Exact key order: source ID, normalized subject, subject type, predicate, value type, typed normalized value, sorted qualifiers; retain the first by block sequence, statement offset, rule priority and stable signature | Over-broad keys could hide distinct facts | Exact-key policy leaves paraphrase duplicates | Include |
+| `subject_span_trimming` | 86 commitment, 6 requirement and 2 decision subjects met the bounded clause-like diagnostic; 5 commitment subjects were at least 80 characters | `commitment`, `requirement`, `decision` | Remove at most one frozen bullet or one ASCII letter/integer enumeration marker; never remove semantic words; reject the span if bounds still fail | Trimming could remove meaningful actor text | Strict limits may abstain on long valid actors | Include |
 
 The following families are excluded because the parent evidence does not identify a bounded safe correction:
 
@@ -169,7 +173,7 @@ Each failure must be reported. A failed quality target does not authorize additi
 8. If all sources complete reproducibly, prepare structural diagnostics and the three-case owner-review packet.
 9. Finalize only after complete owner review and every process gate passes.
 
-The implementation workflow must fail closed on an existing output root unless explicitly operating in the approved versioned v0.2 location. It must not overwrite v0.1 evidence.
+The future `development_run_v0_2_cli.py` owns this prepare/finalize workflow. The single-document `deterministic_v0_2_cli.py` must not load gold, run five-source orchestration, create an observation lock or finalize a baseline. The workflow must fail closed on an existing output root unless explicitly operating in the approved versioned v0.2 location. It must not overwrite v0.1 evidence.
 
 ## Owner-review boundary
 

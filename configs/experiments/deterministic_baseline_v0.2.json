@@ -1,4 +1,290 @@
 {
+  "behavior_contracts": {
+    "action_status_phrase_coverage": {
+      "allowed_subject_types": [
+        "initiative",
+        "policy",
+        "programme"
+      ],
+      "explicit_status_values": [
+        "completed",
+        "delayed",
+        "delivered",
+        "in progress",
+        "met",
+        "not started",
+        "on track"
+      ],
+      "required_action_cues": [
+        "action",
+        "activity",
+        "deliverable",
+        "delivery",
+        "implementation",
+        "milestone",
+        "phase",
+        "progress",
+        "recommendation",
+        "rollout",
+        "step",
+        "task",
+        "work",
+        "workstream"
+      ],
+      "same_statement_only": true,
+      "subject_must_pass_shared_bounds": true,
+      "warning_code": "abstained_action_status_ineligible_subject"
+    },
+    "ambiguous_metric": {
+      "bounds_exceeded_behavior": "abstain_without_candidates",
+      "bounds_exceeded_warning_code": "abstained_ambiguous_metric_bounds_exceeded",
+      "candidate_warning_code": "ambiguous_metric_value_relationship",
+      "confidence": 0.5,
+      "deterministic_output_order": [
+        "evidence_block_sequence",
+        "evidence_start_offset",
+        "normalized_subject_text",
+        "typed_normalized_value",
+        "candidate_id"
+      ],
+      "evidence_status": "ambiguous",
+      "maximum_interpretation_count": 3,
+      "maximum_value_count": 3,
+      "output_behavior": "emit_every_bounded_plausible_interpretation_without_selecting_one",
+      "review_status": "required",
+      "same_statement_only": true
+    },
+    "candidate_contract_guard": {
+      "incompatible_candidate_behavior": "omit_candidate_and_continue_document",
+      "no_type_coercion": true,
+      "preserve_other_candidates": true,
+      "unexpected_errors": "fail_document",
+      "validation_scope": [
+        "predicate",
+        "subject_type",
+        "value_type",
+        "required_qualifiers",
+        "declared_qualifier_names"
+      ],
+      "warning_code": "abstained_incompatible_predicate_contract"
+    },
+    "commitment": {
+      "allowed_subject_types": [
+        "initiative",
+        "organisation",
+        "other",
+        "policy",
+        "programme"
+      ],
+      "clause_like_rejection": {
+        "boundary_characters": [
+          ":",
+          ";",
+          "?",
+          "!",
+          "newline"
+        ],
+        "reject_coordinated_finite_clauses": true,
+        "relative_or_subordinate_markers": [
+          "although",
+          "because",
+          "if",
+          "that",
+          "when",
+          "where",
+          "which",
+          "while",
+          "who"
+        ]
+      },
+      "confidence": {
+        "explicit": 0.9,
+        "weak": 0.7
+      },
+      "copular_and_passive_exclusions": {
+        "excluded_weak_value_prefixes": [
+          "intend to be",
+          "intends to be",
+          "plan to be",
+          "plans to be",
+          "will be",
+          "will not be"
+        ],
+        "passive_without_named_actor": "abstain"
+      },
+      "explicit_trigger_inventory": [
+        "commit to",
+        "commits to",
+        "has committed to"
+      ],
+      "generic_actor_eligibility": {
+        "contract": "generic_noun_phrase_actor_validation",
+        "required_when_subject_type": "other"
+      },
+      "heading_context": {
+        "confidence": 0.7,
+        "cross_block_allowed": false,
+        "requires_one_unique_eligible_heading": true,
+        "subject_must_meet_actor_contract": true
+      },
+      "negation_treatment": "preserve_trigger_negation_in_raw_and_normalized_value",
+      "subject_bounds": {
+        "maximum_characters": 79,
+        "maximum_tokens": 12,
+        "minimum_tokens": 1
+      },
+      "warning_codes": {
+        "ambiguous_heading_context": "abstained_commitment_ambiguous_heading_context",
+        "clause_like_subject": "abstained_commitment_clause_like_subject",
+        "copular_or_passive": "abstained_commitment_copular_or_passive",
+        "ineligible_subject": "abstained_commitment_ineligible_subject",
+        "subject_too_long": "abstained_commitment_subject_too_long"
+      },
+      "weak_trigger_inventory": [
+        "intend to",
+        "intends to",
+        "plan to",
+        "plans to",
+        "will",
+        "will not"
+      ]
+    },
+    "generic_noun_phrase_actor_validation": {
+      "applies_only_to_subject_type": "other",
+      "disallowed_head_terms": [
+        "amount",
+        "average",
+        "baseline",
+        "figure",
+        "level",
+        "measure",
+        "metric",
+        "number",
+        "percentage",
+        "population",
+        "proportion",
+        "rate",
+        "ratio",
+        "score",
+        "share",
+        "target",
+        "total",
+        "value"
+      ],
+      "disallowed_standalone_subjects": [
+        "it",
+        "that",
+        "there",
+        "these",
+        "this",
+        "those"
+      ],
+      "maximum_characters": 79,
+      "maximum_tokens": 12,
+      "minimum_tokens": 1,
+      "required_conditions": [
+        "contains_at_least_one_ascii_letter",
+        "contains_no_clause_boundary",
+        "contains_no_finite_relative_or_subordinate_clause",
+        "head_is_not_a_disallowed_metric_or_population_term",
+        "is_not_an_impersonal_pronoun_or_demonstrative"
+      ],
+      "warning_code": "abstained_ineligible_actor_noun_phrase"
+    },
+    "metric_qualifier_extraction": {
+      "ambiguous_relationship_behavior": "delegate_to_ambiguous_metric_contract",
+      "metric_name_boundary": "one_explicit_noun_phrase_directly_linked_to_the_value",
+      "period_boundary": "one_explicit_four_digit_year_in_the_same_statement",
+      "population_cue_inventory": [
+        "participants",
+        "people",
+        "population",
+        "respondents",
+        "residents",
+        "users"
+      ],
+      "qualifier_names": [
+        "metric_name",
+        "period",
+        "population",
+        "unit"
+      ],
+      "same_statement_only": true,
+      "unit_boundary": "literal_percent_sign_or_percent_or_percentage_token_adjacent_to_value"
+    },
+    "requirement_trigger_narrowing": {
+      "action_bounds": {
+        "maximum_characters": 240,
+        "maximum_tokens": 40,
+        "minimum_tokens": 1
+      },
+      "allowed_subject_types": [
+        "initiative",
+        "organisation",
+        "other",
+        "policy",
+        "programme"
+      ],
+      "excluded_guidance_modal_inventory": [
+        "could",
+        "may",
+        "might",
+        "should"
+      ],
+      "generic_actor_contract_required_for_other": true,
+      "impersonal_subject_inventory": [
+        "it",
+        "that",
+        "there",
+        "these",
+        "this",
+        "those"
+      ],
+      "trigger_inventory": [
+        "are required to",
+        "is required to",
+        "must",
+        "must not",
+        "required to",
+        "shall",
+        "shall not"
+      ],
+      "warning_codes": {
+        "ineligible_action": "abstained_requirement_ineligible_action",
+        "ineligible_subject": "abstained_requirement_ineligible_subject"
+      }
+    },
+    "semantic_duplicate_suppression": {
+      "duplicate_key_fields": [
+        "source_id",
+        "normalized_subject_text",
+        "subject_type",
+        "predicate",
+        "value_type",
+        "typed_normalized_value",
+        "sorted_qualifiers"
+      ],
+      "first_retained_order_fields": [
+        "evidence_block_sequence",
+        "statement_start_offset",
+        "rule_priority",
+        "stable_candidate_signature"
+      ],
+      "retention_policy": "retain_first_and_suppress_later_exact_key_duplicates"
+    },
+    "subject_span_trimming": {
+      "allowed_leading_enumeration": "one_ascii_integer_or_ascii_letter_followed_by_period_or_right_parenthesis",
+      "allowed_leading_markers": [
+        "-",
+        "–",
+        "—",
+        "•"
+      ],
+      "maximum_markers_removed": 1,
+      "semantic_word_removal": "forbidden",
+      "warning_code_when_bounds_still_fail": "abstained_subject_span_out_of_bounds"
+    }
+  },
   "candidate_extraction_schema_version": "0.1",
   "corpus_version": "stage1-corpus-v1.0",
   "development_challenge_case_ids": [
@@ -24,10 +310,12 @@
     "src/document_intelligence/extraction/development_evaluation_v0_2.py",
     "src/document_intelligence/extraction/development_run_models_v0_2.py",
     "src/document_intelligence/extraction/development_run_v0_2.py",
+    "src/document_intelligence/extraction/development_run_v0_2_cli.py",
     "src/document_intelligence/extraction/evaluation_models_v0_2.py",
     "tests/test_baseline_freeze_v0_2.py",
     "tests/test_deterministic_extractor_v0_2.py",
     "tests/test_development_evaluation_v0_2.py",
+    "tests/test_development_run_v0_2_cli.py",
     "tests/test_stage_3b_development_run_v0_2.py"
   ],
   "held_out_access": "blocked_until_successful_v0.2_development_freeze_and_separate_guard",

@@ -52,7 +52,8 @@ def test_validator_cli_succeeds_without_running_extraction() -> None:
         text=True,
     )
     assert completed.returncode == 0
-    assert "9 immutable v0.1 artifact hashes verified" in completed.stdout
+    assert "9 immutable v0.1 artifacts" in completed.stdout
+    assert "24 immutable v0.1 semantic files verified" in completed.stdout
     assert completed.stderr == ""
 
 
@@ -66,6 +67,7 @@ def test_plan_has_exact_identity_and_closed_capabilities() -> None:
     assert payload["llm_enabled"] is False
     assert payload["reconciliation_enabled"] is False
     assert payload["quality_targets_are_acceptance_gates"] is False
+    assert set(payload) == VALIDATOR.TOP_LEVEL_KEYS
 
 
 @pytest.mark.parametrize(
@@ -94,11 +96,48 @@ def test_validator_rejects_missing_required_family_and_gate() -> None:
     assert any("process_acceptance_gates" in error for error in errors)
 
 
+def test_validator_rejects_changed_pre_observation_gate_text() -> None:
+    payload = _payload()
+    payload["pre_observation_test_gates"][0] = "an arbitrary replacement gate"
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("pre_observation_test_gates" in error for error in errors)
+
+
+def test_validator_rejects_changed_implementation_versioning_policy() -> None:
+    payload = _payload()
+    payload["implementation_versioning_policy"][0] = "modify v0.1 in place"
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("implementation_versioning_policy" in error for error in errors)
+
+
 def test_future_files_are_additive_and_versioned() -> None:
     payload = _payload()
     future_files = set(payload["future_implementation_files"])
     assert future_files.isdisjoint(VALIDATOR.PROTECTED_V01_IMPLEMENTATION)
     assert all("v0_2" in Path(path).name for path in future_files)
+    assert (
+        "src/document_intelligence/extraction/development_run_v0_2_cli.py"
+        in future_files
+    )
+    assert "tests/test_development_run_v0_2_cli.py" in future_files
+
+
+@pytest.mark.parametrize("change", ["added", "removed"])
+def test_validator_rejects_changed_future_file_inventory(change: str) -> None:
+    payload = _payload()
+    if change == "added":
+        payload["future_implementation_files"].append("tests/test_extra_v0_2.py")
+    else:
+        payload["future_implementation_files"].pop()
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("future_implementation_files" in error for error in errors)
+
+
+def test_validator_rejects_extra_top_level_key() -> None:
+    payload = _payload()
+    payload["extra_contract"] = False
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("top-level plan keys unexpected" in error for error in errors)
 
 
 def test_validator_rejects_v0_1_overwrite_and_absolute_path() -> None:
@@ -113,6 +152,70 @@ def test_validator_rejects_v0_1_overwrite_and_absolute_path() -> None:
     errors = VALIDATOR.validate_payload(payload)
     assert any("overwrites v0.1" in error for error in errors)
     assert any("absolute path is prohibited" in error for error in errors)
+
+
+def test_validator_rejects_changed_v0_1_implementation_hash() -> None:
+    observed = dict(VALIDATOR.V01_SEMANTIC_FILE_HASHES)
+    path = "src/document_intelligence/extraction/deterministic.py"
+    observed[path] = "0" * 64
+    errors = VALIDATOR.validate_hash_inventory(
+        observed,
+        VALIDATOR.V01_SEMANTIC_FILE_HASHES,
+        label="v0.1 semantic file",
+    )
+    assert errors == [f"v0.1 semantic file hash changed: {path}"]
+
+
+def test_validator_rejects_changed_v0_1_planning_document_hash() -> None:
+    observed = dict(VALIDATOR.V01_SEMANTIC_FILE_HASHES)
+    path = "docs/stage_3b_matching_protocol.md"
+    observed[path] = "F" * 64
+    errors = VALIDATOR.validate_hash_inventory(
+        observed,
+        VALIDATOR.V01_SEMANTIC_FILE_HASHES,
+        label="v0.1 semantic file",
+    )
+    assert errors == [f"v0.1 semantic file hash changed: {path}"]
+
+
+def test_validator_rejects_missing_behavior_contract_key() -> None:
+    payload = _payload()
+    payload["behavior_contracts"].pop("candidate_contract_guard")
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("behavior_contracts differs" in error for error in errors)
+
+
+def test_validator_rejects_changed_commitment_confidence() -> None:
+    payload = _payload()
+    payload["behavior_contracts"]["commitment"]["confidence"]["weak"] = 0.9
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("behavior_contracts differs" in error for error in errors)
+
+
+def test_validator_rejects_changed_contract_warning_code() -> None:
+    payload = _payload()
+    payload["behavior_contracts"]["candidate_contract_guard"]["warning_code"] = (
+        "silently_discarded"
+    )
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("behavior_contracts differs" in error for error in errors)
+
+
+def test_validator_rejects_changed_duplicate_key_field_order() -> None:
+    payload = _payload()
+    fields = payload["behavior_contracts"]["semantic_duplicate_suppression"][
+        "duplicate_key_fields"
+    ]
+    fields[0], fields[1] = fields[1], fields[0]
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("behavior_contracts differs" in error for error in errors)
+
+
+def test_validator_rejects_changed_ambiguous_metric_bounds() -> None:
+    payload = _payload()
+    payload["behavior_contracts"]["ambiguous_metric"]["maximum_value_count"] = 4
+    errors = VALIDATOR.validate_payload(payload)
+    assert any("behavior_contracts differs" in error for error in errors)
 
 
 def test_config_is_canonical_sorted_json() -> None:
