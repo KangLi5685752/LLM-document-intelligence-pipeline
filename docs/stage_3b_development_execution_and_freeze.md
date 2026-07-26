@@ -2,7 +2,7 @@
 
 ## Status
 
-Stage 3B.4B implements a two-checkpoint workflow for `deterministic-baseline-v0.1`. Checkpoint 3B.4B-1 prepares and locks the first real development observation before project-owner challenge review. Checkpoint 3B.4B-2 finalizes the evaluation and baseline freeze only after the owner supplies all three case outcomes.
+Stage 3B.4B implements a two-checkpoint workflow for `deterministic-baseline-v0.1`. Checkpoint 3B.4B-1 prepared and locked the first real development observation before project-owner challenge review. The observation failed the five-source acceptance gate because S004 produced no candidate result. Checkpoint 3B.4B-2 therefore cannot finalize v0.1, irrespective of the still-pending owner outcomes.
 
 The implementation itself is committed before the real preparation command is run. No held-out access option exists in this workflow.
 
@@ -66,7 +66,7 @@ Preparation:
 
 Existing non-empty output roots are protected unless `--force` is explicit. Forced cleanup is restricted to the two dedicated output roots beneath the supplied repository root.
 
-The versioned publish directory contains only:
+For a complete successful preparation, the versioned publish directory may contain only:
 
 - `primary/S001.json`;
 - `primary/S002.json`;
@@ -106,6 +106,16 @@ The lock uses date `2026-07-26` and status `first_development_result_observed`. 
 
 After this artifact exists, the v0.1 experiment configuration, deterministic rules, matching semantics and evaluator semantics must not change.
 
+## First v0.1 execution outcome
+
+The first `prepare` execution completed its workflow responsibilities: it validated the development inputs, isolated each source attempt, preserved successful canonical bytes, recorded failed attempts, wrote the immutable observation lock and left owner outcomes unset. Baseline acceptance is a separate fail-closed decision. It failed because only S001, S002, S003 and S006 produced candidate outputs; S004 failed on both attempts and produced none.
+
+The four successful sources were byte-identical between primary and repeat runs. At the five-source aggregate level, `all_outputs_byte_identical=false` because S004 had no successful output to compare. The observation lock records preliminary counts of 0 TP, 288 FP and 25 FN, with 7 duplicate candidates and 0 review-required candidates. These are incomplete first-observation diagnostics, not an accepted benchmark.
+
+Read-only diagnosis isolated the S004 failure to `CandidateFact` validation inside `extract_deterministic_candidates`: `DET-RULE-COM-001` produced a `commitment` draft whose subject was classified as `metric`, a combination rejected by the frozen predicate contract. The failure is source-independent and reproducible with a neutral fixture. See the [failed first-observation report](stage_3b_v0_1_first_observation_failure.md).
+
+No complete evaluation report, final error analysis or baseline freeze manifest exists. Formal owner challenge outcomes are deliberately deferred until a complete versioned run. The v0.1 observation and implementation remain immutable; any correction requires a separately reviewed and frozen `deterministic-baseline-v0.2` plan.
+
 ## Structural unmatched inventory
 
 The preparation inventory uses exact, deterministic structural comparisons only. It may report subject-text, subject-type, value-type, normalized-value or qualifier mismatches, absence of a same-source predicate candidate, strict non-match and additional candidate duplication.
@@ -126,7 +136,7 @@ The assessment template initializes `outcome` and `rationale` to `null`. Codex a
 
 ## Checkpoint 3B.4B-2: finalize
 
-After the project owner completes all three outcomes and rationales, run:
+For a future complete versioned run, finalization requires the project owner to complete all three outcomes and rationales. The following v0.1 command is retained as the implemented contract, but it must not be run for the failed first observation:
 
 ~~~powershell
 python -m document_intelligence.extraction.development_run_cli finalize \
@@ -135,7 +145,7 @@ python -m document_intelligence.extraction.development_run_cli finalize \
   --owner-assessments path/to/completed-assessments.json
 ~~~
 
-Finalization is implemented and tested before the score is observed, but it is not run in checkpoint 3B.4B-1. It:
+Finalization was implemented and tested before the score was observed, but it was not run in checkpoint 3B.4B-1 and cannot accept the failed v0.1 preparation. It:
 
 1. reloads and revalidates every canonical preparation artifact;
 2. verifies primary files, recorded repeat hashes and the observation lock;

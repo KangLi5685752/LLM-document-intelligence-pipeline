@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.4B - two-checkpoint development execution and baseline-freeze workflow implemented; owner-reviewed finalization remains pending
+- **Current stage:** Stage 3B.4B-D - `deterministic-baseline-v0.1` first observation failed the five-source acceptance gate; S004 diagnosis and v0.2 planning next
 - **Last updated:** 2026-07-26
-- **Latest milestone:** Implemented exact five-source preparation, two-pass canonical extraction evidence, first-observation locking, owner-review packet generation and fail-closed finalization
+- **Latest milestone:** Preserved an immutable failed first observation with four reproducible outputs, one reproducible source failure and fail-closed baseline finalization
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -44,25 +44,33 @@
 - Deterministic structural unmatched inventory.
 - Pending owner-review packet and assessment template.
 - Final report and baseline-freeze validation workflow.
+- Immutable `deterministic-baseline-v0.1` first-observation evidence.
 
 ## In progress
 
-- Stage 3B.4B-1 first development execution and owner-review handoff.
+- Exact S004 failure diagnosis.
+- Failed-v0.1 documentation.
+- `deterministic-baseline-v0.2` planning.
 
-The authoritative first observation, when created, is the versioned `observation_lock.json`; no complete development evaluation report or final baseline freeze exists until owner review and `finalize` complete. No held-out extraction result, LLM extractor or reconciliation layer exists.
+The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete development evaluation report or final baseline freeze exists. Formal challenge-case owner review is deliberately deferred. No held-out extraction result, LLM extractor or reconciliation layer exists.
 
 ## Next tasks
 
-1. Generate fresh development-only `ParsedDocument` inputs with the frozen parser commit.
-2. Run checkpoint 3B.4B-1 `prepare` and preserve the observation lock.
-3. Have the project owner review the three development challenge cases.
-4. Supply all three explicit outcomes and rationales.
-5. Run `finalize` to create the complete report, final error analysis and baseline freeze.
-6. Keep held-out access disabled pending a separately reviewed Stage 3B.5 guard.
+1. Complete the sanitized S004 diagnosis.
+2. Preserve the v0.1 observation unchanged.
+3. Merge the failed-observation evidence and workflow.
+4. Freeze a v0.2 experiment plan.
+5. Implement only source-independent v0.2 corrections.
+6. Rerun all five development sources.
+7. Complete owner review only after a complete run.
+8. Keep held-out access blocked.
 
 ## Blockers
 
-Checkpoint 3B.4B-2 is blocked until the project owner supplies all three challenge-case outcomes and rationales. After the first observation lock, no deterministic-rule, matching or evaluator semantic change is allowed in v0.1; further tuning requires `deterministic-baseline-v0.2`.
+- S004 has no candidate output.
+- The five-source reproducibility gate failed.
+- v0.1 cannot be finalized.
+- v0.2 cannot begin until its plan is reviewed and frozen.
 
 ## AG News replacement status
 

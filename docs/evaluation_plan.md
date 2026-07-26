@@ -137,7 +137,7 @@ The frozen asset contains exactly 35 fact annotations:
 
 This yields 25 development facts and 10 held-out facts. The frozen asset also records ambiguous, unsupported, and missing-value challenge cases with page-level evidence.
 
-All 35 facts and six challenge cases are `owner_verified`, with zero drafts or rejections. This completes evaluation-data preparation, not extraction evaluation. No extractor has run and no extraction metric or public-gold result exists.
+All 35 facts and six challenge cases are `owner_verified`, with zero drafts or rejections. This completed evaluation-data preparation, not extraction evaluation. Stage 3A itself ran no extractor; the later Stage 3B v0.1 first observation is documented separately and did not produce an accepted metric.
 
 Limitations:
 
@@ -165,7 +165,13 @@ Stage 3B.2 enforces development-only evaluation-label access through the guarded
 
 Stage 3B.3 implements the source-independent deterministic candidate rule engine for the eight frozen predicates. Stage 3B.4A implements the [strict development evaluator](stage_3b_development_evaluator.md), including source-bounded one-to-one fact matching, separate typed-value alignment, evidence metrics, explicit failed attempts, owner challenge assessments, reproducibility checks and canonical report serialization. The executable protocol was implemented and reviewed before observing a development score.
 
-Implementation completion is not evaluation completion. Stage 3B.4B uses a two-checkpoint workflow: `prepare` validates the five real development public-PDF ParsedDocuments, runs the extractor twice, records the first TP, FP and FN counts in an immutable observation lock, and generates an owner-review packet without assigning outcomes. `finalize` is implemented before observation but cannot run until all three owner challenge assessments are complete. It then creates the complete report, bounded error analysis and baseline freeze. Held-out access remains blocked even after that manifest until a separate guarded execution path is reviewed.
+Implementation completion is not evaluation completion. Stage 3B.4B uses a two-checkpoint workflow: `prepare` validates the five real development public-PDF ParsedDocuments, runs the extractor twice, records the first TP, FP and FN counts in an immutable observation lock, and generates an owner-review packet without assigning outcomes. `finalize` was implemented before observation and requires every source attempt to succeed reproducibly as well as all three owner challenge assessments. Held-out access remains blocked even after any future valid manifest until a separate guarded execution path is reviewed.
+
+### Deterministic baseline v0.1 first observation
+
+The first development observation occurred only after the executable evaluator and protocol-v0.1 semantics were reviewed. The observation is retained rather than erased: four sources produced repeat-identical outputs, while S004 failed reproducibly before producing a candidate result. The incomplete strict diagnostics are 0 TP, 288 FP and 25 FN, but v0.1 failed its all-source and aggregate reproducibility process gates. These counts are preliminary and no accepted development metric, complete report or baseline freeze exists.
+
+Formal challenge outcomes are deferred because a crashed S004 attempt cannot be assessed as successful do-not-extract behaviour. The [failed first-observation report](stage_3b_v0_1_first_observation_failure.md) preserves the claim boundary and read-only diagnosis. Any correction or rule tuning must be documented in a separately reviewed and frozen `deterministic-baseline-v0.2` plan; v0.1 code and observation evidence remain unchanged.
 
 The existing synthetic held-out gates apply to later reconciliation and final-state evaluation. They do not apply to this candidate-only public-PDF baseline, and synthetic records must not be mixed into public-gold fact F1.
 
@@ -189,7 +195,7 @@ The implemented Stage 3B.3 deterministic candidate extractor uses:
 - heading and table cues;
 - fixed keyword rules.
 
-Its implementation scope is listed here independently of any preliminary observation. The complete reviewed development report is not available until Stage 3B.4B finalization.
+Its implementation scope is listed here independently of the preliminary observation. The failed v0.1 process gates prevent Stage 3B.4B finalization, so no complete reviewed development report is available.
 
 ### Baseline B
 

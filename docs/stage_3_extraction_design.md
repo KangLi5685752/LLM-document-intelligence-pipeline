@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary, the Stage 3B.3 deterministic rule engine, the Stage 3B.4A strict evaluator and the Stage 3B.4B execution/freeze workflow implementation are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1`, guarded development-label loading, source-independent deterministic candidate generation, executable development matching semantics and a two-checkpoint observation-lock workflow. It does not contain reconciliation, an LLM call or held-out extraction.
+Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary, the Stage 3B.3 deterministic rule engine, the Stage 3B.4A strict evaluator and the Stage 3B.4B execution/freeze workflow implementation are complete. The first `deterministic-baseline-v0.1` development observation is also preserved: four sources produced reproducible outputs and S004 failed reproducibly. The run did not satisfy five-source acceptance and produced no complete report or baseline freeze. The repository does not contain reconciliation, an LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -67,7 +67,7 @@ The baseline contract was frozen before implementation in the [Stage 3B determin
 
 Baseline v0.1 scores candidate extraction for eight predicates: `action_status`, `budget`, `commitment`, `decision`, `metric`, `recommendation`, `requirement` and `risk`. Its primary scored scope is development-only public-PDF data. Development synthetic documents may later provide non-scored format and contract smoke tests, while reconciliation and synthetic final-state evaluation remain separate future work.
 
-Stage 3B.2 development-only annotation loading and its fail-closed held-out access guard are implemented. No extractor or metric result exists yet.
+Stage 3B.2 development-only annotation loading and its fail-closed held-out access guard were implemented before baseline execution. The later v0.1 observation produced preliminary incomplete counts, not an accepted metric.
 
 ## Stage 3B.2 development-only gold access
 
@@ -85,7 +85,7 @@ The implementation has a frozen ten-family inventory: eight candidate-producing 
 
 Explicit same-statement candidates use the `0.90` confidence band, eligible same-block contextual candidates use `0.70`, and bounded flattened-layout ambiguity uses `0.50` with required review. Unsafe subjects, multiple plausible values, unbounded table relationships and overlong evidence cause deterministic abstention warnings. Candidate entities remain empty; each fact retains the source-stated subject, while entity consolidation remains future work.
 
-Stage 3B.4B preparation is the only permitted next execution path, and held-out access remains blocked.
+The v0.1 rule engine and observation are now immutable. A separately reviewed and frozen v0.2 experiment plan is required before any source-independent correction or tuning, and held-out access remains blocked.
 
 ## Stage 3B.4A strict development evaluator
 
@@ -107,10 +107,18 @@ The [development execution and freeze workflow](stage_3b_development_execution_a
 
 The baseline freeze manifest retains `held_out_access_status=still_blocked_pending_separate_guarded_execution`. It records evidence for a future gate but neither changes the development-only loader nor authorizes held-out execution.
 
+## First v0.1 execution and transition boundary
+
+The first real v0.1 workflow execution parsed all nine development sources and attempted the five scored public PDFs twice. S001, S002, S003 and S006 produced byte-identical outputs. S004 failed identically during `CandidateFact` validation, so the aggregate five-source reproducibility gate failed and no S004 output exists.
+
+The immutable observation lock records preliminary strict diagnostics of 0 TP, 288 FP and 25 FN. They are not accepted extraction metrics. No complete report, owner-assessed challenge result or baseline freeze exists. The [failed first-observation report](stage_3b_v0_1_first_observation_failure.md) records the sanitized diagnosis and claim boundary.
+
+The v0.1 implementation and observation must not be modified or overwritten. The diagnosed failure is source-independent, but correcting it would change extraction output semantics. Work therefore transitions to a separately planned and frozen `deterministic-baseline-v0.2`; formal owner challenge review resumes only after a complete versioned run. Held-out sources and labels remain inaccessible.
+
 ## Current limitations
 
 - The deterministic extractor uses shallow English-language regex and structural heuristics; no LLM extractor exists.
 - Frozen `public-gold-v0.1` has 35 owner-verified facts and six owner-verified challenge cases, but only one project-owner reviewer and no inter-annotator agreement.
 - Page-level blocks can preserve awkward PDF whitespace and coarse evidence spans.
-- A preliminary development observation, when present, is limited to the versioned observation lock until owner review completes; no final public-gold report is implied by workflow implementation.
+- The v0.1 preliminary observation is limited to its immutable lock and four successful outputs; the S004 failure prevents finalization and no final public-gold report is implied.
 - Final reconciliation, duplicate handling, conflict handling, and review workflow remain planned.
