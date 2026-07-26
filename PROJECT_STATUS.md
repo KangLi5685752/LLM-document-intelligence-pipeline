@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.3 complete - deterministic candidate-extraction rule engine implemented; development evaluation and baseline freeze next
+- **Current stage:** Stage 3B.4A complete - strict development evaluator implemented before score observation; development execution and baseline freeze next
 - **Last updated:** 2026-07-25
-- **Latest milestone:** Implemented source-independent ParsedDocument-to-CandidateExtractionResult rules for eight predicates with exact evidence, deterministic IDs and conservative abstention
+- **Latest milestone:** Implemented source-bounded strict matching, typed value alignment, evidence metrics and deterministic development-report contracts without running the real benchmark
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -29,25 +29,35 @@
 - Deterministic IDs and canonical JSON.
 - ParsedDocument-only deterministic CLI.
 - Neutral source-independent rule tests.
+- Protocol-v0.1 comparison normalization.
+- Strict one-to-one fact matcher.
+- Material qualifier projection.
+- Separate normalized-value alignment.
+- Evidence source/location metrics.
+- Source-attempt and reproducibility models.
+- Explicit owner challenge-assessment model.
+- Canonical development evaluation report.
 
 ## In progress
 
-- Stage 3B.4 development evaluation, error analysis and baseline freeze.
+- Stage 3B.4B first development execution, error analysis and baseline freeze.
 
 No public-gold extraction metric, held-out extraction result, LLM extractor or reconciliation layer exists yet.
 
 ## Next tasks
 
-1. Build the strict matching implementation from protocol v0.1.
-2. Run extraction on the five development public-PDF ParsedDocuments.
-3. Compute development-only metrics with exact numerators and denominators.
-4. Produce per-predicate and failure-taxonomy analysis.
-5. Freeze code, rules, outputs and metrics.
-6. Keep held-out access disabled.
+1. Regenerate or verify the five frozen development `ParsedDocument` inputs.
+2. Run deterministic extraction twice.
+3. Preserve canonical outputs and hashes.
+4. Complete three owner challenge-case assessments.
+5. Generate the first development report.
+6. Classify unmatched predictions and gold facts.
+7. Create and validate the baseline freeze manifest.
+8. Keep held-out access disabled until review completes.
 
 ## Blockers
 
-No technical blocker. Held-out access remains unavailable until the Stage 3B.4 freeze manifest is completed and reviewed.
+No technical blocker. No matching or rule change is allowed after the first development report without an explicit new experiment version or documented pre-freeze correction.
 
 ## AG News replacement status
 

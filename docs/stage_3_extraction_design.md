@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary and the Stage 3B.3 deterministic rule engine are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1`, guarded development-label loading and source-independent deterministic candidate generation. It does not implement reconciliation, extraction metrics, an LLM call or held-out extraction.
+Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary, the Stage 3B.3 deterministic rule engine and the Stage 3B.4A strict evaluator are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1`, guarded development-label loading, source-independent deterministic candidate generation and executable development matching semantics. It does not contain a development score, reconciliation, an LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -85,7 +85,17 @@ The implementation has a frozen ten-family inventory: eight candidate-producing 
 
 Explicit same-statement candidates use the `0.90` confidence band, eligible same-block contextual candidates use `0.70`, and bounded flattened-layout ambiguity uses `0.50` with required review. Unsafe subjects, multiple plausible values, unbounded table relationships and overlong evidence cause deterministic abstention warnings. Candidate entities remain empty; each fact retains the source-stated subject, while entity consolidation remains future work.
 
-No public-gold matching or metric has run. Stage 3B.4 development-only evaluation, error analysis and baseline freeze is next, and held-out access remains blocked.
+No public-gold matching or metric has run. Stage 3B.4B development-only execution, error analysis and baseline freeze is next, and held-out access remains blocked.
+
+## Stage 3B.4A strict development evaluator
+
+The [strict development evaluator](stage_3b_development_evaluator.md) implements protocol-v0.1 comparison normalization, typed value comparison, material gold qualifiers and source-bounded deterministic one-to-one matching. Extra semantic duplicates remain in the candidate population as false positives, while extra declared qualifier keys are reported rather than used to block an otherwise strict match.
+
+Normalized-value accuracy uses a separate one-to-one alignment that excludes normalized value from its key. Evidence source, block/location and normalized excerpt diagnostics use only referenced evidence on strict matches. Explicit attempt models keep failed sources in the five-source schema-valid-rate denominator, and source-level primary/repeat hashes produce deterministic reproducibility states.
+
+Challenge-case outcomes require three explicit owner assessments; the evaluator adds no source-specific automated pass rule. Reports retain exact numerators and denominators and serialize deterministically without timestamps, paths, source text or final fact state. The evaluator accepts already loaded gold and precomputed attempts and performs no file loading or extraction itself.
+
+No real development evaluation has run and no score exists. Stage 3B.4B execution, owner challenge assessment, error analysis and baseline freeze is next.
 
 ## Current limitations
 
