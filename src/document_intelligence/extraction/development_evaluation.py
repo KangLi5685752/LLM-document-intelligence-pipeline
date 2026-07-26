@@ -20,7 +20,10 @@ from document_intelligence.extraction.matching import (
     align_normalized_values,
     match_strict_facts,
 )
-from document_intelligence.extraction.models import CandidateReviewStatus
+from document_intelligence.extraction.models import (
+    CandidateExtractionResult,
+    CandidateReviewStatus,
+)
 
 
 _DEVELOPMENT_SOURCE_IDS = ("S001", "S002", "S003", "S004", "S006")
@@ -129,6 +132,41 @@ def _reproducibility_checks(
     return tuple(checks)
 
 
+def _validate_challenge_references(
+    assessments: Sequence[ChallengeCaseAssessment],
+    successful_results: Sequence[CandidateExtractionResult],
+) -> None:
+    candidate_ids: set[str] = set()
+    observed_warning_codes: set[str] = set()
+    for result in successful_results:
+        candidate_ids.update(
+            candidate.candidate_id for candidate in result.candidate_facts
+        )
+        warnings = [
+            *result.warnings,
+            *(
+                warning
+                for candidate in result.candidate_facts
+                for warning in candidate.warnings
+            ),
+        ]
+        observed_warning_codes.update(
+            warning.split(":", 1)[0] for warning in warnings
+        )
+
+    for assessment in assessments:
+        if not set(assessment.related_candidate_ids).issubset(candidate_ids):
+            raise DevelopmentEvaluationError(
+                "challenge assessment references an unknown candidate ID"
+            )
+        if not set(assessment.related_warning_codes).issubset(
+            observed_warning_codes
+        ):
+            raise DevelopmentEvaluationError(
+                "challenge assessment references an unknown warning code"
+            )
+
+
 def evaluate_development_candidates(
     *,
     gold: DevelopmentGoldBundle,
@@ -170,6 +208,7 @@ def evaluate_development_candidates(
         for result in successful_results
         for candidate in result.candidate_facts
     )
+    _validate_challenge_references(assessments, successful_results)
     schema_valid_count = len(successful_results)
     failed_count = 5 - schema_valid_count
     true_positive = len(strict.strict_matches)

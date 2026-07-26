@@ -12,6 +12,11 @@ from document_intelligence.extraction.models import CandidateExtractionResult
 
 
 _DEVELOPMENT_SOURCE_IDS = ("S001", "S002", "S003", "S004", "S006")
+_DEVELOPMENT_CASE_IDS = (
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001",
+)
 _SHA256_PATTERN = r"^[0-9A-F]{64}$"
 _SNAKE_CASE_PATTERN = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
 _ABSOLUTE_PATH_PATTERN = re.compile(
@@ -216,6 +221,13 @@ class ChallengeCaseAssessment(BaseModel):
         """Exclude nondeterministic, path-bearing, or unbounded assessment data."""
         _require_sorted_unique(self.related_candidate_ids, "related_candidate_ids")
         _require_sorted_unique(self.related_warning_codes, "related_warning_codes")
+        if any(
+            not _SNAKE_CASE_PATTERN.fullmatch(code)
+            for code in self.related_warning_codes
+        ):
+            raise ValueError(
+                "related_warning_codes must use lowercase snake_case"
+            )
         if self.rationale != self.rationale.strip() or not self.rationale.strip():
             raise ValueError("rationale must be non-blank and trimmed")
         if _ABSOLUTE_PATH_PATTERN.search(self.rationale):
@@ -302,6 +314,38 @@ class DevelopmentEvaluationReport(BaseModel):
         ):
             raise ValueError("qualifier over-specification count must reconcile")
 
+        allowed_sources = set(_DEVELOPMENT_SOURCE_IDS)
+        if any(
+            match.source_id not in allowed_sources for match in self.strict_matches
+        ):
+            raise ValueError("strict_matches contain a non-development source")
+        if any(
+            alignment.source_id not in allowed_sources
+            for alignment in self.value_alignments
+        ):
+            raise ValueError("value_alignments contain a non-development source")
+
+        strict_candidate_ids = tuple(
+            match.candidate_id for match in self.strict_matches
+        )
+        strict_annotation_ids = tuple(
+            match.annotation_id for match in self.strict_matches
+        )
+        if len(strict_candidate_ids) != len(set(strict_candidate_ids)):
+            raise ValueError("strict match candidate IDs must be unique")
+        if len(strict_annotation_ids) != len(set(strict_annotation_ids)):
+            raise ValueError("strict match annotation IDs must be unique")
+        alignment_candidate_ids = tuple(
+            alignment.candidate_id for alignment in self.value_alignments
+        )
+        alignment_annotation_ids = tuple(
+            alignment.annotation_id for alignment in self.value_alignments
+        )
+        if len(alignment_candidate_ids) != len(set(alignment_candidate_ids)):
+            raise ValueError("value alignment candidate IDs must be unique")
+        if len(alignment_annotation_ids) != len(set(alignment_annotation_ids)):
+            raise ValueError("value alignment annotation IDs must be unique")
+
         _require_sorted_unique(self.unmatched_candidate_ids, "unmatched_candidate_ids")
         _require_sorted_unique(self.unmatched_annotation_ids, "unmatched_annotation_ids")
         _require_sorted_unique(self.warnings, "warnings")
@@ -338,6 +382,10 @@ class DevelopmentEvaluationReport(BaseModel):
             raise ValueError("exactly three challenge assessments are required")
         case_ids = tuple(item.case_id for item in self.challenge_case_assessments)
         _require_sorted_unique(case_ids, "challenge assessment case IDs")
+        if case_ids != _DEVELOPMENT_CASE_IDS:
+            raise ValueError(
+                "challenge assessment case IDs must match the frozen development cases"
+            )
         if len(self.reproducibility_checks) != 5:
             raise ValueError("exactly five reproducibility checks are required")
         if tuple(item.source_id for item in self.reproducibility_checks) != self.source_ids:

@@ -64,6 +64,10 @@ CASE_SPECS = (
 )
 
 
+def _public_source_id(number: str) -> str:
+    return f"S{number}"
+
+
 @pytest.fixture(scope="module")
 def neutral_gold() -> DevelopmentGoldBundle:
     facts: list[GoldFactAnnotation] = []
@@ -246,6 +250,21 @@ def _replace_attempt(
     )
 
 
+def _assessments_with_references(
+    *,
+    candidate_ids: tuple[str, ...] = (),
+    warning_codes: tuple[str, ...] = (),
+) -> tuple[ChallengeCaseAssessment, ...]:
+    assessments = _assessments()
+    first = assessments[0].model_copy(
+        update={
+            "related_candidate_ids": candidate_ids,
+            "related_warning_codes": warning_codes,
+        }
+    )
+    return (first, *assessments[1:])
+
+
 def test_metric_fraction_contract() -> None:
     assert MetricFraction.from_counts(2, 4) == MetricFraction(
         numerator=2,
@@ -370,6 +389,20 @@ def test_challenge_assessment_is_explicit_sorted_and_path_free() -> None:
         )
 
 
+@pytest.mark.parametrize("warning_code", ("WarningCode", "warning-code"))
+def test_challenge_assessment_warning_codes_require_snake_case(
+    warning_code: str,
+) -> None:
+    with pytest.raises(ValidationError, match="lowercase snake_case"):
+        ChallengeCaseAssessment(
+            case_id="PGC-V01-S001-001",
+            expected_behavior="route_to_review",
+            outcome="passed",
+            related_warning_codes=(warning_code,),
+            rationale="Owner assessed the invented neutral challenge.",
+        )
+
+
 def test_perfect_neutral_evaluation_computes_exact_metrics(
     neutral_gold: DevelopmentGoldBundle,
 ) -> None:
@@ -412,6 +445,75 @@ def test_report_count_reconciliation_and_forbidden_fields(
     invalid = report.model_dump()
     invalid["source_ids"] = ("S001", "S002", "S003", "S004", "S999")
     with pytest.raises(ValidationError, match="frozen development"):
+        DevelopmentEvaluationReport.model_validate(invalid)
+
+
+def test_report_rejects_non_development_strict_match_source(
+    neutral_gold: DevelopmentGoldBundle,
+) -> None:
+    invalid = _evaluate(neutral_gold).model_dump()
+    invalid["strict_matches"][0]["source_id"] = _public_source_id("005")
+
+    with pytest.raises(ValidationError, match="non-development source"):
+        DevelopmentEvaluationReport.model_validate(invalid)
+
+
+@pytest.mark.parametrize("source_id", (_public_source_id("007"), "S999"))
+def test_report_rejects_non_development_value_alignment_source(
+    neutral_gold: DevelopmentGoldBundle,
+    source_id: str,
+) -> None:
+    invalid = _evaluate(neutral_gold).model_dump()
+    invalid["value_alignments"][0]["source_id"] = source_id
+
+    with pytest.raises(ValidationError, match="non-development source"):
+        DevelopmentEvaluationReport.model_validate(invalid)
+
+
+@pytest.mark.parametrize(
+    "case_id",
+    (
+        f"PGC-V01-{_public_source_id('005')}-001",
+        f"PGC-V01-{_public_source_id('007')}-001",
+        "PGC-V01-S999-001",
+    ),
+)
+def test_report_rejects_substituted_challenge_case_id(
+    neutral_gold: DevelopmentGoldBundle,
+    case_id: str,
+) -> None:
+    invalid = _evaluate(neutral_gold).model_dump()
+    invalid["challenge_case_assessments"][2]["case_id"] = case_id
+    invalid["challenge_case_assessments"] = tuple(
+        sorted(
+            invalid["challenge_case_assessments"],
+            key=lambda item: item["case_id"],
+        )
+    )
+
+    with pytest.raises(ValidationError, match="frozen development cases"):
+        DevelopmentEvaluationReport.model_validate(invalid)
+
+
+@pytest.mark.parametrize(
+    ("collection", "field", "message"),
+    (
+        ("strict_matches", "candidate_id", "strict match candidate IDs"),
+        ("strict_matches", "annotation_id", "strict match annotation IDs"),
+        ("value_alignments", "candidate_id", "value alignment candidate IDs"),
+        ("value_alignments", "annotation_id", "value alignment annotation IDs"),
+    ),
+)
+def test_report_rejects_reused_pair_identity(
+    neutral_gold: DevelopmentGoldBundle,
+    collection: str,
+    field: str,
+    message: str,
+) -> None:
+    invalid = _evaluate(neutral_gold).model_dump()
+    invalid[collection][1][field] = invalid[collection][0][field]
+
+    with pytest.raises(ValidationError, match=message):
         DevelopmentEvaluationReport.model_validate(invalid)
 
 
@@ -477,6 +579,90 @@ def test_challenge_assessment_inventory_and_behavior_are_exact(
             neutral_gold,
             assessments=(wrong_behavior, *assessments[1:]),
         )
+
+
+def test_evaluator_rejects_unknown_challenge_candidate_reference(
+    neutral_gold: DevelopmentGoldBundle,
+) -> None:
+    assessments = _assessments_with_references(
+        candidate_ids=("UNKNOWN-NEUTRAL-CANDIDATE",)
+    )
+
+    with pytest.raises(DevelopmentEvaluationError, match="unknown candidate ID"):
+        _evaluate(neutral_gold, assessments=assessments)
+
+
+def test_evaluator_rejects_unknown_challenge_warning_reference(
+    neutral_gold: DevelopmentGoldBundle,
+) -> None:
+    assessments = _assessments_with_references(
+        warning_codes=("unknown_neutral_warning",)
+    )
+
+    with pytest.raises(DevelopmentEvaluationError, match="unknown warning code"):
+        _evaluate(neutral_gold, assessments=assessments)
+
+
+def test_evaluator_accepts_existing_challenge_candidate_reference(
+    neutral_gold: DevelopmentGoldBundle,
+) -> None:
+    candidate_id = "NEUTRAL-CANDIDATE-S001-001"
+    report = _evaluate(
+        neutral_gold,
+        assessments=_assessments_with_references(candidate_ids=(candidate_id,)),
+    )
+
+    assert report.challenge_case_assessments[0].related_candidate_ids == (
+        candidate_id,
+    )
+
+
+@pytest.mark.parametrize("warning_level", ("result", "candidate"))
+def test_evaluator_accepts_observed_warning_code_prefix(
+    neutral_gold: DevelopmentGoldBundle,
+    warning_level: str,
+) -> None:
+    primary = list(_attempts(neutral_gold))
+    result = primary[0].result
+    assert result is not None
+    payload = result.model_dump()
+    observed_warning = "neutral_warning:NEUTRAL-BLOCK:1-2:NEUTRAL-RULE"
+    if warning_level == "result":
+        payload["warnings"] = [observed_warning]
+    else:
+        payload["candidate_facts"][0]["warnings"] = [observed_warning]
+    changed_result = CandidateExtractionResult.model_validate(payload)
+    primary[0] = DevelopmentExtractionAttempt(
+        source_id="S001",
+        result=changed_result,
+        canonical_output_sha256=_hash("S001", warning_level),
+    )
+    attempts = tuple(primary)
+
+    report = _evaluate(
+        neutral_gold,
+        primary=attempts,
+        repeat=attempts,
+        assessments=_assessments_with_references(
+            warning_codes=("neutral_warning",)
+        ),
+    )
+
+    assert report.challenge_case_assessments[0].related_warning_codes == (
+        "neutral_warning",
+    )
+
+
+def test_evaluator_accepts_empty_challenge_references(
+    neutral_gold: DevelopmentGoldBundle,
+) -> None:
+    report = _evaluate(neutral_gold, assessments=_assessments())
+
+    assert all(
+        not assessment.related_candidate_ids
+        and not assessment.related_warning_codes
+        for assessment in report.challenge_case_assessments
+    )
 
 
 def test_failed_source_remains_in_denominator_and_reproducibility(
