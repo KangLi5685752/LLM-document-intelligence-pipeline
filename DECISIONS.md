@@ -521,3 +521,35 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Do not add source-specific automatic challenge rules; require three case-level owner outcomes with traceable candidate/warning references.
 - **Reason:** Explicit assessments preserve the generic evaluator boundary and keep context-dependent judgments visible without encoding known document answers into runtime rules.
 - **Trade-off:** Completing a development report requires a separate owner-review step and cannot be fully automated.
+
+## DEC-066: Split Stage 3B.4B at the owner-review boundary
+
+- **Context:** The frozen evaluator requires explicit outcomes for three development challenge cases, but those contextual judgments cannot be delegated to the extraction implementation or inferred safely from strict fact counts.
+- **Alternatives:** Let the workflow assign challenge outcomes automatically; delay all reproducibility evidence until owner review finishes; split execution into preparation and finalization checkpoints.
+- **Chosen option:** Use `prepare` to run and lock development extraction and create an incomplete owner-review template, then permit `finalize` only after the project owner supplies all three outcomes and rationales.
+- **Reason:** The split preserves an auditable boundary between deterministic execution evidence and human semantic judgment.
+- **Trade-off:** The development evaluation requires a deliberate manual handoff and cannot complete in one unattended command.
+
+## DEC-067: Create an immutable observation lock at first score visibility
+
+- **Context:** Once TP, FP, FN or derived metrics are visible, changing deterministic rules, matching normalization or evaluator denominators could tune the experiment retrospectively.
+- **Alternatives:** Record only the later final report; rely on commit history without a dedicated artifact; write a lock immediately after the first strict development result.
+- **Chosen option:** Create `observation_lock.json` during `prepare`, before owner review, with the preparation commit, immutable hashes, input and output hashes, exact preliminary metrics and unmatched IDs.
+- **Reason:** The lock makes the first observed result durable and freezes `deterministic-baseline-v0.1` semantics at the moment post-observation tuning becomes possible.
+- **Trade-off:** Any later semantic tuning requires a declared `deterministic-baseline-v0.2` experiment rather than editing v0.1 in place.
+
+## DEC-068: Preserve canonical primary outputs and repeat hashes
+
+- **Context:** Reproducibility requires evidence that identical parsed inputs produce identical candidate bytes without unnecessarily committing duplicate files.
+- **Alternatives:** Preserve only aggregate metrics; commit both identical output copies; preserve canonical primary files and record independently generated repeat hashes.
+- **Chosen option:** Keep primary and repeat canonical files under the ignored working root, publish the five primary outputs, and record both hash inventories in the run manifest and observation lock.
+- **Reason:** Canonical outputs and independently observed repeat hashes provide compact, inspectable reproducibility evidence.
+- **Trade-off:** A reviewer can inspect published primary bytes directly, while reproducing the second byte stream requires rerunning the fixed preparation workflow.
+
+## DEC-069: Treat the baseline freeze manifest as necessary but not sufficient for held-out access
+
+- **Context:** A development freeze proves that code, outputs, metrics and owner assessments were preserved, but automatically treating its existence as held-out authorization would weaken the separate execution guard.
+- **Alternatives:** Enable held-out loading whenever a manifest file exists; add a boolean bypass to the development CLI; require both a valid freeze and a separately reviewed guarded execution path.
+- **Chosen option:** The manifest must retain `held_out_access_status=still_blocked_pending_separate_guarded_execution`; held-out access requires a later explicit guard and invocation.
+- **Reason:** Separating reproducibility evidence from authorization prevents accidental held-out reads and keeps the first held-out run reviewable.
+- **Trade-off:** Stage 3B.5 requires another implementation and review step after the development baseline is frozen.

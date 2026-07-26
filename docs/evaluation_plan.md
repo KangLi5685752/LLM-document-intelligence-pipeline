@@ -155,17 +155,17 @@ The [deterministic baseline plan](stage_3b_deterministic_baseline_plan.md), [mat
 
 - The scored development sources are exactly S001, S002, S003, S004 and S006: 25 facts and three challenge cases.
 - The held-out sources are exactly S005 and S007: 10 facts and three challenge cases.
-- Rule design, testing and tuning are restricted to development labels; held-out semantics remain blocked until a future baseline freeze manifest exists.
+- Rule design, testing and tuning are restricted to development labels; a completed baseline freeze manifest is necessary but not sufficient for a later separately guarded held-out run.
 - Every metric must report exact numerators and denominators.
 - Baseline acceptance has no minimum development F1 gate; it requires reproducible execution and complete reporting.
 - The executable matching and metric protocol v0.1 implementation is complete and was reviewed before observing any development metric.
-- No real development extraction report or metric exists yet.
+- Stage 3B.4B records the first preliminary development result in an observation lock before owner challenge assessment; a complete report is not permitted at that checkpoint.
 
-Stage 3B.2 enforces development-only evaluation-label access through the guarded baseline API. Public development labels may be loaded by evaluation and failure-analysis tooling only; extractor runtime receives `ParsedDocument` without labels. Held-out access remains unavailable until a future baseline freeze manifest and validator exist.
+Stage 3B.2 enforces development-only evaluation-label access through the guarded baseline API. Public development labels may be loaded by evaluation and failure-analysis tooling only; extractor runtime receives `ParsedDocument` without labels. Held-out access remains unavailable until a baseline freeze is reviewed and a separate explicit guard and invocation are implemented.
 
 Stage 3B.3 implements the source-independent deterministic candidate rule engine for the eight frozen predicates. Stage 3B.4A implements the [strict development evaluator](stage_3b_development_evaluator.md), including source-bounded one-to-one fact matching, separate typed-value alignment, evidence metrics, explicit failed attempts, owner challenge assessments, reproducibility checks and canonical report serialization. The executable protocol was implemented and reviewed before observing a development score.
 
-Implementation completion is not evaluation completion: the extractor and evaluator have not been run together over the five real development public-PDF sources, and no precision, recall, F1 or other public-gold score is claimed. Stage 3B.4B will perform the first development execution, report exact numerators and denominators, classify errors and freeze the reviewed baseline. Held-out access and evaluation remain blocked until the freeze manifest is completed and reviewed.
+Implementation completion is not evaluation completion. Stage 3B.4B uses a two-checkpoint workflow: `prepare` validates the five real development public-PDF ParsedDocuments, runs the extractor twice, records the first TP, FP and FN counts in an immutable observation lock, and generates an owner-review packet without assigning outcomes. `finalize` is implemented before observation but cannot run until all three owner challenge assessments are complete. It then creates the complete report, bounded error analysis and baseline freeze. Held-out access remains blocked even after that manifest until a separate guarded execution path is reviewed.
 
 The existing synthetic held-out gates apply to later reconciliation and final-state evaluation. They do not apply to this candidate-only public-PDF baseline, and synthetic records must not be mixed into public-gold fact F1.
 
@@ -189,7 +189,7 @@ The implemented Stage 3B.3 deterministic candidate extractor uses:
 - heading and table cues;
 - fixed keyword rules.
 
-Its development evaluation has not run, so this list describes implementation scope rather than measured performance.
+Its implementation scope is listed here independently of any preliminary observation. The complete reviewed development report is not available until Stage 3B.4B finalization.
 
 ### Baseline B
 
@@ -227,6 +227,8 @@ Later reports must record:
 - run date;
 - mock or live mode;
 - cost and latency where applicable.
+
+The first-score observation lock is written before owner challenge review and preserves the preparation commit, immutable v0.1 hashes, parsed-input hashes, primary/repeat output hashes, exact preliminary metrics and unmatched IDs. It applies no minimum F1 gate. Any later semantic tuning requires a new deterministic-baseline experiment version.
 
 ## Failure analysis
 

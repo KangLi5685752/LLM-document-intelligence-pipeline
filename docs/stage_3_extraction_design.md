@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary, the Stage 3B.3 deterministic rule engine and the Stage 3B.4A strict evaluator are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1`, guarded development-label loading, source-independent deterministic candidate generation and executable development matching semantics. It does not contain a development score, reconciliation, an LLM call or held-out extraction.
+Stage 3A, Stage 3B.1 planning, the Stage 3B.2 development-only gold access boundary, the Stage 3B.3 deterministic rule engine, the Stage 3B.4A strict evaluator and the Stage 3B.4B execution/freeze workflow implementation are complete. The repository implements the candidate-extraction contract, bounded predicate vocabulary, public-PDF annotation models, freeze-level validation, frozen `public-gold-v0.1`, guarded development-label loading, source-independent deterministic candidate generation, executable development matching semantics and a two-checkpoint observation-lock workflow. It does not contain reconciliation, an LLM call or held-out extraction.
 
 ## Three distinct data layers
 
@@ -85,7 +85,7 @@ The implementation has a frozen ten-family inventory: eight candidate-producing 
 
 Explicit same-statement candidates use the `0.90` confidence band, eligible same-block contextual candidates use `0.70`, and bounded flattened-layout ambiguity uses `0.50` with required review. Unsafe subjects, multiple plausible values, unbounded table relationships and overlong evidence cause deterministic abstention warnings. Candidate entities remain empty; each fact retains the source-stated subject, while entity consolidation remains future work.
 
-No public-gold matching or metric has run. Stage 3B.4B development-only execution, error analysis and baseline freeze is next, and held-out access remains blocked.
+Stage 3B.4B preparation is the only permitted next execution path, and held-out access remains blocked.
 
 ## Stage 3B.4A strict development evaluator
 
@@ -95,12 +95,22 @@ Normalized-value accuracy uses a separate one-to-one alignment that excludes nor
 
 Challenge-case outcomes require three explicit owner assessments; the evaluator adds no source-specific automated pass rule. Reports retain exact numerators and denominators and serialize deterministically without timestamps, paths, source text or final fact state. The evaluator accepts already loaded gold and precomputed attempts and performs no file loading or extraction itself.
 
-No real development evaluation has run and no score exists. Stage 3B.4B execution, owner challenge assessment, error analysis and baseline freeze is next.
+Stage 3B.4A itself observed no score. Stage 3B.4B records the first preliminary result in a separate observation lock before owner challenge assessment.
+
+## Stage 3B.4B development execution and freeze
+
+The [development execution and freeze workflow](stage_3b_development_execution_and_freeze.md) implements explicit `prepare` and `finalize` modes.
+
+`prepare` validates the exact five public development PDFs and their frozen Stage 2 parser provenance, opens their ParsedDocument JSON through explicit paths, runs deterministic extraction twice, stores canonical primary and repeat evidence, and immediately writes the first observation lock. It then creates structural unmatched diagnostics and a development-only owner-review packet. The accompanying template leaves every outcome and rationale null.
+
+`finalize` is implemented before observation. It refuses incomplete owner assessments, changed immutable hashes, failed source attempts, non-identical repeated outputs or counts that differ from the observation lock. Only after three completed owner assessments does it invoke the frozen evaluator and write the complete report, bounded error analysis and baseline freeze manifest.
+
+The baseline freeze manifest retains `held_out_access_status=still_blocked_pending_separate_guarded_execution`. It records evidence for a future gate but neither changes the development-only loader nor authorizes held-out execution.
 
 ## Current limitations
 
 - The deterministic extractor uses shallow English-language regex and structural heuristics; no LLM extractor exists.
 - Frozen `public-gold-v0.1` has 35 owner-verified facts and six owner-verified challenge cases, but only one project-owner reviewer and no inter-annotator agreement.
 - Page-level blocks can preserve awkward PDF whitespace and coarse evidence spans.
-- No public-gold extraction score exists.
+- A preliminary development observation, when present, is limited to the versioned observation lock until owner review completes; no final public-gold report is implied by workflow implementation.
 - Final reconciliation, duplicate handling, conflict handling, and review workflow remain planned.

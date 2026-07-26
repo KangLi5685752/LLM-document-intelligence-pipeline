@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.4A complete - strict development evaluator implemented before score observation; development execution and baseline freeze next
-- **Last updated:** 2026-07-25
-- **Latest milestone:** Implemented source-bounded strict matching, typed value alignment, evidence metrics and deterministic development-report contracts without running the real benchmark
+- **Current stage:** Stage 3B.4B - two-checkpoint development execution and baseline-freeze workflow implemented; owner-reviewed finalization remains pending
+- **Last updated:** 2026-07-26
+- **Latest milestone:** Implemented exact five-source preparation, two-pass canonical extraction evidence, first-observation locking, owner-review packet generation and fail-closed finalization
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -37,27 +37,32 @@
 - Source-attempt and reproducibility models.
 - Explicit owner challenge-assessment model.
 - Canonical development evaluation report.
+- Strict development-run provenance models.
+- Exact-path five-source input validation.
+- Two-pass canonical candidate-output preservation.
+- First-observation lock contract.
+- Deterministic structural unmatched inventory.
+- Pending owner-review packet and assessment template.
+- Final report and baseline-freeze validation workflow.
 
 ## In progress
 
-- Stage 3B.4B first development execution, error analysis and baseline freeze.
+- Stage 3B.4B-1 first development execution and owner-review handoff.
 
-No public-gold extraction metric, held-out extraction result, LLM extractor or reconciliation layer exists yet.
+The authoritative first observation, when created, is the versioned `observation_lock.json`; no complete development evaluation report or final baseline freeze exists until owner review and `finalize` complete. No held-out extraction result, LLM extractor or reconciliation layer exists.
 
 ## Next tasks
 
-1. Regenerate or verify the five frozen development `ParsedDocument` inputs.
-2. Run deterministic extraction twice.
-3. Preserve canonical outputs and hashes.
-4. Complete three owner challenge-case assessments.
-5. Generate the first development report.
-6. Classify unmatched predictions and gold facts.
-7. Create and validate the baseline freeze manifest.
-8. Keep held-out access disabled until review completes.
+1. Generate fresh development-only `ParsedDocument` inputs with the frozen parser commit.
+2. Run checkpoint 3B.4B-1 `prepare` and preserve the observation lock.
+3. Have the project owner review the three development challenge cases.
+4. Supply all three explicit outcomes and rationales.
+5. Run `finalize` to create the complete report, final error analysis and baseline freeze.
+6. Keep held-out access disabled pending a separately reviewed Stage 3B.5 guard.
 
 ## Blockers
 
-No technical blocker. No matching or rule change is allowed after the first development report without an explicit new experiment version or documented pre-freeze correction.
+Checkpoint 3B.4B-2 is blocked until the project owner supplies all three challenge-case outcomes and rationales. After the first observation lock, no deterministic-rule, matching or evaluator semantic change is allowed in v0.1; further tuning requires `deterministic-baseline-v0.2`.
 
 ## AG News replacement status
 
