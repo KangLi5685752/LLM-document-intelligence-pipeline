@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.4B-D - `deterministic-baseline-v0.1` first observation failed the five-source acceptance gate; S004 diagnosis and v0.2 planning next
+- **Current stage:** Stage 3B.4B-D complete - deterministic-baseline-v0.1 failed observation diagnosed and preserved; v0.2 experiment planning next
 - **Last updated:** 2026-07-26
-- **Latest milestone:** Preserved an immutable failed first observation with four reproducible outputs, one reproducible source failure and fail-closed baseline finalization
+- **Latest milestone:** Isolated the reproducible S004 extractor defect to a commitment candidate with an incompatible metric subject type, without modifying v0.1 code or observation artifacts
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -48,29 +48,25 @@
 
 ## In progress
 
-- Exact S004 failure diagnosis.
-- Failed-v0.1 documentation.
-- `deterministic-baseline-v0.2` planning.
+- `deterministic-baseline-v0.2` experiment planning.
 
 The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete development evaluation report or final baseline freeze exists. Formal challenge-case owner review is deliberately deferred. No held-out extraction result, LLM extractor or reconciliation layer exists.
 
 ## Next tasks
 
-1. Complete the sanitized S004 diagnosis.
-2. Preserve the v0.1 observation unchanged.
-3. Merge the failed-observation evidence and workflow.
-4. Freeze a v0.2 experiment plan.
-5. Implement only source-independent v0.2 corrections.
-6. Rerun all five development sources.
-7. Complete owner review only after a complete run.
+1. Merge the v0.1 workflow, failed observation and diagnosis.
+2. Create and review the `deterministic-baseline-v0.2` experiment plan.
+3. Freeze the permitted source-independent correction and tuning scope.
+4. Implement the neutral S004 regression test and approved v0.2 changes.
+5. Rerun all five development sources twice.
+6. Complete owner challenge review only after a complete run.
+7. Finalize and freeze only if every acceptance gate passes.
 8. Keep held-out access blocked.
 
 ## Blockers
 
-- S004 has no candidate output.
-- The five-source reproducibility gate failed.
 - v0.1 cannot be finalized.
-- v0.2 cannot begin until its plan is reviewed and frozen.
+- v0.2 implementation cannot begin until its plan is reviewed and frozen.
 
 ## AG News replacement status
 

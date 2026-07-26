@@ -23,7 +23,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 3B.4B-D records a failed first development observation for `deterministic-baseline-v0.1`.** S001, S002, S003 and S006 produced byte-identical repeat outputs, while S004 failed reproducibly and produced no candidate output. The immutable preliminary strict counts are 0 TP, 288 FP and 25 FN. No complete development evaluation report or baseline freeze exists, formal owner challenge review is deferred, and no held-out extraction result, LLM extractor or reconciliation implementation exists. The next controlled step is the [read-only S004 diagnosis](docs/stage_3b_v0_1_first_observation_failure.md), followed by a separately reviewed and frozen `deterministic-baseline-v0.2` plan.
+**Stage 3B.4B-D records a failed first development observation for `deterministic-baseline-v0.1`.** S001, S002, S003 and S006 produced byte-identical repeat outputs, while S004 failed reproducibly and produced no candidate output. The immutable preliminary strict counts are 0 TP, 288 FP and 25 FN. No complete development evaluation report or baseline freeze exists, formal owner challenge review is deferred, and no held-out extraction result, LLM extractor or reconciliation implementation exists. The [read-only S004 diagnosis](docs/stage_3b_v0_1_first_observation_failure.md) is complete and documents the exact source-independent schema incompatibility. The next controlled step is a separately reviewed and frozen `deterministic-baseline-v0.2` experiment plan.
 
 ## Stage 3B.1 deterministic baseline contract
 
