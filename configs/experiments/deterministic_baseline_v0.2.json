@@ -1,0 +1,421 @@
+{
+  "behavior_contracts": {
+    "action_status_phrase_coverage": {
+      "allowed_subject_types": [
+        "initiative",
+        "policy",
+        "programme"
+      ],
+      "explicit_status_values": [
+        "completed",
+        "delayed",
+        "delivered",
+        "in progress",
+        "met",
+        "not started",
+        "on track"
+      ],
+      "required_action_cues": [
+        "action",
+        "activity",
+        "deliverable",
+        "delivery",
+        "implementation",
+        "milestone",
+        "phase",
+        "progress",
+        "recommendation",
+        "rollout",
+        "step",
+        "task",
+        "work",
+        "workstream"
+      ],
+      "same_statement_only": true,
+      "subject_must_pass_shared_bounds": true,
+      "warning_code": "abstained_action_status_ineligible_subject"
+    },
+    "ambiguous_metric": {
+      "bounds_exceeded_behavior": "abstain_without_candidates",
+      "bounds_exceeded_warning_code": "abstained_ambiguous_metric_bounds_exceeded",
+      "candidate_warning_code": "ambiguous_metric_value_relationship",
+      "confidence": 0.5,
+      "deterministic_output_order": [
+        "evidence_block_sequence",
+        "evidence_start_offset",
+        "normalized_subject_text",
+        "typed_normalized_value",
+        "candidate_id"
+      ],
+      "evidence_status": "ambiguous",
+      "maximum_interpretation_count": 3,
+      "maximum_value_count": 3,
+      "output_behavior": "emit_every_bounded_plausible_interpretation_without_selecting_one",
+      "review_status": "required",
+      "same_statement_only": true
+    },
+    "candidate_contract_guard": {
+      "incompatible_candidate_behavior": "omit_candidate_and_continue_document",
+      "no_type_coercion": true,
+      "preserve_other_candidates": true,
+      "unexpected_errors": "fail_document",
+      "validation_scope": [
+        "predicate",
+        "subject_type",
+        "value_type",
+        "required_qualifiers",
+        "declared_qualifier_names"
+      ],
+      "warning_code": "abstained_incompatible_predicate_contract"
+    },
+    "commitment": {
+      "allowed_subject_types": [
+        "initiative",
+        "organisation",
+        "other",
+        "policy",
+        "programme"
+      ],
+      "clause_like_rejection": {
+        "boundary_characters": [
+          ":",
+          ";",
+          "?",
+          "!",
+          "newline"
+        ],
+        "reject_coordinated_finite_clauses": true,
+        "relative_or_subordinate_markers": [
+          "although",
+          "because",
+          "if",
+          "that",
+          "when",
+          "where",
+          "which",
+          "while",
+          "who"
+        ]
+      },
+      "confidence": {
+        "explicit": 0.9,
+        "weak": 0.7
+      },
+      "copular_and_passive_exclusions": {
+        "excluded_weak_value_prefixes": [
+          "intend to be",
+          "intends to be",
+          "plan to be",
+          "plans to be",
+          "will be",
+          "will not be"
+        ],
+        "passive_without_named_actor": "abstain"
+      },
+      "explicit_trigger_inventory": [
+        "commit to",
+        "commits to",
+        "has committed to"
+      ],
+      "generic_actor_eligibility": {
+        "contract": "generic_noun_phrase_actor_validation",
+        "required_when_subject_type": "other"
+      },
+      "heading_context": {
+        "confidence": 0.7,
+        "cross_block_allowed": false,
+        "requires_one_unique_eligible_heading": true,
+        "subject_must_meet_actor_contract": true
+      },
+      "negation_treatment": "preserve_trigger_negation_in_raw_and_normalized_value",
+      "subject_bounds": {
+        "maximum_characters": 79,
+        "maximum_tokens": 12,
+        "minimum_tokens": 1
+      },
+      "warning_codes": {
+        "ambiguous_heading_context": "abstained_commitment_ambiguous_heading_context",
+        "clause_like_subject": "abstained_commitment_clause_like_subject",
+        "copular_or_passive": "abstained_commitment_copular_or_passive",
+        "ineligible_subject": "abstained_commitment_ineligible_subject",
+        "subject_too_long": "abstained_commitment_subject_too_long"
+      },
+      "weak_trigger_inventory": [
+        "intend to",
+        "intends to",
+        "plan to",
+        "plans to",
+        "will",
+        "will not"
+      ]
+    },
+    "generic_noun_phrase_actor_validation": {
+      "applies_only_to_subject_type": "other",
+      "disallowed_head_terms": [
+        "amount",
+        "average",
+        "baseline",
+        "figure",
+        "level",
+        "measure",
+        "metric",
+        "number",
+        "percentage",
+        "population",
+        "proportion",
+        "rate",
+        "ratio",
+        "score",
+        "share",
+        "target",
+        "total",
+        "value"
+      ],
+      "disallowed_standalone_subjects": [
+        "it",
+        "that",
+        "there",
+        "these",
+        "this",
+        "those"
+      ],
+      "maximum_characters": 79,
+      "maximum_tokens": 12,
+      "minimum_tokens": 1,
+      "required_conditions": [
+        "contains_at_least_one_ascii_letter",
+        "contains_no_clause_boundary",
+        "contains_no_finite_relative_or_subordinate_clause",
+        "head_is_not_a_disallowed_metric_or_population_term",
+        "is_not_an_impersonal_pronoun_or_demonstrative"
+      ],
+      "warning_code": "abstained_ineligible_actor_noun_phrase"
+    },
+    "metric_qualifier_extraction": {
+      "ambiguous_relationship_behavior": "delegate_to_ambiguous_metric_contract",
+      "metric_name_boundary": "one_explicit_noun_phrase_directly_linked_to_the_value",
+      "period_boundary": "one_explicit_four_digit_year_in_the_same_statement",
+      "population_cue_inventory": [
+        "participants",
+        "people",
+        "population",
+        "respondents",
+        "residents",
+        "users"
+      ],
+      "qualifier_names": [
+        "metric_name",
+        "period",
+        "population",
+        "unit"
+      ],
+      "same_statement_only": true,
+      "unit_boundary": "literal_percent_sign_or_percent_or_percentage_token_adjacent_to_value"
+    },
+    "requirement_trigger_narrowing": {
+      "action_bounds": {
+        "maximum_characters": 240,
+        "maximum_tokens": 40,
+        "minimum_tokens": 1
+      },
+      "allowed_subject_types": [
+        "initiative",
+        "organisation",
+        "other",
+        "policy",
+        "programme"
+      ],
+      "excluded_guidance_modal_inventory": [
+        "could",
+        "may",
+        "might",
+        "should"
+      ],
+      "generic_actor_contract_required_for_other": true,
+      "impersonal_subject_inventory": [
+        "it",
+        "that",
+        "there",
+        "these",
+        "this",
+        "those"
+      ],
+      "trigger_inventory": [
+        "are required to",
+        "is required to",
+        "must",
+        "must not",
+        "required to",
+        "shall",
+        "shall not"
+      ],
+      "warning_codes": {
+        "ineligible_action": "abstained_requirement_ineligible_action",
+        "ineligible_subject": "abstained_requirement_ineligible_subject"
+      }
+    },
+    "semantic_duplicate_suppression": {
+      "duplicate_key_fields": [
+        "source_id",
+        "normalized_subject_text",
+        "subject_type",
+        "predicate",
+        "value_type",
+        "typed_normalized_value",
+        "sorted_qualifiers"
+      ],
+      "first_retained_order_fields": [
+        "evidence_block_sequence",
+        "statement_start_offset",
+        "rule_priority",
+        "stable_candidate_signature"
+      ],
+      "retention_policy": "retain_first_and_suppress_later_exact_key_duplicates"
+    },
+    "subject_span_trimming": {
+      "allowed_leading_enumeration": "one_ascii_integer_or_ascii_letter_followed_by_period_or_right_parenthesis",
+      "allowed_leading_markers": [
+        "-",
+        "–",
+        "—",
+        "•"
+      ],
+      "maximum_markers_removed": 1,
+      "semantic_word_removal": "forbidden",
+      "warning_code_when_bounds_still_fail": "abstained_subject_span_out_of_bounds"
+    }
+  },
+  "candidate_extraction_schema_version": "0.1",
+  "corpus_version": "stage1-corpus-v1.0",
+  "development_challenge_case_ids": [
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001"
+  ],
+  "development_public_source_ids": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S006"
+  ],
+  "experiment_id": "deterministic-baseline-v0.2",
+  "experiment_schema_version": "0.1",
+  "experiment_version": "0.2",
+  "future_implementation_files": [
+    "src/document_intelligence/extraction/baseline_freeze_v0_2.py",
+    "src/document_intelligence/extraction/deterministic_rules_v0_2.py",
+    "src/document_intelligence/extraction/deterministic_v0_2.py",
+    "src/document_intelligence/extraction/deterministic_v0_2_cli.py",
+    "src/document_intelligence/extraction/development_evaluation_v0_2.py",
+    "src/document_intelligence/extraction/development_run_models_v0_2.py",
+    "src/document_intelligence/extraction/development_run_v0_2.py",
+    "src/document_intelligence/extraction/development_run_v0_2_cli.py",
+    "src/document_intelligence/extraction/evaluation_models_v0_2.py",
+    "tests/test_baseline_freeze_v0_2.py",
+    "tests/test_deterministic_extractor_v0_2.py",
+    "tests/test_development_evaluation_v0_2.py",
+    "tests/test_development_run_v0_2_cli.py",
+    "tests/test_stage_3b_development_run_v0_2.py"
+  ],
+  "held_out_access": "blocked_until_successful_v0.2_development_freeze_and_separate_guard",
+  "implementation_versioning_policy": [
+    "additive v0.2 modules only",
+    "reuse unchanged candidate schema, predicate vocabulary, development gold loader and matching functions",
+    "commit the complete v0.2 implementation before the first real development run",
+    "preserve v0.1 implementation, planning documents and observation artifacts byte-identically"
+  ],
+  "llm_enabled": false,
+  "matching_protocol_version": "0.1",
+  "network_enabled": false,
+  "non_binding_quality_targets": [
+    "strict TP greater than zero",
+    "total commitment candidates below the v0.1 count of 243",
+    "total candidate count below the v0.1 count of 288",
+    "at least one candidate routed to review when a bounded ambiguous relationship is emitted",
+    "no incompatible predicate/subject candidate",
+    "no new predicate family dominates the entire candidate population",
+    "fewer semantic duplicates than v0.1 where generic deduplication is approved"
+  ],
+  "optional_bounded_change_families": [
+    "action_status_phrase_coverage",
+    "generic_noun_phrase_actor_validation",
+    "metric_qualifier_extraction",
+    "requirement_trigger_narrowing",
+    "semantic_duplicate_suppression",
+    "subject_span_trimming"
+  ],
+  "parent_experiment_id": "deterministic-baseline-v0.1",
+  "parent_observation_lock_sha256": "AD560F6DC634F99B08564ECFDB54C3156425473B305894F6D6BD4BB475D64DC0",
+  "parser_commit": "71148262f094d54ec7d95e45958bd1aaefc64793",
+  "plan_date": "2026-07-26",
+  "planning_base_commit": "ad8ef2d40a10c16047ebec37acaa2b890310c0f4",
+  "post_observation_change_policy": "Any semantic change after the first v0.2 observation requires deterministic-baseline-v0.3; v0.2 evidence must remain immutable.",
+  "pre_observation_test_gates": [
+    "the plan validator passes and the machine-readable plan remains canonical",
+    "all nine v0.1 development observation artifact hashes match their frozen values",
+    "v0.1 implementation, plans and semantic files remain byte-identical",
+    "a neutral incompatible commitment fixture completes without a document-level exception",
+    "the incompatible draft is omitted with abstained_incompatible_predicate_contract",
+    "unrelated valid candidates survive candidate-level contract abstention",
+    "repeated neutral fixture outputs are byte-identical",
+    "explicit and weak commitment trigger groups have separate neutral unit coverage",
+    "a bounded ambiguous multi-value metric routes to required review without choosing a value",
+    "every included optional change family has neutral positive and negative regression coverage",
+    "the full test suite passes",
+    "the implementation commit exists before any real v0.2 development extraction"
+  ],
+  "predicate_vocabulary_version": "0.1",
+  "process_acceptance_gates": [
+    "all five development public PDFs complete in primary and repeat runs",
+    "zero unhandled extraction exceptions",
+    "every result validates against CandidateExtractionResult schema 0.1",
+    "all five primary/repeat output pairs are byte-identical",
+    "exact output hashes are preserved",
+    "exact metric numerators and denominators are reported",
+    "all three development challenge cases receive explicit owner review",
+    "no held-out semantic content is loaded",
+    "no source-specific extraction rule exists",
+    "v0.1 code and observation hashes remain unchanged",
+    "v0.2 implementation is committed before its first real development run",
+    "no minimum F1 is required for process acceptance"
+  ],
+  "prohibited_changes": [
+    "access held-out fact or held-out challenge semantic content",
+    "add fuzzy matching to improve apparent TP",
+    "add network calls",
+    "add per-document exceptions",
+    "change CandidateExtractionResult schema 0.1",
+    "change code after the first v0.2 observation while retaining v0.2",
+    "change development or held-out splits",
+    "change matching protocol 0.1",
+    "change metric denominators",
+    "change parser implementation or version",
+    "change predicate vocabulary 0.1",
+    "change source checksums",
+    "change strict-match normalization",
+    "modify public gold",
+    "modify v0.1 observation artifacts",
+    "use annotation IDs as rule conditions",
+    "use document titles as rule conditions",
+    "use embeddings",
+    "use filenames as rule conditions",
+    "use fixed page numbers",
+    "use known expected values",
+    "use an LLM",
+    "use source IDs as rule conditions"
+  ],
+  "public_gold_cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+  "public_gold_facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+  "public_gold_version": "public-gold-v0.1",
+  "quality_targets_are_acceptance_gates": false,
+  "reconciliation_enabled": false,
+  "required_change_families": [
+    "additive_version_isolation",
+    "ambiguous_metric_review_routing",
+    "candidate_level_predicate_contract_guard",
+    "commitment_trigger_eligibility_and_confidence",
+    "neutral_incompatible_commitment_regression"
+  ],
+  "status": "frozen_before_implementation"
+}

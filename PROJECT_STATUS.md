@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.4B-D complete - deterministic-baseline-v0.1 failed observation diagnosed and preserved; v0.2 experiment planning next
+- **Current stage:** Stage 3B.4C - deterministic-baseline-v0.2 experiment planning and freeze
 - **Last updated:** 2026-07-26
-- **Latest milestone:** Isolated the reproducible S004 extractor defect to a commitment candidate with an incompatible metric subject type, without modifying v0.1 code or observation artifacts
+- **Latest milestone:** Frozen a source-independent v0.2 correction and tuning scope based on the immutable v0.1 development observation, without modifying v0.1 evidence or accessing held-out semantics
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -45,28 +45,34 @@
 - Pending owner-review packet and assessment template.
 - Final report and baseline-freeze validation workflow.
 - Immutable `deterministic-baseline-v0.1` first-observation evidence.
+- Read-only S004 source-independent failure diagnosis.
+- Frozen `deterministic-baseline-v0.2` experiment identity, error matrix, bounded change families and additive version boundary.
+- Automated v0.2 plan validation, including all nine immutable v0.1 artifact hashes.
 
 ## In progress
 
-- `deterministic-baseline-v0.2` experiment planning.
+- Review and merge of the frozen `deterministic-baseline-v0.2` plan.
 
-The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete development evaluation report or final baseline freeze exists. Formal challenge-case owner review is deliberately deferred. No held-out extraction result, LLM extractor or reconciliation layer exists.
+The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete v0.1 development evaluation report or final baseline freeze exists. The v0.2 scope is frozen before implementation; no v0.2 extractor, output, score, observation lock, owner assessment or freeze manifest exists. No held-out extraction result, LLM extractor or reconciliation layer exists.
 
 ## Next tasks
 
-1. Merge the v0.1 workflow, failed observation and diagnosis.
-2. Create and review the `deterministic-baseline-v0.2` experiment plan.
-3. Freeze the permitted source-independent correction and tuning scope.
-4. Implement the neutral S004 regression test and approved v0.2 changes.
-5. Rerun all five development sources twice.
-6. Complete owner challenge review only after a complete run.
-7. Finalize and freeze only if every acceptance gate passes.
-8. Keep held-out access blocked.
+1. Review the v0.2 plan.
+2. Merge the planning PR.
+3. Implement the neutral compatibility regression.
+4. Implement only approved v0.2 change families.
+5. Commit implementation before real execution.
+6. Run all five development sources twice.
+7. Preserve the v0.2 observation lock.
+8. Complete owner review.
+9. Finalize only if process gates pass.
 
 ## Blockers
 
 - v0.1 cannot be finalized.
-- v0.2 implementation cannot begin until its plan is reviewed and frozen.
+- v0.2 implementation cannot begin until its frozen plan is reviewed and merged.
+- Real v0.2 development execution cannot begin until the approved implementation is committed and all pre-observation gates pass.
+- Held-out access remains blocked pending a successful v0.2 development freeze and a separate reviewed guard.
 
 ## AG News replacement status
 
