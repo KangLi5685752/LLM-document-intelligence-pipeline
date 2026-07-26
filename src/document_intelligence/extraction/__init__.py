@@ -31,6 +31,30 @@ if TYPE_CHECKING:
         canonical_development_evaluation_json,
         evaluate_development_candidates,
     )
+    from document_intelligence.extraction.development_run import (
+        DevelopmentRunError,
+        FinalizedDevelopmentRun,
+        PreparedDevelopmentRun,
+        canonical_artifact_json,
+        finalize_development_baseline_run,
+        prepare_development_baseline_run,
+    )
+    from document_intelligence.extraction.development_run_models import (
+        DevelopmentInputRecord,
+        DevelopmentObservationLock,
+        DevelopmentRunAttemptRecord,
+        DevelopmentRunManifest,
+        OwnerChallengeAssessmentEntry,
+        OwnerChallengeAssessmentTemplate,
+        OwnerChallengeReviewPacket,
+        UnmatchedReviewInventory,
+    )
+    from document_intelligence.extraction.baseline_freeze import (
+        AcceptanceGateOutcome,
+        BaselineFreezeError,
+        BaselineFreezeManifest,
+        FinalErrorAnalysis,
+    )
     from document_intelligence.extraction.evaluation_models import (
         ChallengeCaseAssessment,
         DevelopmentEvaluationReport,
@@ -121,6 +145,24 @@ __all__ = [
     "align_normalized_values",
     "evaluate_development_candidates",
     "canonical_development_evaluation_json",
+    "DevelopmentInputRecord",
+    "DevelopmentRunAttemptRecord",
+    "DevelopmentRunManifest",
+    "DevelopmentObservationLock",
+    "OwnerChallengeReviewPacket",
+    "OwnerChallengeAssessmentEntry",
+    "OwnerChallengeAssessmentTemplate",
+    "UnmatchedReviewInventory",
+    "AcceptanceGateOutcome",
+    "FinalErrorAnalysis",
+    "BaselineFreezeManifest",
+    "BaselineFreezeError",
+    "DevelopmentRunError",
+    "PreparedDevelopmentRun",
+    "FinalizedDevelopmentRun",
+    "canonical_artifact_json",
+    "prepare_development_baseline_run",
+    "finalize_development_baseline_run",
 ]
 
 
@@ -172,6 +214,24 @@ _EXPORT_MODULES = {
     "align_normalized_values": "document_intelligence.extraction.matching",
     "evaluate_development_candidates": "document_intelligence.extraction.development_evaluation",
     "canonical_development_evaluation_json": "document_intelligence.extraction.development_evaluation",
+    "DevelopmentInputRecord": "document_intelligence.extraction.development_run_models",
+    "DevelopmentRunAttemptRecord": "document_intelligence.extraction.development_run_models",
+    "DevelopmentRunManifest": "document_intelligence.extraction.development_run_models",
+    "DevelopmentObservationLock": "document_intelligence.extraction.development_run_models",
+    "OwnerChallengeReviewPacket": "document_intelligence.extraction.development_run_models",
+    "OwnerChallengeAssessmentEntry": "document_intelligence.extraction.development_run_models",
+    "OwnerChallengeAssessmentTemplate": "document_intelligence.extraction.development_run_models",
+    "UnmatchedReviewInventory": "document_intelligence.extraction.development_run_models",
+    "AcceptanceGateOutcome": "document_intelligence.extraction.baseline_freeze",
+    "FinalErrorAnalysis": "document_intelligence.extraction.baseline_freeze",
+    "BaselineFreezeManifest": "document_intelligence.extraction.baseline_freeze",
+    "BaselineFreezeError": "document_intelligence.extraction.baseline_freeze",
+    "DevelopmentRunError": "document_intelligence.extraction.development_run",
+    "PreparedDevelopmentRun": "document_intelligence.extraction.development_run",
+    "FinalizedDevelopmentRun": "document_intelligence.extraction.development_run",
+    "canonical_artifact_json": "document_intelligence.extraction.development_run",
+    "prepare_development_baseline_run": "document_intelligence.extraction.development_run",
+    "finalize_development_baseline_run": "document_intelligence.extraction.development_run",
 }
 
 

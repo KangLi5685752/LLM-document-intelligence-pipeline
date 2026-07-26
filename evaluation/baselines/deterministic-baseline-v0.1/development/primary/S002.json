@@ -1,0 +1,2827 @@
+{
+  "batch_id": "DET-BATCH-DB55D962FA26D6EDAC6F888F25E2997146EEAA686B0ACF48217F968EB25C626C",
+  "candidate_facts": [
+    {
+      "candidate_id": "DET-CAND-A9DFFF8DB4CDE793DA9C844B50326FF00C3E138201C4C30A3989ED7482819A9C",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-3F0A0BB62045A73A16C345A09171DBF590CDADC309C52E68CFEBE95DEA843E88"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will need to obtain permission from the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will need to obtain permission from the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Where we have identified any third party copyright information you",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-EAB262EFC1556D6639FE0078DE78F8AB07F9575607E9E1C5EDEBBE59AFA24D12",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B4F11C9BC096FDBDA6448CADA33C55D7AA528A343A1A29CFA63326ECD0FB168A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 40.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "e03258823_01_25_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "40%",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "E03258823 01/25",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-EA12937DEB0C68965C28F99C081B44752196C9B4E302B785D641C9CEBB1BCF6F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-30C08503524D5BA425673CCB1ED030C7104E28F64B68039C83D7E49E5E8DF0D6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will remain",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will remain",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "In short, in the coming years, there is barely an aspect of our society that",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-C98F9D3C69A6740F2A9B8CBB0D84853B9DE3B95FA88EADF0A916584456C9B594",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-5378DFAC3C12E4ABAE6F7BE99023178479D318F2883013C55CB2C59124973D83"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will not sit back passively and wait for",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will not sit back passively and wait for",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "But this Government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-EC6A1209DCB31B85F2CCA0CA0787C8CA74B3CCC0EF9936666ED21D4D05971478",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-056624173D7559907E07A94B19FD7FD7086640734263AFE84AA60DF896F7DE76"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will be left to buy those breakthroughs by importing",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will be left to buy those breakthroughs by importing",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Other countries",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-0583593BAC3ED14C8E89E187F0592F1ED2649D3BC2228B4F6E528EE432D7AB08",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-FFA4793BC6D7012CC0AD9FC5365B9A46095E348DB0448BAA37E87A40EA3FB7D2"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will be the former – a plan to make our country an",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will be the former – a plan to make our country an",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "This Action Plan sets out how Britain",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B97FA1843299AF618578084103ABBDA215E1BB99A38B0AEDA763BE34F9011160",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-044E0DC4571FC8BE920741CEF91BDB375A3BE53E87F00BCD90C3310AABD9B6B4"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must continue to move fast.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must continue to move fast.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Nonetheless, this race is speeding up and we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-852DEB48336497A65DBF913C6B2DD549D035B592FF6C783318B6A4A793AAF038",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-2684D1128F8509113083D42362E1A4044B349DE76DA53282C61B56313A777F1E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will take forward the recommendation to expand our sovereign compute",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will take forward the recommendation to expand our sovereign compute",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-243E0C0A17921FA85B22FF4790DADA8671C5DB28A0C099627812498CF142DB9A",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-54451F59BFAEBE92A6A117823FDAD97200CAB84AEFB8E56E1DFE472B55139949"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will now start delivery of a new state of the art supercomputing facility that will",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will now start delivery of a new state of the art supercomputing facility that will",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-95962637905B689F7893E23819E7DE19D274E8C75EE5F66AA36EB83A5CE4E295",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-648F38D8A1EB7B1BAB0CB448471E21F9C6DB0DCE4A3EFDFE5675D93E007782D7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will immediately start to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will immediately start to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-E328AA5B4C4E708C079A9B46427A25EC74169C36995F0373C6FA5C23E733658C",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-37A4CD55AA6F315D53FCF9B4FEF3B13013CAEDCE2B44C22269CE13344CB7E219"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will be able to begin accessing the AI Research Resource in early",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will be able to begin accessing the AI Research Resource in early",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "researchers and SMEs",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-4351C42D93D832C4ABF125E98589BDBDF53F0CFC292D0E032B8DA1349AA146BE",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-4C815CCC8A6F2EB3133372C20E016A6927D6ECB993A847FCC0B383850C4F5FC1"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also work with stakeholders to develop a long-term compute strategy that",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also work with stakeholders to develop a long-term compute strategy that",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-C3490E7411DFD6B59CC7A48BC8AA726F2CE3C20FA32503C1607D7F9EEB695F73",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-528FF2F58D736E2AF8CCEA1BB0164B5ED48503141C29D1D5B639E0EB532BCCE6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will drive productivity and growth throughout the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will drive productivity and growth throughout the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "scientific innovations and discoveries that",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-CD4FF72DADB90456D97CD0CAEACAFF7DAC2553C396DC49C6AE957ECA14744170",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-516C6AED6F5B0E9BB3DA0111C1B5711981B68A8BF44DF5D75FD7F3B46807B82B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will publish the Compute Strategy in Spring 2025.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will publish the Compute Strategy in Spring 2025.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-456ADBE63DE2B09CE058CC10EF75B9B495288C45DCABAD47AC425E6E284318EE",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-AD5EFE6BE94C0EB965939DD71A59A611D9374171F5121F72022F95864B58C906"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must maximise opportunities to crowd in private sector",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must maximise opportunities to crowd in private sector",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "As the Action Plan sets out, the UK",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B8379EED8EE4C9D032510072A469F2FC3C5367368DC1442D4012D46664D87914",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-0A7B23F6DA23B637018DAF4677DAF75E38C5AEB3175028F20CD6EA85888C2B88"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will create",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will create",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-548C7767B89E4C5F9EB39F7E06173813CC4A97AD6C60A23A709636DD134EE2F5",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-855112B3DF0CBB4926D5EB60DF173705C80A817D9DD3EF6944583B5733C935B7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will spur economic growth and AI innovation in Britain’, 2024 (Accessed 04",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will spur economic growth and AI innovation in Britain’, 2024 (Accessed 04",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "investment in UK data centres which",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-A8C667D050BFA67FBCF5B823F7AA0AEFDC866ADFDFCB4039D4887FE089D8F2E0",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-263091892536DF4070D13E14E038075A035A55DD6E012AEC73D25B5942EF1D75"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will seek a private-sector partner who would",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will seek a private-sector partner who would",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government and UKAEA",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B6F3B19F5EF73D0A79CEF374B2DA860CE124C43256D1AC7FB31E2262D05EBED1",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-69D487B33650F5FB3B58C038C2EF49AA7692F884BD678701C4A2524E6953A89A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will commence in Spring 2025, alongside steps to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will commence in Spring 2025, alongside steps to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "process to identify a private sector partner",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-802BD284FA176A4E30DBD14AA31B49BD02B6DF55D6AD115D09809365703BFCA2",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-31A241F17D96230B36579B409B0F8D07FAB9F1C7740066AAAC5440C049EE9D1B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will co-chair a new AI Energy Council formed of industry leaders from the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will co-chair a new AI Energy Council formed of industry leaders from the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Energy Secretary",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-244D3DAE8235B1ED20317615032BD43599C166F87C157693B5E2DCB662AC9FB8",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B7563BC4940F6350E11886950428DE2FE8C0462843DCE2128B8ABC089CD7C71B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will provide expert insight on the energy needs of",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will provide expert insight on the energy needs of",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The Energy Council",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-714D73D97FD04F851DB5C1E31FD162665C3D1E05F798F9BBEF04045F22CFA5A7",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-46733CCDFAF423E3F8D292FAEE50585AEC01C3E2EADC43A0E83CBF0DF8701AFC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will responsibly, securely and ethically unlock the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will responsibly, securely and ethically unlock the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-40083C8693A793F4F857F5D40CA543A2445B7881BECC5FBB5137BB4A20D7781A",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-FC5EF06A431BA9EBDB5D726C54CA4786B7759D429ED8EEB9A1FB939DB97079F5"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will be",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will be",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Both",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-3B8D73468CAB88F0A719DBBF23F8B8A16E286F634881730E9498E95813E45925",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-C593C913CB45121AD82A2B8D30271BC60EB2949CF9DC975EE352BF829ACF6BCA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out further",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out further",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-AD8668BE5678C950BD6868871A9A055AD4D998C63CBD683299CFC260E95B8F06",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-0B87847201419FC2F4E359EB4D0EA89D2CA4B7B3DDF7EA1CEAC34C6B0DEFB869"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will be critical",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will be critical",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Creating a strong talent pipeline and ensuring we address wider skills demands",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B9974514FF3CC32B553BD658A4DF14908DC9496FA7E1BDB0A3E1D3D8BC649096",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-164B8A35ADFB79C8ECF84D5D3347929BAFA7DAF742AA399DC59896822D674526"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The creation of Skills England and the Curriculum and Assessment Review",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-A79CE6DE5509EA74A2246B24AD8C1ED87A1E5A4BDF74F7D492D18387A9DB13EB",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-E49EBACFEF410C8934C775F3FFE8E1D1646ABEC2814950A90EEF233DAB2C484F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with DfE, DBT and UKRI to take forward the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with DfE, DBT and UKRI to take forward the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-9A31470C687F3927A6815ED182D3481371CF5700E8FDA17F78640125F63DD092",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-4670D48AE3D212027AF178A80ED65827434FF19DAAF6A4B0451567EAABF43264"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will drive AI trust and adoption across the economy.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will drive AI trust and adoption across the economy.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "innovation",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-9245AA21D326421AD6F42FF3A64E418C3BED73F2BE1A1FD4406784417FD39DC4",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B9315E9B4BED18FA36BD5905589BB422AD6BF5AD3FE526CCD3625DE7785FD7F6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out its",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out its",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-15437534192CBBDECA6184E98C4203E2868B7BB04C5C7D3F221B642C594BDB53",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-3EFFDF11DBA72C30EA4CA51805CC9B8587DC12D83C916C86427045D845720642"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will act to ensure that we have a competitive copyright regime",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will act to ensure that we have a competitive copyright regime",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "approach on AI regulation and",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-A4E8FBC6CA62F3C735FDD259B98BEDB79B60921136877AA697DBF13A51F0B4FE",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-EEC47D8C3FCEF9324F0634C2A39BADEEF955697B974883371CD20D0B9EF3DE9F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will take forward Matt Clifford’s recommendations on",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will take forward Matt Clifford’s recommendations on",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "stimulate growth through AI adoption, we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-C822260B9E38B68ACE6F8A3336A4DEDC243E4193494A3F2487E208EDD53792B7",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-D380C3235EDABCE1FE69C8D286A029B74B59C30C20AC7A8883F6BFB525DBFD0A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "intend to accept these recommendations in full and start by prioritising",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "intend to accept these recommendations in full and start by prioritising",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-D8754C69C01AE7FBF8347D7FB24EE334764027EEFBEB2EAA65ACC33071A06A9D",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-C8AD369376E36739FB57DD7EA5F3CD79C7FD704A76BA72C60194093254FDD86F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will appoint AI Champions in particular sectors highlighted in the Industrial",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will appoint AI Champions in particular sectors highlighted in the Industrial",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-1D36747DB15822DD3451650463DB5DBEA3B1C5B4E2C6A15389FE1547F964DD6E",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-FF7AF2BABC8BDEF6306279EC8A28562E8F522C85F8A6348E3E5248B60F8FFCA8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also work with devolved and local government to identify AI adoption",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also work with devolved and local government to identify AI adoption",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-0EB12CD7392C9A941358BA020961F115BBC9B61059C249741390BA72EE5467F2",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-5CC503C0F7B986086C1981F4BE9558DCC0DE963E765F67538267C7BB2FEC0D8A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will launch a new function with the mandate to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will launch a new function with the mandate to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "To seize this opportunity, the government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-F2A9F4E9595621B42E74B06C2E24B04B4A78860C53F6A0F3BD8579EFE1680DDD",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-EB05147FC7E7BABBB94A187DB49DF60C00835B0F755BAAF17F998B5C19156B95"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will operate with agility and draw on wider government functions to partner",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will operate with agility and draw on wider government functions to partner",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The function",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-46892A07CCC9FD177A6369BDD7A7FDEE31A12847CAFFD6EF19B72D12A535FE6C",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-C9DB5658B29BD19E0FD720C4932D93F78404175222AD7B6B42BB0C61E11EE054"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will require an agile team with leading industry expertise.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require an agile team with leading industry expertise.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Achieving this ambitious mandate",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-17522A30E1EBB599F30FF2CEAC3F698AFAF6FFFC64D2C724BE50F6BB2B149D9A",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-73088E2C3913F7263C7A2B7CFF4C4B090A108EF618D1CBA2DE8F601A430E09E8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will provide further details by Spring 2025.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will provide further details by Spring 2025.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-EE5996E6EEE9FC1F5D705F7ED523379E454A8B2B129CE8FD505B0985927DEED5",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-8575C95DD90D7FC70D9371069DB7D0CD717670790704FE07FD7CEDD09A71F45F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will continue to develop its policy response to the Action Plan as part of the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will continue to develop its policy response to the Action Plan as part of the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-8981D5CC85D0E2DB24B98A8602258208464A5B93E72EAF9FD5757BCCDA66EBFB",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-7BED77E25C61DFD6B7A743F99FD988A4AD364EA3E7E0E9A78E774A134181B625"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will report to him regularly on progress across government.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will report to him regularly on progress across government.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "AI Opportunities Unit in DSIT which",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-C382777A948EA40522F823E20A25A04E807899A69789697183D7F3718BADE541",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-14429F7F487976D9ECE5C52357A6EAE2CE466959CF10F5C2AE375362ADC67234"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will publish a long-term",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will publish a long-term",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-1B7B84093E4261D92771F5AD6739006A6A1FB1890C5F7BAAC2C4B984F54EDF5B",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-903C6E447C980295EBF5891A3469DF3A8590418E92EBED0B08D37AAA90E7B9A8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out how we will",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out how we will",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B1C86029497431891ED1F05FE1CD4921EED917F47DAC10830869CD6EB945A67F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-ACF4ACC26F01C7B5691050F6C34070A846163DE373B542DC00108B1A4C573935"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will at least double the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will at least double the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "facility that",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-01B193083B47CE2FE9EA80EC59A6F26A0B3A6E6403882B35B6A969301BD52699",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B5F512102F6A279893754AD1181239CC6611EB19481173A7F9CD496DABB14B8C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out mission-",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out mission-",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-BDE2E013CC1C05F112D1919725A72F8241301F3D4213EF526759531BCE8654C8",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-1FA0B74AD3966860532BAE9C21EAC882A561BB47BC2EBCAE58B0363110A0C88A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will be",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will be",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "compute strategy that",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-749A0BB687A32AA17EC05079EB5227894424AE9836DA26C8A32EF08590685DA8",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-FABFE24B6E53366621D257465B375D9DBCCAD935149C9DF5D2F0E352D03CFF94"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will deliver",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will deliver",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-CB01C70B76A21EA577D75D253387FFD2042E967B4644311CB4D26A48D44248D1",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-4D8DFAC88DEC31D84ADA37F9C7D2B85483E7932149032D842288DCBE3451F3EA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out a",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out a",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "2025, the government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-F00FD754831DF629E76B4784BC7DF155E48CB9B4B0A383D4366C8CC263AEEB6B",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-D610705636D37BA33E51D6C45DF431A5B857DDC28EF76D05B96A8E7ECC1CFA95"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will take into",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will take into",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "This process",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-72CA4DA1008D5421976C10AB2CD0D7EF0B7FD33F5B6E4555C29F2EEF5FDE7155",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-0EC1A4A4F7BA6DE16DF4B8A7A194A365888320BFD41303EB00609F3BCF9732EE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out how the UK",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out how the UK",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B119B923322B17FF7FBF6A358A4877639EB2C268701684A33C862611352A3ECF",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-974D30FC870885987D94739C999024798436EAE8844833BD0D2B8EBF21094F47"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out its approach",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out its approach",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-887139827F40FCAF10BB27859EA243C4DC40BA0F69386773409D6B82A64352B9",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-2C5291F6FFBE6C5B187BCBA73DD3CCBFB94BC453AE571ACD6BCE05C1B6153427"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will seek to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will seek to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Data Library - NDL)",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-3B9A32C6ED9336AB263537E5FBA9A6C48CB8CE7B1509E0F826BD7E5105303815",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-67FC7850BAE945BBE92F306B7CCB26539D38B0797E3E69230D1D1C37608432FB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will explore how it will",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will explore how it will",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-0738140AFF7CAD987C3FD008F66256FADE226F48A0FC9F636F14C7D47E250C3F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-4721F9A88FA57941675F50581ACA5891E37E17147914F409A7F01C3EEDCF6508"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out further details",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out further details",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-71FEFA46941F877DAB5BDDCA35E6A3E82458DC8FBA91F3F8AD1CBB650C4D6340",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-D8CC459F415B89CFE2536C457AD6DD6EF060C43755B72FCED34504B0CE9E1FB1"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will bring businesses,",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will bring businesses,",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Skills England",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-DFC451F0971BA535DA6F2EE4E463CF5172B3C80C48F5F0F079E39FA26AC63CAF",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-CAB76D9670E343A1BA8D29479A7AF4B5B163611100065EB3C5C329D86265A39F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will be published",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will be published",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "assessments",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-F5EA5942BAC6CA4F20EF833EB311B1CA5C97364DD1D7D2AF343F26828B516A0E",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B1CA24EF170F4F2F514FAA999483132B2CF01F17D870ED82F22659D739DB1BB9"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT and DfE",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-1679D6BA7BC5D7025B883732D3779020A651FD022C1D2D5DF3D12D9DAEDEDFE4",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-F8E6B54F1AD31A5505A4AD282136D927D4984E03BBF57AFF8176D2A5AF5B1B19"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work together with industry",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work together with industry",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-4FC7083313F7F0B731A805298CCD651A957BC34F6E5767943E5113B35EC603EF",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-C97C68767AD65A36796E33FD36E8E7D76D9591CD7451326EBCD042B4AF2180E6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "plan to facilitate",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "plan to facilitate",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "to publish a",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-D2FF03660BD8C4263C3374DB3302951170E025ECF8520356621A345C84F7E8E6",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-CC956A2BEB29478D5DEE1E815C0153C0E9E092400587CFF3E2AAC9F0C7B73FC0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will bring businesses,",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will bring businesses,",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "England",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-0A397254FFE4FCCC4758FB15E21DC6803A412AAF20389411F879136D547D4AFD",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-7A0F8C49181A6AB076EAFFFF9F818A9E4D18CDCBF93BF48D4C5D9D3876700DD4"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with UKRI to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with UKRI to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-3847A8F9F21475E59503F738555AEDB36A8AC90A56544BF7F662A3C43AE503EF",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-515F0F450215C4A160B1D24A9A844F5495E29E8D2F8072A4832DE1DA3D7E5CCF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will take this forward with",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will take this forward with",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DfE",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-BD78540EA13E3777343C20C8B2A2886D1CFE9432921D51D11545148347DB381F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-DE373DC60A4DCC5E28EB2B29BEC96A624163999F4A8D23B485542B46099930E9"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will consider",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will consider",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT and DBT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-530C6EADF6881EF21BD9771B70ADE0987C734407F991BB5C7E23C91CC1CA701A",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-D8DB5B12D861C488FC72F1E0E2EA5E3DFDF85347E739473514D259CE0F1E3A52"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will set out how the UK will",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will set out how the UK will",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Strategy",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-91871E6AC8F1054E04517A9CFF5D8330359832E98CB16AF21F16C204FDF008A0",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-77256EB1A79D137A1A874D69C4D751460A31C3FC2B935CD8D48E17443367707A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with UKRI to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with UKRI to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-60C8948485F0BC40131AAB3FAF99C6E36C1B45E9EDBC3DB7836AD511F49DE2D6",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-6C52CC8C5355CE25A9FF311691ED57FFA4CE4E84073D3628C712DBC8F762D0F1"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will confirm AISI’s",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will confirm AISI’s",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-E505387D8DE26A5285B3B84D4F1A8D31C688F803D89A3703FE3ED0DFA45628A9",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B01C1CCB4EC7545865EFB79709A8BA468D031A00B05A521A2DBCC7C5327FCF1C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will consult on",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will consult on",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B0042ED4AED3357EAA9969A298E94258AFE499ACCC21AA821D0604F99EB24BB4",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-4087D56ECACC95DA394AD1CF394C455C9211218B77E050A2699F61A59438D0BC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "intends to establish AISI",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "intends to establish AISI",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-8A90B6B08A0F5246EF23F8EEDAE758EFCCABCD714238C358495C2090634FC69A",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-55910EA092868AE0F0AA51BE0A87721C666D0A123B06F244E5C18FBE7902199A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Commit to funding regulators to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "Commit to funding regulators to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Recommendation 25",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-FE02C9AB4047C9C73DD0EFB63EDD141942476D395E199D6CA36EC305E48CC417",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-DACFD0C941895A6D19D24EFC5E3927E7240A2A799F53BD99AA28FDE868649847"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will liaise with their",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will liaise with their",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "department",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-FB34456E8E1B2CF17F0180A976C46D9B73D14D7A9067804BAE1F648EEB8E361F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-DB331DD694179B5A26AB09901F754F4BD79EC10EC79A8ABDDB7A609F0AD88CF2"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "commit to stressing the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "commit to stressing the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "departments",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-2BD2311140FA825C05373526E07BF2E340C787C071B8BDF8D3DDC4D6B993CD84",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-40C30BC128FD21111A6D5DF348A5DD3CC6AF66E7FA27AC9435A76D1E3ECFB020"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work together to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work together to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DBT and DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-2D4BDC2CB17B42FAE780734396C5878820DD627BB3B12E1C99E8ABEB729DA068",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-203E7DB39B35C49D36BB032FA617EEF3953F3B54D404C70D88BB7DABC173B224"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with DBT",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with DBT",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "strategy, the RIO",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-EB9E37A441F3BA26B316CA03B661FD28329DDEC5E758E0B5210E4039FC138696",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-F38AFCC50F3C9D20AECCBDDF8F3015596FE2752C15D96716D58435BB60F42D3D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will provide a",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will provide a",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DBT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-5C453C2374657DF9E22F5C0C9DDE0C8DCE4B5547E77B50D7AE00125FD7F8FD62",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-7629B371A127161BABCFCC496FC115D5CA327AC50AFF9D459DB8E2EFA2421EEA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will update",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will update",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-B167494EF02D89B6837418BDAD78D18A2B65EDE4E79F15E356E87B2E46D6452F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-2C2571C10D5B53EA32F95E19983CC19EA704AC1FB67E02CAEE6D2F8853BDDC36"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with sponsor",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with sponsor",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-BEFCB4B3A9BEBA4214D9EA0A6D86B266E1D83ED38B76F8CD92E4C6B62155C842",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-A06D1151218F6A5A0FBAB9CB93E247F7C60C637CF6148A9242AFD8ED87F9CEBB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will seek to prioritise",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will seek to prioritise",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-D2B5F99B0DD5729760BACBFDAF64EE1122376A5EAE480CBFDEAD759E166DE0DB",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B740BB61D701D38729B09BAFCAD95DFD1646FE79F6E5182C6137895134D3FC84"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also explore",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also explore",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-3C039BA480811A2BE6954F9905A94B904A3968D66419AA13A934EA7D837A289F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-1964AF907B96567143A236C2ED6CF36B051F452088DDA5F4C6627A714817DCC7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with the Alan",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with the Alan",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-2A945A4FD746A93D81C561DD67A624113FA95CA2D8BD1E18B603671FFE2B9137",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-58516D2033CDF4378F94E24204C218E02F93382DA21E853C1AF4AE6386C44094"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will appoint an AI",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will appoint an AI",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Government, DSIT",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-F6044691D889B6C3A3960AB07D59866A2062EC62D6A640A12E84B8AA447E8B0F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-FADF136ED1B3FC3621ECC527DECB990D17F86B9C00F4810618F0796679631883"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will build a cross-",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will build a cross-",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-904A1C738E9050E321DD4F5099F48339B27E550F01A1FE87D688613A57D295B5",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-6EFC44E80687FB81B4FAC24BF179045693F0542BCE5CD78F88912379CA7140F7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will explore two-way",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will explore two-way",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-52D59424CA92B629C6DB0CF99D915B18885BAFF1DABABF39E5877DA3AC6CF405",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-43102351814D490C2E1CC3AEBBE120D2EC3500B210620B5446A5F653932D9FAB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will develop a",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will develop a",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-9F2C9A55954FADFDC391831D69F5D8CDEDBFEA91B7C011867BAF70C28D7509B4",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-4C4BC5E2566A06738F9DA46AA14BC42C934A2F62DF37362C07E2DC770216443B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will have a rapid",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will have a rapid",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-BE07336789B934FBFA28A32C2BB6B8857AEAC69FE4C60DF7AE763C81F919DE99",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-4B9EDA42CBC1C44808FA94ECE6EA5714212ACA83384510D72ABA112BB7F32F4D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will build on i.AI and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will build on i.AI and",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-D10F0C8DEA9C3B7853609970ECB252E49DAB7E8D0606AEB5C47BAC9EB76981BF",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-43973788EFDC0C349062E0B76FEA25DD943CDE59F6E7C928CC8A8835A022A399"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will build on i.AI’s",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will build on i.AI’s",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-A67446ABF2943D255008228609BA6452CEE21F9E54FD3AF4ADAEF8C2F526B922",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-01C7C8A7F3926AF41D09F532758ADC51243848417B246AE417E402B9E6A71843"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will scope and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will scope and",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-D3F5220A827587F299038C7B3C59EC49785A57AE5D0E6E3FD6101261B030F2C1",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-CFC40E222C67FB4965B7213F650ABFF9E2DEB06C51747B334F1F41D95B1469CC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will scope the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will scope the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-9F59485F09732B4620F1C1E0F654827D59F11CAC5ED143308D3236E836019372",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-A777D11E95F89463FBC1B24004A27E1F09E714AD766215D4E2E1A166B9B3EF0B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will scope options to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will scope options to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-BF33F512CD7A1348CCEDEA9820386D8E917773CA120CDE52A3CCE56028BED2CC",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-75DA61BA9225434BF0307F72DF51FC0342848AE552B7F752E900E30AC1D7DC6B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will learn from other",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will learn from other",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-D613EBBA6296E1415F2A46722EFAE33654C9F5EBFA9DE9B36B9E2578BA7C2832",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-9C94A92F27A2955263934C1059D9B291D00BB16A2B16E5A02DD780D0BD1FE58A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will commit to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will commit to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-2833C2C1F7FA06572AFA167C4DEA8A2D2A917D0CE845DFDD1B16C944171F8379",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-B786F1AA14AA29B95D2FCE047484FFE2C3707DE458834A544CD6C04764EA6CA3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will procure smartly from",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will procure smartly from",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-BC900E3FCE6AB1B08A0AA1098D3A8D8E1FECCE56E1CBE0E3BAC728B4D9540E2C",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-0688C93EA62572161BA364DF22E4E8E879EF71A6EADA8A59B450711DCF5B9EAC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will scope options to use",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will scope options to use",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-6253856832F4D2FE58252517899A666048D1D821A5DEFF7EF7056C078E9AA69A",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-29C156887F3A99E5F518F05404FF1488AA5F5E875FC96A18DEBB1EFEC04F243B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will pilot the AI",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will pilot the AI",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-4FDC4AA48E7F095FBCCA15B593A633D6F19134CD737331E8C2B3B5C78FE16ED6",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-A6366B9FADBF902B71C9344E582A30AB31DD31AEAD3CB76A36AB77CF07A1B05A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will rapidly",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will rapidly",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "following ‘quick wins’, and",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-226595CAA0C37B42CBDB52C212D3125F1DB4F991BAB1C0E6C5A2CE9AB667D32C",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-168D0C2CD7A3D85D62628475126A0BBE55C2848AFF0258E6652B9702E974603B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with HMT, DBT",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with HMT, DBT",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-126876F3F0FEDDE5EFC8F0F42DE83D8DC6735359C686FF80D0BE6C67B9F5B914",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-FB1167E15CE71719D16F984D693F80227DDB3AE5B617B227F4051262EAE1EC5D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will build",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will build",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "This work",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-D9EB7AB55CCDB3AB8F6B501DAA0DF58C26321A545B6BD7A474D8597642438249",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-5CD9985516C0C02085467B1230FC229364480AD8DC82AF6A77DABC660E7CC428"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT, HMT and DBT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-3BF2C2F957C2E63EC74747961DE99395309D375DCC3703752B717B569C6D741B",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-1D21CF51D2ACEE5D5B43F3A8A3CA0441BF638D463047A0D73753ED60C3D16B03"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will work with devolved",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with devolved",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "DSIT",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-7B8F03C76EA2C4FA6D0078D1FE928806DE9A2006AE699EA20FD37431CDA498BE",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-C40524DAEAC697A4D978B250013011A38AD7080F8E24000CA27EB35762545E99"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will create a",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will create a",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "DET-CAND-3AE20C6A7E7266EB7318BB86A99DA2F220EBABB6633F86AA19336AE7677B326D",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "DET-EVID-9B93F33B8C5F41B37F0D62978AC60C632CD8B59EAEF53DA70B111C74FB49B59F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will draw on wider",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will draw on wider",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "new function which",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S002-B0003",
+      "evidence_id": "DET-EVID-3F0A0BB62045A73A16C345A09171DBF590CDADC309C52E68CFEBE95DEA843E88",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "3",
+      "source_id": "S002",
+      "text_excerpt": "Where we have identified any third party copyright information you will need to obtain permission from the"
+    },
+    {
+      "block_id": "DOC-S002-B0003",
+      "evidence_id": "DET-EVID-B4F11C9BC096FDBDA6448CADA33C55D7AA528A343A1A29CFA63326ECD0FB168A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "3",
+      "source_id": "S002",
+      "text_excerpt": "E03258823 01/25\nPrinted on paper containing 40% recycled fibre content minimum."
+    },
+    {
+      "block_id": "DOC-S002-B0005",
+      "evidence_id": "DET-EVID-30C08503524D5BA425673CCB1ED030C7104E28F64B68039C83D7E49E5E8DF0D6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S002",
+      "text_excerpt": "In short, in the coming years, there is barely an aspect of our society that will remain"
+    },
+    {
+      "block_id": "DOC-S002-B0005",
+      "evidence_id": "DET-EVID-5378DFAC3C12E4ABAE6F7BE99023178479D318F2883013C55CB2C59124973D83",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S002",
+      "text_excerpt": "But this Government will not sit back passively and wait for"
+    },
+    {
+      "block_id": "DOC-S002-B0005",
+      "evidence_id": "DET-EVID-056624173D7559907E07A94B19FD7FD7086640734263AFE84AA60DF896F7DE76",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S002",
+      "text_excerpt": "Other countries will be left to buy those breakthroughs by importing"
+    },
+    {
+      "block_id": "DOC-S002-B0005",
+      "evidence_id": "DET-EVID-FFA4793BC6D7012CC0AD9FC5365B9A46095E348DB0448BAA37E87A40EA3FB7D2",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S002",
+      "text_excerpt": "This Action Plan sets out how Britain will be the former – a plan to make our country an"
+    },
+    {
+      "block_id": "DOC-S002-B0005",
+      "evidence_id": "DET-EVID-044E0DC4571FC8BE920741CEF91BDB375A3BE53E87F00BCD90C3310AABD9B6B4",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S002",
+      "text_excerpt": "Nonetheless, this race is speeding up and we must continue to move fast."
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-2684D1128F8509113083D42362E1A4044B349DE76DA53282C61B56313A777F1E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "We will take forward the recommendation to expand our sovereign compute"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-54451F59BFAEBE92A6A117823FDAD97200CAB84AEFB8E56E1DFE472B55139949",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "The government will now start delivery of a new state of the art supercomputing facility that will"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-648F38D8A1EB7B1BAB0CB448471E21F9C6DB0DCE4A3EFDFE5675D93E007782D7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will immediately start to"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-37A4CD55AA6F315D53FCF9B4FEF3B13013CAEDCE2B44C22269CE13344CB7E219",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "researchers and SMEs will be able to begin accessing the AI Research Resource in early"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-4C815CCC8A6F2EB3133372C20E016A6927D6ECB993A847FCC0B383850C4F5FC1",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "The government will also work with stakeholders to develop a long-term compute strategy that"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-528FF2F58D736E2AF8CCEA1BB0164B5ED48503141C29D1D5B639E0EB532BCCE6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "scientific innovations and discoveries that will drive productivity and growth throughout the"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-516C6AED6F5B0E9BB3DA0111C1B5711981B68A8BF44DF5D75FD7F3B46807B82B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "The government will publish the Compute Strategy in Spring 2025."
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-AD5EFE6BE94C0EB965939DD71A59A611D9374171F5121F72022F95864B58C906",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "As the Action Plan sets out, the UK must maximise opportunities to crowd in private sector"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-0A7B23F6DA23B637018DAF4677DAF75E38C5AEB3175028F20CD6EA85888C2B88",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "The government will create"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "DET-EVID-855112B3DF0CBB4926D5EB60DF173705C80A817D9DD3EF6944583B5733C935B7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "investment in UK data centres which will spur economic growth and AI innovation in Britain’, 2024 (Accessed 04"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-263091892536DF4070D13E14E038075A035A55DD6E012AEC73D25B5942EF1D75",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "The government and UKAEA will seek a private-sector partner who would"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-69D487B33650F5FB3B58C038C2EF49AA7692F884BD678701C4A2524E6953A89A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "process to identify a private sector partner will commence in Spring 2025, alongside steps to"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-31A241F17D96230B36579B409B0F8D07FAB9F1C7740066AAAC5440C049EE9D1B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "Energy Secretary will co-chair a new AI Energy Council formed of industry leaders from the"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-B7563BC4940F6350E11886950428DE2FE8C0462843DCE2128B8ABC089CD7C71B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "The Energy Council will provide expert insight on the energy needs of"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-46733CCDFAF423E3F8D292FAEE50585AEC01C3E2EADC43A0E83CBF0DF8701AFC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "We will responsibly, securely and ethically unlock the"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-FC5EF06A431BA9EBDB5D726C54CA4786B7759D429ED8EEB9A1FB939DB97079F5",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "Both will be"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-C593C913CB45121AD82A2B8D30271BC60EB2949CF9DC975EE352BF829ACF6BCA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "The government will set out further"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-0B87847201419FC2F4E359EB4D0EA89D2CA4B7B3DDF7EA1CEAC34C6B0DEFB869",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "Creating a strong talent pipeline and ensuring we address wider skills demands will be critical"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-164B8A35ADFB79C8ECF84D5D3347929BAFA7DAF742AA399DC59896822D674526",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "The creation of Skills England and the Curriculum and Assessment Review will also"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-E49EBACFEF410C8934C775F3FFE8E1D1646ABEC2814950A90EEF233DAB2C484F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work with DfE, DBT and UKRI to take forward the"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-4670D48AE3D212027AF178A80ED65827434FF19DAAF6A4B0451567EAABF43264",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "innovation will drive AI trust and adoption across the economy."
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-B9315E9B4BED18FA36BD5905589BB422AD6BF5AD3FE526CCD3625DE7785FD7F6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "The government will set out its"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "DET-EVID-3EFFDF11DBA72C30EA4CA51805CC9B8587DC12D83C916C86427045D845720642",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "approach on AI regulation and will act to ensure that we have a competitive copyright regime"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-EEC47D8C3FCEF9324F0634C2A39BADEEF955697B974883371CD20D0B9EF3DE9F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "stimulate growth through AI adoption, we will take forward Matt Clifford’s recommendations on"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-D380C3235EDABCE1FE69C8D286A029B74B59C30C20AC7A8883F6BFB525DBFD0A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "We intend to accept these recommendations in full and start by prioritising"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-C8AD369376E36739FB57DD7EA5F3CD79C7FD704A76BA72C60194093254FDD86F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "Government will appoint AI Champions in particular sectors highlighted in the Industrial"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-FF7AF2BABC8BDEF6306279EC8A28562E8F522C85F8A6348E3E5248B60F8FFCA8",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will also work with devolved and local government to identify AI adoption"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-5CC503C0F7B986086C1981F4BE9558DCC0DE963E765F67538267C7BB2FEC0D8A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "To seize this opportunity, the government will launch a new function with the mandate to"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-EB05147FC7E7BABBB94A187DB49DF60C00835B0F755BAAF17F998B5C19156B95",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "The function will operate with agility and draw on wider government functions to partner"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-C9DB5658B29BD19E0FD720C4932D93F78404175222AD7B6B42BB0C61E11EE054",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "Achieving this ambitious mandate will require an agile team with leading industry expertise."
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-73088E2C3913F7263C7A2B7CFF4C4B090A108EF618D1CBA2DE8F601A430E09E8",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "The government will provide further details by Spring 2025."
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "DET-EVID-8575C95DD90D7FC70D9371069DB7D0CD717670790704FE07FD7CEDD09A71F45F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "The government will continue to develop its policy response to the Action Plan as part of the"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-7BED77E25C61DFD6B7A743F99FD988A4AD364EA3E7E0E9A78E774A134181B625",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "AI Opportunities Unit in DSIT which will report to him regularly on progress across government."
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-14429F7F487976D9ECE5C52357A6EAE2CE466959CF10F5C2AE375362ADC67234",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will publish a long-term"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-903C6E447C980295EBF5891A3469DF3A8590418E92EBED0B08D37AAA90E7B9A8",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will set out how we will"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-ACF4ACC26F01C7B5691050F6C34070A846163DE373B542DC00108B1A4C573935",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "facility that will at least double the"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-B5F512102F6A279893754AD1181239CC6611EB19481173A7F9CD496DABB14B8C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will set out mission-"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-1FA0B74AD3966860532BAE9C21EAC882A561BB47BC2EBCAE58B0363110A0C88A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "compute strategy that will be"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-FABFE24B6E53366621D257465B375D9DBCCAD935149C9DF5D2F0E352D03CFF94",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "The government will deliver"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-4D8DFAC88DEC31D84ADA37F9C7D2B85483E7932149032D842288DCBE3451F3EA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "2025, the government will set out a"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "DET-EVID-D610705636D37BA33E51D6C45DF431A5B857DDC28EF76D05B96A8E7ECC1CFA95",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "This process will take into"
+    },
+    {
+      "block_id": "DOC-S002-B0010",
+      "evidence_id": "DET-EVID-0EC1A4A4F7BA6DE16DF4B8A7A194A365888320BFD41303EB00609F3BCF9732EE",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will set out how the UK"
+    },
+    {
+      "block_id": "DOC-S002-B0010",
+      "evidence_id": "DET-EVID-974D30FC870885987D94739C999024798436EAE8844833BD0D2B8EBF21094F47",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will set out its approach"
+    },
+    {
+      "block_id": "DOC-S002-B0010",
+      "evidence_id": "DET-EVID-2C5291F6FFBE6C5B187BCBA73DD3CCBFB94BC453AE571ACD6BCE05C1B6153427",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S002",
+      "text_excerpt": "Data Library - NDL) will seek to"
+    },
+    {
+      "block_id": "DOC-S002-B0010",
+      "evidence_id": "DET-EVID-67FC7850BAE945BBE92F306B7CCB26539D38B0797E3E69230D1D1C37608432FB",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will explore how it will"
+    },
+    {
+      "block_id": "DOC-S002-B0010",
+      "evidence_id": "DET-EVID-4721F9A88FA57941675F50581ACA5891E37E17147914F409A7F01C3EEDCF6508",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S002",
+      "text_excerpt": "government will set out further details"
+    },
+    {
+      "block_id": "DOC-S002-B0012",
+      "evidence_id": "DET-EVID-D8CC459F415B89CFE2536C457AD6DD6EF060C43755B72FCED34504B0CE9E1FB1",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S002",
+      "text_excerpt": "Skills England will bring businesses,"
+    },
+    {
+      "block_id": "DOC-S002-B0012",
+      "evidence_id": "DET-EVID-CAB76D9670E343A1BA8D29479A7AF4B5B163611100065EB3C5C329D86265A39F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S002",
+      "text_excerpt": "assessments will be published"
+    },
+    {
+      "block_id": "DOC-S002-B0012",
+      "evidence_id": "DET-EVID-B1CA24EF170F4F2F514FAA999483132B2CF01F17D870ED82F22659D739DB1BB9",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S002",
+      "text_excerpt": "DSIT and DfE will work"
+    },
+    {
+      "block_id": "DOC-S002-B0012",
+      "evidence_id": "DET-EVID-F8E6B54F1AD31A5505A4AD282136D927D4984E03BBF57AFF8176D2A5AF5B1B19",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work together with industry"
+    },
+    {
+      "block_id": "DOC-S002-B0012",
+      "evidence_id": "DET-EVID-C97C68767AD65A36796E33FD36E8E7D76D9591CD7451326EBCD042B4AF2180E6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S002",
+      "text_excerpt": "to publish a plan to facilitate"
+    },
+    {
+      "block_id": "DOC-S002-B0012",
+      "evidence_id": "DET-EVID-CC956A2BEB29478D5DEE1E815C0153C0E9E092400587CFF3E2AAC9F0C7B73FC0",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S002",
+      "text_excerpt": "England will bring businesses,"
+    },
+    {
+      "block_id": "DOC-S002-B0013",
+      "evidence_id": "DET-EVID-7A0F8C49181A6AB076EAFFFF9F818A9E4D18CDCBF93BF48D4C5D9D3876700DD4",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work with UKRI to"
+    },
+    {
+      "block_id": "DOC-S002-B0013",
+      "evidence_id": "DET-EVID-515F0F450215C4A160B1D24A9A844F5495E29E8D2F8072A4832DE1DA3D7E5CCF",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S002",
+      "text_excerpt": "DfE will take this forward with"
+    },
+    {
+      "block_id": "DOC-S002-B0013",
+      "evidence_id": "DET-EVID-DE373DC60A4DCC5E28EB2B29BEC96A624163999F4A8D23B485542B46099930E9",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S002",
+      "text_excerpt": "DSIT and DBT will consider"
+    },
+    {
+      "block_id": "DOC-S002-B0013",
+      "evidence_id": "DET-EVID-D8DB5B12D861C488FC72F1E0E2EA5E3DFDF85347E739473514D259CE0F1E3A52",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S002",
+      "text_excerpt": "Strategy will set out how the UK will"
+    },
+    {
+      "block_id": "DOC-S002-B0014",
+      "evidence_id": "DET-EVID-77256EB1A79D137A1A874D69C4D751460A31C3FC2B935CD8D48E17443367707A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work with UKRI to"
+    },
+    {
+      "block_id": "DOC-S002-B0014",
+      "evidence_id": "DET-EVID-6C52CC8C5355CE25A9FF311691ED57FFA4CE4E84073D3628C712DBC8F762D0F1",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will confirm AISI’s"
+    },
+    {
+      "block_id": "DOC-S002-B0014",
+      "evidence_id": "DET-EVID-B01C1CCB4EC7545865EFB79709A8BA468D031A00B05A521A2DBCC7C5327FCF1C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will consult on"
+    },
+    {
+      "block_id": "DOC-S002-B0014",
+      "evidence_id": "DET-EVID-4087D56ECACC95DA394AD1CF394C455C9211218B77E050A2699F61A59438D0BC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S002",
+      "text_excerpt": "government intends to establish AISI"
+    },
+    {
+      "block_id": "DOC-S002-B0014",
+      "evidence_id": "DET-EVID-55910EA092868AE0F0AA51BE0A87721C666D0A123B06F244E5C18FBE7902199A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S002",
+      "text_excerpt": "Recommendation 25\nCommit to funding regulators to"
+    },
+    {
+      "block_id": "DOC-S002-B0014",
+      "evidence_id": "DET-EVID-DACFD0C941895A6D19D24EFC5E3927E7240A2A799F53BD99AA28FDE868649847",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S002",
+      "text_excerpt": "department will liaise with their"
+    },
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "DET-EVID-DB331DD694179B5A26AB09901F754F4BD79EC10EC79A8ABDDB7A609F0AD88CF2",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "departments commit to stressing the"
+    },
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "DET-EVID-40C30BC128FD21111A6D5DF348A5DD3CC6AF66E7FA27AC9435A76D1E3ECFB020",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "DBT and DSIT will work together to"
+    },
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "DET-EVID-203E7DB39B35C49D36BB032FA617EEF3953F3B54D404C70D88BB7DABC173B224",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "strategy, the RIO will work with DBT"
+    },
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "DET-EVID-F38AFCC50F3C9D20AECCBDDF8F3015596FE2752C15D96716D58435BB60F42D3D",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "DBT will provide a"
+    },
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "DET-EVID-7629B371A127161BABCFCC496FC115D5CA327AC50AFF9D459DB8E2EFA2421EEA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will update"
+    },
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "DET-EVID-2C2571C10D5B53EA32F95E19983CC19EA704AC1FB67E02CAEE6D2F8853BDDC36",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work with sponsor"
+    },
+    {
+      "block_id": "DOC-S002-B0016",
+      "evidence_id": "DET-EVID-A06D1151218F6A5A0FBAB9CB93E247F7C60C637CF6148A9242AFD8ED87F9CEBB",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will seek to prioritise"
+    },
+    {
+      "block_id": "DOC-S002-B0016",
+      "evidence_id": "DET-EVID-B740BB61D701D38729B09BAFCAD95DFD1646FE79F6E5182C6137895134D3FC84",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will also explore"
+    },
+    {
+      "block_id": "DOC-S002-B0016",
+      "evidence_id": "DET-EVID-1964AF907B96567143A236C2ED6CF36B051F452088DDA5F4C6627A714817DCC7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work with the Alan"
+    },
+    {
+      "block_id": "DOC-S002-B0016",
+      "evidence_id": "DET-EVID-58516D2033CDF4378F94E24204C218E02F93382DA21E853C1AF4AE6386C44094",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S002",
+      "text_excerpt": "Government, DSIT will appoint an AI"
+    },
+    {
+      "block_id": "DOC-S002-B0017",
+      "evidence_id": "DET-EVID-FADF136ED1B3FC3621ECC527DECB990D17F86B9C00F4810618F0796679631883",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will build a cross-"
+    },
+    {
+      "block_id": "DOC-S002-B0017",
+      "evidence_id": "DET-EVID-6EFC44E80687FB81B4FAC24BF179045693F0542BCE5CD78F88912379CA7140F7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will explore two-way"
+    },
+    {
+      "block_id": "DOC-S002-B0017",
+      "evidence_id": "DET-EVID-43102351814D490C2E1CC3AEBBE120D2EC3500B210620B5446A5F653932D9FAB",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will develop a"
+    },
+    {
+      "block_id": "DOC-S002-B0017",
+      "evidence_id": "DET-EVID-4C4BC5E2566A06738F9DA46AA14BC42C934A2F62DF37362C07E2DC770216443B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will have a rapid"
+    },
+    {
+      "block_id": "DOC-S002-B0017",
+      "evidence_id": "DET-EVID-4B9EDA42CBC1C44808FA94ECE6EA5714212ACA83384510D72ABA112BB7F32F4D",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will build on i.AI and"
+    },
+    {
+      "block_id": "DOC-S002-B0018",
+      "evidence_id": "DET-EVID-43973788EFDC0C349062E0B76FEA25DD943CDE59F6E7C928CC8A8835A022A399",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "18",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will build on i.AI’s"
+    },
+    {
+      "block_id": "DOC-S002-B0018",
+      "evidence_id": "DET-EVID-01C7C8A7F3926AF41D09F532758ADC51243848417B246AE417E402B9E6A71843",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "18",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will scope and"
+    },
+    {
+      "block_id": "DOC-S002-B0018",
+      "evidence_id": "DET-EVID-CFC40E222C67FB4965B7213F650ABFF9E2DEB06C51747B334F1F41D95B1469CC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "18",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will scope the"
+    },
+    {
+      "block_id": "DOC-S002-B0018",
+      "evidence_id": "DET-EVID-A777D11E95F89463FBC1B24004A27E1F09E714AD766215D4E2E1A166B9B3EF0B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "18",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will scope options to"
+    },
+    {
+      "block_id": "DOC-S002-B0018",
+      "evidence_id": "DET-EVID-75DA61BA9225434BF0307F72DF51FC0342848AE552B7F752E900E30AC1D7DC6B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "18",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will learn from other"
+    },
+    {
+      "block_id": "DOC-S002-B0019",
+      "evidence_id": "DET-EVID-9C94A92F27A2955263934C1059D9B291D00BB16A2B16E5A02DD780D0BD1FE58A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "19",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will commit to"
+    },
+    {
+      "block_id": "DOC-S002-B0019",
+      "evidence_id": "DET-EVID-B786F1AA14AA29B95D2FCE047484FFE2C3707DE458834A544CD6C04764EA6CA3",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "19",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will procure smartly from"
+    },
+    {
+      "block_id": "DOC-S002-B0019",
+      "evidence_id": "DET-EVID-0688C93EA62572161BA364DF22E4E8E879EF71A6EADA8A59B450711DCF5B9EAC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "19",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will scope options to use"
+    },
+    {
+      "block_id": "DOC-S002-B0019",
+      "evidence_id": "DET-EVID-29C156887F3A99E5F518F05404FF1488AA5F5E875FC96A18DEBB1EFEC04F243B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "19",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will pilot the AI"
+    },
+    {
+      "block_id": "DOC-S002-B0019",
+      "evidence_id": "DET-EVID-A6366B9FADBF902B71C9344E582A30AB31DD31AEAD3CB76A36AB77CF07A1B05A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "19",
+      "source_id": "S002",
+      "text_excerpt": "following ‘quick wins’, and will rapidly"
+    },
+    {
+      "block_id": "DOC-S002-B0020",
+      "evidence_id": "DET-EVID-168D0C2CD7A3D85D62628475126A0BBE55C2848AFF0258E6652B9702E974603B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "20",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work with HMT, DBT"
+    },
+    {
+      "block_id": "DOC-S002-B0020",
+      "evidence_id": "DET-EVID-FB1167E15CE71719D16F984D693F80227DDB3AE5B617B227F4051262EAE1EC5D",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "20",
+      "source_id": "S002",
+      "text_excerpt": "This work will build"
+    },
+    {
+      "block_id": "DOC-S002-B0020",
+      "evidence_id": "DET-EVID-5CD9985516C0C02085467B1230FC229364480AD8DC82AF6A77DABC660E7CC428",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "20",
+      "source_id": "S002",
+      "text_excerpt": "DSIT, HMT and DBT will work"
+    },
+    {
+      "block_id": "DOC-S002-B0021",
+      "evidence_id": "DET-EVID-1D21CF51D2ACEE5D5B43F3A8A3CA0441BF638D463047A0D73753ED60C3D16B03",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "21",
+      "source_id": "S002",
+      "text_excerpt": "DSIT will work with devolved"
+    },
+    {
+      "block_id": "DOC-S002-B0021",
+      "evidence_id": "DET-EVID-C40524DAEAC697A4D978B250013011A38AD7080F8E24000CA27EB35762545E99",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "21",
+      "source_id": "S002",
+      "text_excerpt": "The government will create a"
+    },
+    {
+      "block_id": "DOC-S002-B0021",
+      "evidence_id": "DET-EVID-9B93F33B8C5F41B37F0D62978AC60C632CD8B59EAEF53DA70B111C74FB49B59F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "21",
+      "source_id": "S002",
+      "text_excerpt": "new function which will draw on wider"
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S002"
+  ],
+  "warnings": [
+    "abstained_missing_subject:DOC-S002-B0005:424-465:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0006:1233-1307:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0006:1308-1400:DET-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S002-B0006:1551-1640:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0007:322-349:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0008:2315-2348:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0010:214-226:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0010:511-550:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0012:1055-1087:DET-RULE-COM-001",
+    "abstained_missing_subject:DOC-S002-B0022:243-274:DET-RULE-COM-001"
+  ]
+}

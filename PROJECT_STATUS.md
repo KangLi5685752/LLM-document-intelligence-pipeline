@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.4A complete - strict development evaluator implemented before score observation; development execution and baseline freeze next
-- **Last updated:** 2026-07-25
-- **Latest milestone:** Implemented source-bounded strict matching, typed value alignment, evidence metrics and deterministic development-report contracts without running the real benchmark
+- **Current stage:** Stage 3B.4B-D complete - deterministic-baseline-v0.1 failed observation diagnosed and preserved; v0.2 experiment planning next
+- **Last updated:** 2026-07-26
+- **Latest milestone:** Isolated the reproducible S004 extractor defect to a commitment candidate with an incompatible metric subject type, without modifying v0.1 code or observation artifacts
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -37,27 +37,36 @@
 - Source-attempt and reproducibility models.
 - Explicit owner challenge-assessment model.
 - Canonical development evaluation report.
+- Strict development-run provenance models.
+- Exact-path five-source input validation.
+- Two-pass canonical candidate-output preservation.
+- First-observation lock contract.
+- Deterministic structural unmatched inventory.
+- Pending owner-review packet and assessment template.
+- Final report and baseline-freeze validation workflow.
+- Immutable `deterministic-baseline-v0.1` first-observation evidence.
 
 ## In progress
 
-- Stage 3B.4B first development execution, error analysis and baseline freeze.
+- `deterministic-baseline-v0.2` experiment planning.
 
-No public-gold extraction metric, held-out extraction result, LLM extractor or reconciliation layer exists yet.
+The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete development evaluation report or final baseline freeze exists. Formal challenge-case owner review is deliberately deferred. No held-out extraction result, LLM extractor or reconciliation layer exists.
 
 ## Next tasks
 
-1. Regenerate or verify the five frozen development `ParsedDocument` inputs.
-2. Run deterministic extraction twice.
-3. Preserve canonical outputs and hashes.
-4. Complete three owner challenge-case assessments.
-5. Generate the first development report.
-6. Classify unmatched predictions and gold facts.
-7. Create and validate the baseline freeze manifest.
-8. Keep held-out access disabled until review completes.
+1. Merge the v0.1 workflow, failed observation and diagnosis.
+2. Create and review the `deterministic-baseline-v0.2` experiment plan.
+3. Freeze the permitted source-independent correction and tuning scope.
+4. Implement the neutral S004 regression test and approved v0.2 changes.
+5. Rerun all five development sources twice.
+6. Complete owner challenge review only after a complete run.
+7. Finalize and freeze only if every acceptance gate passes.
+8. Keep held-out access blocked.
 
 ## Blockers
 
-No technical blocker. No matching or rule change is allowed after the first development report without an explicit new experiment version or documented pre-freeze correction.
+- v0.1 cannot be finalized.
+- v0.2 implementation cannot begin until its plan is reviewed and frozen.
 
 ## AG News replacement status
 

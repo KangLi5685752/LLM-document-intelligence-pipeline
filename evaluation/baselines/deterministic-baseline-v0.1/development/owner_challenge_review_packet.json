@@ -1,0 +1,219 @@
+{
+  "cases": [
+    {
+      "case_id": "PGC-V01-S001-001",
+      "case_type": "missing_expected_value",
+      "description": "The annual-publication requirement does not state an effective start date on the evidence page.",
+      "evidence_block_ids": [
+        "DOC-S001-B0015"
+      ],
+      "evidence_location_values": [
+        "15"
+      ],
+      "expected_behavior": "preserve_missing",
+      "observed_candidates": [
+        {
+          "candidate_id": "DET-CAND-2507B8B6C820F4FD4C2A9A9F5B6A4DAC77EA431A8582B6C5021BC78CFF385189",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "evidence_id": "DET-EVID-2CCDF7C748EA6FC06B0B12755ED7908CD41BFA1E73E9FBDCA7CCF248B4295A32",
+              "location_type": "page",
+              "location_value": "15",
+              "text_excerpt": "It is also essential to act quickly to provide clarity on how frontier models will be"
+            }
+          ],
+          "evidence_ids": [
+            "DET-EVID-2CCDF7C748EA6FC06B0B12755ED7908CD41BFA1E73E9FBDCA7CCF248B4295A32"
+          ],
+          "normalized_value": "will be",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "will be",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "It is also essential to act quickly to provide clarity on how frontier models",
+          "subject_type": "other",
+          "value_type": "string",
+          "warning_codes": []
+        },
+        {
+          "candidate_id": "DET-CAND-A5F7C7F857BAE3352C5579F890CCA441D5DD53E8AE1EC997AFFBFC8AD40739A3",
+          "confidence": 0.7,
+          "evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "evidence_id": "DET-EVID-ED7C663124564BCAB02947829D6A5F5FABEAD848E2B38FD2302219151558272E",
+              "location_type": "page",
+              "location_value": "15",
+              "text_excerpt": "particular, government should:\n25. Commit to funding regulators to scale up their AI capabilities, some of which"
+            }
+          ],
+          "evidence_ids": [
+            "DET-EVID-ED7C663124564BCAB02947829D6A5F5FABEAD848E2B38FD2302219151558272E"
+          ],
+          "normalized_value": "Commit to funding regulators to scale up their AI capabilities, some of which",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "Commit to funding regulators to scale up their AI capabilities, some of which",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "particular, government should",
+          "subject_type": "organisation",
+          "value_type": "string",
+          "warning_codes": []
+        },
+        {
+          "candidate_id": "DET-CAND-E45F28BE4615632E68B5138AEE3EAF095BF8C8F493C91349721F3856C6B36119",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "evidence_id": "DET-EVID-0E179DB6E85109EF8A282EE784F0EBDD20DB326CF009EC4F7E829485F8A4023E",
+              "location_type": "page",
+              "location_value": "15",
+              "text_excerpt": "AI will touch every aspect of the economy and"
+            }
+          ],
+          "evidence_ids": [
+            "DET-EVID-0E179DB6E85109EF8A282EE784F0EBDD20DB326CF009EC4F7E829485F8A4023E"
+          ],
+          "normalized_value": "will touch every aspect of the economy and",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "will touch every aspect of the economy and",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "AI",
+          "subject_type": "other",
+          "value_type": "string",
+          "warning_codes": []
+        }
+      ],
+      "relevant_candidate_warning_codes": [],
+      "relevant_result_warning_codes": [],
+      "source_id": "S001"
+    },
+    {
+      "case_id": "PGC-V01-S004-001",
+      "case_type": "unsupported",
+      "description": "A contributed case study describes an implementation; it must not be generalized into a government-wide finding or policy claim.",
+      "evidence_block_ids": [
+        "DOC-S004-B0110"
+      ],
+      "evidence_location_values": [
+        "110"
+      ],
+      "expected_behavior": "do_not_extract",
+      "observed_candidates": [],
+      "relevant_candidate_warning_codes": [],
+      "relevant_result_warning_codes": [],
+      "source_id": "S004"
+    },
+    {
+      "case_id": "PGC-V01-S006-001",
+      "case_type": "ambiguous",
+      "description": "The page presents several percentages for different adoption states, sectors and business sizes; a candidate without its population and measure is ambiguous.",
+      "evidence_block_ids": [
+        "DOC-S006-B0013"
+      ],
+      "evidence_location_values": [
+        "13"
+      ],
+      "expected_behavior": "route_to_review",
+      "observed_candidates": [
+        {
+          "candidate_id": "DET-CAND-03D28F36757FF541BC22357C54D2EDFE412BD52D18794E637E25DD1BDE822CC0",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "DET-EVID-F40A63E577B1C4D3B44E1625DE2BB6973AD4D5E904627B105F6E43B9876298CA",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "and 5% have plans to adopt AI in the future."
+            }
+          ],
+          "evidence_ids": [
+            "DET-EVID-F40A63E577B1C4D3B44E1625DE2BB6973AD4D5E904627B105F6E43B9876298CA"
+          ],
+          "normalized_value": "plans to adopt AI in the future.",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "plans to adopt AI in the future.",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "and 5% have",
+          "subject_type": "other",
+          "value_type": "string",
+          "warning_codes": []
+        },
+        {
+          "candidate_id": "DET-CAND-087CB6B4F0FD1899B624F7232FE67AD6B37CBAFDCCE965287F554B9A91AE6A93",
+          "confidence": 0.9,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "DET-EVID-27D855DC64FDACCC84A423B493602434D2AECB0E5CCE74A3105539266995ED1F",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "have plans to use AI (84% vs."
+            }
+          ],
+          "evidence_ids": [
+            "DET-EVID-27D855DC64FDACCC84A423B493602434D2AECB0E5CCE74A3105539266995ED1F"
+          ],
+          "normalized_value": "plans to use AI (84% vs.",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "plans to use AI (84% vs.",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "have",
+          "subject_type": "other",
+          "value_type": "string",
+          "warning_codes": []
+        },
+        {
+          "candidate_id": "DET-CAND-D1253FCB0469F97B6CA756748FDEB36EE8041E336FB67D5A01BA9180B043D996",
+          "confidence": 0.7,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "DET-EVID-D368AB7A2D2E9BF3F1038D7FF392511617AF9A4DB9B4FDC1D3E99A892681FE79",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "Use of AI\nThe vast majority of businesses (80%) neither use nor have plans yet to use AI, as shown in"
+            }
+          ],
+          "evidence_ids": [
+            "DET-EVID-D368AB7A2D2E9BF3F1038D7FF392511617AF9A4DB9B4FDC1D3E99A892681FE79"
+          ],
+          "normalized_value": 80.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "use_ai_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "80%",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "Use of AI",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": []
+        }
+      ],
+      "relevant_candidate_warning_codes": [],
+      "relevant_result_warning_codes": [
+        "abstained_missing_subject",
+        "abstained_multiple_values"
+      ],
+      "source_id": "S006"
+    }
+  ],
+  "experiment_id": "deterministic-baseline-v0.1",
+  "review_status": "pending_owner_review",
+  "schema_version": "0.1"
+}

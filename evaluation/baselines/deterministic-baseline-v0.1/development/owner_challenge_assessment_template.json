@@ -1,0 +1,31 @@
+{
+  "assessment_method": "owner_review",
+  "assessments": [
+    {
+      "case_id": "PGC-V01-S001-001",
+      "expected_behavior": "preserve_missing",
+      "outcome": null,
+      "rationale": null,
+      "related_candidate_ids": [],
+      "related_warning_codes": []
+    },
+    {
+      "case_id": "PGC-V01-S004-001",
+      "expected_behavior": "do_not_extract",
+      "outcome": null,
+      "rationale": null,
+      "related_candidate_ids": [],
+      "related_warning_codes": []
+    },
+    {
+      "case_id": "PGC-V01-S006-001",
+      "expected_behavior": "route_to_review",
+      "outcome": null,
+      "rationale": null,
+      "related_candidate_ids": [],
+      "related_warning_codes": []
+    }
+  ],
+  "experiment_id": "deterministic-baseline-v0.1",
+  "schema_version": "0.1"
+}

@@ -23,7 +23,7 @@ Project information is often scattered across heterogeneous PDF, PowerPoint, and
 
 ## Current status
 
-**Stage 3B.4A strict development evaluation semantics are implemented.** The source-independent deterministic extractor and the in-memory strict evaluator now exist. The evaluator provides source-bounded one-to-one matching, typed value alignment, evidence metrics, explicit failed attempts, owner challenge assessments, reproducibility checks and canonical report serialization. No real development run or score exists; Stage 3B.4B execution, error analysis and baseline freeze are next. No held-out extraction result, LLM extractor or reconciliation implementation exists yet.
+**Stage 3B.4B-D records a failed first development observation for `deterministic-baseline-v0.1`.** S001, S002, S003 and S006 produced byte-identical repeat outputs, while S004 failed reproducibly and produced no candidate output. The immutable preliminary strict counts are 0 TP, 288 FP and 25 FN. No complete development evaluation report or baseline freeze exists, formal owner challenge review is deferred, and no held-out extraction result, LLM extractor or reconciliation implementation exists. The [read-only S004 diagnosis](docs/stage_3b_v0_1_first_observation_failure.md) is complete and documents the exact source-independent schema incompatibility. The next controlled step is a separately reviewed and frozen `deterministic-baseline-v0.2` experiment plan.
 
 ## Stage 3B.1 deterministic baseline contract
 
@@ -63,7 +63,15 @@ The engine covers `action_status`, `budget`, `commitment`, `decision`, `metric`,
 
 The [Stage 3B.4A evaluator contract](docs/stage_3b_development_evaluator.md) implements the frozen protocol-v0.1 comparison, one-to-one matching and exact metric semantics before any development score is observed. It accepts already loaded development gold, precomputed successful or failed candidate attempts and explicit owner challenge assessments. It does not invoke the extractor, load files or provide a CLI for running the real benchmark.
 
-No development metric or report has been generated. The next step is the separately reviewed Stage 3B.4B execution and baseline freeze.
+Stage 3B.4A generated no metric. Stage 3B.4B `prepare` later recorded preliminary counts only in the immutable observation lock. The failed S004 attempt means the complete report and baseline freeze are unavailable; owner assessment is deliberately deferred rather than treated as the only remaining blocker.
+
+## Stage 3B.4B development execution and freeze
+
+The [two-checkpoint execution and freeze contract](docs/stage_3b_development_execution_and_freeze.md) separates first-score observation from project-owner challenge assessment.
+
+`prepare` validates the frozen Stage 2 ingestion report, opens only S001, S002, S003, S004 and S006, runs deterministic extraction twice, preserves canonical primary/repeat hashes, performs strict diagnostics and writes the pending-owner-review artifacts. The first v0.1 execution preserved four reproducible outputs and both failed S004 attempts. It did not produce a complete evaluation report, final error analysis or baseline freeze manifest.
+
+`finalize` reloads and verifies prepared evidence, requires successful repeat-identical attempts and three completed owner outcomes, and keeps held-out access explicitly blocked. It is implemented and tested, but v0.1 cannot satisfy its all-source gate and must not be finalized. See the [failed first-observation report](docs/stage_3b_v0_1_first_observation_failure.md).
 
 ## Stage 3A public annotation validation
 
@@ -131,7 +139,7 @@ See the [synthetic challenge-set specification](docs/synthetic_challenge_set_spe
 1. **Stage 0 — Project Charter and Repo Setup**: **Completed.** Define the scope, architecture, decisions, packaging, and evaluation intent.
 2. **Stage 1 – Corpus Audit**: **Completed.** Audited and froze the versioned public and synthetic corpus, family splits, ground truth, product contract, and evaluation gates.
 3. **Stage 2 — Document Ingestion**: **Completed.** The Common Document Object, PDF/PPTX/EML parsers, single-document and batch CLIs, and full frozen-corpus validation are implemented.
-4. **Stage 3 — Baseline and Structured Extraction**: **In progress: Stage 3A through Stage 3B.4A complete; Stage 3B.4B next.** Candidate contracts, frozen owner-reviewed `public-gold-v0.1`, the deterministic-baseline plan, guarded development-label access, the deterministic candidate rule engine and strict development evaluator are implemented. Real development execution, baseline freeze, LLM extraction, reconciliation, conflict checks and measured review-routing results remain planned.
+4. **Stage 3 — Baseline and Structured Extraction**: **In progress: Stage 3B.4B-D failed-observation diagnosis and v0.2 transition.** Candidate contracts, frozen owner-reviewed `public-gold-v0.1`, guarded development-label access, v0.1 deterministic rules, strict evaluation semantics and the execution/freeze workflow are implemented. The first v0.1 observation preserved four reproducible outputs and one reproducible source failure; no accepted metric or freeze exists. A separately frozen v0.2 plan, complete development execution, owner challenge decisions, held-out execution, LLM extraction, reconciliation, conflict checks and measured review-routing results remain incomplete or planned.
 5. **Stage 4 — Extraction Evaluation**: **Planned.** Evaluate extraction quality, schema validity, evidence alignment, and review-routing behaviour on a labelled corpus.
 6. **Stage 5 — Storage and Data Model**: **Planned.** Define the validated knowledge model and local persistence before considering BigQuery.
 7. **Stage 6 — Interface**: **Planned.** Add an interface or API only for capabilities supported by evaluation evidence.
