@@ -249,7 +249,8 @@ _ACTION_ID_RE = re.compile(
 )
 
 _PERCENT_RE = re.compile(
-    r"(?P<value>\d+(?:\.\d+)?)\s*(?P<unit>%|percent(?:age)?\b)",
+    r"(?P<value>\d+(?:\.\d+)?)\s*"
+    r"(?P<unit>%|percentage(?:\s+points?)?|percent)(?![A-Za-z])",
     re.IGNORECASE,
 )
 _SIMPLE_NUMBER_RE = re.compile(
@@ -1373,9 +1374,9 @@ def _currency_and_amount(match: re.Match[str]) -> tuple[str, Decimal]:
     amount_token = match.group("amount_prefix") or match.group("amount_suffix")
     scale_token = match.group("scale_prefix") or match.group("scale_suffix")
     currency = {
-        "N{POUND SIGN}": "GBP",
-        "N{DOLLAR SIGN}": "USD",
-        "N{EURO SIGN}": "EUR",
+        "£": "GBP",
+        "$": "USD",
+        "€": "EUR",
         "GBP": "GBP",
         "USD": "USD",
         "EUR": "EUR",

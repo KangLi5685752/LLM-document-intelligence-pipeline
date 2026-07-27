@@ -25,6 +25,7 @@ from document_intelligence.extraction.models import (
     EvidenceStatus,
     ExtractionMethod,
     SubjectType,
+    ValueType,
 )
 from document_intelligence.ingestion.models import (
     BlockType,
@@ -529,6 +530,36 @@ def test_decimal_percentage_remains_one_statement_value() -> None:
 
 
 @pytest.mark.parametrize(
+    ("text", "expected_raw", "expected_value"),
+    [
+        ("Adoption rate reached 7 percentage points.", "7 percentage points", 7.0),
+        ("Adoption rate reached 1 percentage point.", "1 percentage point", 1.0),
+        ("Adoption rate reached 7 percentage.", "7 percentage", 7.0),
+        ("Adoption rate reached 7 percent.", "7 percent", 7.0),
+        ("Adoption rate reached 7%.", "7%", 7.0),
+    ],
+)
+def test_parent_percentage_unit_forms_are_preserved_in_full(
+    text: str,
+    expected_raw: str,
+    expected_value: float,
+) -> None:
+    first = _extract(text)
+    second = _extract(text)
+    facts = _facts(first, "metric")
+    assert len(facts) == 1
+    fact = facts[0]
+    assert fact.subject_text == "Adoption rate"
+    assert fact.raw_value == expected_raw
+    assert fact.normalized_value == expected_value
+    assert fact.value_type is ValueType.PERCENTAGE
+    assert first.schema_version == "0.1"
+    assert canonical_candidate_result_json_v0_2(first).encode("utf-8") == (
+        canonical_candidate_result_json_v0_2(second).encode("utf-8")
+    )
+
+
+@pytest.mark.parametrize(
     "trigger",
     [
         "are required to",
@@ -757,15 +788,36 @@ def test_generic_risk_wording_outside_parent_trigger_remains_absent() -> None:
     assert _facts(result, "risk") == []
 
 
-def test_budget_carryover_requires_currency_and_explicit_relationship() -> None:
-    fact = _facts(
-        _extract("Delivery project has an approved budget of GBP 2 million."),
-        "budget",
-    )[0]
+@pytest.mark.parametrize(
+    ("text", "expected_currency", "expected_amount"),
+    [
+        ("Delivery project has an approved budget of £2 million.", "GBP", 2_000_000),
+        ("Delivery project has an approved budget of $3 million.", "USD", 3_000_000),
+        ("Delivery project has an approved budget of €4 million.", "EUR", 4_000_000),
+        (
+            "Delivery project has an approved budget of GBP 2 million.",
+            "GBP",
+            2_000_000,
+        ),
+        (
+            "Delivery project has an approved budget of 2 million GBP.",
+            "GBP",
+            2_000_000,
+        ),
+    ],
+)
+def test_budget_currency_symbols_codes_and_suffix_normalize_to_iso(
+    text: str,
+    expected_currency: str,
+    expected_amount: int,
+) -> None:
+    result = _extract(text)
+    fact = _facts(result, "budget")[0]
     assert fact.subject_text == "Delivery project"
-    assert fact.normalized_value.amount == 2_000_000
-    assert fact.normalized_value.currency == "GBP"
+    assert fact.normalized_value.amount == expected_amount
+    assert fact.normalized_value.currency == expected_currency
     assert fact.qualifiers == {"budget_status": "approved"}
+    assert result.schema_version == "0.1"
 
 
 def test_bare_currency_remains_non_budget() -> None:
