@@ -20,6 +20,18 @@ class DeterministicRuleDefinitionV02:
 
 V0_2_RULE_INVENTORY: tuple[DeterministicRuleDefinitionV02, ...] = (
     DeterministicRuleDefinitionV02(
+        rule_id="V02-RULE-REC-001",
+        priority=5,
+        predicate="recommendation",
+        trigger_family="numbered or explicit recommendation",
+        confidence_bands=(0.7, 0.9),
+        evidence_policy="bounded same-statement or immediate same-block context span",
+        description=(
+            "Preserve numbered recommendation labels and explicit recommendation "
+            "constructions without speculative heading expansion."
+        ),
+    ),
+    DeterministicRuleDefinitionV02(
         rule_id="V02-RULE-COM-EXPLICIT-001",
         priority=10,
         predicate="commitment",
@@ -60,8 +72,8 @@ V0_2_RULE_INVENTORY: tuple[DeterministicRuleDefinitionV02, ...] = (
         priority=40,
         predicate="requirement",
         trigger_family="mandatory requirement",
-        confidence_bands=(0.9,),
-        evidence_policy="exact bounded same-statement span",
+        confidence_bands=(0.7, 0.9),
+        evidence_policy="bounded same-statement or immediate same-block context span",
         description=(
             "Extract mandatory actor-attributed requirements within frozen actor and "
             "action bounds."
@@ -72,11 +84,47 @@ V0_2_RULE_INVENTORY: tuple[DeterministicRuleDefinitionV02, ...] = (
         priority=50,
         predicate="action_status",
         trigger_family="explicit action progress status",
-        confidence_bands=(0.9,),
-        evidence_policy="exact bounded same-statement span",
+        confidence_bands=(0.7, 0.9),
+        evidence_policy="bounded same-statement or immediate same-block context span",
         description=(
             "Extract an approved explicit status value for an eligible action-like "
             "initiative, policy, or programme subject."
+        ),
+    ),
+    DeterministicRuleDefinitionV02(
+        rule_id="V02-RULE-DEC-001",
+        priority=60,
+        predicate="decision",
+        trigger_family="explicit recorded decision",
+        confidence_bands=(0.7, 0.9),
+        evidence_policy="bounded same-statement or immediate same-block context span",
+        description=(
+            "Preserve explicit recorded determinations while retaining the parent "
+            "proposal and option exclusion."
+        ),
+    ),
+    DeterministicRuleDefinitionV02(
+        rule_id="V02-RULE-RISK-001",
+        priority=70,
+        predicate="risk",
+        trigger_family="bounded risk, threat, or adverse impact",
+        confidence_bands=(0.5, 0.7, 0.9),
+        evidence_policy="bounded exact span with flattened-table ambiguity routing",
+        description=(
+            "Preserve bounded risk, threat, and adverse-impact detection without "
+            "broadening the parent trigger inventory."
+        ),
+    ),
+    DeterministicRuleDefinitionV02(
+        rule_id="V02-RULE-BUD-001",
+        priority=80,
+        predicate="budget",
+        trigger_family="currency-qualified budget relationship",
+        confidence_bands=(0.7, 0.9),
+        evidence_policy="bounded exact relationship span",
+        description=(
+            "Preserve explicit currency amounts only when a budget, funding, "
+            "investment, or allocation relationship is present."
         ),
     ),
     DeterministicRuleDefinitionV02(

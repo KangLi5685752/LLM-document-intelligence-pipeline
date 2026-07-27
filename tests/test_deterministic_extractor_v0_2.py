@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+import document_intelligence.extraction.deterministic_v0_2 as deterministic_v0_2
 from document_intelligence.extraction.deterministic_rules_v0_2 import (
     V0_2_RULE_INVENTORY,
     get_v0_2_rule_inventory,
@@ -77,6 +78,54 @@ def _extract(*texts: str):
     return extract_deterministic_candidates_v0_2(_document(*texts))
 
 
+def _quoted_history_document(text: str) -> ParsedDocument:
+    return ParsedDocument(
+        document_id="neutral-message",
+        source_id="NEUTRAL-MESSAGE",
+        source_format=SourceFormat.EML,
+        filename="neutral.eml",
+        checksum_sha256="B" * 64,
+        blocks=[
+            DocumentBlock(
+                block_id="neutral-quoted-block",
+                sequence=1,
+                block_type=BlockType.QUOTED_HISTORY,
+                text=text,
+                location=SourceLocation(
+                    location_type=LocationType.QUOTED_HISTORY,
+                    location_value="quoted-history",
+                    message_id="neutral-message-id",
+                ),
+            )
+        ],
+        parse_status=ParseStatus.SUCCESS,
+    )
+
+
+def _single_pdf_block_document(text: str, block_type: BlockType) -> ParsedDocument:
+    return ParsedDocument(
+        document_id="neutral-single-block",
+        source_id="NEUTRAL-BLOCK",
+        source_format=SourceFormat.PDF,
+        filename="neutral-block.pdf",
+        checksum_sha256="C" * 64,
+        blocks=[
+            DocumentBlock(
+                block_id="neutral-single-block",
+                sequence=1,
+                block_type=block_type,
+                text=text,
+                location=SourceLocation(
+                    location_type=LocationType.PAGE,
+                    location_value="1",
+                    page_number=1,
+                ),
+            )
+        ],
+        parse_status=ParseStatus.SUCCESS,
+    )
+
+
 def _facts(result, predicate: str):
     return [fact for fact in result.candidate_facts if fact.predicate == predicate]
 
@@ -95,25 +144,85 @@ def test_version_and_rule_inventory_are_stable_and_ordered() -> None:
     assert DETERMINISTIC_BASELINE_VERSION == "deterministic-baseline-v0.2"
     assert get_v0_2_rule_inventory() is V0_2_RULE_INVENTORY
     assert [rule.rule_id for rule in V0_2_RULE_INVENTORY] == [
+        "V02-RULE-REC-001",
         "V02-RULE-COM-EXPLICIT-001",
         "V02-RULE-COM-WEAK-002",
         "V02-RULE-METRIC-001",
         "V02-RULE-REQ-001",
         "V02-RULE-ACTION-001",
+        "V02-RULE-DEC-001",
+        "V02-RULE-RISK-001",
+        "V02-RULE-BUD-001",
         "V02-POLICY-CONTRACT-001",
         "V02-POLICY-DEDUP-002",
         "V02-POLICY-SUBJECT-003",
     ]
     assert [rule.priority for rule in V0_2_RULE_INVENTORY] == [
+        5,
         10,
         20,
         30,
         40,
         50,
+        60,
+        70,
+        80,
         90,
         91,
         92,
     ]
+    candidate_predicates = {
+        rule.predicate for rule in V0_2_RULE_INVENTORY if rule.predicate is not None
+    }
+    assert candidate_predicates == {
+        "action_status",
+        "budget",
+        "commitment",
+        "decision",
+        "metric",
+        "recommendation",
+        "requirement",
+        "risk",
+    }
+    assert deterministic_v0_2._MATCHER_PREDICATES == candidate_predicates
+    assert len(deterministic_v0_2._MATCHERS) == 8
+
+
+def test_frozen_v0_2_contract_constants_remain_exact() -> None:
+    rules = {rule.rule_id: rule for rule in V0_2_RULE_INVENTORY}
+    assert rules["V02-RULE-COM-EXPLICIT-001"].confidence_bands == (0.9,)
+    assert rules["V02-RULE-COM-WEAK-002"].confidence_bands == (0.7,)
+    assert rules["V02-RULE-METRIC-001"].confidence_bands == (0.5, 0.9)
+    assert 0.9 in rules["V02-RULE-ACTION-001"].confidence_bands
+    assert deterministic_v0_2._EXPLICIT_TRIGGERS == (
+        "has committed to",
+        "commits to",
+        "commit to",
+    )
+    assert deterministic_v0_2._WEAK_TRIGGERS == (
+        "intends to",
+        "intend to",
+        "plans to",
+        "plan to",
+        "will not",
+        "will",
+    )
+    assert deterministic_v0_2._SUBJECT_MIN_TOKENS == 1
+    assert deterministic_v0_2._SUBJECT_MAX_TOKENS == 12
+    assert deterministic_v0_2._SUBJECT_MAX_CHARACTERS == 79
+    assert deterministic_v0_2._AMBIGUOUS_METRIC_MAX_VALUES == 3
+    assert deterministic_v0_2._AMBIGUOUS_METRIC_MAX_INTERPRETATIONS == 3
+    assert deterministic_v0_2._REQUIREMENT_ACTION_MAX_TOKENS == 40
+    assert deterministic_v0_2._REQUIREMENT_ACTION_MAX_CHARACTERS == 240
+    assert deterministic_v0_2._CONTRACT_WARNING == (
+        "abstained_incompatible_predicate_contract"
+    )
+    assert deterministic_v0_2._AMBIGUOUS_METRIC_WARNING == (
+        "ambiguous_metric_value_relationship"
+    )
+    assert deterministic_v0_2._AMBIGUOUS_METRIC_BOUNDS_WARNING == (
+        "abstained_ambiguous_metric_bounds_exceeded"
+    )
 
 
 def test_neutral_incompatible_commitment_abstains_without_losing_valid_fact() -> None:
@@ -260,9 +369,14 @@ def test_disallowed_generic_metric_head_is_not_an_actor() -> None:
 
 
 def test_heading_context_uses_one_same_block_actor_at_weak_confidence() -> None:
-    fact = _facts(_extract("Civic Office\nwill publish guidance."), "commitment")[0]
+    result = _extract("Civic Office\nwill publish guidance.")
+    fact = _facts(result, "commitment")[0]
     assert fact.subject_text == "Civic Office"
     assert fact.confidence == 0.7
+    evidence = {item.evidence_id: item for item in result.evidence_references}
+    assert evidence[fact.evidence_ids[0]].text_excerpt == (
+        "Civic Office\nwill publish guidance."
+    )
 
 
 def test_heading_context_abstains_when_more_than_one_actor_is_eligible() -> None:
@@ -293,6 +407,22 @@ def test_negated_weak_trigger_is_preserved_and_not_consumed_by_will() -> None:
     assert fact.raw_value == "will not close access."
     assert fact.normalized_value == "will not close access."
     assert fact.confidence == 0.7
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Civic Office did not commit to publish guidance.",
+        "Civic Office does not commit to publish guidance.",
+        "Civic Office may commit to publish guidance.",
+        "Civic Office might commit to publish guidance.",
+        "Civic Office could commit to publish guidance.",
+        "Civic Office should commit to publish guidance.",
+    ],
+)
+def test_modal_or_negated_explicit_commitment_is_not_attributed(text: str) -> None:
+    result = _extract(text)
+    assert _facts(result, "commitment") == []
 
 
 def test_weak_copular_prefix_does_not_consume_a_longer_action_word() -> None:
@@ -431,6 +561,37 @@ def test_impersonal_requirement_abstains() -> None:
     ]
 
 
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Civic Office is not required to publish guidance.",
+        "Civic Office was not required to publish guidance.",
+    ],
+)
+def test_negated_required_to_construction_is_not_a_requirement(text: str) -> None:
+    assert _facts(_extract(text), "requirement") == []
+
+
+def test_positive_generic_required_to_trigger_remains_supported() -> None:
+    fact = _facts(
+        _extract("Civic Office required to publish guidance."),
+        "requirement",
+    )[0]
+    assert fact.subject_text == "Civic Office"
+    assert fact.raw_value == "required to publish guidance."
+
+
+def test_requirement_immediate_heading_context_remains_supported() -> None:
+    result = _extract("Civic Office\nmust publish guidance.")
+    fact = _facts(result, "requirement")[0]
+    assert fact.subject_text == "Civic Office"
+    assert fact.confidence == 0.7
+    evidence = {item.evidence_id: item for item in result.evidence_references}
+    assert evidence[fact.evidence_ids[0]].text_excerpt == (
+        "Civic Office\nmust publish guidance."
+    )
+
+
 @pytest.mark.parametrize("prefix", ["-", "•", "–", "—", "4.", "B)"])
 def test_one_structural_subject_marker_is_trimmed(prefix: str) -> None:
     fact = _facts(
@@ -502,6 +663,215 @@ def test_different_metric_qualifier_is_retained() -> None:
     facts = _facts(result, "metric")
     assert len(facts) == 2
     assert [fact.qualifiers["period"] for fact in facts] == ["2025", "2026"]
+
+
+def test_recommendation_carryover_preserves_numbered_explicit_and_contextual_forms() -> None:
+    result = _extract(
+        "Recommendation 4: Publish the neutral summary.",
+        "Civic Office recommends that teams publish guidance.",
+        "Civic Office\nrecommended that teams archive records.",
+    )
+    facts = _facts(result, "recommendation")
+    assert [(fact.subject_text, fact.confidence) for fact in facts] == [
+        ("Recommendation 4", 0.9),
+        ("Civic Office", 0.9),
+        ("Civic Office", 0.7),
+    ]
+    assert facts[0].qualifiers == {"recommendation_id": 4}
+    evidence = {item.evidence_id: item for item in result.evidence_references}
+    contextual_excerpt = evidence[facts[2].evidence_ids[0]].text_excerpt
+    assert contextual_excerpt.startswith("Civic Office\nrecommended")
+
+
+def test_speculative_numbered_recommendation_expansion_remains_absent() -> None:
+    result = _extract("Recommendations\n4. Publish the neutral summary.")
+    assert _facts(result, "recommendation") == []
+
+
+@pytest.mark.parametrize(
+    "phrase",
+    [
+        "decided to retain the neutral process",
+        "agreed to retain the neutral process",
+        "approved the neutral process",
+        "selected the neutral process",
+        "chose to retain the neutral process",
+        "resolved to retain the neutral process",
+    ],
+)
+def test_decision_carryover_preserves_explicit_triggers(phrase: str) -> None:
+    fact = _facts(
+        _extract(f"Civic Office {phrase}."),
+        "decision",
+    )[0]
+    assert fact.subject_text == "Civic Office"
+    assert fact.raw_value == f"{phrase}."
+    assert fact.confidence == 0.9
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Civic Office considered a proposal to approve the neutral option.",
+        "Civic Office recorded an option to select a different process.",
+    ],
+)
+def test_proposal_and_option_exclusion_remains_unchanged(text: str) -> None:
+    assert _facts(_extract(text), "decision") == []
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "faces a risk of delayed delivery",
+        "faces a threat of delayed delivery",
+        "identified risk: delayed delivery",
+        "could have an adverse impact on delivery",
+    ],
+)
+def test_risk_carryover_preserves_bounded_explicit_triggers(value: str) -> None:
+    fact = _facts(
+        _extract(f"Civic Office {value}."),
+        "risk",
+    )[0]
+    assert fact.subject_text == "Civic Office"
+    assert fact.raw_value == f"{value}."
+    assert fact.confidence == 0.9
+
+
+def test_flattened_table_risk_remains_ambiguous_and_review_required() -> None:
+    document = _single_pdf_block_document(
+        "Delivery project | identified risk: delayed supply",
+        BlockType.TABLE,
+    )
+    result = extract_deterministic_candidates_v0_2(document)
+    fact = _facts(result, "risk")[0]
+    assert fact.confidence == 0.5
+    assert fact.review_status is CandidateReviewStatus.REQUIRED
+    evidence = {item.evidence_id: item for item in result.evidence_references}
+    assert evidence[fact.evidence_ids[0]].evidence_status is EvidenceStatus.AMBIGUOUS
+
+
+def test_generic_risk_wording_outside_parent_trigger_remains_absent() -> None:
+    result = _extract("Civic Office monitors uncertain delivery conditions.")
+    assert _facts(result, "risk") == []
+
+
+def test_budget_carryover_requires_currency_and_explicit_relationship() -> None:
+    fact = _facts(
+        _extract("Delivery project has an approved budget of GBP 2 million."),
+        "budget",
+    )[0]
+    assert fact.subject_text == "Delivery project"
+    assert fact.normalized_value.amount == 2_000_000
+    assert fact.normalized_value.currency == "GBP"
+    assert fact.qualifiers == {"budget_status": "approved"}
+
+
+def test_bare_currency_remains_non_budget() -> None:
+    result = _extract("Delivery project received GBP 2 million.")
+    assert _facts(result, "budget") == []
+
+
+def test_simple_numeric_metric_carryover_preserves_normalization() -> None:
+    fact = _facts(
+        _extract("120 participants registered during March 2026."),
+        "metric",
+    )[0]
+    assert fact.subject_text == "participants"
+    assert fact.normalized_value == 120
+    assert fact.qualifiers == {
+        "metric_name": "participants_count",
+        "unit": "participants",
+        "population": "participants",
+        "period": "2026-03",
+    }
+
+
+def test_value_first_percentage_metric_carryover_preserves_population() -> None:
+    fact = _facts(
+        _extract("42% of surveyed residents reported use in 2026."),
+        "metric",
+    )[0]
+    assert fact.subject_text == "surveyed residents"
+    assert fact.normalized_value == 42.0
+    assert isinstance(fact.normalized_value, float)
+    assert fact.qualifiers["population"] == "surveyed residents"
+    assert fact.qualifiers["unit"] == "percent"
+
+
+def test_action_ratio_carryover_preserves_status_and_identifier() -> None:
+    fact = _facts(
+        _extract("Action A-4: 3 of 5 identified actions were completed."),
+        "action_status",
+    )[0]
+    assert fact.subject_text == "Action A-4"
+    assert fact.raw_value == "3 of 5 identified actions were completed"
+    assert fact.qualifiers == {"action_id": "A-4"}
+    assert fact.confidence == 0.9
+
+
+def test_parent_action_noun_progress_phrase_remains_supported() -> None:
+    fact = _facts(_extract("Action A-4 is completed."), "action_status")[0]
+    assert fact.subject_text == "Action A-4"
+    assert fact.normalized_value == "completed"
+    assert fact.qualifiers == {"action_id": "A-4"}
+
+
+def test_parent_action_heading_context_and_evidence_remain_supported() -> None:
+    result = _extract("Action A-4\ncompleted.")
+    fact = _facts(result, "action_status")[0]
+    assert fact.subject_text == "Action A-4"
+    assert fact.confidence == 0.7
+    evidence = {item.evidence_id: item for item in result.evidence_references}
+    assert evidence[fact.evidence_ids[0]].text_excerpt == "Action A-4\ncompleted."
+
+
+def test_candidate_block_inventory_excludes_quoted_history_exactly() -> None:
+    assert deterministic_v0_2._CANDIDATE_BLOCK_TYPES == {
+        BlockType.PAGE_TEXT,
+        BlockType.SLIDE_TITLE,
+        BlockType.SHAPE_TEXT,
+        BlockType.TABLE,
+        BlockType.EMAIL_BODY,
+    }
+    document = _quoted_history_document(
+        "Civic Office commits to publish guidance. "
+        "Recommendation 4: Publish the neutral summary."
+    )
+    result = extract_deterministic_candidates_v0_2(document)
+    assert result.candidate_facts == []
+    assert result.evidence_references == []
+    assert result.warnings == []
+
+
+def test_complete_parent_scope_is_schema_valid_and_repeat_identical() -> None:
+    texts = (
+        "Recommendation 4: Publish the neutral summary.",
+        "Civic Office commits to publish guidance.",
+        "Civic Office must retain records.",
+        "Civic Office decided to retain the neutral process.",
+        "Civic Office faces a risk of delayed delivery.",
+        "120 participants registered in 2026.",
+        "Delivery project has an approved budget of GBP 2 million.",
+        "Action A-4 is completed.",
+    )
+    first = _extract(*texts)
+    second = _extract(*texts)
+    assert first.schema_version == "0.1"
+    assert {fact.predicate for fact in first.candidate_facts} == {
+        "action_status",
+        "budget",
+        "commitment",
+        "decision",
+        "metric",
+        "recommendation",
+        "requirement",
+        "risk",
+    }
+    assert canonical_candidate_result_json_v0_2(first).encode("utf-8") == (
+        canonical_candidate_result_json_v0_2(second).encode("utf-8")
+    )
 
 
 def test_cli_valid_input_writes_exact_canonical_output(tmp_path: Path) -> None:
