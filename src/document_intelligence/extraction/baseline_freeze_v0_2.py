@@ -18,6 +18,7 @@ from document_intelligence.extraction.development_run_models_v0_2 import (
     DevelopmentObservationLock,
     DevelopmentPreparationManifest,
     FinalizationRecord,
+    contains_prohibited_absolute_path,
 )
 from document_intelligence.extraction.evaluation_models_v0_2 import (
     DevelopmentEvaluationReport,
@@ -123,7 +124,7 @@ class ProcessGateOutcome(BaseModel):
     def validate_evidence(self) -> ProcessGateOutcome:
         if self.evidence != self.evidence.strip():
             raise ValueError("gate evidence must be trimmed")
-        if "file://" in self.evidence or "\\" in self.evidence:
+        if contains_prohibited_absolute_path(self.evidence):
             raise ValueError("gate evidence must not contain a local path")
         return self
 
@@ -147,6 +148,14 @@ class QualityTargetOutcome(BaseModel):
     non_binding: Literal[True] = True
     observed: str = Field(min_length=1, max_length=200)
 
+    @model_validator(mode="after")
+    def validate_observed(self) -> QualityTargetOutcome:
+        if self.observed != self.observed.strip():
+            raise ValueError("quality evidence must be trimmed")
+        if contains_prohibited_absolute_path(self.observed):
+            raise ValueError("quality evidence must not contain a local path")
+        return self
+
 
 class BaselineFreezeManifest(BaseModel):
     """Legal v0.2 freeze emitted only after all process gates pass."""
@@ -161,6 +170,7 @@ class BaselineFreezeManifest(BaseModel):
     )
     freeze_date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
     implementation_commit: str = Field(pattern=COMMIT_PATTERN)
+    observation_evidence_commit: str = Field(pattern=COMMIT_PATTERN)
     planning_merge_commit: Literal[
         "f224c4e385fab5c4e0348bcf251015630cea9af8"
     ] = PLANNING_MERGE_COMMIT
@@ -428,6 +438,7 @@ def build_baseline_freeze_manifest(
     return BaselineFreezeManifest(
         freeze_date=freeze_date or date.today().isoformat(),
         implementation_commit=preparation.implementation_commit,
+        observation_evidence_commit=finalization.observation_evidence_commit,
         config_sha256=preparation.config_sha256,
         public_gold_facts_sha256=preparation.public_gold_facts_sha256,
         public_gold_cases_sha256=preparation.public_gold_cases_sha256,

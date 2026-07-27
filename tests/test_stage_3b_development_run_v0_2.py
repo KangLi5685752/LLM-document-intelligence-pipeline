@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -37,7 +38,14 @@ from document_intelligence.extraction.development_run_v0_2 import (
     DevelopmentRunError,
     prepare_development_baseline_run,
 )
-from document_intelligence.extraction.models import CandidateExtractionResult
+from document_intelligence.extraction.models import (
+    CandidateEvidenceReference,
+    CandidateExtractionResult,
+    CandidateFact,
+    CandidateReviewStatus,
+    EvidenceStatus,
+    ExtractionMethod,
+)
 from document_intelligence.ingestion.batch import (
     BatchIngestionItem,
     BatchIngestionReport,
@@ -56,19 +64,42 @@ from document_intelligence.ingestion.models import (
 
 IMPLEMENTATION_COMMIT = "1" * 40
 CASE_SPECS = (
-    (DEVELOPMENT_CASE_IDS[0], "S001", "ambiguous", "route_to_review"),
-    (DEVELOPMENT_CASE_IDS[1], "S004", "unsupported", "do_not_extract"),
     (
-        DEVELOPMENT_CASE_IDS[2],
-        "S006",
+        DEVELOPMENT_CASE_IDS[0],
+        "S001",
         "missing_expected_value",
         "preserve_missing",
     ),
+    (DEVELOPMENT_CASE_IDS[1], "S004", "unsupported", "do_not_extract"),
+    (DEVELOPMENT_CASE_IDS[2], "S006", "ambiguous", "route_to_review"),
 )
 
 
 def _sha(value: str) -> str:
     return hashlib.sha256(value.encode()).hexdigest().upper()
+
+
+def _git(repository: Path, *arguments: str) -> str:
+    completed = subprocess.run(
+        ["git", *arguments],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return completed.stdout.strip()
+
+
+def _write(repository: Path, relative_path: str, value: str) -> None:
+    path = repository / relative_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(value, encoding="utf-8", newline="\n")
+
+
+def _commit(repository: Path, message: str) -> str:
+    _git(repository, "add", "-A")
+    _git(repository, "commit", "-m", message)
+    return _git(repository, "rev-parse", "HEAD")
 
 
 def _gold() -> DevelopmentGoldBundle:
@@ -155,6 +186,21 @@ def _write_neutral_fixture(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> SimpleNamespace:
     repository = tmp_path / "neutral-repository"
+    repository.mkdir(parents=True)
+    _git(repository, "init", "-b", "main")
+    _git(repository, "config", "user.email", "neutral@example.invalid")
+    _git(repository, "config", "user.name", "Neutral Test")
+    for relative_path in run_module.PROTECTED_PLANNING_PATHS:
+        value = (
+            "raise SystemExit(0)\n"
+            if relative_path == "scripts/validate_deterministic_v0_2_plan.py"
+            else "neutral protected planning\n"
+        )
+        _write(repository, relative_path, value)
+    planning_commit = _commit(repository, "neutral planning anchor")
+    for relative_path in run_module.D1_IMPLEMENTATION_PATHS:
+        _write(repository, relative_path, "NEUTRAL_VALUE = 1\n")
+    d1_commit = _commit(repository, "neutral D-1 anchor")
     manifests = repository / "data" / "manifests"
     manifests.mkdir(parents=True)
     parsed = repository / "artifacts" / "neutral-parsed"
@@ -213,27 +259,22 @@ def _write_neutral_fixture(
         checksum_match_count=5,
         items=items,
     )
-    report_path = tmp_path / "neutral-ingestion-report.json"
+    report_path = repository / "artifacts" / "neutral-ingestion-report.json"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(report.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    implementation_commit = _commit(repository, "neutral implementation boundary")
     output = repository / OUTPUT_RELATIVE_ROOT
-    boundary_calls: list[str] = []
-
-    def boundary(_root: Path, commit: str) -> tuple[dict[str, str], dict[str, str]]:
-        boundary_calls.append(commit)
-        return (
-            dict(sorted(run_module.PROTECTED_PLANNING_HASHES.items())),
-            dict(sorted(run_module.D1_IMPLEMENTATION_HASHES.items())),
-        )
-
-    monkeypatch.setattr(run_module, "_validate_preparation_boundary", boundary)
-    monkeypatch.setattr(run_module, "_validate_unchanged_boundary", boundary)
+    monkeypatch.setattr(run_module, "PLANNING_MERGE_COMMIT", planning_commit)
+    monkeypatch.setattr(run_module, "D1_ANCHOR_COMMIT", d1_commit)
     monkeypatch.setattr(run_module, "load_baseline_gold", lambda **_: _gold())
     return SimpleNamespace(
         repository=repository,
         parsed=parsed,
         report=report_path,
         output=output,
-        boundary_calls=boundary_calls,
+        planning_commit=planning_commit,
+        d1_commit=d1_commit,
+        implementation_commit=implementation_commit,
     )
 
 
@@ -242,7 +283,7 @@ def _prepare(fixture: SimpleNamespace) -> Any:
         repository_root=fixture.repository,
         parsed_root=fixture.parsed,
         ingestion_report=fixture.report,
-        implementation_commit=IMPLEMENTATION_COMMIT,
+        implementation_commit=fixture.implementation_commit,
         output_root=fixture.output,
     )
 
@@ -260,7 +301,15 @@ def test_prepare_validates_exact_five_sources_and_executes_twice(
     assert all(item.status == "success" for item in prepared.manifest.primary_attempt_records)
     assert prepared.manifest.aggregate_reproducibility is True
     assert prepared.manifest.owner_review_authorized is True
-    assert fixture.boundary_calls == [IMPLEMENTATION_COMMIT, IMPLEMENTATION_COMMIT]
+    assert prepared.manifest.implementation_commit == fixture.implementation_commit
+    assert tuple(prepared.manifest.protected_planning_hashes) == (
+        run_module.PROTECTED_PLANNING_PATHS
+    )
+    observation_inventory = run_module.observation_evidence_inventory(
+        prepared.manifest
+    )
+    assert len(observation_inventory) == 15
+    assert observation_inventory == run_module._complete_observation_inventory()
 
 
 def test_prepare_preserves_primary_repeat_canonical_outputs_and_hashes(
@@ -279,6 +328,132 @@ def test_prepare_preserves_primary_repeat_canonical_outputs_and_hashes(
             if item.source_id == source_id
         )
         assert record.canonical_output_sha256 == expected
+
+
+def test_owner_packet_keeps_challenge_evidence_without_candidates(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    packet = _prepare(fixture).owner_review_packet
+    assert packet is not None
+    by_id = {item.case_id: item for item in packet.cases}
+    for case_id in DEVELOPMENT_CASE_IDS[:2]:
+        case = by_id[case_id]
+        assert case.observed_candidates == ()
+        assert len(case.challenge_source_evidence) == 1
+        assert case.challenge_source_evidence[0].text_excerpt == (
+            "Invented neutral prose without an extraction trigger."
+        )
+    assert "outcome" not in json.dumps(packet.model_dump(mode="json"))
+
+
+def test_owner_packet_exposes_exact_route_to_review_candidate_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+
+    def extractor(document: ParsedDocument) -> CandidateExtractionResult:
+        if document.source_id != "S006":
+            return CandidateExtractionResult(
+                batch_id=f"NEUTRAL-{document.source_id}",
+                source_ids=[document.source_id],
+            )
+        evidence = CandidateEvidenceReference(
+            evidence_id="NEUTRAL-EVIDENCE-1",
+            source_id="S006",
+            block_id="NEUTRAL-S006-BLOCK-1",
+            location_type=LocationType.PAGE,
+            location_value="1",
+            text_excerpt="Invented neutral evidence with an ambiguous 7 percent.",
+            evidence_status=EvidenceStatus.AMBIGUOUS,
+        )
+        candidate = CandidateFact(
+            candidate_id="NEUTRAL-CANDIDATE-1",
+            source_id="S006",
+            document_family="invented-neutral-family",
+            subject_text="Invented adoption measure",
+            subject_type="metric",
+            predicate="metric",
+            raw_value="7 percent",
+            normalized_value=7.0,
+            value_type="percentage",
+            qualifiers={"metric_name": "invented adoption measure"},
+            evidence_ids=[evidence.evidence_id],
+            confidence=0.5,
+            review_status=CandidateReviewStatus.REQUIRED,
+            extraction_method=ExtractionMethod.DETERMINISTIC,
+            warnings=["ambiguous_metric_value_relationship"],
+        )
+        return CandidateExtractionResult(
+            batch_id="NEUTRAL-S006",
+            source_ids=["S006"],
+            evidence_references=[evidence],
+            candidate_facts=[candidate],
+            warnings=["neutral_source_warning:details"],
+        )
+
+    monkeypatch.setattr(run_module, "extract_deterministic_candidates_v0_2", extractor)
+    first = _prepare(fixture)
+    packet = first.owner_review_packet
+    assert packet is not None
+    case = packet.cases[2]
+    summary = case.observed_candidates[0]
+    assert summary.confidence == 0.5
+    assert summary.evidence_status is EvidenceStatus.AMBIGUOUS
+    assert summary.review_status is CandidateReviewStatus.REQUIRED
+    assert summary.warning_codes == ("ambiguous_metric_value_relationship",)
+    assert summary.subject_text == "Invented adoption measure"
+    assert summary.raw_value == "7 percent"
+    assert summary.normalized_value == 7.0
+    assert summary.qualifiers == {"metric_name": "invented adoption measure"}
+    assert summary.references_challenge_evidence_block is True
+    assert case.relevant_result_warning_codes == ("neutral_source_warning",)
+    assert case.relevant_candidate_warning_codes == (
+        "ambiguous_metric_value_relationship",
+    )
+    packet_path = fixture.output / OWNER_PACKET_NAME
+    assert packet_path.read_bytes() == run_module.canonical_artifact_json(packet).encode(
+        "utf-8"
+    )
+    documents = tuple(
+        ParsedDocument.model_validate_json(
+            (fixture.parsed / f"{source_id}.json").read_bytes()
+        )
+        for source_id in DEVELOPMENT_SOURCE_IDS
+    )
+    results = tuple(
+        CandidateExtractionResult.model_validate_json(
+            (fixture.output / "primary" / f"{source_id}.json").read_bytes()
+        )
+        for source_id in DEVELOPMENT_SOURCE_IDS
+    )
+    repeated = run_module._owner_review_packet(_gold(), documents, results)
+    assert run_module.canonical_artifact_json(repeated) == (
+        run_module.canonical_artifact_json(packet)
+    )
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    (
+        ("evidence_block_ids", ["NEUTRAL-MISSING-BLOCK"], "block is missing"),
+        ("evidence_location_values", ["2"], "location differs"),
+    ),
+)
+def test_owner_packet_fails_closed_on_invalid_challenge_source_evidence(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    value: list[str],
+    message: str,
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    payload = _gold().model_dump(mode="json")
+    payload["challenge_cases"][0][field] = value
+    changed = DevelopmentGoldBundle.model_validate(payload)
+    monkeypatch.setattr(run_module, "load_baseline_gold", lambda **_: changed)
+    with pytest.raises(DevelopmentRunError, match=message):
+        _prepare(fixture)
 
 
 def test_observation_lock_precedes_owner_artifacts_and_no_freeze_is_created(
@@ -317,6 +492,9 @@ def test_missing_parsed_source_is_rejected(
 ) -> None:
     fixture = _write_neutral_fixture(tmp_path, monkeypatch)
     (fixture.parsed / f"{missing_source}.json").unlink()
+    fixture.implementation_commit = _commit(
+        fixture.repository, "neutral missing parsed source"
+    )
     with pytest.raises(DevelopmentRunError, match="exactly five"):
         _prepare(fixture)
 
@@ -337,6 +515,9 @@ def test_duplicate_manifest_source_is_rejected(
     split = fixture.repository / "data/manifests/corpus_split.csv"
     lines = split.read_text(encoding="utf-8").splitlines()
     split.write_text("\n".join([*lines, lines[1]]) + "\n", encoding="utf-8")
+    fixture.implementation_commit = _commit(
+        fixture.repository, "neutral duplicate manifest source"
+    )
     with pytest.raises(DevelopmentRunError, match="duplicate"):
         _prepare(fixture)
 
@@ -349,6 +530,9 @@ def test_parse_status_and_checksum_substitution_are_rejected(
     payload = json.loads(path.read_text(encoding="utf-8"))
     payload["checksum_sha256"] = "F" * 64
     path.write_text(json.dumps(payload), encoding="utf-8")
+    fixture.implementation_commit = _commit(
+        fixture.repository, "neutral checksum substitution"
+    )
     with pytest.raises(DevelopmentRunError, match="checksum"):
         _prepare(fixture)
 
@@ -360,6 +544,9 @@ def test_ingestion_parser_provenance_is_rejected(
     payload = json.loads(fixture.report.read_text(encoding="utf-8"))
     payload["parser_commit"] = "2" * 40
     fixture.report.write_text(json.dumps(payload), encoding="utf-8")
+    fixture.implementation_commit = _commit(
+        fixture.repository, "neutral parser provenance substitution"
+    )
     with pytest.raises(DevelopmentRunError, match="provenance"):
         _prepare(fixture)
 
@@ -447,3 +634,139 @@ def test_atomic_publication_leaves_no_temporary_files(
     _prepare(fixture)
     assert not list(fixture.output.rglob("*.tmp"))
     assert not list(fixture.output.parent.glob(".deterministic-v0.2-*"))
+
+
+def test_temporary_git_protected_blob_boundaries_are_binary_safe(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    boundary = run_module.validate_protected_git_boundaries(
+        fixture.repository, fixture.implementation_commit
+    )
+    assert tuple(boundary.planning_hashes) == run_module.PROTECTED_PLANNING_PATHS
+    assert tuple(boundary.d1_hashes) == run_module.D1_IMPLEMENTATION_PATHS
+    binary = fixture.repository / "neutral.bin"
+    binary.write_bytes(b"\x00\xff\r\nneutral\n")
+    binary_commit = _commit(fixture.repository, "neutral binary blob")
+    assert run_module.read_git_blob_bytes(
+        fixture.repository, binary_commit, "neutral.bin"
+    ) == b"\x00\xff\r\nneutral\n"
+    assert run_module.git_blob_sha256(
+        fixture.repository, binary_commit, "neutral.bin"
+    ) == hashlib.sha256(b"\x00\xff\r\nneutral\n").hexdigest().upper()
+
+
+@pytest.mark.parametrize("inventory", ("planning", "d1"))
+@pytest.mark.parametrize("change", ("modified", "missing"))
+def test_temporary_git_protected_blob_change_fails_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    inventory: str,
+    change: str,
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    paths = (
+        run_module.PROTECTED_PLANNING_PATHS
+        if inventory == "planning"
+        else run_module.D1_IMPLEMENTATION_PATHS
+    )
+    path = fixture.repository / paths[0]
+    if change == "modified":
+        path.write_text("changed protected blob\n", encoding="utf-8")
+    else:
+        path.unlink()
+    changed_commit = _commit(fixture.repository, f"neutral {change} {inventory}")
+    with pytest.raises(DevelopmentRunError, match="protected blob changed|provenance"):
+        run_module.validate_protected_git_boundaries(
+            fixture.repository, changed_commit
+        )
+
+
+def test_temporary_git_wrong_anchor_relationship_fails_closed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    with pytest.raises(DevelopmentRunError, match="not an implementation ancestor"):
+        run_module.validate_protected_git_boundaries(
+            fixture.repository,
+            fixture.planning_commit,
+            planning_anchor_commit=fixture.implementation_commit,
+            d1_anchor_commit=fixture.planning_commit,
+            planning_paths=(run_module.PROTECTED_PLANNING_PATHS[0],),
+            d1_paths=(run_module.PROTECTED_PLANNING_PATHS[0],),
+            require_current_head=False,
+            run_plan_validator=False,
+        )
+
+
+def test_temporary_git_unrelated_commit_is_not_an_ancestor(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    tree = _git(fixture.repository, "rev-parse", f"{fixture.implementation_commit}^{{tree}}")
+    completed = subprocess.run(
+        ["git", "commit-tree", tree],
+        cwd=fixture.repository,
+        check=True,
+        input="neutral unrelated root\n",
+        capture_output=True,
+        text=True,
+    )
+    unrelated = completed.stdout.strip()
+    assert not run_module.git_commit_is_ancestor(
+        fixture.repository, fixture.implementation_commit, unrelated
+    )
+
+
+def test_exact_add_only_observation_diff_accepts_only_authorized_additions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    base = fixture.implementation_commit
+    _write(fixture.repository, "neutral-evidence/a.json", "{}\n")
+    observation = _commit(fixture.repository, "neutral exact evidence")
+    assert run_module.validate_exact_observation_diff(
+        fixture.repository, base, observation, ("neutral-evidence/a.json",)
+    ) == (("A", "neutral-evidence/a.json"),)
+
+
+@pytest.mark.parametrize(
+    "extra_path",
+    (
+        "src/extra_code.py",
+        "docs/stage_3b_v0_2_experiment_plan.md",
+        "evaluation/baselines/deterministic-baseline-v0.2/development/owner_completed.json",
+        "evaluation/baselines/deterministic-baseline-v0.2/development/development_evaluation_report.json",
+    ),
+)
+def test_exact_observation_diff_rejects_early_or_extra_content(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    extra_path: str,
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    base = fixture.implementation_commit
+    _write(fixture.repository, "neutral-evidence/a.json", "{}\n")
+    _write(fixture.repository, extra_path, "neutral extra\n")
+    observation = _commit(fixture.repository, "neutral extra observation content")
+    with pytest.raises(DevelopmentRunError, match="exact add-only"):
+        run_module.validate_exact_observation_diff(
+            fixture.repository, base, observation, ("neutral-evidence/a.json",)
+        )
+
+
+def test_exact_observation_diff_rejects_modified_evidence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _write_neutral_fixture(tmp_path, monkeypatch)
+    _write(fixture.repository, "neutral-evidence/a.json", "first\n")
+    base = _commit(fixture.repository, "neutral pre-existing evidence")
+    _write(fixture.repository, "neutral-evidence/a.json", "second\n")
+    observation = _commit(fixture.repository, "neutral modified evidence")
+    assert run_module.git_name_status_diff(
+        fixture.repository, base, observation
+    ) == (("M", "neutral-evidence/a.json"),)
+    with pytest.raises(DevelopmentRunError, match="exact add-only"):
+        run_module.validate_exact_observation_diff(
+            fixture.repository, base, observation, ("neutral-evidence/a.json",)
+        )

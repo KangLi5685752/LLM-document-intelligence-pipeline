@@ -6,25 +6,51 @@ import ast
 import hashlib
 import json
 from pathlib import Path
+from typing import get_args
 
 import pytest
+from pydantic import TypeAdapter, ValidationError
 
 import document_intelligence.extraction.development_run_v0_2 as run_module
+import document_intelligence.extraction.development_run_v0_2_cli as cli_module
 from document_intelligence.extraction.baseline_freeze_v0_2 import (
     PROCESS_GATE_IDS,
     QUALITY_TARGET_IDS,
     BaselineFreezeError,
     BaselineFreezeManifest,
     FreezeProcessEvidence,
+    ProcessGateOutcome,
+    QualityTargetOutcome,
     validate_process_gates,
+)
+from document_intelligence.extraction.development_run_models_v0_2 import (
+    CANDIDATE_SCHEMA_VERSION,
+    CORPUS_VERSION,
+    EXPERIMENT_ID,
+    HELD_OUT_ACCESS,
+    MATCHING_PROTOCOL_VERSION,
+    PARSER_COMMIT,
+    PREDICATE_VOCABULARY_VERSION,
+    PUBLIC_GOLD_CASES_SHA256,
+    PUBLIC_GOLD_FACTS_SHA256,
+    PUBLIC_GOLD_VERSION,
+    CompletedOwnerAssessmentEntry,
+    DevelopmentObservationLock,
+    DevelopmentPreparationManifest,
 )
 from document_intelligence.extraction.development_run_v0_2 import (
     BASELINE_FREEZE_MANIFEST_NAME,
     finalize_development_baseline_run,
 )
-from tests.test_development_run_v0_2_cli import _completed_assessments
+from tests.test_development_run_v0_2_cli import (
+    _commit_observation,
+    _completed_assessments,
+)
 from tests.test_stage_3b_development_run_v0_2 import (
+    _commit,
+    _git,
     _prepare,
+    _write,
     _write_neutral_fixture,
 )
 
@@ -135,16 +161,22 @@ def test_complete_neutral_freeze_allows_failed_quality_targets_and_zero_f1(
 ) -> None:
     fixture = _write_neutral_fixture(tmp_path, monkeypatch)
     prepared = _prepare(fixture)
+    observation_commit = _commit_observation(fixture)
     owner = _completed_assessments(fixture.output / "owner_completed.json")
-    monkeypatch.setattr(run_module, "_source_specific_rule_detected", lambda _: False)
     finalized = finalize_development_baseline_run(
         repository_root=fixture.repository,
         output_root=fixture.output,
         owner_assessments=owner,
+        observation_commit=observation_commit,
         freeze_date="2026-08-01",
     )
     manifest = finalized.freeze_manifest
     assert isinstance(manifest, BaselineFreezeManifest)
+    assert manifest.observation_evidence_commit == observation_commit
+    assert (
+        finalized.finalization_record.observation_evidence_commit
+        == observation_commit
+    )
     assert manifest.minimum_f1_gate_applies is False
     assert finalized.evaluation_report.fact_f1.value is None
     assert any(
@@ -179,8 +211,6 @@ def test_new_modules_do_not_import_v0_1_or_network_or_llm_orchestration() -> Non
 
 def test_new_modules_contain_no_real_titles_or_local_absolute_paths() -> None:
     forbidden_text = (
-        "AI Opportunities Action Plan",
-        "Artificial Intelligence and Public Standards",
         "D:\\Warwick",
         "C:\\Users\\Kanata",
     )
@@ -189,6 +219,149 @@ def test_new_modules_contain_no_real_titles_or_local_absolute_paths() -> None:
     )
     assert all(value not in combined for value in forbidden_text)
     assert "deterministic-baseline-v0.2" in combined
+
+
+def test_workflow_identities_match_the_frozen_config_not_test_constants() -> None:
+    config = json.loads(
+        (ROOT / "configs/experiments/deterministic_baseline_v0.2.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert EXPERIMENT_ID == config["experiment_id"]
+    assert config["experiment_version"] == "0.2"
+    assert CORPUS_VERSION == config["corpus_version"]
+    assert PARSER_COMMIT == config["parser_commit"]
+    assert PUBLIC_GOLD_VERSION == config["public_gold_version"]
+    assert PUBLIC_GOLD_FACTS_SHA256 == config["public_gold_facts_sha256"]
+    assert PUBLIC_GOLD_CASES_SHA256 == config["public_gold_cases_sha256"]
+    assert CANDIDATE_SCHEMA_VERSION == config["candidate_extraction_schema_version"]
+    assert PREDICATE_VOCABULARY_VERSION == config["predicate_vocabulary_version"]
+    assert MATCHING_PROTOCOL_VERSION == config["matching_protocol_version"]
+    assert run_module.DEVELOPMENT_SOURCE_IDS == tuple(
+        config["development_public_source_ids"]
+    )
+    assert run_module.DEVELOPMENT_CASE_IDS == tuple(
+        config["development_challenge_case_ids"]
+    )
+    assert HELD_OUT_ACCESS == config["held_out_access"]
+    for model in (
+        DevelopmentPreparationManifest,
+        DevelopmentObservationLock,
+        BaselineFreezeManifest,
+    ):
+        annotation = model.model_fields["public_gold_cases_sha256"].annotation
+        assert get_args(annotation) == (config["public_gold_cases_sha256"],)
+        incorrect = config["public_gold_cases_sha256"].replace(
+            "ABFF" + "CC6F", "ABFF6F"
+        )
+        with pytest.raises(ValidationError):
+            TypeAdapter(annotation).validate_python(incorrect)
+
+
+@pytest.mark.parametrize(
+    "value",
+    (
+        r"C:\Users\neutral\private.txt",
+        "D:/Warwick/private.txt",
+        r"\\server\share\private.txt",
+        "file:///tmp/private.txt",
+        "/home/user/private.txt",
+        "/tmp/private.txt",
+        "/var/data/private.txt",
+    ),
+)
+def test_operator_free_text_rejects_and_cli_redacts_absolute_paths(value: str) -> None:
+    with pytest.raises(ValueError, match="absolute path"):
+        CompletedOwnerAssessmentEntry(
+            case_id="PGC-V01-S001-001",
+            expected_behavior="preserve_missing",
+            outcome="passed",
+            rationale=f"Reviewed evidence at {value}",
+        )
+    with pytest.raises(ValueError, match="local path"):
+        ProcessGateOutcome(
+            gate_id="all_sources_complete_both_passes",
+            evidence=f"Evidence stored at {value}",
+        )
+    with pytest.raises(ValueError, match="local path"):
+        QualityTargetOutcome(
+            target_id="strict_tp_greater_than_zero",
+            outcome="not_met",
+            observed=f"Observed at {value}",
+        )
+    safe = cli_module._safe_message(ValueError(f"failed at {value}"))
+    assert "[local-path]" in safe
+    assert value not in safe
+
+
+def test_operator_free_text_allows_prose_ratios_and_https_urls() -> None:
+    value = "Reviewed input/output at 75% with ratio 1/2; https://example.com/a/b."
+    entry = CompletedOwnerAssessmentEntry(
+        case_id="PGC-V01-S001-001",
+        expected_behavior="preserve_missing",
+        outcome="passed",
+        rationale=value,
+    )
+    assert entry.rationale == value
+    assert cli_module._safe_message(ValueError(value)) == value
+
+
+@pytest.mark.parametrize(
+    "source",
+    (
+        'if document.filename == "special.pdf":\n    value = 1\n',
+        'if "special title" in document.title:\n    value = 1\n',
+        "if block.location.page_number == 18:\n    value = 1\n",
+        "if block.location.page_number in {3, 7}:\n    value = 1\n",
+        'value = "S004"\n',
+        'value = "PG-V01-S004-001"\n',
+        'value = "PGC-V01-S004-001"\n',
+        'value = "AI Opportunities Action Plan"\n',
+        "value = 1 if block.location.page_number == 18 else 0\n",
+        '[item for item in values if document.filename == "special.pdf"]\n',
+        "match value:\n    case _ if block.location.page_number in {3, 7}:\n        accepted = True\n",
+        "if candidate.normalized_value == 17:\n    accepted = True\n",
+        "import requests\n",
+        "import openai\n",
+    ),
+)
+def test_committed_blob_source_independence_audit_rejects_specific_rules(
+    tmp_path: Path, source: str
+) -> None:
+    repository = tmp_path / "audit-repository"
+    repository.mkdir()
+    _git(repository, "init", "-b", "main")
+    _git(repository, "config", "user.email", "neutral@example.invalid")
+    _git(repository, "config", "user.name", "Neutral Test")
+    _write(repository, "neutral_rule.py", source)
+    commit = _commit(repository, "neutral prohibited rule")
+    assert run_module.audit_source_independence_from_blobs(
+        repository, commit, source_paths=("neutral_rule.py",)
+    )
+
+
+def test_committed_blob_source_independence_audit_allows_generic_provenance(
+    tmp_path: Path,
+) -> None:
+    repository = tmp_path / "audit-repository"
+    repository.mkdir()
+    _git(repository, "init", "-b", "main")
+    _git(repository, "config", "user.email", "neutral@example.invalid")
+    _git(repository, "config", "user.name", "Neutral Test")
+    source = """
+candidate.source_id = document.source_id
+evidence_page = block.location.page_number
+if block.location.page_number is not None:
+    evidence.append(evidence_page)
+if block.block_type is BlockType.PAGE_TEXT:
+    accepted = True
+""".lstrip()
+    _write(repository, "neutral_rule.py", source)
+    commit = _commit(repository, "neutral generic rule")
+    _write(repository, "neutral_rule.py", 'value = "S004"\n')
+    assert run_module.audit_source_independence_from_blobs(
+        repository, commit, source_paths=("neutral_rule.py",)
+    ) == ()
 
 
 def test_held_out_source_ids_are_absent_from_production_workflow_sources() -> None:
@@ -200,11 +373,17 @@ def test_held_out_source_ids_are_absent_from_production_workflow_sources() -> No
 
 
 def test_d1_files_remain_byte_identical() -> None:
+    expected = {
+        "src/document_intelligence/extraction/deterministic_rules_v0_2.py": "A0F644C56BB2DFC3BA397BAC020A943732F77ACE6E147A5425255E45946B99E7",
+        "src/document_intelligence/extraction/deterministic_v0_2.py": "A6BC8E52D2B99C8BE4C4AFD182B0165DB80EEF48F07B25E7104FF9482577161D",
+        "src/document_intelligence/extraction/deterministic_v0_2_cli.py": "E22827C71699268CDD465700CECDC23BC9BF533C9FD719CE920FAACFAA9DA52F",
+        "tests/test_deterministic_extractor_v0_2.py": "03BF9D68587F6ECAC624E122C79D7E233C5809CF07DBC8BF9EBE3FC69CBB813E",
+    }
     observed = {
         path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest().upper()
-        for path in sorted(run_module.D1_IMPLEMENTATION_HASHES)
+        for path in sorted(expected)
     }
-    assert observed == dict(sorted(run_module.D1_IMPLEMENTATION_HASHES.items()))
+    assert observed == expected
 
 
 def test_no_repository_v0_2_observation_or_freeze_was_created_by_tests() -> None:

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import re
 import sys
 from pathlib import Path
 
@@ -16,6 +15,9 @@ from document_intelligence.extraction.development_run_v0_2 import (
     DevelopmentRunError,
     finalize_development_baseline_run,
     prepare_development_baseline_run,
+)
+from document_intelligence.extraction.development_run_models_v0_2 import (
+    redact_prohibited_absolute_paths,
 )
 
 
@@ -47,15 +49,14 @@ def build_parser() -> argparse.ArgumentParser:
     finalize.add_argument("--repository-root", type=Path, required=True)
     finalize.add_argument("--output-root", type=Path, required=True)
     finalize.add_argument("--owner-assessments", type=Path, required=True)
+    finalize.add_argument("--observation-commit", required=True)
     finalize.add_argument("--freeze-date")
     return parser
 
 
 def _safe_message(error: Exception) -> str:
     message = " ".join(str(error).split()) or type(error).__name__
-    message = re.sub(r"[A-Za-z]:[\\/][^\s,;]+", "[local-path]", message)
-    message = re.sub(r"file://[^\s,;]+", "[local-path]", message)
-    return message[:300]
+    return redact_prohibited_absolute_paths(message)[:300]
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -90,6 +91,7 @@ def main(argv: list[str] | None = None) -> int:
                 repository_root=args.repository_root,
                 output_root=args.output_root,
                 owner_assessments=args.owner_assessments,
+                observation_commit=args.observation_commit,
                 freeze_date=args.freeze_date,
             )
             report = finalized.evaluation_report

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import csv
 import hashlib
 import json
@@ -53,6 +54,7 @@ from document_intelligence.extraction.development_run_models_v0_2 import (
     PUBLIC_GOLD_FACTS_SHA256,
     BaselineFreezeReferences,
     CandidateOutputRecord,
+    ChallengeSourceEvidence,
     CompletedOwnerAssessmentArtifact,
     DevelopmentInputRecord,
     DevelopmentObservationLock,
@@ -108,40 +110,21 @@ EVALUATION_REPORT_NAME = "development_evaluation_report.json"
 FINALIZATION_RECORD_NAME = "finalization_record.json"
 BASELINE_FREEZE_MANIFEST_NAME = "baseline_freeze_manifest.json"
 
-PROTECTED_PLANNING_HASHES = {
-    "configs/experiments/deterministic_baseline_v0.2.json": (
-        "D4651E3CDDC57EA071DEAAF4B600CC8895AA4F9EA3FE50F575587245FFF2EF2E"
-    ),
-    "docs/stage_3b_v0_2_error_matrix.md": (
-        "E6E4DFBE2F64A41752A9B14137324D7E2B35864048842EB59ADCAE0B430E241B"
-    ),
-    "docs/stage_3b_v0_2_experiment_plan.md": (
-        "079E4A77737C09183B1185D350814BE21FC4246B98D1D9B7BA7C705250F69783"
-    ),
-    "docs/stage_3b_v0_2_versioning_and_freeze.md": (
-        "232A27A3766AE43AA2F9F94758DFB5051FF79842E2AD70FFAF9B9CC5964D066A"
-    ),
-    "scripts/validate_deterministic_v0_2_plan.py": (
-        "B9D60F8FA4BEDA02E9E9D6AA197DC2B33BCDBC792FC163278C32211BA7BA02D9"
-    ),
-    "tests/test_deterministic_v0_2_plan.py": (
-        "1BF2F0E23C664AECE45B287B77B09BFF1FA6A697E90D1F145BABECB94F1EBCBC"
-    ),
-}
-D1_IMPLEMENTATION_HASHES = {
-    "src/document_intelligence/extraction/deterministic_rules_v0_2.py": (
-        "A0F644C56BB2DFC3BA397BAC020A943732F77ACE6E147A5425255E45946B99E7"
-    ),
-    "src/document_intelligence/extraction/deterministic_v0_2.py": (
-        "A6BC8E52D2B99C8BE4C4AFD182B0165DB80EEF48F07B25E7104FF9482577161D"
-    ),
-    "src/document_intelligence/extraction/deterministic_v0_2_cli.py": (
-        "E22827C71699268CDD465700CECDC23BC9BF533C9FD719CE920FAACFAA9DA52F"
-    ),
-    "tests/test_deterministic_extractor_v0_2.py": (
-        "03BF9D68587F6ECAC624E122C79D7E233C5809CF07DBC8BF9EBE3FC69CBB813E"
-    ),
-}
+D1_ANCHOR_COMMIT = "2e54c7f0eb7a7173d4fe3c7b9941f7121fe15722"
+PROTECTED_PLANNING_PATHS = (
+    "configs/experiments/deterministic_baseline_v0.2.json",
+    "docs/stage_3b_v0_2_error_matrix.md",
+    "docs/stage_3b_v0_2_experiment_plan.md",
+    "docs/stage_3b_v0_2_versioning_and_freeze.md",
+    "scripts/validate_deterministic_v0_2_plan.py",
+    "tests/test_deterministic_v0_2_plan.py",
+)
+D1_IMPLEMENTATION_PATHS = (
+    "src/document_intelligence/extraction/deterministic_rules_v0_2.py",
+    "src/document_intelligence/extraction/deterministic_v0_2.py",
+    "src/document_intelligence/extraction/deterministic_v0_2_cli.py",
+    "tests/test_deterministic_extractor_v0_2.py",
+)
 V0_1_SEMANTIC_DUPLICATE_COUNT = 7
 SUPPORTED_PREDICATES = (
     "action_status",
@@ -213,40 +196,93 @@ def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest().upper()
 
 
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    try:
-        with path.open("rb") as handle:
-            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(chunk)
-    except OSError as error:
-        raise DevelopmentRunError("a required protected file could not be read") from error
-    return digest.hexdigest().upper()
-
-
-def _hash_inventory(
-    repository_root: Path, expected: dict[str, str], label: str
-) -> dict[str, str]:
-    observed = {
-        path: _sha256_file(repository_root / path) for path in sorted(expected)
-    }
-    if observed != dict(sorted(expected.items())):
-        raise DevelopmentRunError(f"{label} hashes do not match frozen values")
-    return observed
-
-
-def _run_git(repository_root: Path, arguments: Sequence[str]) -> str:
+def _run_git_bytes(repository_root: Path, arguments: Sequence[str]) -> bytes:
     try:
         completed = subprocess.run(
             ["git", *arguments],
             cwd=repository_root,
             check=True,
             capture_output=True,
-            text=True,
         )
     except (OSError, subprocess.CalledProcessError) as error:
         raise DevelopmentRunError("repository Git provenance check failed") from error
-    return completed.stdout.strip()
+    return completed.stdout
+
+
+def _run_git(repository_root: Path, arguments: Sequence[str]) -> str:
+    try:
+        return _run_git_bytes(repository_root, arguments).decode("utf-8").strip()
+    except UnicodeDecodeError as error:
+        raise DevelopmentRunError("repository Git output is not UTF-8") from error
+
+
+def verify_git_commit_exists(repository_root: Path, commit: str) -> None:
+    """Require an exact full SHA identifying a commit object."""
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise DevelopmentRunError("commit must be a full lowercase SHA")
+    _run_git(repository_root, ("cat-file", "-e", f"{commit}^{{commit}}"))
+
+
+def read_git_blob_bytes(repository_root: Path, commit: str, path: str) -> bytes:
+    """Read one committed blob without text decoding or line-ending conversion."""
+    verify_git_commit_exists(repository_root, commit)
+    return _run_git_bytes(repository_root, ("show", f"{commit}:{path}"))
+
+
+def git_blob_object_id(repository_root: Path, commit: str, path: str) -> str:
+    """Return the immutable object ID for one path at one commit."""
+    verify_git_commit_exists(repository_root, commit)
+    object_id = _run_git(repository_root, ("rev-parse", f"{commit}:{path}"))
+    if not re.fullmatch(r"[0-9a-f]{40,64}", object_id):
+        raise DevelopmentRunError("protected path does not identify a Git blob")
+    return object_id
+
+
+def git_blob_sha256(repository_root: Path, commit: str, path: str) -> str:
+    """Calculate uppercase SHA-256 from exact committed blob bytes."""
+    return _sha256_bytes(read_git_blob_bytes(repository_root, commit, path))
+
+
+def git_commit_is_ancestor(
+    repository_root: Path, ancestor: str, descendant: str
+) -> bool:
+    """Return the real Git ancestry relation for two existing commits."""
+    verify_git_commit_exists(repository_root, ancestor)
+    verify_git_commit_exists(repository_root, descendant)
+    try:
+        completed = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", ancestor, descendant],
+            cwd=repository_root,
+            check=False,
+            capture_output=True,
+        )
+    except OSError as error:
+        raise DevelopmentRunError("repository Git ancestry check failed") from error
+    if completed.returncode not in (0, 1):
+        raise DevelopmentRunError("repository Git ancestry check failed")
+    return completed.returncode == 0
+
+
+def git_name_status_diff(
+    repository_root: Path, base_commit: str, target_commit: str
+) -> tuple[tuple[str, str], ...]:
+    """Return a deterministic, no-rename name-status commit diff."""
+    verify_git_commit_exists(repository_root, base_commit)
+    verify_git_commit_exists(repository_root, target_commit)
+    output = _run_git(
+        repository_root,
+        ("diff", "--name-status", "--no-renames", base_commit, target_commit),
+    )
+    entries: list[tuple[str, str]] = []
+    for line in output.splitlines():
+        if not line:
+            continue
+        try:
+            status, path = line.split("\t", 1)
+        except ValueError as error:
+            raise DevelopmentRunError("Git name-status diff is malformed") from error
+        entries.append((status, path.replace("\\", "/")))
+    return tuple(entries)
 
 
 def _repository_head(repository_root: Path) -> str:
@@ -256,59 +292,90 @@ def _repository_head(repository_root: Path) -> str:
     return head
 
 
-def _validate_preparation_boundary(
-    repository_root: Path, implementation_commit: str
-) -> tuple[dict[str, str], dict[str, str]]:
-    if not re.fullmatch(r"[0-9a-f]{40}", implementation_commit):
-        raise DevelopmentRunError("implementation_commit must be a full commit SHA")
-    if _repository_head(repository_root) != implementation_commit:
-        raise DevelopmentRunError("current HEAD differs from implementation_commit")
-    _run_git(repository_root, ("cat-file", "-e", f"{implementation_commit}^{{commit}}"))
-    if _run_git(repository_root, ("status", "--porcelain")):
-        raise DevelopmentRunError("repository working tree must be clean")
-    validator = repository_root / "scripts/validate_deterministic_v0_2_plan.py"
-    try:
-        subprocess.run(
-            [sys.executable, str(validator)],
-            cwd=repository_root,
-            check=True,
-            capture_output=True,
+@dataclass(frozen=True, slots=True)
+class ProtectedGitBoundaries:
+    """Calculated committed-blob hashes for both immutable anchors."""
+
+    planning_hashes: dict[str, str]
+    d1_hashes: dict[str, str]
+
+
+def _validate_blob_inventory(
+    *,
+    repository_root: Path,
+    anchor_commit: str,
+    implementation_commit: str,
+    paths: Sequence[str],
+    label: str,
+) -> dict[str, str]:
+    if not git_commit_is_ancestor(
+        repository_root, anchor_commit, implementation_commit
+    ):
+        raise DevelopmentRunError(f"{label} anchor is not an implementation ancestor")
+    hashes: dict[str, str] = {}
+    for path in sorted(paths):
+        anchor_oid = git_blob_object_id(repository_root, anchor_commit, path)
+        implementation_oid = git_blob_object_id(
+            repository_root, implementation_commit, path
         )
-    except (OSError, subprocess.CalledProcessError) as error:
-        raise DevelopmentRunError("frozen plan or protected v0.1 validation failed") from error
-    planning = _hash_inventory(
-        repository_root, PROTECTED_PLANNING_HASHES, "protected planning"
-    )
-    d1 = _hash_inventory(repository_root, D1_IMPLEMENTATION_HASHES, "D-1")
-    return planning, d1
+        if anchor_oid != implementation_oid:
+            raise DevelopmentRunError(f"{label} protected blob changed: {path}")
+        hashes[path] = git_blob_sha256(repository_root, anchor_commit, path)
+    return hashes
 
 
-def _validate_unchanged_boundary(
-    repository_root: Path, implementation_commit: str
-) -> tuple[dict[str, str], dict[str, str]]:
-    """Recheck committed implementation while ignoring generated untracked evidence."""
-    if _repository_head(repository_root) != implementation_commit:
-        raise DevelopmentRunError("implementation commit changed during the workflow")
+def validate_protected_git_boundaries(
+    repository_root: Path,
+    implementation_commit: str,
+    *,
+    planning_anchor_commit: str | None = None,
+    d1_anchor_commit: str | None = None,
+    planning_paths: Sequence[str] | None = None,
+    d1_paths: Sequence[str] | None = None,
+    require_current_head: bool = True,
+    run_plan_validator: bool = True,
+) -> ProtectedGitBoundaries:
+    """Validate immutable planning and D-1 blobs at a committed boundary."""
+    repository_root = Path(repository_root).resolve()
+    planning_anchor_commit = planning_anchor_commit or PLANNING_MERGE_COMMIT
+    d1_anchor_commit = d1_anchor_commit or D1_ANCHOR_COMMIT
+    planning_paths = planning_paths or PROTECTED_PLANNING_PATHS
+    d1_paths = d1_paths or D1_IMPLEMENTATION_PATHS
+    verify_git_commit_exists(repository_root, implementation_commit)
+    if require_current_head and _repository_head(repository_root) != implementation_commit:
+        raise DevelopmentRunError("current HEAD differs from implementation_commit")
     if _run_git(
         repository_root, ("status", "--porcelain", "--untracked-files=no")
     ):
-        raise DevelopmentRunError("tracked implementation changed during the workflow")
+        raise DevelopmentRunError("tracked repository working tree must be clean")
     validator = repository_root / "scripts/validate_deterministic_v0_2_plan.py"
-    try:
-        subprocess.run(
-            [sys.executable, str(validator)],
-            cwd=repository_root,
-            check=True,
-            capture_output=True,
-        )
-    except (OSError, subprocess.CalledProcessError) as error:
-        raise DevelopmentRunError("frozen plan or protected v0.1 validation failed") from error
-    return (
-        _hash_inventory(
-            repository_root, PROTECTED_PLANNING_HASHES, "protected planning"
-        ),
-        _hash_inventory(repository_root, D1_IMPLEMENTATION_HASHES, "D-1"),
+    if run_plan_validator:
+        try:
+            subprocess.run(
+                [sys.executable, str(validator)],
+                cwd=repository_root,
+                check=True,
+                capture_output=True,
+            )
+        except (OSError, subprocess.CalledProcessError) as error:
+            raise DevelopmentRunError(
+                "frozen plan or protected v0.1 validation failed"
+            ) from error
+    planning = _validate_blob_inventory(
+        repository_root=repository_root,
+        anchor_commit=planning_anchor_commit,
+        implementation_commit=implementation_commit,
+        paths=planning_paths,
+        label="protected planning",
     )
+    d1 = _validate_blob_inventory(
+        repository_root=repository_root,
+        anchor_commit=d1_anchor_commit,
+        implementation_commit=implementation_commit,
+        paths=d1_paths,
+        label="D-1 implementation",
+    )
+    return ProtectedGitBoundaries(planning_hashes=planning, d1_hashes=d1)
 
 
 def _read_csv(path: Path, label: str) -> list[dict[str, str]]:
@@ -820,34 +887,85 @@ def _structural_inventory(
 
 
 def _owner_review_packet(
-    gold: DevelopmentGoldBundle, results: Sequence[CandidateExtractionResult]
+    gold: DevelopmentGoldBundle,
+    documents: Sequence[ParsedDocument],
+    results: Sequence[CandidateExtractionResult],
 ) -> OwnerChallengeReviewPacket:
     by_source = {item.source_ids[0]: item for item in results}
+    documents_by_source = {item.source_id: item for item in documents}
+    if len(documents_by_source) != len(documents):
+        raise DevelopmentRunError("owner packet document sources must be unique")
     cases: list[OwnerChallengeReviewCase] = []
     for case in gold.challenge_cases:
-        result = by_source[case.source_id]
+        try:
+            result = by_source[case.source_id]
+            document = documents_by_source[case.source_id]
+        except KeyError as error:
+            raise DevelopmentRunError(
+                "owner packet requires every development challenge source"
+            ) from error
+        blocks_by_id: dict[str, Any] = {}
+        for block in document.blocks:
+            if block.block_id in blocks_by_id:
+                raise DevelopmentRunError("challenge evidence block is duplicated")
+            blocks_by_id[block.block_id] = block
+        challenge_source_evidence: list[ChallengeSourceEvidence] = []
+        for block_id, expected_location in zip(
+            case.evidence_block_ids,
+            case.evidence_location_values,
+            strict=True,
+        ):
+            block = blocks_by_id.get(block_id)
+            if block is None:
+                raise DevelopmentRunError("challenge evidence block is missing")
+            if block.location.location_value != expected_location:
+                raise DevelopmentRunError("challenge evidence location differs from gold")
+            challenge_source_evidence.append(
+                ChallengeSourceEvidence(
+                    block_id=block.block_id,
+                    location_type=block.location.location_type,
+                    location_value=block.location.location_value,
+                    text_excerpt=block.text.strip()[:240],
+                )
+            )
         evidence_by_id = {item.evidence_id: item for item in result.evidence_references}
         case_blocks = set(case.evidence_block_ids)
         summaries: list[OwnerChallengeCandidateSummary] = []
-        evidence_ids: set[str] = set()
-        warning_codes: set[str] = set()
+        candidate_warning_codes: set[str] = set()
         for candidate in sorted(result.candidate_facts, key=lambda item: item.candidate_id):
-            evidence = tuple(
-                evidence_by_id[item]
-                for item in sorted(candidate.evidence_ids)
-                if item in evidence_by_id
-            )
+            try:
+                evidence = tuple(
+                    evidence_by_id[item] for item in sorted(candidate.evidence_ids)
+                )
+            except KeyError as error:
+                raise DevelopmentRunError(
+                    "owner packet candidate evidence is missing"
+                ) from error
             if not any(item.block_id in case_blocks for item in evidence):
                 continue
-            candidate_warning_codes = tuple(
+            warning_codes = tuple(
                 sorted({_warning_code(item) for item in candidate.warnings})
             )
-            warning_codes.update(candidate_warning_codes)
-            evidence_ids.update(item.evidence_id for item in evidence)
+            candidate_warning_codes.update(warning_codes)
+            statuses = {item.evidence_status for item in evidence}
+            if len(statuses) != 1:
+                raise DevelopmentRunError(
+                    "owner packet candidate evidence statuses do not agree"
+                )
             summaries.append(
                 OwnerChallengeCandidateSummary(
                     candidate_id=candidate.candidate_id,
-                    warning_codes=candidate_warning_codes,
+                    predicate=candidate.predicate,
+                    subject_text=candidate.subject_text,
+                    subject_type=candidate.subject_type,
+                    raw_value=candidate.raw_value,
+                    normalized_value=candidate.normalized_value,
+                    value_type=candidate.value_type,
+                    qualifiers=candidate.qualifiers,
+                    confidence=candidate.confidence,
+                    evidence_status=next(iter(statuses)),
+                    review_status=candidate.review_status,
+                    warning_codes=warning_codes,
                     evidence_ids=tuple(item.evidence_id for item in evidence),
                     evidence=tuple(
                         OwnerChallengeEvidenceSummary(
@@ -855,26 +973,31 @@ def _owner_review_packet(
                             block_id=item.block_id,
                             location_type=item.location_type,
                             location_value=item.location_value,
-                            text_excerpt=item.text_excerpt[:240],
+                            text_excerpt=item.text_excerpt.strip()[:240],
+                            evidence_status=item.evidence_status,
                         )
                         for item in evidence
                     ),
+                    references_challenge_evidence_block=True,
                 )
             )
-        warning_codes.update(
-            _warning_code(item)
-            for item in result.warnings
-            if case_blocks.intersection(item.split(":"))
-        )
         cases.append(
             OwnerChallengeReviewCase(
                 case_id=case.case_id,
                 source_id=case.source_id,
+                case_type=case.case_type,
                 expected_behavior=case.expected_behavior,
-                candidate_ids=tuple(item.candidate_id for item in summaries),
-                evidence_ids=tuple(sorted(evidence_ids)),
-                warning_codes=tuple(sorted(warning_codes)),
+                description=case.description,
+                evidence_block_ids=tuple(case.evidence_block_ids),
+                evidence_location_values=tuple(case.evidence_location_values),
+                challenge_source_evidence=tuple(challenge_source_evidence),
                 observed_candidates=tuple(summaries),
+                relevant_result_warning_codes=tuple(
+                    sorted({_warning_code(item) for item in result.warnings})
+                ),
+                relevant_candidate_warning_codes=tuple(
+                    sorted(candidate_warning_codes)
+                ),
             )
         )
     return OwnerChallengeReviewPacket(cases=tuple(cases))
@@ -961,9 +1084,11 @@ def prepare_development_baseline_run(
         raise DevelopmentRunError(
             "parsed_root must be repository-relative"
         ) from error
-    planning_hashes, d1_hashes = _validate_preparation_boundary(
+    boundary = validate_protected_git_boundaries(
         repository_root, implementation_commit
     )
+    planning_hashes = boundary.planning_hashes
+    d1_hashes = boundary.d1_hashes
     expected_sources = _load_expected_sources(repository_root)
     report_items = _load_ingestion_report(ingestion_report, expected_sources)
     documents, input_records = _load_development_inputs(
@@ -1022,7 +1147,11 @@ def prepare_development_baseline_run(
     )
     lock_bytes = canonical_artifact_json(lock).encode("utf-8")
     inventory_bytes = canonical_artifact_json(inventory).encode("utf-8")
-    packet = _owner_review_packet(gold, results) if owner_authorized else None
+    packet = (
+        _owner_review_packet(gold, documents, results)
+        if owner_authorized
+        else None
+    )
     template = _owner_assessment_template(gold) if owner_authorized else None
     packet_bytes = (
         canonical_artifact_json(packet).encode("utf-8")
@@ -1080,10 +1209,13 @@ def prepare_development_baseline_run(
             _atomic_write_bytes(staging / OWNER_PACKET_NAME, packet_bytes)
             _atomic_write_bytes(staging / OWNER_TEMPLATE_NAME, template_bytes)
         _write_model(staging / PREPARATION_MANIFEST_NAME, manifest)
-        current_planning, current_d1 = _validate_unchanged_boundary(
+        current_boundary = validate_protected_git_boundaries(
             repository_root, implementation_commit
         )
-        if current_planning != planning_hashes or current_d1 != d1_hashes:
+        if (
+            current_boundary.planning_hashes != planning_hashes
+            or current_boundary.d1_hashes != d1_hashes
+        ):
             raise DevelopmentRunError("protected implementation changed during preparation")
         os.replace(staging, output_root)
     except Exception:
@@ -1141,9 +1273,16 @@ def _assessment_values(
         packet_case = packet_by_id[item.case_id]
         if item.expected_behavior != packet_case.expected_behavior:
             raise DevelopmentRunError("owner expected_behavior changed")
-        if not set(item.related_candidate_ids).issubset(packet_case.candidate_ids):
+        packet_candidate_ids = {
+            candidate.candidate_id for candidate in packet_case.observed_candidates
+        }
+        packet_warning_codes = {
+            *packet_case.relevant_result_warning_codes,
+            *packet_case.relevant_candidate_warning_codes,
+        }
+        if not set(item.related_candidate_ids).issubset(packet_candidate_ids):
             raise DevelopmentRunError("owner assessment references unknown candidate")
-        if not set(item.related_warning_codes).issubset(packet_case.warning_codes):
+        if not set(item.related_warning_codes).issubset(packet_warning_codes):
             raise DevelopmentRunError("owner assessment references unknown warning")
         values.append(
             ChallengeCaseAssessment(
@@ -1166,15 +1305,293 @@ def _relative_to_repository(path: Path, repository_root: Path) -> str:
         raise DevelopmentRunError("artifact path must be under repository_root") from error
 
 
-def _source_specific_rule_detected(repository_root: Path) -> bool:
-    values = "\n".join(
-        (repository_root / path).read_text(encoding="utf-8")
-        for path in (
-            "src/document_intelligence/extraction/deterministic_rules_v0_2.py",
-            "src/document_intelligence/extraction/deterministic_v0_2.py",
+def _git_path_exists(repository_root: Path, commit: str, path: str) -> bool:
+    try:
+        completed = subprocess.run(
+            ["git", "cat-file", "-e", f"{commit}:{path}"],
+            cwd=repository_root,
+            check=False,
+            capture_output=True,
+        )
+    except OSError as error:
+        raise DevelopmentRunError("repository Git path check failed") from error
+    if completed.returncode not in (0, 1, 128):
+        raise DevelopmentRunError("repository Git path check failed")
+    return completed.returncode == 0
+
+
+def observation_evidence_inventory(
+    manifest: DevelopmentPreparationManifest,
+) -> tuple[str, ...]:
+    """Derive the preservable evidence inventory from a validated manifest."""
+    output_root = Path(OUTPUT_RELATIVE_ROOT)
+    paths = [
+        *(output_root / item.relative_path for item in manifest.primary_output_records),
+        *(output_root / item.relative_path for item in manifest.repeat_output_records),
+        output_root / OBSERVATION_LOCK_NAME,
+        output_root / STRUCTURAL_INVENTORY_NAME,
+        output_root / PREPARATION_MANIFEST_NAME,
+    ]
+    if manifest.owner_review_packet_sha256 is not None:
+        paths.append(output_root / OWNER_PACKET_NAME)
+    if manifest.owner_assessment_template_sha256 is not None:
+        paths.append(output_root / OWNER_TEMPLATE_NAME)
+    return tuple(sorted(path.as_posix() for path in paths))
+
+
+def _complete_observation_inventory() -> tuple[str, ...]:
+    root = Path(OUTPUT_RELATIVE_ROOT)
+    return tuple(
+        sorted(
+            path.as_posix()
+            for path in [
+                *(root / PRIMARY_DIRECTORY / f"{source_id}.json" for source_id in DEVELOPMENT_SOURCE_IDS),
+                *(root / REPEAT_DIRECTORY / f"{source_id}.json" for source_id in DEVELOPMENT_SOURCE_IDS),
+                root / OBSERVATION_LOCK_NAME,
+                root / STRUCTURAL_INVENTORY_NAME,
+                root / OWNER_PACKET_NAME,
+                root / OWNER_TEMPLATE_NAME,
+                root / PREPARATION_MANIFEST_NAME,
+            ]
         )
     )
-    return bool(re.search(r"[\"']S00(?:1|2|3|4|6)[\"']", values))
+
+
+@dataclass(frozen=True, slots=True)
+class ObservationCommitBoundary:
+    """Evidence-derived process values from an observation Git commit."""
+
+    implementation_precedes_observation: bool
+    artifact_identities_agree: bool
+    observation_lock_blob_equal: bool
+
+
+def validate_exact_observation_diff(
+    repository_root: Path,
+    implementation_commit: str,
+    observation_commit: str,
+    authorized_paths: Sequence[str],
+) -> tuple[tuple[str, str], ...]:
+    """Require every authorized observation path to be added, and nothing else."""
+    observed = git_name_status_diff(
+        repository_root, implementation_commit, observation_commit
+    )
+    expected = tuple(("A", path) for path in sorted(authorized_paths))
+    if observed != expected:
+        raise DevelopmentRunError("observation commit is not the exact add-only inventory")
+    return observed
+
+
+def validate_observation_commit_boundary(
+    *,
+    repository_root: Path,
+    output_root: Path,
+    manifest: DevelopmentPreparationManifest,
+    observation_commit: str,
+    owner_assessments: Path,
+) -> ObservationCommitBoundary:
+    """Validate an exact add-only external anchor before reading owner content."""
+    expected_output_root = (repository_root / OUTPUT_RELATIVE_ROOT).resolve()
+    if Path(output_root).resolve() != expected_output_root:
+        raise DevelopmentRunError("observation output root is not the frozen layout")
+    verify_git_commit_exists(repository_root, observation_commit)
+    if _repository_head(repository_root) != observation_commit:
+        raise DevelopmentRunError("current HEAD differs from observation_commit")
+    if observation_commit == manifest.implementation_commit:
+        raise DevelopmentRunError("observation commit must follow implementation")
+    is_ancestor = git_commit_is_ancestor(
+        repository_root, manifest.implementation_commit, observation_commit
+    )
+    if not is_ancestor:
+        raise DevelopmentRunError("implementation is not an observation ancestor")
+    if not manifest.owner_review_authorized:
+        raise DevelopmentRunError("incomplete observation cannot be finalized")
+    authorized = observation_evidence_inventory(manifest)
+    complete = _complete_observation_inventory()
+    if authorized != complete:
+        raise DevelopmentRunError("observation inventory is not complete and reproducible")
+    validated_diff = validate_exact_observation_diff(
+        repository_root,
+        manifest.implementation_commit,
+        observation_commit,
+        authorized,
+    )
+    assessment_relative = _relative_to_repository(owner_assessments, repository_root)
+    forbidden = (
+        assessment_relative,
+        (Path(OUTPUT_RELATIVE_ROOT) / EVALUATION_REPORT_NAME).as_posix(),
+        (Path(OUTPUT_RELATIVE_ROOT) / FINALIZATION_RECORD_NAME).as_posix(),
+        (Path(OUTPUT_RELATIVE_ROOT) / BASELINE_FREEZE_MANIFEST_NAME).as_posix(),
+    )
+    if any(_git_path_exists(repository_root, observation_commit, path) for path in forbidden):
+        raise DevelopmentRunError("owner or final evidence was committed before review")
+    if _run_git(
+        repository_root, ("status", "--porcelain", "--untracked-files=no")
+    ):
+        raise DevelopmentRunError("tracked repository working tree must be clean")
+    lock_relative = (Path(OUTPUT_RELATIVE_ROOT) / OBSERVATION_LOCK_NAME).as_posix()
+    lock_equal = False
+    blob_equal_count = 0
+    for relative_path in authorized:
+        working_path = repository_root / relative_path
+        try:
+            working_bytes = working_path.read_bytes()
+        except OSError as error:
+            raise DevelopmentRunError("an observation working file is missing") from error
+        blob_bytes = read_git_blob_bytes(
+            repository_root, observation_commit, relative_path
+        )
+        if working_bytes != blob_bytes:
+            raise DevelopmentRunError("observation working file differs from Git blob")
+        blob_equal_count += 1
+        if relative_path == lock_relative:
+            lock_equal = True
+    return ObservationCommitBoundary(
+        implementation_precedes_observation=is_ancestor,
+        artifact_identities_agree=(
+            len(validated_diff) == len(authorized)
+            and blob_equal_count == len(authorized)
+        ),
+        observation_lock_blob_equal=lock_equal,
+    )
+
+
+_KNOWN_REAL_TITLES = (
+    "AI Opportunities Action Plan",
+    "Artificial Intelligence and Public Standards",
+    "Scotland's Artificial Intelligence strategy",
+    "Planning and implementing real-world artificial intelligence",
+)
+_NETWORK_OR_LLM_IMPORTS = {
+    "aiohttp",
+    "anthropic",
+    "boto3",
+    "cohere",
+    "google.generativeai",
+    "httpx",
+    "mistralai",
+    "openai",
+    "requests",
+    "socket",
+    "urllib",
+    "urllib3",
+}
+
+
+def _attribute_path(node: ast.AST) -> str | None:
+    parts: list[str] = []
+    current = node
+    while isinstance(current, ast.Attribute):
+        parts.append(current.attr)
+        current = current.value
+    if isinstance(current, ast.Name):
+        parts.append(current.id)
+        return ".".join(reversed(parts))
+    return None
+
+
+def _condition_expressions(tree: ast.AST) -> tuple[ast.AST, ...]:
+    values: list[ast.AST] = []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.If, ast.IfExp)):
+            values.append(node.test)
+        elif isinstance(node, ast.comprehension):
+            values.extend(node.ifs)
+        elif isinstance(node, ast.match_case) and node.guard is not None:
+            values.append(node.guard)
+    return tuple(values)
+
+
+def audit_source_independence_from_blobs(
+    repository_root: Path,
+    implementation_commit: str,
+    *,
+    source_paths: Sequence[str] = D1_IMPLEMENTATION_PATHS[:2],
+) -> tuple[str, ...]:
+    """Audit committed D-1 source for source-conditioned rule eligibility."""
+    violations: set[str] = set()
+    for path in sorted(source_paths):
+        try:
+            source = read_git_blob_bytes(
+                repository_root, implementation_commit, path
+            ).decode("utf-8")
+            tree = ast.parse(source, filename=path)
+        except (UnicodeDecodeError, SyntaxError) as error:
+            raise DevelopmentRunError("committed D-1 source is not valid UTF-8 Python") from error
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                names = (
+                    [alias.name for alias in node.names]
+                    if isinstance(node, ast.Import)
+                    else [node.module or ""]
+                )
+                for name in names:
+                    if any(
+                        name == blocked or name.startswith(f"{blocked}.")
+                        for blocked in _NETWORK_OR_LLM_IMPORTS
+                    ):
+                        violations.add(f"{path}: prohibited import {name}")
+            if isinstance(node, ast.Constant) and isinstance(node.value, str):
+                value = node.value
+                if re.search(r"\bS00[1-7]\b", value):
+                    violations.add(f"{path}: literal development source ID")
+                if re.search(r"\bPGC?-V\d{2}-S\d{3}-\d{3}\b", value):
+                    violations.add(f"{path}: literal gold identifier")
+                if re.search(r"(?i)(?:^|[\\/])[^\\/\n]+\.pdf$", value):
+                    violations.add(f"{path}: source-specific PDF filename")
+                if any(title.casefold() in value.casefold() for title in _KNOWN_REAL_TITLES):
+                    violations.add(f"{path}: known real document title")
+        for condition in _condition_expressions(tree):
+            condition_nodes = tuple(ast.walk(condition))
+            attributes = {
+                value
+                for node in condition_nodes
+                if (value := _attribute_path(node)) is not None
+            }
+            names = {
+                node.id for node in condition_nodes if isinstance(node, ast.Name)
+            }
+            if any(value.endswith((".filename", ".title")) for value in attributes):
+                violations.add(f"{path}: filename/title eligibility condition")
+            page_nodes = [
+                node
+                for node in condition_nodes
+                if _attribute_path(node) is not None
+                and _attribute_path(node).endswith(".page_number")
+            ]
+            if page_nodes:
+                for comparison in (
+                    node for node in condition_nodes if isinstance(node, ast.Compare)
+                ):
+                    compared = (comparison.left, *comparison.comparators)
+                    page_in_comparison = any(
+                        _attribute_path(item) is not None
+                        and _attribute_path(item).endswith(".page_number")
+                        for item in compared
+                    )
+                    fixed_literal = any(
+                        isinstance(item, (ast.Constant, ast.Set, ast.List, ast.Tuple))
+                        and not (
+                            isinstance(item, ast.Constant) and item.value is None
+                        )
+                        for item in compared
+                    )
+                    if page_in_comparison and fixed_literal:
+                        violations.add(f"{path}: fixed page-number eligibility")
+            if any(
+                value.endswith((".raw_value", ".normalized_value", ".amount"))
+                for value in attributes
+            ) or names.intersection({"raw_value", "normalized_value", "amount"}):
+                value_eligibility = True
+            else:
+                value_eligibility = False
+            if value_eligibility and any(
+                isinstance(node, ast.Constant)
+                and isinstance(node.value, (int, float, str))
+                for node in condition_nodes
+            ):
+                violations.add(f"{path}: direct value-literal eligibility")
+    return tuple(sorted(violations))
 
 
 def _metrics_match_observation(report: Any, lock: DevelopmentObservationLock) -> bool:
@@ -1200,11 +1617,76 @@ def _metrics_match_observation(report: Any, lock: DevelopmentObservationLock) ->
     return all(getattr(report, name) == getattr(preliminary, name) for name in names)
 
 
+def _publish_staged_file(staged_path: Path, final_path: Path) -> None:
+    """Publish without replacing any pre-existing final artifact."""
+    os.link(staged_path, final_path)
+
+
+def _publish_finalization_transaction(
+    *,
+    output_root: Path,
+    report: BaseModel,
+    finalization: FinalizationRecord,
+    freeze: BaselineFreezeManifest,
+    report_bytes: bytes,
+    finalization_bytes: bytes,
+    freeze_bytes: bytes,
+) -> None:
+    """Stage, reload, and publish all final artifacts with rollback."""
+    ordered = (
+        (EVALUATION_REPORT_NAME, report_bytes),
+        (FINALIZATION_RECORD_NAME, finalization_bytes),
+        (BASELINE_FREEZE_MANIFEST_NAME, freeze_bytes),
+    )
+    targets = tuple(output_root / name for name, _ in ordered)
+    if any(path.exists() for path in targets):
+        raise DevelopmentRunError("final output already exists; overwrite is forbidden")
+    staging = Path(tempfile.mkdtemp(prefix=".finalization-", dir=output_root))
+    published: list[Path] = []
+    try:
+        for name, raw in ordered:
+            _atomic_write_bytes(staging / name, raw)
+        staged_report, _ = _load_canonical_model(
+            staging / EVALUATION_REPORT_NAME, type(report), "staged evaluation report"
+        )
+        staged_finalization, _ = _load_canonical_model(
+            staging / FINALIZATION_RECORD_NAME,
+            FinalizationRecord,
+            "staged finalization record",
+        )
+        staged_freeze, _ = _load_canonical_model(
+            staging / BASELINE_FREEZE_MANIFEST_NAME,
+            BaselineFreezeManifest,
+            "staged freeze manifest",
+        )
+        if staged_report != report or staged_finalization != finalization:
+            raise DevelopmentRunError("staged finalization artifacts changed")
+        if staged_freeze != freeze:
+            raise DevelopmentRunError("staged freeze manifest changed")
+        if staged_finalization.evidence_references.evaluation_report_sha256 != (
+            _sha256_bytes(report_bytes)
+        ):
+            raise DevelopmentRunError("staged report hash does not reconcile")
+        if staged_freeze.evidence_references != staged_finalization.evidence_references:
+            raise DevelopmentRunError("staged freeze references do not reconcile")
+        for (name, _), target in zip(ordered, targets, strict=True):
+            _publish_staged_file(staging / name, target)
+            published.append(target)
+            (staging / name).unlink()
+    except Exception:
+        for path in reversed(published):
+            path.unlink(missing_ok=True)
+        raise
+    finally:
+        shutil.rmtree(staging, ignore_errors=True)
+
+
 def finalize_development_baseline_run(
     *,
     repository_root: Path,
     output_root: Path,
     owner_assessments: Path,
+    observation_commit: str,
     freeze_date: str | None = None,
 ) -> FinalizedDevelopmentRun:
     """Finalize existing preparation evidence without performing extraction."""
@@ -1246,11 +1728,6 @@ def finalize_development_baseline_run(
         OwnerChallengeAssessmentTemplate,
         "owner assessment template",
     )
-    assessments, assessment_bytes = _load_canonical_model(
-        owner_assessments,
-        CompletedOwnerAssessmentArtifact,
-        "completed owner assessments",
-    )
     if _sha256_bytes(lock_bytes) != manifest.observation_lock_sha256:
         raise DevelopmentRunError("observation lock hash changed")
     if _sha256_bytes(inventory_bytes) != manifest.structural_inventory_sha256:
@@ -1269,13 +1746,27 @@ def finalize_development_baseline_run(
         raise DevelopmentRunError("preparation and observation commits disagree")
     if manifest.config_sha256 != lock.config_sha256:
         raise DevelopmentRunError("preparation and observation config hashes disagree")
-    planning_hashes, d1_hashes = _validate_unchanged_boundary(
-        repository_root, manifest.implementation_commit
+    observation_boundary = validate_observation_commit_boundary(
+        repository_root=repository_root,
+        output_root=output_root,
+        manifest=manifest,
+        observation_commit=observation_commit,
+        owner_assessments=owner_assessments,
     )
-    if planning_hashes != manifest.protected_planning_hashes:
+    protected_boundary = validate_protected_git_boundaries(
+        repository_root,
+        manifest.implementation_commit,
+        require_current_head=False,
+    )
+    if protected_boundary.planning_hashes != manifest.protected_planning_hashes:
         raise DevelopmentRunError("protected planning hashes changed")
-    if d1_hashes != manifest.d1_implementation_hashes:
+    if protected_boundary.d1_hashes != manifest.d1_implementation_hashes:
         raise DevelopmentRunError("D-1 implementation hashes changed")
+    assessments, assessment_bytes = _load_canonical_model(
+        owner_assessments,
+        CompletedOwnerAssessmentArtifact,
+        "completed owner assessments",
+    )
     if manifest.input_records != lock.input_records:
         raise DevelopmentRunError("preparation and observation inputs disagree")
     if manifest.primary_attempt_records != lock.primary_attempt_records or (
@@ -1374,31 +1865,67 @@ def finalize_development_baseline_run(
     )
     finalization = FinalizationRecord(
         implementation_commit=manifest.implementation_commit,
+        observation_evidence_commit=observation_commit,
         evidence_references=references,
         all_source_attempts_successful=True,
         all_outputs_byte_identical=True,
         owner_assessments_complete=True,
         held_out_semantic_content_loaded=False,
     )
+    source_independence_violations = audit_source_independence_from_blobs(
+        repository_root, manifest.implementation_commit
+    )
+    primary_success_count = sum(
+        item.status == "success" for item in manifest.primary_attempt_records
+    )
+    repeat_success_count = sum(
+        item.status == "success" for item in manifest.repeat_attempt_records
+    )
+    identical_count = sum(
+        item.status == "passed" and item.byte_identical is True
+        for item in manifest.reproducibility_records
+    )
+    output_hashes_revalidated = (
+        len(primary_results) == len(repeat_results) == len(DEVELOPMENT_SOURCE_IDS)
+        and primary_hashes == repeat_hashes
+        and all(
+            _sha256_bytes((output_root / item.relative_path).read_bytes())
+            == item.canonical_output_sha256
+            for item in (
+                *manifest.primary_output_records,
+                *manifest.repeat_output_records,
+            )
+        )
+    )
+    metrics_reconciled = _metrics_match_observation(report, lock)
+    lock_hash_reconciled = (
+        _sha256_bytes(lock_bytes) == manifest.observation_lock_sha256
+        and observation_boundary.observation_lock_blob_equal
+    )
     process_evidence = FreezeProcessEvidence(
-        primary_success_count=5,
-        repeat_success_count=5,
-        unhandled_extraction_exception_count=0,
-        schema_valid_primary_count=5,
-        schema_valid_repeat_count=5,
-        byte_identical_source_count=5,
-        exact_output_hashes_revalidated=True,
-        exact_metrics_reconciled=True,
-        owner_assessment_count=3,
-        held_out_semantic_content_loaded=False,
-        source_specific_rule_detected=_source_specific_rule_detected(repository_root),
-        protected_v0_1_hashes_valid=True,
-        protected_planning_hashes_valid=True,
-        implementation_commit_precedes_observation=(
-            lock.implementation_commit_verified_before_observation
+        primary_success_count=primary_success_count,
+        repeat_success_count=repeat_success_count,
+        unhandled_extraction_exception_count=(
+            0 if primary_success_count == 5 and repeat_success_count == 5 else 1
         ),
-        artifact_identities_agree=True,
-        observation_lock_hash_revalidated=True,
+        schema_valid_primary_count=len(primary_results),
+        schema_valid_repeat_count=len(repeat_results),
+        byte_identical_source_count=identical_count,
+        exact_output_hashes_revalidated=output_hashes_revalidated,
+        exact_metrics_reconciled=metrics_reconciled,
+        owner_assessment_count=len(assessments.assessments),
+        held_out_semantic_content_loaded=False,
+        source_specific_rule_detected=bool(source_independence_violations),
+        protected_v0_1_hashes_valid=manifest.protected_v0_1_hashes_valid,
+        protected_planning_hashes_valid=(
+            protected_boundary.planning_hashes
+            == manifest.protected_planning_hashes
+        ),
+        implementation_commit_precedes_observation=(
+            observation_boundary.implementation_precedes_observation
+        ),
+        artifact_identities_agree=observation_boundary.artifact_identities_agree,
+        observation_lock_hash_revalidated=lock_hash_reconciled,
     )
     ambiguous_emitted = any(
         _warning_code(warning) == "ambiguous_metric_value_relationship"
@@ -1440,18 +1967,17 @@ def finalize_development_baseline_run(
     validate_freeze_against_evidence(
         manifest=freeze, report=report, process_evidence=process_evidence
     )
-    for path, raw in (
-        (output_root / EVALUATION_REPORT_NAME, report_bytes),
-        (
-            output_root / FINALIZATION_RECORD_NAME,
-            canonical_artifact_json(finalization).encode("utf-8"),
-        ),
-        (
-            output_root / BASELINE_FREEZE_MANIFEST_NAME,
-            canonical_artifact_json(freeze).encode("utf-8"),
-        ),
-    ):
-        _atomic_write_bytes(path, raw)
+    finalization_bytes = canonical_artifact_json(finalization).encode("utf-8")
+    freeze_bytes = canonical_artifact_json(freeze).encode("utf-8")
+    _publish_finalization_transaction(
+        output_root=output_root,
+        report=report,
+        finalization=finalization,
+        freeze=freeze,
+        report_bytes=report_bytes,
+        finalization_bytes=finalization_bytes,
+        freeze_bytes=freeze_bytes,
+    )
     return FinalizedDevelopmentRun(
         evaluation_report=report,
         finalization_record=finalization,
@@ -1465,10 +1991,11 @@ finalize_development_baseline_run_v0_2 = finalize_development_baseline_run
 __all__ = [
     "EXPERIMENT_ID",
     "PLANNING_MERGE_COMMIT",
+    "D1_ANCHOR_COMMIT",
     "PARSER_COMMIT",
     "SUPPORTED_PREDICATES",
-    "PROTECTED_PLANNING_HASHES",
-    "D1_IMPLEMENTATION_HASHES",
+    "PROTECTED_PLANNING_PATHS",
+    "D1_IMPLEMENTATION_PATHS",
     "OUTPUT_RELATIVE_ROOT",
     "PRIMARY_DIRECTORY",
     "REPEAT_DIRECTORY",
@@ -1483,7 +2010,20 @@ __all__ = [
     "DevelopmentRunError",
     "PreparedDevelopmentRun",
     "FinalizedDevelopmentRun",
+    "ProtectedGitBoundaries",
+    "ObservationCommitBoundary",
     "canonical_artifact_json",
+    "verify_git_commit_exists",
+    "read_git_blob_bytes",
+    "git_blob_object_id",
+    "git_blob_sha256",
+    "git_commit_is_ancestor",
+    "git_name_status_diff",
+    "validate_protected_git_boundaries",
+    "observation_evidence_inventory",
+    "validate_exact_observation_diff",
+    "validate_observation_commit_boundary",
+    "audit_source_independence_from_blobs",
     "prepare_development_baseline_run",
     "prepare_development_baseline_run_v0_2",
     "finalize_development_baseline_run",

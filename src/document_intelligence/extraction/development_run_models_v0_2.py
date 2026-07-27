@@ -13,6 +13,14 @@ from document_intelligence.extraction.evaluation_models_v0_2 import (
     DEVELOPMENT_SOURCE_IDS,
     PreliminaryDevelopmentEvaluationReport,
 )
+from document_intelligence.extraction.models import (
+    CandidateReviewStatus,
+    EvidenceStatus,
+    NormalizedValue,
+    QualifierValue,
+    SubjectType,
+    ValueType,
+)
 from document_intelligence.ingestion.models import LocationType, SourceFormat
 
 
@@ -47,6 +55,26 @@ DIAGNOSTIC_REASON_CODES = {
     "subject_type_mismatch",
     "value_type_mismatch",
 }
+
+_LOCAL_PATH_PATTERNS = (
+    re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/][^\s,;]+"),
+    re.compile(r"\\\\[^\s\\/,;]+[\\/][^\s,;]+"),
+    re.compile(r"file:///(?:[^\s,;]+)", re.IGNORECASE),
+    re.compile(r"(?<![:/A-Za-z0-9])/(?!/)(?:[^\s/,;]+)(?:/[^\s,;]*)*"),
+)
+
+
+def contains_prohibited_absolute_path(value: str) -> bool:
+    """Return whether workflow-authored text exposes a local absolute path."""
+    return any(pattern.search(value) for pattern in _LOCAL_PATH_PATTERNS)
+
+
+def redact_prohibited_absolute_paths(value: str) -> str:
+    """Redact local absolute paths while preserving prose, ratios, and web URLs."""
+    redacted = value
+    for pattern in _LOCAL_PATH_PATTERNS:
+        redacted = pattern.sub("[local-path]", redacted)
+    return redacted
 
 
 def _require_sorted_unique(values: tuple[str, ...], label: str) -> None:
@@ -612,6 +640,35 @@ class OwnerChallengeEvidenceSummary(BaseModel):
     location_type: LocationType
     location_value: str = Field(min_length=1)
     text_excerpt: str = Field(min_length=1, max_length=240)
+    evidence_status: EvidenceStatus
+
+    @model_validator(mode="after")
+    def validate_evidence(self) -> OwnerChallengeEvidenceSummary:
+        for field_name in ("evidence_id", "block_id", "location_value"):
+            if getattr(self, field_name) != getattr(self, field_name).strip():
+                raise ValueError(f"{field_name} must be trimmed")
+        if self.text_excerpt != self.text_excerpt.strip():
+            raise ValueError("text_excerpt must be trimmed")
+        return self
+
+
+class ChallengeSourceEvidence(BaseModel):
+    """Bounded source evidence for a challenge, independent of candidates."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True, strict=True)
+
+    experiment_id: Literal["deterministic-baseline-v0.2"] = EXPERIMENT_ID
+    block_id: str = Field(min_length=1)
+    location_type: LocationType
+    location_value: str = Field(min_length=1)
+    text_excerpt: str = Field(min_length=1, max_length=240)
+
+    @model_validator(mode="after")
+    def validate_evidence(self) -> ChallengeSourceEvidence:
+        for field_name in ("block_id", "location_value", "text_excerpt"):
+            if getattr(self, field_name) != getattr(self, field_name).strip():
+                raise ValueError(f"{field_name} must be trimmed")
+        return self
 
 
 class OwnerChallengeCandidateSummary(BaseModel):
@@ -621,9 +678,20 @@ class OwnerChallengeCandidateSummary(BaseModel):
 
     experiment_id: Literal["deterministic-baseline-v0.2"] = EXPERIMENT_ID
     candidate_id: str = Field(min_length=1)
+    predicate: str = Field(pattern=r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
+    subject_text: str = Field(min_length=1)
+    subject_type: SubjectType
+    raw_value: str
+    normalized_value: NormalizedValue
+    value_type: ValueType
+    qualifiers: dict[str, QualifierValue]
+    confidence: float = Field(ge=0, le=1)
+    evidence_status: EvidenceStatus
+    review_status: CandidateReviewStatus
     warning_codes: tuple[str, ...]
     evidence_ids: tuple[str, ...]
     evidence: tuple[OwnerChallengeEvidenceSummary, ...]
+    references_challenge_evidence_block: bool
 
     @model_validator(mode="after")
     def validate_summary(self) -> OwnerChallengeCandidateSummary:
@@ -631,6 +699,10 @@ class OwnerChallengeCandidateSummary(BaseModel):
         _require_sorted_unique(self.evidence_ids, "evidence_ids")
         if tuple(item.evidence_id for item in self.evidence) != self.evidence_ids:
             raise ValueError("evidence summaries must match evidence_ids")
+        if not self.evidence:
+            raise ValueError("candidate summary evidence must not be empty")
+        if any(item.evidence_status is not self.evidence_status for item in self.evidence):
+            raise ValueError("candidate evidence statuses must reconcile")
         return self
 
 
@@ -642,13 +714,17 @@ class OwnerChallengeReviewCase(BaseModel):
     experiment_id: Literal["deterministic-baseline-v0.2"] = EXPERIMENT_ID
     case_id: str = Field(pattern=r"^PGC-V01-S\d{3}-\d{3}$")
     source_id: str = Field(pattern=r"^S\d{3}$")
+    case_type: Literal["ambiguous", "unsupported", "missing_expected_value"]
     expected_behavior: Literal[
         "route_to_review", "do_not_extract", "preserve_missing"
     ]
-    candidate_ids: tuple[str, ...]
-    evidence_ids: tuple[str, ...]
-    warning_codes: tuple[str, ...]
+    description: str = Field(min_length=1)
+    evidence_block_ids: tuple[str, ...]
+    evidence_location_values: tuple[str, ...]
+    challenge_source_evidence: tuple[ChallengeSourceEvidence, ...]
     observed_candidates: tuple[OwnerChallengeCandidateSummary, ...]
+    relevant_result_warning_codes: tuple[str, ...]
+    relevant_candidate_warning_codes: tuple[str, ...]
 
     @model_validator(mode="after")
     def validate_case(self) -> OwnerChallengeReviewCase:
@@ -656,13 +732,31 @@ class OwnerChallengeReviewCase(BaseModel):
             raise ValueError("challenge case contains a non-development source")
         if f"-{self.source_id}-" not in self.case_id:
             raise ValueError("challenge case ID and source disagree")
-        _require_sorted_unique(self.candidate_ids, "candidate_ids")
-        _require_sorted_unique(self.evidence_ids, "evidence_ids")
-        _require_sorted_unique(self.warning_codes, "warning_codes")
-        if tuple(item.candidate_id for item in self.observed_candidates) != (
-            self.candidate_ids
+        if len(self.evidence_block_ids) != len(self.evidence_location_values):
+            raise ValueError("challenge evidence block and location counts differ")
+        if not self.evidence_block_ids:
+            raise ValueError("challenge evidence must not be empty")
+        if len(self.evidence_block_ids) != len(set(self.evidence_block_ids)):
+            raise ValueError("challenge evidence block IDs must be unique")
+        if tuple(item.block_id for item in self.challenge_source_evidence) != (
+            self.evidence_block_ids
         ):
-            raise ValueError("observed candidates must match candidate_ids")
+            raise ValueError("challenge source evidence must match block inventory")
+        if tuple(item.location_value for item in self.challenge_source_evidence) != (
+            self.evidence_location_values
+        ):
+            raise ValueError("challenge source evidence must match location inventory")
+        _require_sorted_unique(
+            tuple(item.candidate_id for item in self.observed_candidates),
+            "observed candidate IDs",
+        )
+        _require_sorted_unique(
+            self.relevant_result_warning_codes, "relevant_result_warning_codes"
+        )
+        _require_sorted_unique(
+            self.relevant_candidate_warning_codes,
+            "relevant_candidate_warning_codes",
+        )
         return self
 
 
@@ -744,7 +838,7 @@ class CompletedOwnerAssessmentEntry(BaseModel):
             raise ValueError("related_warning_codes must use snake_case")
         if self.rationale != self.rationale.strip():
             raise ValueError("rationale must be trimmed")
-        if re.search(r"(?:[A-Za-z]:[\\/]|\\\\|file://)", self.rationale):
+        if contains_prohibited_absolute_path(self.rationale):
             raise ValueError("rationale must not contain an absolute path")
         return self
 
@@ -810,6 +904,7 @@ class FinalizationRecord(BaseModel):
         "complete_process_gates_passed"
     )
     implementation_commit: str = Field(pattern=COMMIT_PATTERN)
+    observation_evidence_commit: str = Field(pattern=COMMIT_PATTERN)
     planning_merge_commit: Literal[
         "f224c4e385fab5c4e0348bcf251015630cea9af8"
     ] = PLANNING_MERGE_COMMIT
@@ -831,6 +926,8 @@ __all__ = [
     "PUBLIC_GOLD_VERSION",
     "PUBLIC_GOLD_FACTS_SHA256",
     "PUBLIC_GOLD_CASES_SHA256",
+    "contains_prohibited_absolute_path",
+    "redact_prohibited_absolute_paths",
     "CANDIDATE_SCHEMA_VERSION",
     "PREDICATE_VOCABULARY_VERSION",
     "MATCHING_PROTOCOL_VERSION",
@@ -854,6 +951,7 @@ __all__ = [
     "StructuralUnmatchedInventory",
     "UnmatchedReviewInventory",
     "OwnerChallengeEvidenceSummary",
+    "ChallengeSourceEvidence",
     "OwnerChallengeCandidateSummary",
     "OwnerChallengeReviewCase",
     "OwnerChallengeReviewPacket",
