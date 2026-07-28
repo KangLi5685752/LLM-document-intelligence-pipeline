@@ -625,3 +625,11 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Require `deterministic-baseline-v0.3` after any post-observation change to triggers, candidates, qualifiers, confidence, review routing, duplicate policy, schema use, matching or metrics.
 - **Reason:** A new experiment identity keeps first observations and their implementation commits auditable.
 - **Trade-off:** Even a small semantic fix requires another plan, versioned implementation and execution cycle.
+
+## DEC-079: Preserve the implementation chain and merge-commit execution boundary
+
+- **Context:** The deterministic-baseline-v0.2 evidence contract depends on the reviewed planning and D-1 ancestry, while the first real prepare run must identify an immutable implementation whose exact implementation and test blobs were audited before observation.
+- **Alternatives:** Squash or rebase the implementation chain; rewrite the branch before execution; preserve the five implementation commits, freeze their 14-file blob inventory and merge only with an explicit merge commit.
+- **Chosen option:** Preserve the five implementation commits without squash, rebase or history rewrite; freeze the implementation/test blob inventory before observation; require **Create a merge commit**; and use the final PR merge commit as the implementation commit for the first real prepare run.
+- **Reason:** Keeping ancestry and blob identity intact makes the planning boundary, D-1 boundary and reviewed implementation independently verifiable before any real score becomes visible.
+- **Trade-off:** Real execution remains blocked until PR review, Python 3.10–3.12 CI, merge-commit integration and post-merge validation have all completed.

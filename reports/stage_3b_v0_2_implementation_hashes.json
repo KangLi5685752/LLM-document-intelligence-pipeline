@@ -1,0 +1,189 @@
+{
+  "audit_date": "2026-07-28",
+  "audit_schema_version": "0.1",
+  "audit_status": "pre_observation_implementation_audit_passed",
+  "base_main_commit": "f224c4e385fab5c4e0348bcf251015630cea9af8",
+  "d1_anchor_commit": "2e54c7f0eb7a7173d4fe3c7b9941f7121fe15722",
+  "d1_blob_hashes": {
+    "src/document_intelligence/extraction/deterministic_rules_v0_2.py": "A0F644C56BB2DFC3BA397BAC020A943732F77ACE6E147A5425255E45946B99E7",
+    "src/document_intelligence/extraction/deterministic_v0_2.py": "A6BC8E52D2B99C8BE4C4AFD182B0165DB80EEF48F07B25E7104FF9482577161D",
+    "src/document_intelligence/extraction/deterministic_v0_2_cli.py": "E22827C71699268CDD465700CECDC23BC9BF533C9FD719CE920FAACFAA9DA52F",
+    "tests/test_deterministic_extractor_v0_2.py": "03BF9D68587F6ECAC624E122C79D7E233C5809CF07DBC8BF9EBE3FC69CBB813E"
+  },
+  "implementation_commit_chain": [
+    {
+      "commit": "aa48e43fec9dca29b09564efe002105e5b09976f",
+      "subject": "feat: implement deterministic baseline v0.2 extractor"
+    },
+    {
+      "commit": "169303b8f68b5e01ec39b6383153ed21a3936d75",
+      "subject": "fix: preserve v0.1 baseline scope in v0.2"
+    },
+    {
+      "commit": "2e54c7f0eb7a7173d4fe3c7b9941f7121fe15722",
+      "subject": "fix: complete v0.1 value normalization carryover"
+    },
+    {
+      "commit": "027e2c6fe73c4c7af470194a2fe1fb54d7bbb3fe",
+      "subject": "feat: implement deterministic v0.2 evaluation workflow"
+    },
+    {
+      "commit": "29dad914a416bb3251cb7615b04fbf712ecf3de6",
+      "subject": "fix: harden deterministic v0.2 evidence integrity"
+    }
+  ],
+  "implementation_file_inventory": [
+    {
+      "category": "implementation",
+      "git_blob_object_id": "ede206d0b9e17a3ae14c780f97fd2ff2417c3fb2",
+      "path": "src/document_intelligence/extraction/baseline_freeze_v0_2.py",
+      "sha256": "AF121E77961F2BF6827C35AB53EA078E41524AC3041E893B65C5CBB4C3F689C8"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "a175daa50971a8192acf13b49be761c20b990048",
+      "path": "src/document_intelligence/extraction/deterministic_rules_v0_2.py",
+      "sha256": "A0F644C56BB2DFC3BA397BAC020A943732F77ACE6E147A5425255E45946B99E7"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "095aa19e88bc4ec5d76d5184e8dbd1828aa0ec3e",
+      "path": "src/document_intelligence/extraction/deterministic_v0_2.py",
+      "sha256": "A6BC8E52D2B99C8BE4C4AFD182B0165DB80EEF48F07B25E7104FF9482577161D"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "20818b2ef104c5705498a2c41f5050364e5fe6df",
+      "path": "src/document_intelligence/extraction/deterministic_v0_2_cli.py",
+      "sha256": "E22827C71699268CDD465700CECDC23BC9BF533C9FD719CE920FAACFAA9DA52F"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "69beaf0621fe50b1a573ecdb1c1cbb94af8febfc",
+      "path": "src/document_intelligence/extraction/development_evaluation_v0_2.py",
+      "sha256": "E000C67696D369920B1D572F76814EC7CDEC74460020A04824030921F94B65D9"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "10ca789f001c99256200b8c9972eb07be31a7c21",
+      "path": "src/document_intelligence/extraction/development_run_models_v0_2.py",
+      "sha256": "00FC70318847E9A264F215ED8708526CA812EC6AA6D4073EB9A3AA1EEEF13617"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "7c2ae552e209782f9e7c72e3a048ef1570b1a199",
+      "path": "src/document_intelligence/extraction/development_run_v0_2.py",
+      "sha256": "BCB1B2EAF6CCEA6DA194E7CACFF9EDED54CADB18BF47D62385C1856820404566"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "bc72ea7c84ac1aea06da4c5fa180401a90eb6adc",
+      "path": "src/document_intelligence/extraction/development_run_v0_2_cli.py",
+      "sha256": "76547AC5BDC7A2753801647CC5E0F43E8A5A23CD242F88C23407EAD24A094277"
+    },
+    {
+      "category": "implementation",
+      "git_blob_object_id": "54093bf02b24a92a5662e30a322979afd2cb3aaa",
+      "path": "src/document_intelligence/extraction/evaluation_models_v0_2.py",
+      "sha256": "22117D4521135B411E1ABAE1588B9B9EA7BBF00550FCCF40AD4812BC58E3AF44"
+    },
+    {
+      "category": "test",
+      "git_blob_object_id": "18dab959bbc67a21895636088dc0e3281546bc6f",
+      "path": "tests/test_baseline_freeze_v0_2.py",
+      "sha256": "2CDF0ED7D59B4DE32A86BC05F48AAB1553F4819574A0E0C7F4D77718A754978B"
+    },
+    {
+      "category": "test",
+      "git_blob_object_id": "26d1bba9d79ec547d3e50a210f9a3a22b41d24fe",
+      "path": "tests/test_deterministic_extractor_v0_2.py",
+      "sha256": "03BF9D68587F6ECAC624E122C79D7E233C5809CF07DBC8BF9EBE3FC69CBB813E"
+    },
+    {
+      "category": "test",
+      "git_blob_object_id": "1e49aba4f370c1e669653da3e3df042965b9794a",
+      "path": "tests/test_development_evaluation_v0_2.py",
+      "sha256": "7ED2AD902511EB270576992B3B469DF2AD74CDB1D5CE5867B2D25727003137BB"
+    },
+    {
+      "category": "test",
+      "git_blob_object_id": "e6d38d4d4dd7c13b5d2cfaa2c7af033810054d2c",
+      "path": "tests/test_development_run_v0_2_cli.py",
+      "sha256": "C8654FC5A755CB72FD847193298945BAA17A6641240FAFED60FF0A529BAE1AF4"
+    },
+    {
+      "category": "test",
+      "git_blob_object_id": "6eee3a09a47de9c6850019b6cbe85406a08d4f84",
+      "path": "tests/test_stage_3b_development_run_v0_2.py",
+      "sha256": "B8265BD262059C8A99E73CF7B8C937BBBEA8242AC1169D72E9734D47F4C2EA4F"
+    }
+  ],
+  "isolation_status": {
+    "held_out_semantic_access": "not_accessed",
+    "real_development_execution": "not_run",
+    "v0_2_evidence_directory_present": false
+  },
+  "planning_blob_hashes": {
+    "configs/experiments/deterministic_baseline_v0.2.json": "369D5CFF68AA4F6AF2952CBB5B443676EC9748B037EC2EDB2C99AEB005D80D27",
+    "docs/stage_3b_v0_2_error_matrix.md": "1D62567670E109DEB9BA1490C17C139BE39A73B849DF298007B0018E7A104211",
+    "docs/stage_3b_v0_2_experiment_plan.md": "F913126B8C92A4D532671D1A8357DC90F319448AE98717E8066D818948048B04",
+    "docs/stage_3b_v0_2_versioning_and_freeze.md": "6F3EDE4E2B437234978A0652659D0C4E33C19E7B3170B33C1A0D736BE1FE60C6",
+    "scripts/validate_deterministic_v0_2_plan.py": "6098384EA560E1EDAE60253A87B2189184DF851D2A0EC0784C1519CEC743815B",
+    "tests/test_deterministic_v0_2_plan.py": "BDF8E96A5BA38E4460E7AFA5D6FA794B8F8BAEE8FB64EB4FF97F338986F545C3"
+  },
+  "planning_merge_commit": "f224c4e385fab5c4e0348bcf251015630cea9af8",
+  "pull_request_gate": {
+    "authorization_condition": "PR merged with a merge commit and post-merge main validation passed",
+    "real_prepare_authorized": false,
+    "required_merge_strategy": "create_merge_commit",
+    "required_python_versions": [
+      "3.10",
+      "3.11",
+      "3.12"
+    ]
+  },
+  "reviewed_implementation_head": "29dad914a416bb3251cb7615b04fbf712ecf3de6",
+  "stage": "Stage 3B.4D-3",
+  "validation_results": {
+    "compileall": {
+      "status": "passed"
+    },
+    "focused_pytest": {
+      "duration_seconds": 260.59,
+      "passed": 269,
+      "status": "passed"
+    },
+    "full_pytest": {
+      "duration_seconds": 262.81,
+      "passed": 786,
+      "status": "passed"
+    },
+    "git_diff_check": {
+      "status": "passed"
+    },
+    "implementation_diff": {
+      "added_files": 14,
+      "modified_deleted_or_renamed_files": 0,
+      "status": "passed"
+    },
+    "plan_validator": {
+      "protected_v0_1_artifacts": 9,
+      "protected_v0_1_semantic_files": 24,
+      "status": "passed"
+    },
+    "protected_d1_blobs": {
+      "count": 4,
+      "status": "passed"
+    },
+    "protected_planning_blobs": {
+      "count": 6,
+      "status": "passed"
+    },
+    "public_gold_hashes": {
+      "cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+      "facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+      "status": "passed"
+    },
+    "source_independence_violations": []
+  }
+}
