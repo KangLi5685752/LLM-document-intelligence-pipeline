@@ -9,3 +9,9 @@ data/annotations/public_gold_facts_v0.1.jsonl text eol=lf
 data/annotations/public_gold_cases_v0.1.jsonl text eol=lf
 data/annotations/public_gold_v0.1_manifest.json text eol=lf
 data/manifests/corpus_split.csv text eol=lf
+
+# Keep frozen deterministic-baseline-v0.2 D-1 files byte-identical across platforms.
+src/document_intelligence/extraction/deterministic_rules_v0_2.py text eol=lf
+src/document_intelligence/extraction/deterministic_v0_2.py text eol=lf
+src/document_intelligence/extraction/deterministic_v0_2_cli.py text eol=lf
+tests/test_deterministic_extractor_v0_2.py text eol=lf
