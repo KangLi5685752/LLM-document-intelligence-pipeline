@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.4C - deterministic-baseline-v0.2 experiment planning and freeze
-- **Last updated:** 2026-07-26
-- **Latest milestone:** Frozen a source-independent v0.2 correction and tuning scope based on the immutable v0.1 development observation, without modifying v0.1 evidence or accessing held-out semantics
+- **Current stage:** Stage 3B.4D-3 local pre-observation audit passed; PR CI and merge pending
+- **Last updated:** 2026-07-28
+- **Latest milestone:** Completed the local pre-observation audit and froze the exact Git blob inventory for all 14 deterministic-baseline-v0.2 implementation and test files without running real development data
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -48,30 +48,28 @@
 - Read-only S004 source-independent failure diagnosis.
 - Frozen `deterministic-baseline-v0.2` experiment identity, error matrix, bounded change families and additive version boundary.
 - Automated v0.2 plan validation, including all nine immutable v0.1 artifact hashes.
+- Stage 3B.4D-1 source-independent deterministic-baseline-v0.2 extractor implementation.
+- Stage 3B.4D-2 evaluation, evidence-integrity, owner-review, observation-provenance and transactional-finalization workflow.
+- Stage 3B.4D-3 local pre-observation implementation audit and 14-file Git blob hash freeze.
 
 ## In progress
 
-- Review and merge of the frozen `deterministic-baseline-v0.2` plan.
+- PR review, Python 3.10–3.12 CI, merge-commit integration and post-merge validation for `deterministic-baseline-v0.2`.
 
-The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete v0.1 development evaluation report or final baseline freeze exists. The v0.2 scope is frozen before implementation; no v0.2 extractor, output, score, observation lock, owner assessment or freeze manifest exists. No held-out extraction result, LLM extractor or reconciliation layer exists.
+The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete v0.1 development evaluation report or final baseline freeze exists. The v0.2 implementation and local audit are complete, but PR CI and merge remain pending. No real v0.2 output, score, observation lock, owner assessment or freeze manifest exists. Real v0.2 development execution is not authorized, and no held-out extraction result, LLM extractor or reconciliation layer exists.
 
 ## Next tasks
 
-1. Review the v0.2 plan.
-2. Merge the planning PR.
-3. Implement the neutral compatibility regression.
-4. Implement only approved v0.2 change families.
-5. Commit implementation before real execution.
-6. Run all five development sources twice.
-7. Preserve the v0.2 observation lock.
-8. Complete owner review.
-9. Finalize only if process gates pass.
+1. Review the implementation PR.
+2. Require Python 3.10, 3.11 and 3.12 CI success.
+3. Merge using Create a merge commit.
+4. Complete post-merge validation on `main` before authorizing real prepare.
 
 ## Blockers
 
 - v0.1 cannot be finalized.
-- v0.2 implementation cannot begin until its frozen plan is reviewed and merged.
-- Real v0.2 development execution cannot begin until the approved implementation is committed and all pre-observation gates pass.
+- Stage 3B.4D is not fully complete until the implementation PR is merged and post-merge validation passes.
+- Real v0.2 development execution remains blocked until that merge commit and post-merge approval exist.
 - Held-out access remains blocked pending a successful v0.2 development freeze and a separate reviewed guard.
 
 ## AG News replacement status
