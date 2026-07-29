@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "case_id": "PGC-V01-S001-001",
+      "case_type": "missing_expected_value",
+      "challenge_source_evidence": [
+        {
+          "block_id": "DOC-S001-B0015",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "location_type": "page",
+          "location_value": "15",
+          "text_excerpt": "AI Opportunities Action Plan\n14\ndevelopment of the UK’s cyber security industry.14 Clear rules provide clarity to businesses so\nthey have the confidence to invest and bring new products and services to market.\nThe government should:\n23. Con"
+        }
+      ],
+      "description": "The annual-publication requirement does not state an effective start date on the evidence page.",
+      "evidence_block_ids": [
+        "DOC-S001-B0015"
+      ],
+      "evidence_location_values": [
+        "15"
+      ],
+      "expected_behavior": "preserve_missing",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "observed_candidates": [
+        {
+          "candidate_id": "V02-CAND-DDD5C20A0E81D1D0DF775904ACCA30BC86D2882CA8B1369324573A3E63A94453",
+          "confidence": 0.7,
+          "evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "evidence_id": "V02-EVID-7EE631842B82E92E998D9C3D96644CBE9CF8A7EF976A0A7E77D58ABBD3D162F8",
+              "evidence_status": "supported",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "15",
+              "text_excerpt": "AI will touch every aspect of the economy and"
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-7EE631842B82E92E998D9C3D96644CBE9CF8A7EF976A0A7E77D58ABBD3D162F8"
+          ],
+          "evidence_status": "supported",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": "will touch every aspect of the economy and",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "will touch every aspect of the economy and",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "AI",
+          "subject_type": "other",
+          "value_type": "string",
+          "warning_codes": []
+        }
+      ],
+      "relevant_candidate_warning_codes": [],
+      "relevant_result_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S001"
+    },
+    {
+      "case_id": "PGC-V01-S004-001",
+      "case_type": "unsupported",
+      "challenge_source_evidence": [
+        {
+          "block_id": "DOC-S004-B0110",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "location_type": "page",
+          "location_value": "110",
+          "text_excerpt": "Artiﬁcial  Intelligence  Playbook  for  the  UK  Government\n\nDigital  Sensitivity  Review  at  FCDO  Services\nFCDO  Services  has  developed  an  AI-powered  Digital  Sensitivity  Review  toolset.\nThis\n\nenables\n\ndepartments\n\nto\n\nselect,\n\nre"
+        }
+      ],
+      "description": "A contributed case study describes an implementation; it must not be generalized into a government-wide finding or policy claim.",
+      "evidence_block_ids": [
+        "DOC-S004-B0110"
+      ],
+      "evidence_location_values": [
+        "110"
+      ],
+      "expected_behavior": "do_not_extract",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "observed_candidates": [],
+      "relevant_candidate_warning_codes": [],
+      "relevant_result_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_ambiguous_heading_context",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_evidence_too_long",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_missing_subject",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S004"
+    },
+    {
+      "case_id": "PGC-V01-S006-001",
+      "case_type": "ambiguous",
+      "challenge_source_evidence": [
+        {
+          "block_id": "DOC-S006-B0013",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "location_type": "page",
+          "location_value": "13",
+          "text_excerpt": "AI Adoption Research\n13\nOFFICIAL\nOFFICIAL\nsuch as safety risks. In contrast, sectors like retail and logistics were already actively\nintegrating AI to improve customer insights and streamline functions such as inventory\nmanagement and suppl"
+        }
+      ],
+      "description": "The page presents several percentages for different adoption states, sectors and business sizes; a candidate without its population and measure is ambiguous.",
+      "evidence_block_ids": [
+        "DOC-S006-B0013"
+      ],
+      "evidence_location_values": [
+        "13"
+      ],
+      "expected_behavior": "route_to_review",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "observed_candidates": [
+        {
+          "candidate_id": "V02-CAND-001619AD8EF442DF3C56467E4ED3CA22A1DAB22CB89421CA1007691214C37F09",
+          "confidence": 0.5,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-D37B67F1E47F2802754F4A5B072F8CF81B9D7B4BFFFB41BEFEF39E050E27C632",
+              "evidence_status": "ambiguous",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "Large (36%) and mid-sized (23%) businesses are more"
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-D37B67F1E47F2802754F4A5B072F8CF81B9D7B4BFFFB41BEFEF39E050E27C632"
+          ],
+          "evidence_status": "ambiguous",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": 36.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "large_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "36%",
+          "references_challenge_evidence_block": true,
+          "review_status": "required",
+          "subject_text": "Large (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-3FEE20D5D5233FFFE629DC1AEEB0F08B6460350C4D1F53F7688F8856C35A868A",
+          "confidence": 0.5,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-12D6EDF7C4A3790ADB6B0325100B236E166D8D5CA7800A0C96AEC1C07EA646E3",
+              "evidence_status": "ambiguous",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "Across sectors, those in the construction (88%), retail / distribution (86%), transport and"
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-12D6EDF7C4A3790ADB6B0325100B236E166D8D5CA7800A0C96AEC1C07EA646E3"
+          ],
+          "evidence_status": "ambiguous",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": 86.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "across_sectors_those_in_construction_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "86%",
+          "references_challenge_evidence_block": true,
+          "review_status": "required",
+          "subject_text": "Across sectors, those in the construction (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-54965C74D9D5AD727299011D4B1D14672119B9B00D4DFAFE71848997A95E7AED",
+          "confidence": 0.5,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-D37B67F1E47F2802754F4A5B072F8CF81B9D7B4BFFFB41BEFEF39E050E27C632",
+              "evidence_status": "ambiguous",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "Large (36%) and mid-sized (23%) businesses are more"
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-D37B67F1E47F2802754F4A5B072F8CF81B9D7B4BFFFB41BEFEF39E050E27C632"
+          ],
+          "evidence_status": "ambiguous",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": 23.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "large_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "23%",
+          "references_challenge_evidence_block": true,
+          "review_status": "required",
+          "subject_text": "Large (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-873D59C8C7EA5F4E4FA26D8D6836B584C96346AC9A454D891975A4E1A6AB800E",
+          "confidence": 0.7,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-4C2898295677039E66FEFB2A9786A54ABD84B2AADE14B7E0192F642898888490",
+              "evidence_status": "supported",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "and 5% have plans to adopt AI in the future."
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-4C2898295677039E66FEFB2A9786A54ABD84B2AADE14B7E0192F642898888490"
+          ],
+          "evidence_status": "supported",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": "plans to adopt AI in the future.",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "plans to adopt AI in the future.",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "and 5% have",
+          "subject_type": "other",
+          "value_type": "string",
+          "warning_codes": []
+        },
+        {
+          "candidate_id": "V02-CAND-9A9A2187F30361C6C1F2ED250422ECF182E4F3CE3C203C1E51F8E4EF99357612",
+          "confidence": 0.7,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-403FFD07A23378BB293517042A4EAC3CFE8060927FC2E498DF7B27177119C3A5",
+              "evidence_status": "supported",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "have plans to use AI (84% vs."
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-403FFD07A23378BB293517042A4EAC3CFE8060927FC2E498DF7B27177119C3A5"
+          ],
+          "evidence_status": "supported",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": "plans to use AI (84% vs.",
+          "predicate": "commitment",
+          "qualifiers": {},
+          "raw_value": "plans to use AI (84% vs.",
+          "references_challenge_evidence_block": true,
+          "review_status": "not_required",
+          "subject_text": "have",
+          "subject_type": "other",
+          "value_type": "string",
+          "warning_codes": []
+        },
+        {
+          "candidate_id": "V02-CAND-B841F76E7D6D54D1E13683FDD05F3EB5E33B9C997296C809E793D2C84E5D2B6C",
+          "confidence": 0.5,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-31105B2CD80DB27E1D6A04ECA5F1641EC2452A815F640346BF71048BE75744EC",
+              "evidence_status": "ambiguous",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "storage (90%) and hotel / catering (88%) sectors are more likely to neither use nor have plans"
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-31105B2CD80DB27E1D6A04ECA5F1641EC2452A815F640346BF71048BE75744EC"
+          ],
+          "evidence_status": "ambiguous",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": 88.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "storage_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "88%",
+          "references_challenge_evidence_block": true,
+          "review_status": "required",
+          "subject_text": "storage (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-CB8348E5A21180F67812F028E5D7B831050AB648E1872AC596B75D30A13F29C8",
+          "confidence": 0.5,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-12D6EDF7C4A3790ADB6B0325100B236E166D8D5CA7800A0C96AEC1C07EA646E3",
+              "evidence_status": "ambiguous",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "Across sectors, those in the construction (88%), retail / distribution (86%), transport and"
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-12D6EDF7C4A3790ADB6B0325100B236E166D8D5CA7800A0C96AEC1C07EA646E3"
+          ],
+          "evidence_status": "ambiguous",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": 88.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "across_sectors_those_in_construction_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "88%",
+          "references_challenge_evidence_block": true,
+          "review_status": "required",
+          "subject_text": "Across sectors, those in the construction (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-DCAA932C062674E7B705A222D15E52506D350F55919A965DDD92CBA9FC80A30C",
+          "confidence": 0.5,
+          "evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "evidence_id": "V02-EVID-31105B2CD80DB27E1D6A04ECA5F1641EC2452A815F640346BF71048BE75744EC",
+              "evidence_status": "ambiguous",
+              "experiment_id": "deterministic-baseline-v0.2",
+              "location_type": "page",
+              "location_value": "13",
+              "text_excerpt": "storage (90%) and hotel / catering (88%) sectors are more likely to neither use nor have plans"
+            }
+          ],
+          "evidence_ids": [
+            "V02-EVID-31105B2CD80DB27E1D6A04ECA5F1641EC2452A815F640346BF71048BE75744EC"
+          ],
+          "evidence_status": "ambiguous",
+          "experiment_id": "deterministic-baseline-v0.2",
+          "normalized_value": 90.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "storage_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "90%",
+          "references_challenge_evidence_block": true,
+          "review_status": "required",
+          "subject_text": "storage (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ]
+        }
+      ],
+      "relevant_candidate_warning_codes": [
+        "ambiguous_metric_value_relationship"
+      ],
+      "relevant_result_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_ambiguous_metric_bounds_exceeded",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_incompatible_predicate_contract",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S006"
+    }
+  ],
+  "experiment_id": "deterministic-baseline-v0.2",
+  "review_status": "authorized_pending_owner_review",
+  "schema_version": "0.1"
+}

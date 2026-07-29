@@ -1,0 +1,1227 @@
+{
+  "batch_id": "V02-BATCH-1CB2780642E0BEC251A2CC578ED03E141854E09FB67725DF92BB45825E716E9A",
+  "candidate_facts": [
+    {
+      "candidate_id": "V02-CAND-34121525848B2AA5500825306A43B6BF47A2A1E0EF02CD0F17A7330D4A9FA8B7",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-4F59D4AA5FD48C53FF97B1B52087FA216271B6FAD0E64A733762BFA025C48B7A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will do so by working closely with the world’s leading AI companies, Britain’s",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will do so by working closely with the world’s leading AI companies, Britain’s",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-FB5427D5007F327553FBE4550C5F28D36AED15F91144B1E0400A62EC82237B62",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-F2616DD22A045ED35581F645B786AA2A4984C7000BDC8CF86AB2F33CB3D512CB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will make it easier to build the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will make it easier to build the",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Our transformative planning reforms",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-EB3E37A002972439BE0AC4643C6AFB0B7C81378F47A745DADD71DB49C2E2E228",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-2442A31A05595EB28387941A9CD1A73E3C80BFE5AE5A03D9B9D5AD12504A9B38"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will help ensure that British",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will help ensure that British",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Skills England",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-3A26AB95FAAEC9B7E47E53710EB5653F9D86CB4A736140495F6DA5B6D737DD8A",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-CB7E07AAC1566EAEE182833AD723E83BA33D4782860711F8525538A401F9BC39"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will drive forward the technological",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will drive forward the technological",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Government I have created in my Department",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-3D9E52D9A05ED1AAE123E28DD931C16A1EA0EF5F4E87978CB2B124BC38C26FA9",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-75940937290943A723A1D57FD5707C91FF52897087EC26F787D5916DF9AF4950"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will rise to the challenge.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will rise to the challenge.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Today, we have set out how we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-BACA9F7316F51AFEB52CAB7331E79727C85D70A03D2C2A8D2BF777EB13A9EE75",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-DCF033B6B888F8C1DC50421016FC91E8A3400631FB4A7C1AA6A11551FA400E7E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will meet the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will meet the",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "It is hard to imagine how we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-006A35B6991FFEA4F7FAF6A81C44BD63F37BEA6388B6874AB47DE487E5EA9FAD",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-4A7F851C229A7755CF2FE066F62826C2B27A75E98EDC01F00125A248431FA914"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will require bold and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require bold and",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The UK’s starting point makes this aspiration plausible, but achieving it",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-CA8AAD33CC2DD8D46D35E08A66B1D01D9C60C08462FB8DDF546898CEEBDC12D4",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-D57B7D379AC4F4082366B1F5D847AD61567A0E70650DF5EDE7684D2C0E66E90A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will require real leadership and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require real leadership and",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "But doing this well is not easy – it",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-6787E822C4CE47226FC540E1356220042ED81DEB8A2BD24D960C34A89EE8A8C0",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-EF0DB85CCF2E9172F6C404D72315043B2218827CE69C5CAA56B37CB9D53685F6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will look like a decade from now.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will look like a decade from now.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "No one can say with certainty what AI",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-2FB866C0A077725B64167DD95A21875D5A2B6654055403E8E08C94A3E64AC47F",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-47F77D6FFD4C7244BE416AB39B9C2A7FB0041B7166E625EBB97D0161BDAE455C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will see large benefits from deploying today’s frontier capabilities and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will see large benefits from deploying today’s frontier capabilities and",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "progress slows, we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-A240B165654703E029D9DE91CC9BB6ADFF3BD11B0AE0A65AB1BD7A471A7974D4",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-420A7109670556A044A667C5630E1ED26D31CA16FFD2CD5E895C6EB0E3703CF4"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must make.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must make.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "asymmetric bet – and one the UK can and",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-F16570A347BE496D9EB84CCF63467ED7B791E90166700F43DBD515D4F922EC5D",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-E55EB6676FF706CA3AC535416FB9AD25F284B136EDBE30B7CA535776C869F596"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will almost certainly be more computationally intensive: new",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will almost certainly be more computationally intensive: new",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "decade from now the economy",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-0E5E9D454D648810EE7E653C4E8764D690046F78EC9422D47D162255AD11202D",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-6CE0B6716A4B9223EF5F426374874781DDFD690D921C8D1A0B0A5AF7EAA018DD"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will have been created and access to compute",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will have been created and access to compute",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "high-skill jobs and compute-adjacent industries",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-A7F5F197772DF412395E92CF89570EBCEDCD807143C678CB0DC399EC02B62B00",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-0BEA0AA1366DAA98FC1D81F1244A6BDA997F137C37AE2E7E8880910216BA860C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must therefore secure access to a sufficient supply of compute.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must therefore secure access to a sufficient supply of compute.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-8A977FFCF5C7F57A0AEB2A0C32F3E2692D4000AD904FE6835BCDA373FAAA2C9B",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-AAA0603180D6E4D9F71CAEF178303FF86D3B8D519924E990BE394B3C343CBD54"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will enable the UK",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will enable the UK",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Sovereign AI compute, owned and/or allocated by the public sector,",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-EFDF69E581E4878D5F3E9957284B12921A1609BD8C534C4C009DB7B452DCE946",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-8635629694B2014C2C6CA90D6DEDA4F6D9D6D1BDCC78641B309DB2147448E92A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will almost certainly be the smallest",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will almost certainly be the smallest",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Sovereign AI compute",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-52137A903D06931794A986633CCE18FFE6C72FFE70CAEF84A2DDA09B92683393",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-80F8F372933E91468B254D5DC936A688E297DE8F6DDA29B6BC9672E9104F76E4"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will create spillover",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will create spillover",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Due to the criticality of compute for AI, domestic compute",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-FB26DACF37EBB395934C7F6E66E9EA462707861E106C8C2BFD15E1339ACE721F",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-9E1A161666E7CFA141889E611524AE9E5E126DD41F97FBEF63FD25B050B72B00"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will consider",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will consider",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "A credible plan",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-D38E674CB21675AE382B69C889E5C18F2EF7E52A28D96E6FE0DE21A307238B3C",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-3CEF06B65F4FBC4E0AD97C3C9978A961FBEC9AB86DA39196EF50818FECC4BC61"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will have little impact.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will have little impact.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "spreading large amounts of compute thinly",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-127D657172D8524AA85F5DC2CB37FE4A8DB59E830684E7365BCEE6213A36790B",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-66E9B26782694FB1AA9CBB331602A807B74F22158A223311D976071547CB1473"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will have to make",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will have to make",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-422F0333B39604CF2CC3D8E449BB3A568642F9C4A4D81BE233EC6F0601F1D6A3",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-9DDEBE7127E215A8B1A23F7E7FD1A5164A8F46E40B897D65A1E50BA5BAFAB9FF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will seek to make",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will seek to make",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Rapidly identify at least five high-impact public data sets it",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-904EEA7B1A8A6EF69462617087544008E33A69D68D40A533999EF7EB336723C7",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-9B59543966B86D4D4988CFBE292940C46A0D5AE4C67BE3424D536F80A49F9E71"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will help bridge the estimated gap between",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will help bridge the estimated gap between",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "tens of thousands of AI professionals by 2030",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-8A427FFEA176690F612DD3DC15B47A48C3FC0138A4A52EC0F2724C87628AD5C2",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-BAD202A851122C5547A3CFD8F5E6E75E4D5D79E82A903E87D06DE38157C890A9"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must make efforts to come",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must make efforts to come",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "accurately understanding the skills gap, and so government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-C75941B5AF51340BCF16827D5B5E600C59E8D4B25FF5B3FA5167943629DC1F2D",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-8A0542D2A45660F9A183B06611CD98FE3E7EED4A7A0839AB907D41355A950E60"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must be tailored – there is no one-size-fits-all",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must be tailored – there is no one-size-fits-all",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Interventions",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-0238E2D5F94C152077B935D7FE90E0E6A71D828948981F03007FC91B41DF956A",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-8974D55C27780FB9C2F660C2C35D8D3D1260ECDE53CC43C1BF56319695B1F472"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will likely remain so at least until 2030.10 To meet the demands of",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will likely remain so at least until 2030.10 To meet the demands of",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "into AI careers and",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-A8642F29182E3ED002FBCCBAEFFF08383F655EC72EB7F75F0078285C87E84559",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-E70005DFB94108D06023E1E035433F664D2974DD508C13CEA69ADDA593B7FED6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "shall or Fulbright for students to study in the UK.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "shall or Fulbright for students to study in the UK.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "scale of Rhodes, Mar",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-6A8A89A249895C4A88688E5814EDF59B2A91A7AA3F97FB1BAF8C0C4BC27DEB61",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-2309D615B2829BF36C0F6A45194D078C09216B871B7B23468ECDD46037AA5A68"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must show exceptional",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must show exceptional",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Potential scholars",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-097AB0DF42F5DE1783458ADDACDAA5B5343A8B7DD644AE4B6D6783C447220ACE",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-65CC276361F8E8B7343EDE284F4A5C2FC64EC1D67CF6F6E0FD1EEFE21C635965"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will continue to change the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will continue to change the",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-62B516FF5777F9B461AD96BACEFE97BF0EB3E36747EE3E5474AD7B19404D474A",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-046B7EFBA8CF9B5A9567E17F33D35F0BD0334813E3D95C94EC559C3001B2CAE3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must go further than existing measures",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must go further than existing measures",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The UK",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-DFF00B11CF01FA3A95646CCB55733EDEE50989EEE1DE58D7AFBEE9F312D1DF81",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-3E6C966183F5FB3BDA63BE0AD4C78BD4D506ACE350DCAE87F3E736DE3A23C43B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will need flexibility to develop specific offers and provide wraparound support to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will need flexibility to develop specific offers and provide wraparound support to",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Officials",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-1E6E0AD710830F25493654059184F5E3E92A47FCA077CF80D387A09619C3E5BC",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-4D4FEF15B30D63B4EA4CB2E625B3991C274718B47CBBFB00E4AC486ECEDB71A6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must protect UK citizens",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must protect UK citizens",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-DDD5C20A0E81D1D0DF775904ACCA30BC86D2882CA8B1369324573A3E63A94453",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-7EE631842B82E92E998D9C3D96644CBE9CF8A7EF976A0A7E77D58ABBD3D162F8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will touch every aspect of the economy and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will touch every aspect of the economy and",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-96A01CC3D2DA0963505DFB91BC1A2547E2BC1A236DAD9965E1B7ABE992645C2B",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-79BEAF8B5E67919FB3A15C4A2E1C905182862EC5DA2021B12CE524A500CEEA76"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will raise different considerations than in advanced",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will raise different considerations than in advanced",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "example, AI use in health and care",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-1F30EC78195BB0202C588A2C38CE3CBC605515E5F2048C231724054164861D75",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-5F0CCF76C4ADADEA77C9BBD21DBAA9814E45DC9C8AB1504128AFA3338AFE00DD"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will require us to think differently",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require us to think differently",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Scaling these successes is essential, but",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-06FDE3BC077E456ED12C706750A28B84481909CB96430BFEF6D11B6DF0A66394",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-605DC925C7439F274CE8C95001A5843A69BFC9518B29E700DEB3EBCAA12907BF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will need to set out how AI adoption can",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will need to set out how AI adoption can",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The Industrial Strategy",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-D2941BD12C024275E04B7A4AA003B85636561CB042CE554D25EF0FEFB4D6476E",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-45EC2235E8C9CB3750DB92C7565108735E5B32F96C5B6F70E31C4689640F849A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also very soon see agentic systems – systems that can be",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also very soon see agentic systems – systems that can be",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Given the pace of progress, we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-E2857ACBCC693D9B358D9931FD17D6E94E9CD70F88EAFFCE081F8C00538249EE",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-8A86F4EEBC1081323D59D8EAD8372E1CE5D6428A5A459B7816FB9C882C724F7E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will require",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Generating national champions",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-87282F9EE36E15A8BEA8F2F47A2F1561A2BDDE0C210FC626E48BC4BB8668AD7D",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-CA7DF44F528C81D68A4F6A3997D2336FD9911868FDC34FA3B228BB737DF2C027"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must maximise its ambition and ensure the UK has national champions at the",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must maximise its ambition and ensure the UK has national champions at the",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-DD488D5008C4C0C8225954273D04E6574B604501D9DA9C7B9363B2D42CCC041D",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-99E6F5B2ADD80BFC0D10C8C71E4D62B18F3E91D0989A9B83300898429A391AA5"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will require bold, concerted and coherent action, using all the levers of the state",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require bold, concerted and coherent action, using all the levers of the state",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Achieving this",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-4B6B8879582524566E4EAB386E99BC6BE68660D809BB75F72E9EA057E0917F5B",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-3E0D9EAE512F4E9596A9BC136F1CF9D6A1989D36023A2C4977C38E202B949F09"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must develop a clear position on which areas of AI research are",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must develop a clear position on which areas of AI research are",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "To achieve this, the unit",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-6648882D43FB64599945ACB3E0987CE6842B3ABCBF5F652C4989B2DAB2EC9DCD",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-8AA65B55D12F94552D38187755C3A86DA9D989BBE6AC4D65754118737F7F0C68"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will play a critical coordinating role, able to remove",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will play a critical coordinating role, able to remove",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "With a clear and powerful mandate the unit",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-FC45E5C096E924DB5FB6ECD4E75932C103268D295605B241D1A17E5F85BB1E41",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-712B50416430B10F673BAF62ACEFA6E507660BD47553FA3BF241EFA2BCE591DE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will require the government to both take a long-term view and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require the government to both take a long-term view and",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The Action Plan I have set out",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-63515B213D1845E59D33EC6EE856D2D2A3F1F58C6BD60CEAB744F9714B618973",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V02-EVID-D3914192C12EEBFC2244B6D43C946554A29F9EDE3CA946213EC0094CB1881333"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will need to be prepared to absorb",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will need to be prepared to absorb",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Instead, government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V02-EVID-046B7EFBA8CF9B5A9567E17F33D35F0BD0334813E3D95C94EC559C3001B2CAE3",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "The UK must go further than existing measures"
+    },
+    {
+      "block_id": "DOC-S001-B0008",
+      "evidence_id": "V02-EVID-0BEA0AA1366DAA98FC1D81F1244A6BDA997F137C37AE2E7E8880910216BA860C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S001",
+      "text_excerpt": "The government must therefore secure access to a sufficient supply of compute."
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V02-EVID-2309D615B2829BF36C0F6A45194D078C09216B871B7B23468ECDD46037AA5A68",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "Potential scholars must show exceptional"
+    },
+    {
+      "block_id": "DOC-S001-B0005",
+      "evidence_id": "V02-EVID-2442A31A05595EB28387941A9CD1A73E3C80BFE5AE5A03D9B9D5AD12504A9B38",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S001",
+      "text_excerpt": "Skills England will help ensure that British"
+    },
+    {
+      "block_id": "DOC-S001-B0009",
+      "evidence_id": "V02-EVID-3CEF06B65F4FBC4E0AD97C3C9978A961FBEC9AB86DA39196EF50818FECC4BC61",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S001",
+      "text_excerpt": "spreading large amounts of compute thinly will have little impact."
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V02-EVID-3E0D9EAE512F4E9596A9BC136F1CF9D6A1989D36023A2C4977C38E202B949F09",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "To achieve this, the unit must develop a clear position on which areas of AI research are"
+    },
+    {
+      "block_id": "DOC-S001-B0014",
+      "evidence_id": "V02-EVID-3E6C966183F5FB3BDA63BE0AD4C78BD4D506ACE350DCAE87F3E736DE3A23C43B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S001",
+      "text_excerpt": "Officials will need flexibility to develop specific offers and provide wraparound support to"
+    },
+    {
+      "block_id": "DOC-S001-B0007",
+      "evidence_id": "V02-EVID-420A7109670556A044A667C5630E1ED26D31CA16FFD2CD5E895C6EB0E3703CF4",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S001",
+      "text_excerpt": "asymmetric bet – and one the UK can and must make."
+    },
+    {
+      "block_id": "DOC-S001-B0022",
+      "evidence_id": "V02-EVID-45EC2235E8C9CB3750DB92C7565108735E5B32F96C5B6F70E31C4689640F849A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "22",
+      "source_id": "S001",
+      "text_excerpt": "Given the pace of progress, we will also very soon see agentic systems – systems that can be"
+    },
+    {
+      "block_id": "DOC-S001-B0007",
+      "evidence_id": "V02-EVID-47F77D6FFD4C7244BE416AB39B9C2A7FB0041B7166E625EBB97D0161BDAE455C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S001",
+      "text_excerpt": "progress slows, we will see large benefits from deploying today’s frontier capabilities and"
+    },
+    {
+      "block_id": "DOC-S001-B0006",
+      "evidence_id": "V02-EVID-4A7F851C229A7755CF2FE066F62826C2B27A75E98EDC01F00125A248431FA914",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S001",
+      "text_excerpt": "The UK’s starting point makes this aspiration plausible, but achieving it will require bold and"
+    },
+    {
+      "block_id": "DOC-S001-B0014",
+      "evidence_id": "V02-EVID-4D4FEF15B30D63B4EA4CB2E625B3991C274718B47CBBFB00E4AC486ECEDB71A6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S001",
+      "text_excerpt": "Government must protect UK citizens"
+    },
+    {
+      "block_id": "DOC-S001-B0005",
+      "evidence_id": "V02-EVID-4F59D4AA5FD48C53FF97B1B52087FA216271B6FAD0E64A733762BFA025C48B7A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S001",
+      "text_excerpt": "We will do so by working closely with the world’s leading AI companies, Britain’s"
+    },
+    {
+      "block_id": "DOC-S001-B0018",
+      "evidence_id": "V02-EVID-5F0CCF76C4ADADEA77C9BBD21DBAA9814E45DC9C8AB1504128AFA3338AFE00DD",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "18",
+      "source_id": "S001",
+      "text_excerpt": "Scaling these successes is essential, but will require us to think differently"
+    },
+    {
+      "block_id": "DOC-S001-B0020",
+      "evidence_id": "V02-EVID-605DC925C7439F274CE8C95001A5843A69BFC9518B29E700DEB3EBCAA12907BF",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "20",
+      "source_id": "S001",
+      "text_excerpt": "The Industrial Strategy will need to set out how AI adoption can"
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V02-EVID-65CC276361F8E8B7343EDE284F4A5C2FC64EC1D67CF6F6E0FD1EEFE21C635965",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "AI will continue to change the"
+    },
+    {
+      "block_id": "DOC-S001-B0009",
+      "evidence_id": "V02-EVID-66E9B26782694FB1AA9CBB331602A807B74F22158A223311D976071547CB1473",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S001",
+      "text_excerpt": "We will have to make"
+    },
+    {
+      "block_id": "DOC-S001-B0008",
+      "evidence_id": "V02-EVID-6CE0B6716A4B9223EF5F426374874781DDFD690D921C8D1A0B0A5AF7EAA018DD",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S001",
+      "text_excerpt": "high-skill jobs and compute-adjacent industries will have been created and access to compute"
+    },
+    {
+      "block_id": "DOC-S001-B0025",
+      "evidence_id": "V02-EVID-712B50416430B10F673BAF62ACEFA6E507660BD47553FA3BF241EFA2BCE591DE",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "25",
+      "source_id": "S001",
+      "text_excerpt": "The Action Plan I have set out will require the government to both take a long-term view and"
+    },
+    {
+      "block_id": "DOC-S001-B0005",
+      "evidence_id": "V02-EVID-75940937290943A723A1D57FD5707C91FF52897087EC26F787D5916DF9AF4950",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S001",
+      "text_excerpt": "Today, we have set out how we will rise to the challenge."
+    },
+    {
+      "block_id": "DOC-S001-B0017",
+      "evidence_id": "V02-EVID-79BEAF8B5E67919FB3A15C4A2E1C905182862EC5DA2021B12CE524A500CEEA76",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S001",
+      "text_excerpt": "example, AI use in health and care will raise different considerations than in advanced"
+    },
+    {
+      "block_id": "DOC-S001-B0015",
+      "evidence_id": "V02-EVID-7EE631842B82E92E998D9C3D96644CBE9CF8A7EF976A0A7E77D58ABBD3D162F8",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S001",
+      "text_excerpt": "AI will touch every aspect of the economy and"
+    },
+    {
+      "block_id": "DOC-S001-B0008",
+      "evidence_id": "V02-EVID-80F8F372933E91468B254D5DC936A688E297DE8F6DDA29B6BC9672E9104F76E4",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S001",
+      "text_excerpt": "Due to the criticality of compute for AI, domestic compute will create spillover"
+    },
+    {
+      "block_id": "DOC-S001-B0008",
+      "evidence_id": "V02-EVID-8635629694B2014C2C6CA90D6DEDA4F6D9D6D1BDCC78641B309DB2147448E92A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S001",
+      "text_excerpt": "Sovereign AI compute will almost certainly be the smallest"
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V02-EVID-8974D55C27780FB9C2F660C2C35D8D3D1260ECDE53CC43C1BF56319695B1F472",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "into AI careers and will likely remain so at least until 2030.10 To meet the demands of"
+    },
+    {
+      "block_id": "DOC-S001-B0012",
+      "evidence_id": "V02-EVID-8A0542D2A45660F9A183B06611CD98FE3E7EED4A7A0839AB907D41355A950E60",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S001",
+      "text_excerpt": "Interventions must be tailored – there is no one-size-fits-all"
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V02-EVID-8A86F4EEBC1081323D59D8EAD8372E1CE5D6428A5A459B7816FB9C882C724F7E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "Generating national champions will require"
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V02-EVID-8AA65B55D12F94552D38187755C3A86DA9D989BBE6AC4D65754118737F7F0C68",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "With a clear and powerful mandate the unit will play a critical coordinating role, able to remove"
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V02-EVID-99E6F5B2ADD80BFC0D10C8C71E4D62B18F3E91D0989A9B83300898429A391AA5",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "Achieving this will require bold, concerted and coherent action, using all the levers of the state"
+    },
+    {
+      "block_id": "DOC-S001-B0012",
+      "evidence_id": "V02-EVID-9B59543966B86D4D4988CFBE292940C46A0D5AE4C67BE3424D536F80A49F9E71",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S001",
+      "text_excerpt": "tens of thousands of AI professionals by 2030 will help bridge the estimated gap between"
+    },
+    {
+      "block_id": "DOC-S001-B0010",
+      "evidence_id": "V02-EVID-9DDEBE7127E215A8B1A23F7E7FD1A5164A8F46E40B897D65A1E50BA5BAFAB9FF",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S001",
+      "text_excerpt": "7. Rapidly identify at least five high-impact public data sets it will seek to make"
+    },
+    {
+      "block_id": "DOC-S001-B0009",
+      "evidence_id": "V02-EVID-9E1A161666E7CFA141889E611524AE9E5E126DD41F97FBEF63FD25B050B72B00",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S001",
+      "text_excerpt": "A credible plan will consider"
+    },
+    {
+      "block_id": "DOC-S001-B0008",
+      "evidence_id": "V02-EVID-AAA0603180D6E4D9F71CAEF178303FF86D3B8D519924E990BE394B3C343CBD54",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S001",
+      "text_excerpt": "• Sovereign AI compute, owned and/or allocated by the public sector, will enable the UK"
+    },
+    {
+      "block_id": "DOC-S001-B0012",
+      "evidence_id": "V02-EVID-BAD202A851122C5547A3CFD8F5E6E75E4D5D79E82A903E87D06DE38157C890A9",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S001",
+      "text_excerpt": "accurately understanding the skills gap, and so government must make efforts to come"
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V02-EVID-CA7DF44F528C81D68A4F6A3997D2336FD9911868FDC34FA3B228BB737DF2C027",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "The government must maximise its ambition and ensure the UK has national champions at the"
+    },
+    {
+      "block_id": "DOC-S001-B0005",
+      "evidence_id": "V02-EVID-CB7E07AAC1566EAEE182833AD723E83BA33D4782860711F8525538A401F9BC39",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S001",
+      "text_excerpt": "Government I have created in my Department will drive forward the technological"
+    },
+    {
+      "block_id": "DOC-S001-B0025",
+      "evidence_id": "V02-EVID-D3914192C12EEBFC2244B6D43C946554A29F9EDE3CA946213EC0094CB1881333",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "25",
+      "source_id": "S001",
+      "text_excerpt": "Instead, government will need to be prepared to absorb"
+    },
+    {
+      "block_id": "DOC-S001-B0007",
+      "evidence_id": "V02-EVID-D57B7D379AC4F4082366B1F5D847AD61567A0E70650DF5EDE7684D2C0E66E90A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S001",
+      "text_excerpt": "But doing this well is not easy – it will require real leadership and"
+    },
+    {
+      "block_id": "DOC-S001-B0006",
+      "evidence_id": "V02-EVID-DCF033B6B888F8C1DC50421016FC91E8A3400631FB4A7C1AA6A11551FA400E7E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S001",
+      "text_excerpt": "It is hard to imagine how we will meet the"
+    },
+    {
+      "block_id": "DOC-S001-B0008",
+      "evidence_id": "V02-EVID-E55EB6676FF706CA3AC535416FB9AD25F284B136EDBE30B7CA535776C869F596",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S001",
+      "text_excerpt": "decade from now the economy will almost certainly be more computationally intensive: new"
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V02-EVID-E70005DFB94108D06023E1E035433F664D2974DD508C13CEA69ADDA593B7FED6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "scale of Rhodes, Marshall or Fulbright for students to study in the UK."
+    },
+    {
+      "block_id": "DOC-S001-B0007",
+      "evidence_id": "V02-EVID-EF0DB85CCF2E9172F6C404D72315043B2218827CE69C5CAA56B37CB9D53685F6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S001",
+      "text_excerpt": "No one can say with certainty what AI will look like a decade from now."
+    },
+    {
+      "block_id": "DOC-S001-B0005",
+      "evidence_id": "V02-EVID-F2616DD22A045ED35581F645B786AA2A4984C7000BDC8CF86AB2F33CB3D512CB",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S001",
+      "text_excerpt": "Our transformative planning reforms will make it easier to build the"
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S001"
+  ],
+  "warnings": [
+    "abstained_action_status_ineligible_subject",
+    "abstained_commitment_clause_like_subject",
+    "abstained_commitment_copular_or_passive",
+    "abstained_commitment_ineligible_subject",
+    "abstained_commitment_subject_too_long",
+    "abstained_ineligible_actor_noun_phrase",
+    "abstained_requirement_ineligible_action",
+    "abstained_requirement_ineligible_subject",
+    "abstained_subject_span_out_of_bounds"
+  ]
+}
