@@ -1,0 +1,256 @@
+{
+  "candidate_schema_version": "0.1",
+  "config_sha256": "369D5CFF68AA4F6AF2952CBB5B443676EC9748B037EC2EDB2C99AEB005D80D27",
+  "corpus_version": "stage1-corpus-v1.0",
+  "development_challenge_case_ids": [
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001"
+  ],
+  "development_source_ids": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S006"
+  ],
+  "evidence_references": {
+    "evaluation_report_path": "evaluation/baselines/deterministic-baseline-v0.2/development/development_evaluation_report.json",
+    "evaluation_report_sha256": "A470161F8477D7129CD15934E29F22EA04F38DAD8F6A01F607A35CB569BF2CE6",
+    "experiment_id": "deterministic-baseline-v0.2",
+    "observation_lock_path": "evaluation/baselines/deterministic-baseline-v0.2/development/observation_lock.json",
+    "observation_lock_sha256": "6EFDB39F54B9DF29B7C5F5C3175FCFEE05E9A1A84F22AB91CA9652CED59B3309",
+    "owner_assessment_path": "evaluation/baselines/deterministic-baseline-v0.2/development/owner_completed_assessments.json",
+    "owner_assessment_sha256": "A7B07AF89C32A98BB79EA500C7C03C6AAD42F8D98268B2094CFC5FBA817AE591",
+    "owner_review_packet_path": "evaluation/baselines/deterministic-baseline-v0.2/development/owner_challenge_review_packet.json",
+    "owner_review_packet_sha256": "4F38B512F388D6358281F841C5FF2CB7AE70560CA5B5C74DEC88EB3224A18364",
+    "preparation_manifest_path": "evaluation/baselines/deterministic-baseline-v0.2/development/preparation_manifest.json",
+    "preparation_manifest_sha256": "A893C1BFF49C3A7D7987260DFFEB94DBE3E809140540634C10359BFEB18E699E",
+    "structural_inventory_path": "evaluation/baselines/deterministic-baseline-v0.2/development/structural_unmatched_inventory.json",
+    "structural_inventory_sha256": "0B095EE68A2F59DD696E5576E694BC24E0E586344F86644B13E4F4D9B450DFAD"
+  },
+  "experiment_id": "deterministic-baseline-v0.2",
+  "experiment_version": "0.2",
+  "freeze_date": "2026-07-29",
+  "freeze_schema_version": "0.1",
+  "freeze_status": "frozen_after_development_process_acceptance",
+  "held_out_access": "blocked_until_successful_v0.2_development_freeze_and_separate_guard",
+  "held_out_execution_authorized": false,
+  "implementation_commit": "b939857a570e726fdaf5ddf767e84943605d636c",
+  "matching_protocol_version": "0.1",
+  "metric_fractions": {
+    "development_challenge_case_pass_rate": {
+      "denominator": 3,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 2,
+      "value": 0.6666666666666666
+    },
+    "evidence_excerpt_exact_match": {
+      "denominator": 0,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 0,
+      "value": null
+    },
+    "evidence_location_accuracy": {
+      "denominator": 0,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 0,
+      "value": null
+    },
+    "evidence_source_accuracy": {
+      "denominator": 0,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 0,
+      "value": null
+    },
+    "fact_f1": {
+      "denominator": 0,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 0,
+      "value": null
+    },
+    "fact_precision": {
+      "denominator": 321,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 0,
+      "value": 0.0
+    },
+    "fact_recall": {
+      "denominator": 25,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 0,
+      "value": 0.0
+    },
+    "normalized_value_exact_match": {
+      "denominator": 0,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 0,
+      "value": null
+    },
+    "schema_valid_result_rate": {
+      "denominator": 5,
+      "experiment_id": "deterministic-baseline-v0.2",
+      "numerator": 5,
+      "value": 1.0
+    }
+  },
+  "minimum_f1_gate_applies": false,
+  "non_binding_quality_targets": [
+    {
+      "experiment_id": "deterministic-baseline-v0.2",
+      "non_binding": true,
+      "observed": "strict_tp=0",
+      "outcome": "not_met",
+      "target_id": "strict_tp_greater_than_zero"
+    },
+    {
+      "experiment_id": "deterministic-baseline-v0.2",
+      "non_binding": true,
+      "observed": "commitment_candidates=193",
+      "outcome": "met",
+      "target_id": "commitment_candidates_below_243"
+    },
+    {
+      "experiment_id": "deterministic-baseline-v0.2",
+      "non_binding": true,
+      "observed": "total_candidates=321",
+      "outcome": "not_met",
+      "target_id": "total_candidates_below_288"
+    },
+    {
+      "experiment_id": "deterministic-baseline-v0.2",
+      "non_binding": true,
+      "observed": "review_required=77",
+      "outcome": "met",
+      "target_id": "ambiguous_relationship_routed_to_review"
+    },
+    {
+      "experiment_id": "deterministic-baseline-v0.2",
+      "non_binding": true,
+      "observed": "incompatible_candidates=0",
+      "outcome": "met",
+      "target_id": "zero_incompatible_predicate_subject_candidate"
+    },
+    {
+      "experiment_id": "deterministic-baseline-v0.2",
+      "non_binding": true,
+      "observed": "largest_predicate_population=193",
+      "outcome": "met",
+      "target_id": "no_predicate_family_dominates"
+    },
+    {
+      "experiment_id": "deterministic-baseline-v0.2",
+      "non_binding": true,
+      "observed": "v0_2_duplicates=0;v0_1_duplicates=7",
+      "outcome": "met",
+      "target_id": "fewer_semantic_duplicates_than_v0_1"
+    }
+  ],
+  "observation_evidence_commit": "5660294f8c655a3fd5e32101f28277ad3cf98467",
+  "parser_commit": "71148262f094d54ec7d95e45958bd1aaefc64793",
+  "planning_merge_commit": "f224c4e385fab5c4e0348bcf251015630cea9af8",
+  "predicate_vocabulary_version": "0.1",
+  "primary_candidate_output_hashes": {
+    "S001": "8116B8BA1BF39B86E5024779FF53D8EE7BB3CCE87118BB98FB8342597798E7DA",
+    "S002": "2E4999F6C0BF0DED35186870714285BC0F423D1BB0309486D653983CBD4A35D0",
+    "S003": "2027FD044619A29CA916D918B65F121643D088FD8240AA6E9A04BC25E0F5742A",
+    "S004": "173B41874C6F72E17AA130047D9BC9669BD46D07B57AB19E8148F237310EB8D2",
+    "S006": "3E7DE0A7891ACCAAEA650D8C608EB54A8D4BE1526D5AD88DA2CDA281249DA73C"
+  },
+  "process_gate_outcomes": [
+    {
+      "evidence": "5 primary and 5 repeat source attempts completed",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "all_sources_complete_both_passes",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "all extraction failures were bounded and none remained unhandled",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "zero_unhandled_extraction_exceptions",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "all 10 candidate outputs validated against schema 0.1",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "candidate_schema_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "all 5 primary and repeat output pairs are byte-identical",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "repeat_outputs_byte_identical",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "every stored candidate output hash revalidated",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "exact_output_hashes_revalidated",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "all exact metric numerators and denominators reconcile",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "exact_metrics_reconciled",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "all 3 development challenge cases have explicit owner outcomes",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "challenge_cases_owner_assessed",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "held-out semantic content was not loaded",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "held_out_semantics_not_loaded",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "reviewed extractor inventory contains no source-specific rule",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "source_independent_rules",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "protected v0.1 semantic and observation hashes remain valid",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "protected_v0_1_hashes_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "all frozen v0.2 planning hashes remain valid",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "protected_planning_hashes_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "implementation commit was verified before first observation",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "implementation_commit_precedes_observation",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "preparation observation and final report identities agree",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "artifact_identities_agree",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "the immutable observation lock hash revalidated",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "gate_id": "observation_lock_hash_revalidated",
+      "outcome": "passed"
+    }
+  ],
+  "public_gold_cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+  "public_gold_facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+  "public_gold_version": "public-gold-v0.1",
+  "repeat_candidate_output_hashes": {
+    "S001": "8116B8BA1BF39B86E5024779FF53D8EE7BB3CCE87118BB98FB8342597798E7DA",
+    "S002": "2E4999F6C0BF0DED35186870714285BC0F423D1BB0309486D653983CBD4A35D0",
+    "S003": "2027FD044619A29CA916D918B65F121643D088FD8240AA6E9A04BC25E0F5742A",
+    "S004": "173B41874C6F72E17AA130047D9BC9669BD46D07B57AB19E8148F237310EB8D2",
+    "S006": "3E7DE0A7891ACCAAEA650D8C608EB54A8D4BE1526D5AD88DA2CDA281249DA73C"
+  }
+}

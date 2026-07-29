@@ -1,0 +1,28 @@
+{
+  "all_outputs_byte_identical": true,
+  "all_source_attempts_successful": true,
+  "evidence_references": {
+    "evaluation_report_path": "evaluation/baselines/deterministic-baseline-v0.2/development/development_evaluation_report.json",
+    "evaluation_report_sha256": "A470161F8477D7129CD15934E29F22EA04F38DAD8F6A01F607A35CB569BF2CE6",
+    "experiment_id": "deterministic-baseline-v0.2",
+    "observation_lock_path": "evaluation/baselines/deterministic-baseline-v0.2/development/observation_lock.json",
+    "observation_lock_sha256": "6EFDB39F54B9DF29B7C5F5C3175FCFEE05E9A1A84F22AB91CA9652CED59B3309",
+    "owner_assessment_path": "evaluation/baselines/deterministic-baseline-v0.2/development/owner_completed_assessments.json",
+    "owner_assessment_sha256": "A7B07AF89C32A98BB79EA500C7C03C6AAD42F8D98268B2094CFC5FBA817AE591",
+    "owner_review_packet_path": "evaluation/baselines/deterministic-baseline-v0.2/development/owner_challenge_review_packet.json",
+    "owner_review_packet_sha256": "4F38B512F388D6358281F841C5FF2CB7AE70560CA5B5C74DEC88EB3224A18364",
+    "preparation_manifest_path": "evaluation/baselines/deterministic-baseline-v0.2/development/preparation_manifest.json",
+    "preparation_manifest_sha256": "A893C1BFF49C3A7D7987260DFFEB94DBE3E809140540634C10359BFEB18E699E",
+    "structural_inventory_path": "evaluation/baselines/deterministic-baseline-v0.2/development/structural_unmatched_inventory.json",
+    "structural_inventory_sha256": "0B095EE68A2F59DD696E5576E694BC24E0E586344F86644B13E4F4D9B450DFAD"
+  },
+  "experiment_id": "deterministic-baseline-v0.2",
+  "finalization_status": "complete_process_gates_passed",
+  "held_out_access": "blocked_until_successful_v0.2_development_freeze_and_separate_guard",
+  "held_out_semantic_content_loaded": false,
+  "implementation_commit": "b939857a570e726fdaf5ddf767e84943605d636c",
+  "observation_evidence_commit": "5660294f8c655a3fd5e32101f28277ad3cf98467",
+  "owner_assessments_complete": true,
+  "planning_merge_commit": "f224c4e385fab5c4e0348bcf251015630cea9af8",
+  "schema_version": "0.1"
+}
