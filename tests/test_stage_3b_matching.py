@@ -610,8 +610,17 @@ def test_new_sources_and_tests_contain_no_non_development_source_ids() -> None:
     )
 
 
-def test_no_freeze_manifest_artifact_or_evaluation_cli_exists() -> None:
-    assert not list(ROOT.rglob("*baseline*freeze*manifest*"))
+def test_only_frozen_v0_2_manifest_exists_and_evaluation_cli_is_absent() -> None:
+    expected_freeze_manifest = (
+        ROOT
+        / "evaluation/baselines/deterministic-baseline-v0.2/development"
+        / "baseline_freeze_manifest.json"
+    )
+    freeze_manifests = {
+        path for path in ROOT.rglob("*baseline*freeze*manifest*") if path.is_file()
+    }
+
+    assert freeze_manifests == {expected_freeze_manifest}
     assert not list((ROOT / "artifacts").rglob("*development*evaluation*.json"))
     assert not (
         ROOT
