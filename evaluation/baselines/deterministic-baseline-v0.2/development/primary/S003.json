@@ -1,0 +1,811 @@
+{
+  "batch_id": "V02-BATCH-5C84691F4A25D92882863326BFE342F07A477487C04E26521BF6D0D61A7729C7",
+  "candidate_facts": [
+    {
+      "candidate_id": "V02-CAND-21C539C70BB46A3168A8972650AE64010566C0F1DE36BFC263404D87883FBAAB",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-A87BC17D83D48427CF5EB0108DBFE11F822E59CEDA75564B401475A7AF9F49B7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Plan to set a clear direction for how",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "Plan to set a clear direction for how",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "A year ago, we launched the AI Opportunities Action",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-37D90D6021952F6751B4D49F2117344BDD7937D535A032135B92F229B560E67A",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-9A9887FB2E0028A1EA04CC6F3B45B20E08540777BA378D37726E98633EB83B5A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will ensure we’re building the infrastructure for growth, embedding AI into",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will ensure we’re building the infrastructure for growth, embedding AI into",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "These achievements",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-39BDDE1DDB46D9463F5081DD9F1316C2806711F2A57ACDA70DD8ED42DAA02009",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-0A1E59B8404F93CBDB9F0067D69F2D8130F73D3172DE0C1F4BC0FCBF5B5489FE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will go further and faster, with the new AI Growth",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will go further and faster, with the new AI Growth",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "This year we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-77F4791473F88453DFE566C1EB64B0DBEEC3DA55EC746DA81E1D650B8C09747B",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-6B29964551C647D616DD7E95B0B30A5D4C5C1B8D6AF387E0AF748162A0272BA5"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will take proven AI tools in public services – from diagnostics to planning to digital",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will take proven AI tools in public services – from diagnostics to planning to digital",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-DD4CC4B6E174CEE7B2D6E9ED96937921D6D4A5996DCAC41EB306FE64BA2D22A2",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-DB20C507B65CFF8841F2615DB0EC5E97B53BD3A8AC211B825A0310BD83F118FE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will put the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will put the",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "And we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-3B5DC0F5030C8CBC5FE1DB4A6E8E5237943CC5AF73FD422D640715B8757536B8",
+      "confidence": 0.9,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-B1195F3E5B584C317D3C78D7D06982313572A1EAE008730AA4890E36D603C92E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must make sure these technologies work for everyone, supporting growth while",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must make sure these technologies work for everyone, supporting growth while",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-D2666469D7D5D9DB52569042029779F106BAB0179F1BA387ABDF7CF3C03575CA",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-7E02AF71906A887534CF5FC4F1FC5125966B923D2A6AC8B837D23F5EA38240DA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will only succeed in winning for Britain if people have the confidence this technology is",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will only succeed in winning for Britain if people have the confidence this technology is",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-F6CF6C5E7763ADFE317DF64C84A6D58C35E498C167C5C0998637FA6DEE648FD1",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-0F725EDCB780F3F7978C7AF25A66DF8B74278DFF19B48AB0DE7CDD2E559739E2"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Plan to ensure the UK is effectively",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "Plan to ensure the UK is effectively",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "A year ago, we launched the AI Opportunities Action",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-B1A0BDB32545BD20F69202BC26CFD639C2EB8C8DF235A1C689286D52C1D9EA27",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-EFDC7BDD0DD9E47184C2D389AF36AE59F29EB0E9667A2EAAFACD51BFF12C282F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will continue to deliver at pace, to ensure",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will continue to deliver at pace, to ensure",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-53EA5E76DDF7D78EC8BBF11565B2D1FF4CE927CE8A269BB4B7335E9903A57DE9",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-4B3EE29DFB02A5D4E9195B953E4B684D17185CD3D5636D324CCB0BD59010762E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will continue not just to adapt to technological change, but to shape it in the public",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will continue not just to adapt to technological change, but to shape it in the public",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Britain",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-71F57D0A35EA9ED36F1000AD9C87A019D04B7AC55268D6DF87F8044235C4A358",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-849066A58631E47252FFD1BF338222DFC8C058A22F543EFF16795DAF9DEE2CB4"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will shape",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will shape",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Our national compute capacity",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-59381661E63D8F449C84ADF729FC9351152270F701EF8554A7F6604C1E83937B",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-00A49CD805CD82C8FA45B683A03DBECE6311E8C1B29701AAB7FF53BD025EFEA0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "plan to ensure Britain has the compute it needs –",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "plan to ensure Britain has the compute it needs –",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The UK Compute Roadmap sets out our",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-99A0F778335B0C78D0282B2BD6ED1DA6E2FF6E6170977F415514F0A11FA5BC01",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-1A23EE89A4A9AD680A80F0B9931834F392383A23EC599D7C915404CFB5EBE54B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will broker power, planning and offtake across the first wave",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will broker power, planning and offtake across the first wave",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The AI Growth Zone Delivery Unit",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-3BF2DA4323F19740668051A14208D2BEBE07D8EF33CA4E3353560E39CC5E4ECC",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-BFFA13E4E86561F2D56D9A2EB9F3D528E8802180CEEB50996A3D1748EA31C708"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also procure to increase the supercomputer capacity at the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also procure to increase the supercomputer capacity at the",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "government confirmed it",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-77F5C058711AEDD8B0C8D58F3D71AD163538896784A7CE1026F067F4B61B0722",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-47D159B2F6A8E77B8A927BF55D60AFC3DBDCA54B4024845CEA39478007B9C042"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will shape what data government collects and how it is managed.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will shape what data government collects and how it is managed.",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The NDL",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-E3C95FEB2E133D8ECDBEF1ECC6DCFB6C34C68F5FAF9F3D65EC4712F70FF2F1BA",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-7BED040E16025075F89D9F15CC54FFD47DDB73508C4B05060CAE03D4BB6C8514"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will scale to support up to 900",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will scale to support up to 900",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-601ADF7F15439BE936432AF31B50C293E231C46CDC1306E6460C93205A4C4071",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-48DCE63794EFFB03321CE98FCFCCA50918D7DA3CC70EBD3DA70042D75D4E663D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Researchers and academics in sectors such as AI",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-C3A40D6813FDEB0B5ECAB4B84D2E9E8553A966B0BFBCB1C589676FB8795BB98E",
+      "confidence": 0.9,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-707E4D45026914CEF582C6EB0C1AE428225031C896A3F0E4D939A412703D9C3A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "delivered",
+      "predicate": "action_status",
+      "qualifiers": {},
+      "raw_value": "delivered",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Future of Work programme, to be",
+      "subject_type": "programme",
+      "value_type": "status",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-6C6082009E6E3B63E1EEA8767A81CFD8FC2CA04BD23C5C622155D499146356B6",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-86F8CC9E9EFC5805C49971A7569D0765BFDAFD518F7E5BE94FC04B110B5F7CBE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will provide the best analysis and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will provide the best analysis and",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "panel of experts from business and trade unions, the unit",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-76DC9BF70A5A9A2550B34777273911D2EDD792E5C19FCC059F471D94F3C7FB90",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-B7AED266DE65D7B0A70F3E0E5D97765F73A54021C9C5241EBDD8DC8A41FE9549"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will open for applications in Spring 2026.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will open for applications in Spring 2026.",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The first round of the AI Assurance Innovation Fund",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-FCD797E9A0C71EA547C2B7A99688C59C0A98FCC986E822B8D7244DA929547C4D",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-4E8E26880646F7B9504EC570224D4EF7468666C4FE2038158113914BCC161384"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will also explore opportunities for the fund to support the work of the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also explore opportunities for the fund to support the work of the",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "To drive AI adoption, we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-33680D831D85B35ECF3E36162F1895E3C5FAA16371952C68D8344B0EA36303BB",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-9F5CC384932130B7E5D41A733738308D96F8B04F86425F10FADCD6F2DE67B0F1"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will include clinical AI",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will include clinical AI",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The second phase",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-A5914E51925A84BA1EB7BA7C97D28A01909AECA8D6C1A1ECBF204A23FCB73519",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-F7F797E1C0E4BF8D2858F8F3DB7B4C000E323A30F3B7DDD66D0EF3D1AECDF427"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will publish a plan",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will publish a plan",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Following strategic guidance issued by the government this year, regulators",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-C4A443CBFFD483592929F21DE2416BDBEA3C66173F1FBC7A50443358BFB4AEF4",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-283C58FB6021BAB04BF27A1D93675ABCA26F537F0DC9F51672F28A659B976FD3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will enable safe AI-powered innovation and begin to report on this",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will enable safe AI-powered innovation and begin to report on this",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "setting out how they",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-62B51FDB221B15E94D23D1A25025228A55FDFBDD611DDD98EED840C31F51B143",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-9FB955693D6D23807F107426D2B333E8894F253DFA345DB5E5592F108A7F7967"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will launch tenders",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will launch tenders",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "By March 2026, we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-1C33991914A0A44BD3385B46C84EB64FC140ADBDEF9B575221272CCBB0970A99",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-3CF0B49262E827F143AB8DCA81D20FD7F48FC5C79A4C1ABA5CA8E7E683C87755"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "plans to expand Innovate UK’s",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "plans to expand Innovate UK’s",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "At Autumn Budget 2025, the government set out",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-65327F952A3D395F012E533CF245B10D84543483890B096DCE3793A4956E4420",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-6EB960A75059C9B43BAFB03010BD7F5542F236B731966A022041AA79B727F762"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will launch the next phase of the Sovereign AI Unit in April 2026.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will launch the next phase of the Sovereign AI Unit in April 2026.",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V02-CAND-14975CFE203AC6992403AE1119358A4BD13A220BEA784297311F3A00EC6D7CE2",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V02-EVID-8EF0CC537D7E65A52FADEEB9700D99B1741BFA462BAC37A1AE6AB5D21B5F3A28"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "will invest in and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will invest in and",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "delivered by the Department of Science, Innovation and Technology, and",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S003-B0009",
+      "evidence_id": "V02-EVID-00A49CD805CD82C8FA45B683A03DBECE6311E8C1B29701AAB7FF53BD025EFEA0",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S003",
+      "text_excerpt": "The UK Compute Roadmap sets out our plan to ensure Britain has the compute it needs –"
+    },
+    {
+      "block_id": "DOC-S003-B0005",
+      "evidence_id": "V02-EVID-0A1E59B8404F93CBDB9F0067D69F2D8130F73D3172DE0C1F4BC0FCBF5B5489FE",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S003",
+      "text_excerpt": "This year we will go further and faster, with the new AI Growth"
+    },
+    {
+      "block_id": "DOC-S003-B0008",
+      "evidence_id": "V02-EVID-0F725EDCB780F3F7978C7AF25A66DF8B74278DFF19B48AB0DE7CDD2E559739E2",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S003",
+      "text_excerpt": "A year ago, we launched the AI Opportunities Action Plan to ensure the UK is effectively"
+    },
+    {
+      "block_id": "DOC-S003-B0009",
+      "evidence_id": "V02-EVID-1A23EE89A4A9AD680A80F0B9931834F392383A23EC599D7C915404CFB5EBE54B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S003",
+      "text_excerpt": "The AI Growth Zone Delivery Unit will broker power, planning and offtake across the first wave"
+    },
+    {
+      "block_id": "DOC-S003-B0013",
+      "evidence_id": "V02-EVID-283C58FB6021BAB04BF27A1D93675ABCA26F537F0DC9F51672F28A659B976FD3",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S003",
+      "text_excerpt": "setting out how they will enable safe AI-powered innovation and begin to report on this"
+    },
+    {
+      "block_id": "DOC-S003-B0014",
+      "evidence_id": "V02-EVID-3CF0B49262E827F143AB8DCA81D20FD7F48FC5C79A4C1ABA5CA8E7E683C87755",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S003",
+      "text_excerpt": "At Autumn Budget 2025, the government set out plans to expand Innovate UK’s"
+    },
+    {
+      "block_id": "DOC-S003-B0010",
+      "evidence_id": "V02-EVID-47D159B2F6A8E77B8A927BF55D60AFC3DBDCA54B4024845CEA39478007B9C042",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S003",
+      "text_excerpt": "2025. The NDL will shape what data government collects and how it is managed."
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V02-EVID-48DCE63794EFFB03321CE98FCFCCA50918D7DA3CC70EBD3DA70042D75D4E663D",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "Researchers and academics in sectors such as AI will also"
+    },
+    {
+      "block_id": "DOC-S003-B0008",
+      "evidence_id": "V02-EVID-4B3EE29DFB02A5D4E9195B953E4B684D17185CD3D5636D324CCB0BD59010762E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S003",
+      "text_excerpt": "Britain will continue not just to adapt to technological change, but to shape it in the public"
+    },
+    {
+      "block_id": "DOC-S003-B0012",
+      "evidence_id": "V02-EVID-4E8E26880646F7B9504EC570224D4EF7468666C4FE2038158113914BCC161384",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S003",
+      "text_excerpt": "To drive AI adoption, we will also explore opportunities for the fund to support the work of the"
+    },
+    {
+      "block_id": "DOC-S003-B0005",
+      "evidence_id": "V02-EVID-6B29964551C647D616DD7E95B0B30A5D4C5C1B8D6AF387E0AF748162A0272BA5",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S003",
+      "text_excerpt": "We will take proven AI tools in public services – from diagnostics to planning to digital"
+    },
+    {
+      "block_id": "DOC-S003-B0015",
+      "evidence_id": "V02-EVID-6EB960A75059C9B43BAFB03010BD7F5542F236B731966A022041AA79B727F762",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S003",
+      "text_excerpt": "The government will launch the next phase of the Sovereign AI Unit in April 2026."
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V02-EVID-707E4D45026914CEF582C6EB0C1AE428225031C896A3F0E4D939A412703D9C3A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "Future of Work programme, to be delivered by a new cross-government unit."
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V02-EVID-7BED040E16025075F89D9F15CC54FFD47DDB73508C4B05060CAE03D4BB6C8514",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "The government will scale to support up to 900"
+    },
+    {
+      "block_id": "DOC-S003-B0007",
+      "evidence_id": "V02-EVID-7E02AF71906A887534CF5FC4F1FC5125966B923D2A6AC8B837D23F5EA38240DA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S003",
+      "text_excerpt": "We will only succeed in winning for Britain if people have the confidence this technology is"
+    },
+    {
+      "block_id": "DOC-S003-B0009",
+      "evidence_id": "V02-EVID-849066A58631E47252FFD1BF338222DFC8C058A22F543EFF16795DAF9DEE2CB4",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S003",
+      "text_excerpt": "Our national compute capacity will shape"
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V02-EVID-86F8CC9E9EFC5805C49971A7569D0765BFDAFD518F7E5BE94FC04B110B5F7CBE",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "panel of experts from business and trade unions, the unit will provide the best analysis and"
+    },
+    {
+      "block_id": "DOC-S003-B0015",
+      "evidence_id": "V02-EVID-8EF0CC537D7E65A52FADEEB9700D99B1741BFA462BAC37A1AE6AB5D21B5F3A28",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S003",
+      "text_excerpt": "delivered by the Department of Science, Innovation and Technology, and will invest in and"
+    },
+    {
+      "block_id": "DOC-S003-B0005",
+      "evidence_id": "V02-EVID-9A9887FB2E0028A1EA04CC6F3B45B20E08540777BA378D37726E98633EB83B5A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S003",
+      "text_excerpt": "These achievements will ensure we’re building the infrastructure for growth, embedding AI into"
+    },
+    {
+      "block_id": "DOC-S003-B0012",
+      "evidence_id": "V02-EVID-9F5CC384932130B7E5D41A733738308D96F8B04F86425F10FADCD6F2DE67B0F1",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S003",
+      "text_excerpt": "The second phase will include clinical AI"
+    },
+    {
+      "block_id": "DOC-S003-B0013",
+      "evidence_id": "V02-EVID-9FB955693D6D23807F107426D2B333E8894F253DFA345DB5E5592F108A7F7967",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S003",
+      "text_excerpt": "By March 2026, we will launch tenders"
+    },
+    {
+      "block_id": "DOC-S003-B0004",
+      "evidence_id": "V02-EVID-A87BC17D83D48427CF5EB0108DBFE11F822E59CEDA75564B401475A7AF9F49B7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "4",
+      "source_id": "S003",
+      "text_excerpt": "A year ago, we launched the AI Opportunities Action Plan to set a clear direction for how"
+    },
+    {
+      "block_id": "DOC-S003-B0005",
+      "evidence_id": "V02-EVID-B1195F3E5B584C317D3C78D7D06982313572A1EAE008730AA4890E36D603C92E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S003",
+      "text_excerpt": "We must make sure these technologies work for everyone, supporting growth while"
+    },
+    {
+      "block_id": "DOC-S003-B0012",
+      "evidence_id": "V02-EVID-B7AED266DE65D7B0A70F3E0E5D97765F73A54021C9C5241EBDD8DC8A41FE9549",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S003",
+      "text_excerpt": "The first round of the AI Assurance Innovation Fund will open for applications in Spring 2026."
+    },
+    {
+      "block_id": "DOC-S003-B0009",
+      "evidence_id": "V02-EVID-BFFA13E4E86561F2D56D9A2EB9F3D528E8802180CEEB50996A3D1748EA31C708",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S003",
+      "text_excerpt": "government confirmed it will also procure to increase the supercomputer capacity at the"
+    },
+    {
+      "block_id": "DOC-S003-B0005",
+      "evidence_id": "V02-EVID-DB20C507B65CFF8841F2615DB0EC5E97B53BD3A8AC211B825A0310BD83F118FE",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S003",
+      "text_excerpt": "And we will put the"
+    },
+    {
+      "block_id": "DOC-S003-B0008",
+      "evidence_id": "V02-EVID-EFDC7BDD0DD9E47184C2D389AF36AE59F29EB0E9667A2EAAFACD51BFF12C282F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S003",
+      "text_excerpt": "We will continue to deliver at pace, to ensure"
+    },
+    {
+      "block_id": "DOC-S003-B0013",
+      "evidence_id": "V02-EVID-F7F797E1C0E4BF8D2858F8F3DB7B4C000E323A30F3B7DDD66D0EF3D1AECDF427",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S003",
+      "text_excerpt": "Following strategic guidance issued by the government this year, regulators will publish a plan"
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S003"
+  ],
+  "warnings": [
+    "abstained_action_status_ineligible_subject",
+    "abstained_commitment_clause_like_subject",
+    "abstained_commitment_copular_or_passive",
+    "abstained_commitment_ineligible_subject",
+    "abstained_commitment_subject_too_long",
+    "abstained_ineligible_actor_noun_phrase",
+    "abstained_missing_subject:DOC-S003-B0005:618-704:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0009:877-970:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0009:971-1063:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0010:1240-1332:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0015:531-613:V02-RULE-BUD-001",
+    "abstained_subject_span_out_of_bounds",
+    "abstained_unsupported_subject_type:DOC-S003-B0013:43-128:V02-RULE-BUD-001"
+  ]
+}

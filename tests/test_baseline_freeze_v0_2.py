@@ -386,14 +386,40 @@ def test_d1_files_remain_byte_identical() -> None:
     assert observed == expected
 
 
-def test_no_repository_v0_2_observation_or_freeze_was_created_by_tests() -> None:
+def test_repository_v0_2_development_evidence_inventory_is_frozen() -> None:
     repository_output = ROOT / run_module.OUTPUT_RELATIVE_ROOT
-    assert not repository_output.exists()
-    tracked = json.dumps(
-        [
-            path.as_posix()
-            for path in ROOT.rglob("*.json")
-            if "deterministic-baseline-v0.2/development" in path.as_posix()
-        ]
-    )
-    assert tracked == "[]"
+    expected = {
+        "baseline_freeze_manifest.json",
+        "development_evaluation_report.json",
+        "finalization_record.json",
+        "observation_lock.json",
+        "owner_challenge_assessment_template.json",
+        "owner_challenge_review_packet.json",
+        "owner_completed_assessments.json",
+        "preparation_manifest.json",
+        "primary/S001.json",
+        "primary/S002.json",
+        "primary/S003.json",
+        "primary/S004.json",
+        "primary/S006.json",
+        "repeat/S001.json",
+        "repeat/S002.json",
+        "repeat/S003.json",
+        "repeat/S004.json",
+        "repeat/S006.json",
+        "structural_unmatched_inventory.json",
+    }
+    observed = {
+        path.relative_to(repository_output).as_posix()
+        for path in repository_output.rglob("*")
+        if path.is_file()
+    }
+    temporary_paths = {
+        path.relative_to(repository_output).as_posix()
+        for path in repository_output.rglob("*")
+        if path.name.startswith(".finalization-") or path.name.endswith(".tmp")
+    }
+
+    assert len(expected) == 19
+    assert observed == expected
+    assert temporary_paths == set()

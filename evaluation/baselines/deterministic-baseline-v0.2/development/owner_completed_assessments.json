@@ -1,0 +1,46 @@
+{
+  "assessment_method": "owner_review",
+  "assessment_status": "complete",
+  "assessments": [
+    {
+      "case_id": "PGC-V01-S001-001",
+      "expected_behavior": "preserve_missing",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "outcome": "failed",
+      "rationale": "Failed because the annual-publication requirement and its unstated effective start date were not represented. The only candidate linked to the challenge block is an unrelated commitment about AI touching the economy, so preserve-missing behavior was not demonstrated.",
+      "related_candidate_ids": [
+        "V02-CAND-DDD5C20A0E81D1D0DF775904ACCA30BC86D2882CA8B1369324573A3E63A94453"
+      ],
+      "related_warning_codes": []
+    },
+    {
+      "case_id": "PGC-V01-S004-001",
+      "expected_behavior": "do_not_extract",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "outcome": "passed",
+      "rationale": "Passed because no candidate references the contributed case-study block, so the implementation was not generalized into a government-wide finding or policy claim.",
+      "related_candidate_ids": [],
+      "related_warning_codes": []
+    },
+    {
+      "case_id": "PGC-V01-S006-001",
+      "expected_behavior": "route_to_review",
+      "experiment_id": "deterministic-baseline-v0.2",
+      "outcome": "passed",
+      "rationale": "Passed because all six ambiguous percentage candidates linked to the challenge block were marked as ambiguous, required human review, used confidence 0.5, and carried the ambiguous_metric_value_relationship warning instead of being accepted as unambiguous facts.",
+      "related_candidate_ids": [
+        "V02-CAND-001619AD8EF442DF3C56467E4ED3CA22A1DAB22CB89421CA1007691214C37F09",
+        "V02-CAND-3FEE20D5D5233FFFE629DC1AEEB0F08B6460350C4D1F53F7688F8856C35A868A",
+        "V02-CAND-54965C74D9D5AD727299011D4B1D14672119B9B00D4DFAFE71848997A95E7AED",
+        "V02-CAND-B841F76E7D6D54D1E13683FDD05F3EB5E33B9C997296C809E793D2C84E5D2B6C",
+        "V02-CAND-CB8348E5A21180F67812F028E5D7B831050AB648E1872AC596B75D30A13F29C8",
+        "V02-CAND-DCAA932C062674E7B705A222D15E52506D350F55919A965DDD92CBA9FC80A30C"
+      ],
+      "related_warning_codes": [
+        "ambiguous_metric_value_relationship"
+      ]
+    }
+  ],
+  "experiment_id": "deterministic-baseline-v0.2",
+  "schema_version": "0.1"
+}
