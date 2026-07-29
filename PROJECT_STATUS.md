@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.4D-3 local pre-observation audit passed; PR CI and merge pending
-- **Last updated:** 2026-07-28
-- **Latest milestone:** Completed the local pre-observation audit and froze the exact Git blob inventory for all 14 deterministic-baseline-v0.2 implementation and test files without running real development data
+- **Current stage:** Stage 3B.5A local deterministic-baseline-v0.3 development quality recovery complete; review pending
+- **Last updated:** 2026-07-29
+- **Latest milestone:** Additive v0.3 recovered 5 of 25 development gold facts with unchanged matching protocol `0.1`, the unchanged `match_strict_facts` implementation and an explicitly reconciled additive report calculator; candidates fell from 321 to 177 and all three automated development challenge diagnostics passed
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -11,67 +11,37 @@
 - Stage 1 corpus strategy, audit, synthetic fixtures, evaluation design and `stage1-corpus-v1.0` freeze.
 - Stage 2 Common Document Object, PDF/PPTX/EML parsers, dispatcher, CLIs, batch ingestion and frozen-corpus validation.
 - Stage 3A candidate extraction schema `0.1`, predicate vocabulary `0.1`, public annotation models and checksummed `public-gold-v0.1` freeze.
-- Stage 3B.1 `deterministic-baseline-v0.1` experiment and matching contract.
-- Guarded baseline gold API.
-- Experiment and manifest compatibility validation.
-- Byte-level hash checks.
-- Metadata-first JSONL routing.
-- Development-only semantic validation.
-- Deterministic non-semantic summary CLI.
-- Held-out denial tests.
-- Ten-family deterministic rule inventory.
-- Eight candidate-producing predicates.
-- Bounded statement segmentation.
-- Same-block subject attribution.
-- Typed percentage and money normalization.
-- Exact evidence references.
-- Fixed confidence and review contract.
-- Deterministic IDs and canonical JSON.
-- ParsedDocument-only deterministic CLI.
-- Neutral source-independent rule tests.
-- Protocol-v0.1 comparison normalization.
-- Strict one-to-one fact matcher.
-- Material qualifier projection.
-- Separate normalized-value alignment.
-- Evidence source/location metrics.
-- Source-attempt and reproducibility models.
-- Explicit owner challenge-assessment model.
-- Canonical development evaluation report.
-- Strict development-run provenance models.
-- Exact-path five-source input validation.
-- Two-pass canonical candidate-output preservation.
-- First-observation lock contract.
-- Deterministic structural unmatched inventory.
-- Pending owner-review packet and assessment template.
-- Final report and baseline-freeze validation workflow.
-- Immutable `deterministic-baseline-v0.1` first-observation evidence.
-- Read-only S004 source-independent failure diagnosis.
-- Frozen `deterministic-baseline-v0.2` experiment identity, error matrix, bounded change families and additive version boundary.
-- Automated v0.2 plan validation, including all nine immutable v0.1 artifact hashes.
-- Stage 3B.4D-1 source-independent deterministic-baseline-v0.2 extractor implementation.
-- Stage 3B.4D-2 evaluation, evidence-integrity, owner-review, observation-provenance and transactional-finalization workflow.
-- Stage 3B.4D-3 local pre-observation implementation audit and 14-file Git blob hash freeze.
+- Stage 3B.1 `deterministic-baseline-v0.1` experiment and strict matching protocol `0.1`.
+- Guarded development-only gold access with metadata-first routing and held-out denial.
+- Pure ParsedDocument deterministic extraction, canonical output, hash-derived IDs and exact evidence provenance.
+- Development-run, reproducibility, owner-review, observation-lock and transactional freeze contracts.
+- Immutable failed v0.1 observation and read-only S004 diagnosis.
+- Frozen additive v0.2 plan, extractor, evaluator, execution workflow and evidence-integrity controls.
+- PR #17 merged through commit `35949e538756c2e592533fda1564da29427ae03a`.
+- Frozen `deterministic-baseline-v0.2` development evidence: TP 0, FP 321, FN 25, F1 null and challenge pass rate 2/3.
+- Stage 3B.5A additive `deterministic-baseline-v0.3` local development comparison: TP 5, FP 172, FN 20, recall 0.20, F1 0.04950495049504951 and automated challenge diagnostics 3/3 passed; formal v0.3 owner assessment has not been performed.
 
 ## In progress
 
-- PR review, Python 3.10–3.12 CI, merge-commit integration and post-merge validation for `deterministic-baseline-v0.2`.
+- Review of the uncommitted Stage 3B.5A v0.3 implementation, neutral source-independent extractor unit tests, development-evidence regression tests and development-only reports.
 
-The authoritative v0.1 first observation is the versioned `observation_lock.json`. S004 has no candidate output, so no complete v0.1 development evaluation report or final baseline freeze exists. The v0.2 implementation and local audit are complete, but PR CI and merge remain pending. No real v0.2 output, score, observation lock, owner assessment or freeze manifest exists. Real v0.2 development execution is not authorized, and no held-out extraction result, LLM extractor or reconciliation layer exists.
+The authoritative v0.1 observation and complete v0.2 development baseline remain frozen and immutable. Stage 3B.5A uses additive v0.3 modules with unchanged candidate schema `0.1`, predicate vocabulary `0.1`, matching protocol `0.1` and `match_strict_facts`. It uses an additive deterministic v0.3 report calculator with explicit matcher reconciliation, not the complete frozen v0.2 evaluator. No held-out semantic annotation model was deserialized; no S005 or S007 ParsedDocument was opened or executed; held-out raw JSONL bytes and row metadata may be scanned by the guarded loader for integrity verification and split routing. No held-out extraction result, LLM extractor or LLM reconciliation layer exists.
 
 ## Next tasks
 
-1. Review the implementation PR.
-2. Require Python 3.10, 3.11 and 3.12 CI success.
-3. Merge using Create a merge commit.
-4. Complete post-merge validation on `main` before authorizing real prepare.
+1. Review the additive v0.3 rules, neutral extractor tests, development-evidence regression tests and development-only diagnosis.
+2. Review the exact v0.2 versus v0.3 comparison and sparse-gold claim boundary.
+3. Defer S002 subject/value representation and actor-resolution work to Stage 3B.5B.
+4. Commit and open a separately reviewed v0.3 pull request only after approval.
+5. Keep held-out execution blocked behind a later explicit guard and authorization.
 
 ## Blockers
 
 - v0.1 cannot be finalized.
-- Stage 3B.4D is not fully complete until the implementation PR is merged and post-merge validation passes.
-- Real v0.2 development execution remains blocked until that merge commit and post-merge approval exist.
-- Held-out access remains blocked pending a successful v0.2 development freeze and a separate reviewed guard.
+- Stage 3B.5A changes remain uncommitted pending review.
+- Sparse development gold cannot independently establish exhaustive candidate precision.
+- Held-out access remains blocked pending a separate reviewed guard and explicit authorization.
 
 ## AG News replacement status
 
-Not yet eligible. This repository replaces the portfolio slot previously associated with a standalone RAG project, but it should not be treated as an evaluated replacement until the document pipeline and its benchmark have been implemented and reported.
+Not yet eligible. Replacement remains conservative until extraction quality improves beyond the small development recovery, benchmark limitations are presented clearly and the project presentation is portfolio-ready.
