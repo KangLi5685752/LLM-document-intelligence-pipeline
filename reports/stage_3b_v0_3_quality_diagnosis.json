@@ -1,0 +1,1254 @@
+{
+  "access_mode": "development_only",
+  "aggregates": {
+    "candidate_counts_by_predicate": {
+      "action_status": 1,
+      "commitment": 193,
+      "decision": 3,
+      "metric": 84,
+      "requirement": 34,
+      "risk": 6
+    },
+    "candidate_counts_by_rule": {
+      "V02-RULE-ACTION-001": 1,
+      "V02-RULE-COM-EXPLICIT-001": 1,
+      "V02-RULE-COM-WEAK-002": 192,
+      "V02-RULE-DEC-001": 3,
+      "V02-RULE-METRIC-001": 84,
+      "V02-RULE-REQ-001": 34,
+      "V02-RULE-RISK-001": 6
+    },
+    "failure_counts_by_category": {
+      "evidence_segmentation": 5,
+      "missed_numbered_recommendation": 4,
+      "missing_predicate_coverage": 4,
+      "subject_text_resolution": 12
+    },
+    "gold_counts_by_predicate": {
+      "action_status": 1,
+      "budget": 2,
+      "commitment": 5,
+      "decision": 1,
+      "metric": 7,
+      "recommendation": 4,
+      "requirement": 4,
+      "risk": 1
+    },
+    "gold_counts_by_source": {
+      "S001": 5,
+      "S002": 5,
+      "S003": 4,
+      "S004": 6,
+      "S006": 5
+    },
+    "gold_facts_primarily_blocked_by_representation": 12,
+    "gold_facts_requiring_new_predicate_rule": 8,
+    "gold_facts_with_candidate_in_exact_evidence_block": 12,
+    "review_required_candidate_count": 77,
+    "top_overgeneration_patterns": {
+      "review_required_metric_candidates": 77,
+      "strict_unmatched_candidates": 321,
+      "weak_commitment_candidates": 192
+    }
+  },
+  "diagnosed_baseline": "deterministic-baseline-v0.2",
+  "experiment_id": "deterministic-baseline-v0.3",
+  "facts": [
+    {
+      "annotation_id": "PG-V01-S001-001",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S001-B0009",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": "Expand the capacity of the AI Research Resource (AIRR) by at least 20x by 2030 – starting within 6 months.",
+      "gold_qualifiers": {
+        "recommendation_id": 2
+      },
+      "gold_subject_text": "AI Opportunities Action Plan recommendation 2",
+      "gold_subject_type": "recommendation",
+      "predicate": "recommendation",
+      "primary_failure_category": "missed_numbered_recommendation",
+      "secondary_failure_categories": [],
+      "source_id": "S001",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 43
+    },
+    {
+      "annotation_id": "PG-V01-S001-002",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S001-B0010",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": "Rapidly identify at least five high-impact public data sets it will seek to make available to AI researchers and innovators.",
+      "gold_qualifiers": {
+        "recommendation_id": 7
+      },
+      "gold_subject_text": "UK Government",
+      "gold_subject_type": "organisation",
+      "predicate": "recommendation",
+      "primary_failure_category": "missed_numbered_recommendation",
+      "secondary_failure_categories": [],
+      "source_id": "S001",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 43
+    },
+    {
+      "annotation_id": "PG-V01-S001-003",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S001-B0012",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": 22.0,
+      "gold_qualifiers": {
+        "metric_name": "women_in_ai_and_data_science_workforce",
+        "population": "people working in AI and data science",
+        "unit": "percent"
+      },
+      "gold_subject_text": "Women in the AI and data science workforce",
+      "gold_subject_type": "metric",
+      "predicate": "metric",
+      "primary_failure_category": "missing_predicate_coverage",
+      "secondary_failure_categories": [],
+      "source_id": "S001",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 43
+    },
+    {
+      "annotation_id": "PG-V01-S001-004",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S001-B0015",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": "Require all regulators to publish annually how they have enabled innovation and growth driven by AI in their sector.",
+      "gold_qualifiers": {
+        "recommendation_id": 28
+      },
+      "gold_subject_text": "AI Opportunities Action Plan recommendation 28",
+      "gold_subject_type": "recommendation",
+      "predicate": "recommendation",
+      "primary_failure_category": "missed_numbered_recommendation",
+      "secondary_failure_categories": [],
+      "source_id": "S001",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 43
+    },
+    {
+      "annotation_id": "PG-V01-S001-005",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S001-B0020",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": "In the next three months, identify a series of quick wins to support adoption of the scan, pilot, scale approach and enable the public and private sectors to reinforce each other.",
+      "gold_qualifiers": {
+        "recommendation_id": 46
+      },
+      "gold_subject_text": "Digital Centre of Government",
+      "gold_subject_type": "organisation",
+      "predicate": "recommendation",
+      "primary_failure_category": "missed_numbered_recommendation",
+      "secondary_failure_categories": [],
+      "source_id": "S001",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 43
+    },
+    {
+      "annotation_id": "PG-V01-S002-001",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-19D7708836E648DD451DC275A7CDE15C72C1B1C5FF84F5A11775862E1A335E5D",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-6E1EBF34E2B7CBC183E0F3FB094576C0BA1C3E45E11849FF6C759BF7BA107970",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-844A087D210C9DA1F8FAF1F2398DEC47E605F14A4A1FFEED76B1768D9EE001E5",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S002-B0006",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": "Expand sovereign compute capacity by at least 20x by 2030.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "UK Government",
+      "gold_subject_type": "organisation",
+      "predicate": "commitment",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S002",
+      "v0_2_same_evidence_block_candidate_count": 7,
+      "v0_2_same_predicate_candidate_count": 90,
+      "v0_2_same_source_candidate_count": 93
+    },
+    {
+      "annotation_id": "PG-V01-S002-002",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-19D7708836E648DD451DC275A7CDE15C72C1B1C5FF84F5A11775862E1A335E5D",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-6E1EBF34E2B7CBC183E0F3FB094576C0BA1C3E45E11849FF6C759BF7BA107970",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-844A087D210C9DA1F8FAF1F2398DEC47E605F14A4A1FFEED76B1768D9EE001E5",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S002-B0006",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": "Start delivery of a new state-of-the-art supercomputing facility that will double the capacity of the national AI Research Resource.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "UK Government",
+      "gold_subject_type": "organisation",
+      "predicate": "commitment",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S002",
+      "v0_2_same_evidence_block_candidate_count": 7,
+      "v0_2_same_predicate_candidate_count": 90,
+      "v0_2_same_source_candidate_count": 93
+    },
+    {
+      "annotation_id": "PG-V01-S002-003",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-19D7708836E648DD451DC275A7CDE15C72C1B1C5FF84F5A11775862E1A335E5D",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-6E1EBF34E2B7CBC183E0F3FB094576C0BA1C3E45E11849FF6C759BF7BA107970",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-844A087D210C9DA1F8FAF1F2398DEC47E605F14A4A1FFEED76B1768D9EE001E5",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S002-B0006",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": "Publish the Compute Strategy in Spring 2025.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "UK Government",
+      "gold_subject_type": "organisation",
+      "predicate": "commitment",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S002",
+      "v0_2_same_evidence_block_candidate_count": 7,
+      "v0_2_same_predicate_candidate_count": 90,
+      "v0_2_same_source_candidate_count": 93
+    },
+    {
+      "annotation_id": "PG-V01-S002-004",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-19D7708836E648DD451DC275A7CDE15C72C1B1C5FF84F5A11775862E1A335E5D",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-6E1EBF34E2B7CBC183E0F3FB094576C0BA1C3E45E11849FF6C759BF7BA107970",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-844A087D210C9DA1F8FAF1F2398DEC47E605F14A4A1FFEED76B1768D9EE001E5",
+          "evidence_block_ids": [
+            "DOC-S002-B0006"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S002-B0006",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": "Create AI Growth Zones to accelerate AI infrastructure buildout.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "UK Government",
+      "gold_subject_type": "organisation",
+      "predicate": "commitment",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S002",
+      "v0_2_same_evidence_block_candidate_count": 7,
+      "v0_2_same_predicate_candidate_count": 90,
+      "v0_2_same_source_candidate_count": 93
+    },
+    {
+      "annotation_id": "PG-V01-S002-005",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-28054BC7B8A0CBC94A79C3D354B179B4D68CEEB79CEC2E4500F88E6D6C6F70EB",
+          "evidence_block_ids": [
+            "DOC-S002-B0008"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-5EDB3AC33B16A883131B873C6CA07C8A75CB82AE690CA82C6DC2ACA3DBBEF414",
+          "evidence_block_ids": [
+            "DOC-S002-B0008"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-699F719394A8F62A2276A3CACDAE8D5759F78E95CE0CC6E1BBE9E88327F39B6B",
+          "evidence_block_ids": [
+            "DOC-S002-B0008"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S002-B0008",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": "Intend to accept the adoption recommendations in full and start by prioritising the scaling up of successful pilots that adopt AI in the public interest.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "UK Government",
+      "gold_subject_type": "organisation",
+      "predicate": "commitment",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S002",
+      "v0_2_same_evidence_block_candidate_count": 9,
+      "v0_2_same_predicate_candidate_count": 90,
+      "v0_2_same_source_candidate_count": 93
+    },
+    {
+      "annotation_id": "PG-V01-S003-001",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-C3A40D6813FDEB0B5ECAB4B84D2E9E8553A966B0BFBCB1C589676FB8795BB98E",
+          "evidence_block_ids": [
+            "DOC-S003-B0011"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S003-B0008",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text",
+        "subject_type"
+      ],
+      "gold_normalized_value": "38 of 50 actions met",
+      "gold_qualifiers": {},
+      "gold_subject_text": "AI Opportunities Action Plan",
+      "gold_subject_type": "policy",
+      "predicate": "action_status",
+      "primary_failure_category": "evidence_segmentation",
+      "secondary_failure_categories": [],
+      "source_id": "S003",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 1,
+      "v0_2_same_source_candidate_count": 28
+    },
+    {
+      "annotation_id": "PG-V01-S003-002",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S003-B0010",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": {
+        "amount": "600000000",
+        "currency": "GBP"
+      },
+      "gold_qualifiers": {
+        "budget_status": "committed"
+      },
+      "gold_subject_text": "Health Data Research Service",
+      "gold_subject_type": "programme",
+      "predicate": "budget",
+      "primary_failure_category": "missing_predicate_coverage",
+      "secondary_failure_categories": [],
+      "source_id": "S003",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 28
+    },
+    {
+      "annotation_id": "PG-V01-S003-003",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S003-B0011",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": {
+        "amount": "187000000",
+        "currency": "GBP"
+      },
+      "gold_qualifiers": {
+        "budget_status": "committed"
+      },
+      "gold_subject_text": "TechFirst",
+      "gold_subject_type": "programme",
+      "predicate": "budget",
+      "primary_failure_category": "missing_predicate_coverage",
+      "secondary_failure_categories": [],
+      "source_id": "S003",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 28
+    },
+    {
+      "annotation_id": "PG-V01-S003-004",
+      "closest_v0_2_candidates": [],
+      "evidence_block": "DOC-S003-B0013",
+      "exact_mismatching_fields": [],
+      "gold_normalized_value": 50.0,
+      "gold_qualifiers": {
+        "metric_name": "straightforward_planning_application_processing_time_reduction_target",
+        "population": "most straightforward planning applications",
+        "unit": "percent"
+      },
+      "gold_subject_text": "Initial target for straightforward planning application processing time reduction",
+      "gold_subject_type": "metric",
+      "predicate": "metric",
+      "primary_failure_category": "missing_predicate_coverage",
+      "secondary_failure_categories": [],
+      "source_id": "S003",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 0,
+      "v0_2_same_source_candidate_count": 28
+    },
+    {
+      "annotation_id": "PG-V01-S004-001",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-00D7E056BC3C5242239257E538EC9B6C6F5A519328B65B79497B219B5ED8641A",
+          "evidence_block_ids": [
+            "DOC-S004-B0074"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-A95E90D851277FBC026505642C501A335B9D8CD806ACF768CDAC3CD6C40FE8DC",
+          "evidence_block_ids": [
+            "DOC-S004-B0011"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-4F5D96A0E6697FCB0704B1D8CFF299414F9F77B4BFDD9C49F68AF08F7C4052C3",
+          "evidence_block_ids": [
+            "DOC-S004-B0013"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S004-B0028",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text",
+        "subject_type"
+      ],
+      "gold_normalized_value": "Work collaboratively in a multidisciplinary team with diverse expertise.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "Government AI project team",
+      "gold_subject_type": "initiative",
+      "predicate": "requirement",
+      "primary_failure_category": "evidence_segmentation",
+      "secondary_failure_categories": [],
+      "source_id": "S004",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 19,
+      "v0_2_same_source_candidate_count": 52
+    },
+    {
+      "annotation_id": "PG-V01-S004-002",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-622E8DA1F50893B97C7C2A79202A6B4F3D7D491126E0FDFEFBAB1A6A131FFB6A",
+          "evidence_block_ids": [
+            "DOC-S004-B0047"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-00D7E056BC3C5242239257E538EC9B6C6F5A519328B65B79497B219B5ED8641A",
+          "evidence_block_ids": [
+            "DOC-S004-B0074"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-A95E90D851277FBC026505642C501A335B9D8CD806ACF768CDAC3CD6C40FE8DC",
+          "evidence_block_ids": [
+            "DOC-S004-B0011"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S004-B0047",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text",
+        "subject_type"
+      ],
+      "gold_normalized_value": "Build safe, secure and robust AI solutions.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "Government AI project team",
+      "gold_subject_type": "initiative",
+      "predicate": "requirement",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S004",
+      "v0_2_same_evidence_block_candidate_count": 1,
+      "v0_2_same_predicate_candidate_count": 19,
+      "v0_2_same_source_candidate_count": 52
+    },
+    {
+      "annotation_id": "PG-V01-S004-003",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-FA9089FBCB81B4329EAAEF24C5A2DD020A1787765630278EA51F53310B6BA4A2",
+          "evidence_block_ids": [
+            "DOC-S004-B0058"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-00D7E056BC3C5242239257E538EC9B6C6F5A519328B65B79497B219B5ED8641A",
+          "evidence_block_ids": [
+            "DOC-S004-B0074"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-A95E90D851277FBC026505642C501A335B9D8CD806ACF768CDAC3CD6C40FE8DC",
+          "evidence_block_ids": [
+            "DOC-S004-B0011"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S004-B0058",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text",
+        "subject_type"
+      ],
+      "gold_normalized_value": "Generate a net positive impact on stakeholders and society at large while minimising potential harms as much as possible.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "Government AI system",
+      "gold_subject_type": "initiative",
+      "predicate": "requirement",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S004",
+      "v0_2_same_evidence_block_candidate_count": 1,
+      "v0_2_same_predicate_candidate_count": 19,
+      "v0_2_same_source_candidate_count": 52
+    },
+    {
+      "annotation_id": "PG-V01-S004-004",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-00D7E056BC3C5242239257E538EC9B6C6F5A519328B65B79497B219B5ED8641A",
+          "evidence_block_ids": [
+            "DOC-S004-B0074"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-A95E90D851277FBC026505642C501A335B9D8CD806ACF768CDAC3CD6C40FE8DC",
+          "evidence_block_ids": [
+            "DOC-S004-B0011"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-4F5D96A0E6697FCB0704B1D8CFF299414F9F77B4BFDD9C49F68AF08F7C4052C3",
+          "evidence_block_ids": [
+            "DOC-S004-B0013"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S004-B0074",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text",
+        "subject_type"
+      ],
+      "gold_normalized_value": "Comply with the government's Secure by Design principles before deployment.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "Government AI service",
+      "gold_subject_type": "initiative",
+      "predicate": "requirement",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization"
+      ],
+      "source_id": "S004",
+      "v0_2_same_evidence_block_candidate_count": 1,
+      "v0_2_same_predicate_candidate_count": 19,
+      "v0_2_same_source_candidate_count": 52
+    },
+    {
+      "annotation_id": "PG-V01-S004-005",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-0B7B89FD846C123B5D0CD237A7AFDCD0B2792B3171FA318BF4EAC5A2E20E48D1",
+          "evidence_block_ids": [
+            "DOC-S004-B0063"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-42620B366BD6F79C0EE02B3C979A2EF4FCDEFD9D5685A6E54F0F94015C3D4474",
+          "evidence_block_ids": [
+            "DOC-S004-B0072"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-7984959E15BA59435ADC6E6FCCB257F448BAE6B7AE7C82B9AB50CB331ACD1606",
+          "evidence_block_ids": [
+            "DOC-S004-B0091"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S004-B0089",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text",
+        "subject_type"
+      ],
+      "gold_normalized_value": "Misidentification of the true user, leading to identity fraud.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "Identity-verification deepfake scenario",
+      "gold_subject_type": "risk",
+      "predicate": "risk",
+      "primary_failure_category": "evidence_segmentation",
+      "secondary_failure_categories": [],
+      "source_id": "S004",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 6,
+      "v0_2_same_source_candidate_count": 52
+    },
+    {
+      "annotation_id": "PG-V01-S004-006",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-3D34DA160DF9D8672545FA569830A68D35796DD114A35CE03ACBA879433AAF82",
+          "evidence_block_ids": [
+            "DOC-S004-B0022"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-D936BE96E8670AE989DCA4CB6B96D738B60DA1EDFDA82399E7A65D2F0135EAA1",
+          "evidence_block_ids": [
+            "DOC-S004-B0081"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "subject_type",
+            "normalized_value",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S004-B0110",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "raw_value_non_strict",
+        "subject_text",
+        "subject_type"
+      ],
+      "gold_normalized_value": "Use off-the-shelf software wherever possible and ensure that the system is modular in design, making it easy to upgrade.",
+      "gold_qualifiers": {},
+      "gold_subject_text": "Digital Sensitivity Review project",
+      "gold_subject_type": "initiative",
+      "predicate": "decision",
+      "primary_failure_category": "evidence_segmentation",
+      "secondary_failure_categories": [],
+      "source_id": "S004",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 2,
+      "v0_2_same_source_candidate_count": 52
+    },
+    {
+      "annotation_id": "PG-V01-S006-001",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-001619AD8EF442DF3C56467E4ED3CA22A1DAB22CB89421CA1007691214C37F09",
+          "evidence_block_ids": [
+            "DOC-S006-B0013"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-3FEE20D5D5233FFFE629DC1AEEB0F08B6460350C4D1F53F7688F8856C35A868A",
+          "evidence_block_ids": [
+            "DOC-S006-B0013"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-54965C74D9D5AD727299011D4B1D14672119B9B00D4DFAFE71848997A95E7AED",
+          "evidence_block_ids": [
+            "DOC-S006-B0013"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S006-B0013",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "qualifier_missing:period",
+        "qualifier_missing:population",
+        "qualifier_value:metric_name",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": 16.0,
+      "gold_qualifiers": {
+        "metric_name": "businesses_currently_using_ai",
+        "period": "survey reporting period",
+        "population": "surveyed UK private-sector businesses with at least five employees",
+        "unit": "percent"
+      },
+      "gold_subject_text": "Surveyed UK private-sector businesses with at least five employees",
+      "gold_subject_type": "metric",
+      "predicate": "metric",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization",
+        "qualifier_generation"
+      ],
+      "source_id": "S006",
+      "v0_2_same_evidence_block_candidate_count": 6,
+      "v0_2_same_predicate_candidate_count": 82,
+      "v0_2_same_source_candidate_count": 105
+    },
+    {
+      "annotation_id": "PG-V01-S006-002",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-001619AD8EF442DF3C56467E4ED3CA22A1DAB22CB89421CA1007691214C37F09",
+          "evidence_block_ids": [
+            "DOC-S006-B0013"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-01CE97DABDEAFFFEB310856588E6E8DCFB666AD9975A0908ED33E9C4660214FE",
+          "evidence_block_ids": [
+            "DOC-S006-B0024"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-051386E7ED0D5C93896A419DCEDCF2999AC6038D7DA8E0D09C5C3586D150D954",
+          "evidence_block_ids": [
+            "DOC-S006-B0007"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S006-B0022",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "qualifier_missing:period",
+        "qualifier_missing:population",
+        "qualifier_value:metric_name",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": 77.0,
+      "gold_qualifiers": {
+        "metric_name": "businesses_with_less_than_half_of_staff_using_ai",
+        "period": "survey reporting period",
+        "population": "businesses currently using AI",
+        "unit": "percent"
+      },
+      "gold_subject_text": "Businesses currently using AI",
+      "gold_subject_type": "metric",
+      "predicate": "metric",
+      "primary_failure_category": "evidence_segmentation",
+      "secondary_failure_categories": [],
+      "source_id": "S006",
+      "v0_2_same_evidence_block_candidate_count": 0,
+      "v0_2_same_predicate_candidate_count": 82,
+      "v0_2_same_source_candidate_count": 105
+    },
+    {
+      "annotation_id": "PG-V01-S006-003",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-0DBB43E98182D4B0F80E21E1D0B91BB1F6B2397E392912EFB8CD58BE5FD0AB01",
+          "evidence_block_ids": [
+            "DOC-S006-B0035"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-31C8B387E407EC492456AFEE353F33192D6640CFB138B7D108B5C9E6232A0F6A",
+          "evidence_block_ids": [
+            "DOC-S006-B0035"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-CF15D65A2D523AA3B85CA615A7DBF407E87315E59E261DA79EAFAEDBBAC639C9",
+          "evidence_block_ids": [
+            "DOC-S006-B0035"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S006-B0035",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "qualifier_missing:period",
+        "qualifier_missing:population",
+        "qualifier_value:metric_name",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": 80.0,
+      "gold_qualifiers": {
+        "metric_name": "ethical_concerns_significance",
+        "period": "survey reporting period",
+        "population": "businesses that identified ethical concerns as an AI-adoption barrier and rated its significance",
+        "unit": "percent"
+      },
+      "gold_subject_text": "Businesses citing ethical concerns as an AI-adoption barrier",
+      "gold_subject_type": "metric",
+      "predicate": "metric",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization",
+        "qualifier_generation"
+      ],
+      "source_id": "S006",
+      "v0_2_same_evidence_block_candidate_count": 5,
+      "v0_2_same_predicate_candidate_count": 82,
+      "v0_2_same_source_candidate_count": 105
+    },
+    {
+      "annotation_id": "PG-V01-S006-004",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-A3699A477FD51D0DB8704CD4C74AF8E08FD53C12D5988C4B067F22877E23C3BE",
+          "evidence_block_ids": [
+            "DOC-S006-B0042"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-90FA2957531C11D77CC50971C7356757C3F0FD13D9B35C839A9BE22F31456F85",
+          "evidence_block_ids": [
+            "DOC-S006-B0042"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-61CEED39FC55D4C1EA03AB4BDA13C62E18C365B4BAE7B16912CD05CCC588C8C5",
+          "evidence_block_ids": [
+            "DOC-S006-B0030"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S006-B0042",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "qualifier_missing:period",
+        "qualifier_missing:population",
+        "qualifier_value:metric_name",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": 75.0,
+      "gold_qualifiers": {
+        "metric_name": "businesses_reporting_improved_workforce_productivity_impact",
+        "period": "survey reporting period",
+        "population": "businesses currently using AI",
+        "unit": "percent"
+      },
+      "gold_subject_text": "Businesses currently using AI",
+      "gold_subject_type": "metric",
+      "predicate": "metric",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization",
+        "qualifier_generation"
+      ],
+      "source_id": "S006",
+      "v0_2_same_evidence_block_candidate_count": 2,
+      "v0_2_same_predicate_candidate_count": 82,
+      "v0_2_same_source_candidate_count": 105
+    },
+    {
+      "annotation_id": "PG-V01-S006-005",
+      "closest_v0_2_candidates": [
+        {
+          "candidate_id": "V02-CAND-75C3F019D05535261940E5572BAFC8576F851A50EAD921C4CA1419EBC0900C04",
+          "evidence_block_ids": [
+            "DOC-S006-B0043"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-82F05C05DD15ED294E8E1F72266F923DDF4E0E8B2BE8D1EDFFC261C3B1D18F4B",
+          "evidence_block_ids": [
+            "DOC-S006-B0043"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        },
+        {
+          "candidate_id": "V02-CAND-001619AD8EF442DF3C56467E4ED3CA22A1DAB22CB89421CA1007691214C37F09",
+          "evidence_block_ids": [
+            "DOC-S006-B0013"
+          ],
+          "mismatching_fields": [
+            "subject_text",
+            "normalized_value",
+            "qualifier_value:metric_name",
+            "qualifier_missing:population",
+            "qualifier_missing:period",
+            "raw_value_non_strict"
+          ]
+        }
+      ],
+      "evidence_block": "DOC-S006-B0043",
+      "exact_mismatching_fields": [
+        "normalized_value",
+        "qualifier_missing:period",
+        "qualifier_missing:population",
+        "qualifier_value:metric_name",
+        "raw_value_non_strict",
+        "subject_text"
+      ],
+      "gold_normalized_value": 77.0,
+      "gold_qualifiers": {
+        "metric_name": "businesses_reporting_no_revenue_change_since_ai_adoption",
+        "period": "survey reporting period",
+        "population": "businesses currently using AI",
+        "unit": "percent"
+      },
+      "gold_subject_text": "Businesses currently using AI",
+      "gold_subject_type": "metric",
+      "predicate": "metric",
+      "primary_failure_category": "subject_text_resolution",
+      "secondary_failure_categories": [
+        "typed_value_normalization",
+        "qualifier_generation"
+      ],
+      "source_id": "S006",
+      "v0_2_same_evidence_block_candidate_count": 2,
+      "v0_2_same_predicate_candidate_count": 82,
+      "v0_2_same_source_candidate_count": 105
+    }
+  ],
+  "held_out_access": "No held-out semantic annotation model was deserialized; no S005 or S007 ParsedDocument was opened or executed; held-out raw JSONL bytes and row metadata may be scanned by the guarded loader for integrity verification and split routing.",
+  "matching_protocol_version": "0.1",
+  "report_schema_version": "0.1",
+  "sparse_gold_precision_limitation": "Strict unmatched candidates are not automatically manually confirmed false facts because the selected development gold is not proven exhaustive."
+}
