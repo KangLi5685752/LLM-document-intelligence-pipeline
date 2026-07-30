@@ -665,3 +665,27 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Remove only leading affirmative `will`, preserve semantic modifiers such as `now`, `also`, `immediately`, `still` and `only`, and preserve possessives. Allow one narrow recommendation-wrapper collapse only around a complete eligible action. Parent recovery may extend a source span to a safe same-statement boundary but must contain the complete normalized parent raw value and never shorten it. Preserve negation, intent, planning, explicit commitment modality, objects, quantities, dates, conditions and subordinate clauses; reject incomplete or unsafe wrappers and ambiguous boundaries.
 - **Reason:** Lossless, bounded and non-generative operations improve canonical representation while retaining source evidence, ownership, emphasis and material meaning needed for strict audit.
 - **Trade-off:** Anaphora, semantic compression, broad paraphrase and incomplete or ambiguous parent spans remain unmatched even when they are plausibly equivalent.
+
+## DEC-084: Keep formal v0.4 challenge assessment as a separate human checkpoint
+
+- **Context:** The corrected v0.4 comparison records three automated structural challenge passes, but predefined structural conditions cannot determine whether the actual evidence satisfies each frozen qualitative behavior.
+- **Alternatives:** Treat 3/3 automated diagnostics as formal outcomes; let Codex infer outcomes and rationales; require the project owner to assess all three cases independently.
+- **Chosen option:** Treat automated diagnostics only as machine evidence. Codex may prepare the evidence packet and blank template, but only the project owner may populate a `passed` or `failed` outcome and an evidence-based rationale for each case.
+- **Reason:** Separating machine checks from qualitative judgment keeps authorship of the decisions explicit and prevents structural proxies from being presented as owner approval.
+- **Trade-off:** v0.4 cannot be finalized through an unattended workflow and remains pending until three human decisions are completed and independently validated.
+
+## DEC-085: Include every challenge-block candidate without tuning during review preparation
+
+- **Context:** Selecting only candidates that support a favorable result would bias the review, while changing extraction after the merged comparison would invalidate the evidence being assessed.
+- **Alternatives:** Include only machine-diagnostic candidate IDs; summarize favorable candidates manually; include every candidate whose resolved evidence references a frozen challenge block and preserve merged v0.4 semantics.
+- **Chosen option:** Build the packet from all evidence-linked candidates, including ambiguous, unrelated, `not_required` and potentially adverse candidates, with complete candidate fields, resolved evidence and warning codes. Make no extraction, matching, evaluation or gold change during preparation.
+- **Reason:** Complete deterministic inclusion makes omissions detectable and gives the owner the same bounded evidence regardless of the eventual decision.
+- **Trade-off:** The packet may contain candidates that are not decisive and requires deliberate owner inspection rather than a pre-filtered answer.
+
+## DEC-086: Preparation neither finalizes v0.4 nor authorizes held-out access
+
+- **Context:** A blank owner template and integrity manifest establish review provenance but contain no completed assessment and cannot serve as a baseline freeze or execution authorization.
+- **Alternatives:** Treat preparation as an implicit freeze; enable held-out execution after packet generation; retain separate assessment, finalization and held-out authorization gates.
+- **Chosen option:** Keep all three owner outcomes and rationales null in the tracked preparation package. Require a later validated owner assessment and separate finalization transaction before any v0.4 freeze; keep held-out access blocked. Any later extraction or evaluation semantic change must use a new baseline version rather than editing v0.4.
+- **Reason:** Distinct gates preserve the merged evidence, prevent premature performance claims and keep the first held-out execution separately reviewable.
+- **Trade-off:** Additional reviewed milestones are required before v0.4 can be frozen or evaluated beyond development data.

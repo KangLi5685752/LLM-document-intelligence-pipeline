@@ -1,0 +1,666 @@
+{
+  "automated_diagnostics_are_not_owner_outcomes": true,
+  "cases": [
+    {
+      "automated_diagnostic": {
+        "automated_diagnostic_status": "passed",
+        "expected_behavior": "preserve_missing",
+        "machine_observation": "The merged comparison recorded the predefined preserve_missing structural diagnostic as passed with 6 related candidate IDs.",
+        "not_an_owner_outcome": true,
+        "observed_machine_result": "passed",
+        "rule_used": "Check challenge-block candidates for a recommendation carrying its numbered identity without a date or effective-start qualifier."
+      },
+      "case_id": "PGC-V01-S001-001",
+      "case_type": "missing_expected_value",
+      "challenge_source_evidence": [
+        {
+          "block_id": "DOC-S001-B0015",
+          "block_sequence": 15,
+          "location_type": "page",
+          "location_value": "15",
+          "message_id": null,
+          "page_number": 15,
+          "slide_number": null,
+          "text_excerpt": "AI Opportunities Action Plan\n14\ndevelopment of the UK’s cyber security industry.14 Clear rules provide clarity to businesses so\nthey have the confidence to invest and bring new products and services to market.\nThe government should:\n23. Con"
+        }
+      ],
+      "evidence_block_ids": [
+        "DOC-S001-B0015"
+      ],
+      "evidence_linked_candidate_count": 6,
+      "evidence_linked_candidates": [
+        {
+          "candidate_id": "V04-CAND-0C7DF3535A906A1D60028F8B5A4312B1E4131526E7059304A78330C72F6F1D60",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "V04-EVID-63CE5BAD181C14917639FEDF72F0B1C92D2E3CDD7E755D66DBE7A6D47FC41146"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": "Commit to funding regulators to scale up their AI capabilities, some of which need urgent addressing.",
+          "predicate": "recommendation",
+          "qualifiers": {
+            "recommendation_id": 25
+          },
+          "raw_value": "Commit to funding regulators to scale up their AI capabilities, some of which need urgent addressing.",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "block_sequence": 15,
+              "evidence_id": "V04-EVID-63CE5BAD181C14917639FEDF72F0B1C92D2E3CDD7E755D66DBE7A6D47FC41146",
+              "evidence_status": "supported",
+              "location_type": "page",
+              "location_value": "15",
+              "message_id": null,
+              "page_number": 15,
+              "slide_number": null,
+              "source_id": "S001",
+              "text_excerpt": "25. Commit to funding regulators to scale up their AI capabilities, some of which\nneed urgent addressing."
+            }
+          ],
+          "review_status": "not_required",
+          "source_id": "S001",
+          "subject_text": "AI Opportunities Action Plan recommendation 25",
+          "subject_type": "recommendation",
+          "value_type": "string",
+          "warning_codes": [],
+          "warnings": []
+        },
+        {
+          "candidate_id": "V04-CAND-1E036D18C52232F3FF8ADCAE913C1EA5F14339D9E11496586804C9284FCD2FFF",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "V04-EVID-B3852B9D5411B8335B4B066E0C59577E22FC29B5296A3E31C0FF237861BD694C"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": "Require all regulators to publish annually how they have enabled innovation and growth driven by AI in their sector.",
+          "predicate": "recommendation",
+          "qualifiers": {
+            "recommendation_id": 28
+          },
+          "raw_value": "Require all regulators to publish annually how they have enabled innovation and growth driven by AI in their sector.",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "block_sequence": 15,
+              "evidence_id": "V04-EVID-B3852B9D5411B8335B4B066E0C59577E22FC29B5296A3E31C0FF237861BD694C",
+              "evidence_status": "supported",
+              "location_type": "page",
+              "location_value": "15",
+              "message_id": null,
+              "page_number": 15,
+              "slide_number": null,
+              "source_id": "S001",
+              "text_excerpt": "28. Require all regulators to publish annually how they have enabled innovation and\ngrowth driven by AI in their sector."
+            }
+          ],
+          "review_status": "not_required",
+          "source_id": "S001",
+          "subject_text": "AI Opportunities Action Plan recommendation 28",
+          "subject_type": "recommendation",
+          "value_type": "string",
+          "warning_codes": [],
+          "warnings": []
+        },
+        {
+          "candidate_id": "V04-CAND-8B6F7E651A09ABE4CACB554F8ED3E8C6E69B51DF72A95033606710F40D5DE74F",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "V04-EVID-FB4F7CD0250F378B9459945C26D092154B565FD4CBA82246E402A808B6E4B34D"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": "Continue to support and grow the AI Safety Institute (AISI) to maintain and expand its research on model evaluations, foundational safety and societal resilience research.",
+          "predicate": "recommendation",
+          "qualifiers": {
+            "recommendation_id": 23
+          },
+          "raw_value": "Continue to support and grow the AI Safety Institute (AISI) to maintain and expand its research on model evaluations, foundational safety and societal resilience research.",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "block_sequence": 15,
+              "evidence_id": "V04-EVID-FB4F7CD0250F378B9459945C26D092154B565FD4CBA82246E402A808B6E4B34D",
+              "evidence_status": "supported",
+              "location_type": "page",
+              "location_value": "15",
+              "message_id": null,
+              "page_number": 15,
+              "slide_number": null,
+              "source_id": "S001",
+              "text_excerpt": "23. Continue to support and grow the AI Safety Institute (AISI) to maintain and\nexpand its research on model evaluations, foundational safety and societal\nresilience research."
+            }
+          ],
+          "review_status": "not_required",
+          "source_id": "S001",
+          "subject_text": "AI Opportunities Action Plan recommendation 23",
+          "subject_type": "recommendation",
+          "value_type": "string",
+          "warning_codes": [],
+          "warnings": []
+        },
+        {
+          "candidate_id": "V04-CAND-A2E5A81EBFFFB9D006FF5A9D8A949C9A7A2A36551C82BAAB231D9D6B2F3839D3",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "V04-EVID-918A0701F19CFB66A7AF4C3F9A1620540292063B57976D6F06A3C92EAEBA65FB"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": "Reform the UK text and data mining regime so that it is at least as competitive as the EU.",
+          "predicate": "recommendation",
+          "qualifiers": {
+            "recommendation_id": 24
+          },
+          "raw_value": "Reform the UK text and data mining regime so that it is at least as competitive as the EU.",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "block_sequence": 15,
+              "evidence_id": "V04-EVID-918A0701F19CFB66A7AF4C3F9A1620540292063B57976D6F06A3C92EAEBA65FB",
+              "evidence_status": "supported",
+              "location_type": "page",
+              "location_value": "15",
+              "message_id": null,
+              "page_number": 15,
+              "slide_number": null,
+              "source_id": "S001",
+              "text_excerpt": "24. Reform the UK text and data mining regime so that it is at least as competitive as\nthe EU."
+            }
+          ],
+          "review_status": "not_required",
+          "source_id": "S001",
+          "subject_text": "AI Opportunities Action Plan recommendation 24",
+          "subject_type": "recommendation",
+          "value_type": "string",
+          "warning_codes": [],
+          "warnings": []
+        },
+        {
+          "candidate_id": "V04-CAND-B027B5351CC32D79242BEBBD68D02E8CC89476616D20A392D9B16F3791810EBD",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "V04-EVID-AB54239C84B630E5290C269F917382E7E761466B98126CB0BC92B4E8FD73169A"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": "Work with regulators to accelerate AI in priority sectors and implement pro- innovation initiatives like regulatory sandboxes.",
+          "predicate": "recommendation",
+          "qualifiers": {
+            "recommendation_id": 27
+          },
+          "raw_value": "Work with regulators to accelerate AI in priority sectors and implement pro- innovation initiatives like regulatory sandboxes.",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "block_sequence": 15,
+              "evidence_id": "V04-EVID-AB54239C84B630E5290C269F917382E7E761466B98126CB0BC92B4E8FD73169A",
+              "evidence_status": "supported",
+              "location_type": "page",
+              "location_value": "15",
+              "message_id": null,
+              "page_number": 15,
+              "slide_number": null,
+              "source_id": "S001",
+              "text_excerpt": "27. Work with regulators to accelerate AI in priority sectors and implement pro-\ninnovation initiatives like regulatory sandboxes."
+            }
+          ],
+          "review_status": "not_required",
+          "source_id": "S001",
+          "subject_text": "AI Opportunities Action Plan recommendation 27",
+          "subject_type": "recommendation",
+          "value_type": "string",
+          "warning_codes": [],
+          "warnings": []
+        },
+        {
+          "candidate_id": "V04-CAND-F1CF64CB2E26857F08C5ACCC86AD8520D07C9AA6BBE885D1DEA5BD2AF2166AE9",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "V04-EVID-7A1D8597C96EABFAEF18BECE7970A967824A84A95ECD2980AF626FAC544F8B4A"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": "Ensure all sponsor departments include a focus on enabling safe AI innovation in their strategic guidance to regulators.",
+          "predicate": "recommendation",
+          "qualifiers": {
+            "recommendation_id": 26
+          },
+          "raw_value": "Ensure all sponsor departments include a focus on enabling safe AI innovation in their strategic guidance to regulators.",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S001-B0015",
+              "block_sequence": 15,
+              "evidence_id": "V04-EVID-7A1D8597C96EABFAEF18BECE7970A967824A84A95ECD2980AF626FAC544F8B4A",
+              "evidence_status": "supported",
+              "location_type": "page",
+              "location_value": "15",
+              "message_id": null,
+              "page_number": 15,
+              "slide_number": null,
+              "source_id": "S001",
+              "text_excerpt": "26. Ensure all sponsor departments include a focus on enabling safe AI innovation in\ntheir strategic guidance to regulators."
+            }
+          ],
+          "review_status": "not_required",
+          "source_id": "S001",
+          "subject_text": "AI Opportunities Action Plan recommendation 26",
+          "subject_type": "recommendation",
+          "value_type": "string",
+          "warning_codes": [],
+          "warnings": []
+        }
+      ],
+      "evidence_location_values": [
+        "15"
+      ],
+      "expected_behavior": "preserve_missing",
+      "frozen_description": "The annual-publication requirement does not state an effective start date on the evidence page.",
+      "owner_outcome": null,
+      "owner_question": "Does the v0.4 output avoid inventing an effective start date and preserve the absence of that value, without presenting an unrelated candidate as satisfying the missing-value requirement?",
+      "owner_rationale": null,
+      "relevant_candidate_warning_codes": [],
+      "relevant_result_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "relevant_result_warnings": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S001"
+    },
+    {
+      "automated_diagnostic": {
+        "automated_diagnostic_status": "passed",
+        "expected_behavior": "do_not_extract",
+        "machine_observation": "The merged comparison recorded the predefined do_not_extract structural diagnostic as passed with 0 related candidate IDs.",
+        "not_an_owner_outcome": true,
+        "observed_machine_result": "passed",
+        "rule_used": "Check that no candidate references the frozen challenge block."
+      },
+      "case_id": "PGC-V01-S004-001",
+      "case_type": "unsupported",
+      "challenge_source_evidence": [
+        {
+          "block_id": "DOC-S004-B0110",
+          "block_sequence": 110,
+          "location_type": "page",
+          "location_value": "110",
+          "message_id": null,
+          "page_number": 110,
+          "slide_number": null,
+          "text_excerpt": "Artiﬁcial  Intelligence  Playbook  for  the  UK  Government\n\nDigital  Sensitivity  Review  at  FCDO  Services\nFCDO  Services  has  developed  an  AI-powered  Digital  Sensitivity  Review  toolset.\nThis\n\nenables\n\ndepartments\n\nto\n\nselect,\n\nre"
+        }
+      ],
+      "evidence_block_ids": [
+        "DOC-S004-B0110"
+      ],
+      "evidence_linked_candidate_count": 0,
+      "evidence_linked_candidates": [],
+      "evidence_location_values": [
+        "110"
+      ],
+      "expected_behavior": "do_not_extract",
+      "frozen_description": "A contributed case study describes an implementation; it must not be generalized into a government-wide finding or policy claim.",
+      "owner_outcome": null,
+      "owner_question": "Does the v0.4 output avoid extracting or generalizing the contributed case-study implementation into a government-wide finding, policy, requirement or commitment?",
+      "owner_rationale": null,
+      "relevant_candidate_warning_codes": [],
+      "relevant_result_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_ambiguous_heading_context",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_evidence_too_long",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_missing_subject",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "relevant_result_warnings": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_ambiguous_heading_context",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_evidence_too_long:DOC-S004-B0002:1011-1394:V02-RULE-METRIC-001",
+        "abstained_evidence_too_long:DOC-S004-B0060:1461-1801:V02-RULE-RISK-001",
+        "abstained_evidence_too_long:DOC-S004-B0072:1022-1294:V02-RULE-COM-WEAK-002",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_missing_subject:DOC-S004-B0064:348-657:V02-RULE-RISK-001",
+        "abstained_missing_subject:DOC-S004-B0064:92-186:V02-RULE-RISK-001",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S004"
+    },
+    {
+      "automated_diagnostic": {
+        "automated_diagnostic_status": "passed",
+        "expected_behavior": "route_to_review",
+        "machine_observation": "The merged comparison recorded the predefined route_to_review structural diagnostic as passed with 6 related candidate IDs.",
+        "not_an_owner_outcome": true,
+        "observed_machine_result": "passed",
+        "rule_used": "Check challenge-block metric candidates require review and carry the ambiguous_metric_value_relationship warning."
+      },
+      "case_id": "PGC-V01-S006-001",
+      "case_type": "ambiguous",
+      "challenge_source_evidence": [
+        {
+          "block_id": "DOC-S006-B0013",
+          "block_sequence": 13,
+          "location_type": "page",
+          "location_value": "13",
+          "message_id": null,
+          "page_number": 13,
+          "slide_number": null,
+          "text_excerpt": "AI Adoption Research\n13\nOFFICIAL\nOFFICIAL\nsuch as safety risks. In contrast, sectors like retail and logistics were already actively\nintegrating AI to improve customer insights and streamline functions such as inventory\nmanagement and suppl"
+        }
+      ],
+      "evidence_block_ids": [
+        "DOC-S006-B0013"
+      ],
+      "evidence_linked_candidate_count": 6,
+      "evidence_linked_candidates": [
+        {
+          "candidate_id": "V04-CAND-382C380406CA48D3386BB1251A9F33E4BB1B61A486CFF96DA058117B1BE02A0E",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "V04-EVID-42F1BF68E876AC4810425DBDFB734FFA2679009FA929F5BAA90D807A89D55FBF"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": 36.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "large_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "36%",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "block_sequence": 13,
+              "evidence_id": "V04-EVID-42F1BF68E876AC4810425DBDFB734FFA2679009FA929F5BAA90D807A89D55FBF",
+              "evidence_status": "ambiguous",
+              "location_type": "page",
+              "location_value": "13",
+              "message_id": null,
+              "page_number": 13,
+              "slide_number": null,
+              "source_id": "S006",
+              "text_excerpt": "Large (36%) and mid-sized (23%) businesses are more"
+            }
+          ],
+          "review_status": "required",
+          "source_id": "S006",
+          "subject_text": "Large (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ],
+          "warnings": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V04-CAND-5093FE7D66B8DB75F3782D2BA476F8AB33A4C2C371F91FA7AEE3F652A5783B5B",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "V04-EVID-43370A22F72ED8D76F7A9C37370B2B7E557D103AD9EEB71987CD607484C7A0EE"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": 88.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "across_sectors_those_in_construction_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "88%",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "block_sequence": 13,
+              "evidence_id": "V04-EVID-43370A22F72ED8D76F7A9C37370B2B7E557D103AD9EEB71987CD607484C7A0EE",
+              "evidence_status": "ambiguous",
+              "location_type": "page",
+              "location_value": "13",
+              "message_id": null,
+              "page_number": 13,
+              "slide_number": null,
+              "source_id": "S006",
+              "text_excerpt": "Across sectors, those in the construction (88%), retail / distribution (86%), transport and"
+            }
+          ],
+          "review_status": "required",
+          "source_id": "S006",
+          "subject_text": "Across sectors, those in the construction (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ],
+          "warnings": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V04-CAND-7DE2F6856650F2C594C10A6ED920D7C445DF4E1F7E9EB55136B7C7B85408C21D",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "V04-EVID-3292EA673369F7CE1BA177E974472C6FA49C3818B73A494F37918B12632F75DA"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": 90.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "storage_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "90%",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "block_sequence": 13,
+              "evidence_id": "V04-EVID-3292EA673369F7CE1BA177E974472C6FA49C3818B73A494F37918B12632F75DA",
+              "evidence_status": "ambiguous",
+              "location_type": "page",
+              "location_value": "13",
+              "message_id": null,
+              "page_number": 13,
+              "slide_number": null,
+              "source_id": "S006",
+              "text_excerpt": "storage (90%) and hotel / catering (88%) sectors are more likely to neither use nor have plans"
+            }
+          ],
+          "review_status": "required",
+          "source_id": "S006",
+          "subject_text": "storage (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ],
+          "warnings": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V04-CAND-9C582AE452864C871EB13FD2ED6669AB0632185DB2DED7D4312CF7DF84188B23",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "V04-EVID-43370A22F72ED8D76F7A9C37370B2B7E557D103AD9EEB71987CD607484C7A0EE"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": 86.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "across_sectors_those_in_construction_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "86%",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "block_sequence": 13,
+              "evidence_id": "V04-EVID-43370A22F72ED8D76F7A9C37370B2B7E557D103AD9EEB71987CD607484C7A0EE",
+              "evidence_status": "ambiguous",
+              "location_type": "page",
+              "location_value": "13",
+              "message_id": null,
+              "page_number": 13,
+              "slide_number": null,
+              "source_id": "S006",
+              "text_excerpt": "Across sectors, those in the construction (88%), retail / distribution (86%), transport and"
+            }
+          ],
+          "review_status": "required",
+          "source_id": "S006",
+          "subject_text": "Across sectors, those in the construction (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ],
+          "warnings": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V04-CAND-B92FF70B6DAA97E1CD40F57B087522E64EDE54FF15B4CF005A1F1067BC612798",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "V04-EVID-42F1BF68E876AC4810425DBDFB734FFA2679009FA929F5BAA90D807A89D55FBF"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": 23.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "large_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "23%",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "block_sequence": 13,
+              "evidence_id": "V04-EVID-42F1BF68E876AC4810425DBDFB734FFA2679009FA929F5BAA90D807A89D55FBF",
+              "evidence_status": "ambiguous",
+              "location_type": "page",
+              "location_value": "13",
+              "message_id": null,
+              "page_number": 13,
+              "slide_number": null,
+              "source_id": "S006",
+              "text_excerpt": "Large (36%) and mid-sized (23%) businesses are more"
+            }
+          ],
+          "review_status": "required",
+          "source_id": "S006",
+          "subject_text": "Large (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ],
+          "warnings": [
+            "ambiguous_metric_value_relationship"
+          ]
+        },
+        {
+          "candidate_id": "V04-CAND-FCA89031F33C23D4010B6490C8E535B2FE81280ED9AB4120925009726129FFE8",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "V04-EVID-3292EA673369F7CE1BA177E974472C6FA49C3818B73A494F37918B12632F75DA"
+          ],
+          "extraction_method": "deterministic",
+          "normalized_value": 88.0,
+          "predicate": "metric",
+          "qualifiers": {
+            "metric_name": "storage_percentage",
+            "unit": "percent"
+          },
+          "raw_value": "88%",
+          "resolved_evidence": [
+            {
+              "block_id": "DOC-S006-B0013",
+              "block_sequence": 13,
+              "evidence_id": "V04-EVID-3292EA673369F7CE1BA177E974472C6FA49C3818B73A494F37918B12632F75DA",
+              "evidence_status": "ambiguous",
+              "location_type": "page",
+              "location_value": "13",
+              "message_id": null,
+              "page_number": 13,
+              "slide_number": null,
+              "source_id": "S006",
+              "text_excerpt": "storage (90%) and hotel / catering (88%) sectors are more likely to neither use nor have plans"
+            }
+          ],
+          "review_status": "required",
+          "source_id": "S006",
+          "subject_text": "storage (",
+          "subject_type": "metric",
+          "value_type": "percentage",
+          "warning_codes": [
+            "ambiguous_metric_value_relationship"
+          ],
+          "warnings": [
+            "ambiguous_metric_value_relationship"
+          ]
+        }
+      ],
+      "evidence_location_values": [
+        "13"
+      ],
+      "expected_behavior": "route_to_review",
+      "frozen_description": "The page presents several percentages for different adoption states, sectors and business sizes; a candidate without its population and measure is ambiguous.",
+      "owner_outcome": null,
+      "owner_question": "Are all ambiguous percentage relationships represented conservatively and routed to human review rather than accepted as unambiguous facts?",
+      "owner_rationale": null,
+      "relevant_candidate_warning_codes": [
+        "ambiguous_metric_value_relationship"
+      ],
+      "relevant_result_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_ambiguous_metric_bounds_exceeded",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_incompatible_predicate_contract",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "relevant_result_warnings": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_ambiguous_metric_bounds_exceeded",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_incompatible_predicate_contract",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S006"
+    }
+  ],
+  "experiment_id": "deterministic-baseline-v0.4",
+  "review_status": "pending_project_owner_assessment",
+  "schema_version": "0.1"
+}
