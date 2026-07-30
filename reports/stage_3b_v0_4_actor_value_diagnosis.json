@@ -1,0 +1,115 @@
+{
+  "actor_contract": {
+    "ambiguity_policy": "Resolve only one directly evidenced authoring actor; contradictory or multiple eligible actors remain unresolved.",
+    "quotation_precedes_actor_classification": true,
+    "forbidden_identity_inputs": [
+      "source_id",
+      "filename",
+      "page number",
+      "document family",
+      "checksum",
+      "annotation content",
+      "source-specific aliases",
+      "document title subject",
+      "generic publisher or creator metadata",
+      "licence, website, Parliament or Command boilerplate",
+      "printing or publication location"
+    ],
+    "high_trust_inputs": [
+      "explicit eligible actor in the commitment statement",
+      "one complete eligible organisation in authors_or_senders",
+      "one complete eligible organisation in an explicitly authoring metadata role",
+      "bounded front matter with explicit issued, published, authored, prepared or presented by grammar"
+    ],
+    "precedence": [
+      "quotation or reported-speech blocked classification",
+      "explicit eligible statement actor in the commitment statement",
+      "one unambiguous direct role-aware authoring actor outside quotation or reported speech",
+      "preserved_parent_subject for a carried non-actor subject",
+      "unresolved"
+    ],
+    "preserved_parent_policy": "Retain an unchanged v0.3 non-actor subject without describing it as an explicit statement actor.",
+    "quotation_policy": "Classify quotation, quoted history and reported speech before explicit or document-level actor resolution; retain safe parent semantics under a blocked category without author substitution."
+  },
+  "correction_status": {
+    "first_attempt_review": "rejected_during_semantic_provenance_review",
+    "manual_provenance_review": "correction_applied_pending_read_only_review",
+    "removed_defects": [
+      "printing-location jurisdiction inference",
+      "indirect composite government actor synthesis",
+      "actor-bound possessive deletion",
+      "unconditional semantic-modifier deletion",
+      "parent recovery that could shorten the parent raw value",
+      "quotation classification after explicit-subject acceptance",
+      "blanket explicit_statement_actor labels for non-actor parent subjects"
+    ]
+  },
+  "development_only": true,
+  "experiment_id": "deterministic-baseline-v0.4",
+  "report_schema_version": "0.2",
+  "s002_document_identity": {
+    "authors_or_senders": [
+      "DSIT"
+    ],
+    "direct_role_aware_government_actor": null,
+    "document_title": "AI Opportunities Action Plan Government Response",
+    "resolution": "unresolved",
+    "resolution_reason": "DSIT is an unexpanded acronym and the ParsedDocument has no complete government organisation in a direct authoring or issuing role. Title, official-publication boilerplate and printing location are insufficient and ignored."
+  },
+  "s002_fact_diagnosis": [
+    {
+      "annotation_id": "PG-V01-S002-001",
+      "evidence_block": "DOC-S002-B0006",
+      "parent_candidate_id": "V02-CAND-C627F6043F8807CFE91E0CA37C2E14BE34C01BC9E8D718E0CA0B5A5D5AF90E83",
+      "parent_status": "filtered_by_v0.3",
+      "corrected_v0_4_outcome": "not_recovered",
+      "reason": "Institutional first person has no unique direct role-aware authoring actor. The wrapper rule also preserves the possessive our and the complete source action."
+    },
+    {
+      "annotation_id": "PG-V01-S002-002",
+      "evidence_block": "DOC-S002-B0006",
+      "parent_candidate_id": "V02-CAND-844A087D210C9DA1F8FAF1F2398DEC47E605F14A4A1FFEED76B1768D9EE001E5",
+      "parent_status": "filtered_by_v0.3",
+      "corrected_v0_4_outcome": "not_recovered",
+      "reason": "Generic government remains unresolved and recovery does not rewrite compounds, articles or semantic scope."
+    },
+    {
+      "annotation_id": "PG-V01-S002-003",
+      "evidence_block": "DOC-S002-B0006",
+      "parent_candidate_id": "V03-CAND-559DAE2692D41E977229CE8F0915EDC7D74B534AEB84D8E903ECBC96C26CB8F6",
+      "parent_status": "retained_by_v0.3",
+      "corrected_v0_4_outcome": "value_normalized_actor_unresolved",
+      "reason": "Affirmative will is removed, but generic government is preserved because no direct role-aware government author is present."
+    },
+    {
+      "annotation_id": "PG-V01-S002-004",
+      "evidence_block": "DOC-S002-B0006",
+      "parent_candidate_id": "V03-CAND-B43D0B37D496793C1F368CFA4632B4B95EF59D520DD79EC2D94C21773ADEE0D1",
+      "parent_status": "retained_by_v0.3",
+      "corrected_v0_4_outcome": "actor_unresolved_and_value_incomplete",
+      "reason": "No direct government author is available and semantic compression remains outside scope."
+    },
+    {
+      "annotation_id": "PG-V01-S002-005",
+      "evidence_block": "DOC-S002-B0008",
+      "parent_candidate_id": "V02-CAND-D4EB1A26C1486A9698E3208596A9D72FCD404F49BD5A4402CE23735F587DDAEE",
+      "parent_status": "filtered_by_v0.3",
+      "corrected_v0_4_outcome": "not_recovered",
+      "reason": "Institutional first person has no direct role-aware author and anaphora replacement remains prohibited."
+    }
+  ],
+  "source_independence_assurance": {
+    "counterfactual_behavioural_tests": "passed_during_current_correction",
+    "manual_semantic_provenance_review": "correction_applied_pending_read_only_review",
+    "static_forbidden_reference_audit": "limited_leakage_blacklist_not_standalone_proof"
+  },
+  "value_contract": {
+    "affirmative_will": "Remove only leading affirmative will and deterministically capitalise the remaining action.",
+    "action_span": "A recovered span must contain the complete normalized parent raw value and may only extend to a safe same-statement boundary.",
+    "generic_wrapper": "Collapse only the recognized structural recommendation wrapper around a complete eligible action while preserving possessives, quantities, dates, conditions, scope and subordinate clauses.",
+    "intent_and_planning": "Preserve intent, planning and explicit commitment modality.",
+    "negation": "Preserve negation.",
+    "semantic_modifiers": "Preserve now, also, immediately, still and only.",
+    "non_generative": "Do not paraphrase, resolve general anaphora, synthesize actors or rewrite source ownership."
+  }
+}
