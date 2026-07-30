@@ -1,0 +1,67 @@
+{
+  "actor_resolution_scope": [
+    "quotation and reported-speech checks precede every actor classification",
+    "explicit eligible statement actors",
+    "one unambiguous direct role-aware authoring actor for institutional first person",
+    "one directly identified government-compatible authoring actor for a generic government subject",
+    "quoted or reported subjects use an explicit blocked category without document-actor substitution",
+    "unchanged non-actor v0.3 subjects use preserved_parent_subject rather than explicit_statement_actor"
+  ],
+  "candidate_schema_version": "0.1",
+  "corpus_version": "stage1-corpus-v1.0",
+  "development_challenge_case_ids": [
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001"
+  ],
+  "development_only_tuning_status": "active_stage_3b_5b",
+  "development_source_ids": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S006"
+  ],
+  "experiment_id": "deterministic-baseline-v0.4",
+  "experiment_version": "0.4",
+  "held_out_extraction": "blocked_during_v0.4_development_tuning",
+  "llm_enabled": false,
+  "matching_protocol_version": "0.1",
+  "network_enabled": false,
+  "parent_baseline": "deterministic-baseline-v0.3",
+  "parent_merge_commit": "bc758f2a294023b1629565badbbbdb5b89dca4d6",
+  "parser_commit": "71148262f094d54ec7d95e45958bd1aaefc64793",
+  "predicate_vocabulary_version": "0.1",
+  "public_gold_cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+  "public_gold_facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+  "public_gold_version": "public-gold-v0.1",
+  "quality_objectives": {
+    "commitment_candidate_maximum": 30,
+    "desired_commitment_candidate_maximum": 28,
+    "desired_recall_minimum": 0.20,
+    "desired_s002_strict_match_minimum": 0,
+    "desired_strict_true_positive_minimum": 5,
+    "desired_total_candidate_maximum": 180,
+    "duplicate_candidate_count": 0,
+    "mandatory_recall_minimum": 0.20,
+    "mandatory_s002_strict_match_minimum": 0,
+    "mandatory_strict_true_positive_minimum": 5,
+    "total_candidate_maximum": 185
+  },
+  "reconciliation_enabled": false,
+  "source_specific_rules": "prohibited",
+  "source_independence_assurance": {
+    "counterfactual_behavioural_tests": "required",
+    "manual_semantic_provenance_review": "correction_applied_pending_read_only_review",
+    "static_forbidden_reference_audit": "limited_leakage_blacklist_not_standalone_proof"
+  },
+  "sparse_gold_limitation": "Official strict false positives are unmatched against a deliberately sparse 25-fact development set and are not independently confirmed semantic errors.",
+  "value_normalisation_scope": [
+    "affirmative future auxiliary removal",
+    "semantic modifier preservation",
+    "possessive preservation",
+    "preserved negation, intent and planning modality",
+    "safe generic recommendation-wrapper collapse",
+    "complete bounded same-statement action recovery that never shortens its parent"
+  ]
+}
