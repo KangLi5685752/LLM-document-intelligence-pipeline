@@ -1,0 +1,94 @@
+{
+  "automated_diagnostic_pass_count": 3,
+  "automated_diagnostic_status_by_case": {
+    "PGC-V01-S001-001": "passed",
+    "PGC-V01-S004-001": "passed",
+    "PGC-V01-S006-001": "passed"
+  },
+  "candidate_count_by_source": {
+    "S001": 32,
+    "S002": 18,
+    "S003": 13,
+    "S004": 30,
+    "S006": 85
+  },
+  "candidate_output_sha256": {
+    "S001": "2D7668A267586A1B370C23FB856A94D39D661137ED3217B3102569ED5CDA0AD1",
+    "S002": "3DD2760F0398E88E624F77168197CBB41B99635E32211075FBB907ECBA011C92",
+    "S003": "9CB4151E66B80C5FCF25E7102C3B5A9B233D767FF0524261BD04C9C0FFCC670B",
+    "S004": "30522C9B3D285CF099AAB4F3F512B6F843340BA5FECD1BB7E58AE0085731D243",
+    "S006": "7E6DF1EAD8F9BA4F95A5F53AC8D36B55D3B537BDE14FB083CEE6395717664C98"
+  },
+  "candidate_schema_version": "0.1",
+  "completed_owner_assessment_count": 0,
+  "corpus_version": "stage1-corpus-v1.0",
+  "development_challenge_case_ids": [
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001"
+  ],
+  "development_source_ids": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S006"
+  ],
+  "evidence_linked_candidate_count_by_case": {
+    "PGC-V01-S001-001": 6,
+    "PGC-V01-S004-001": 0,
+    "PGC-V01-S006-001": 6
+  },
+  "experiment_id": "deterministic-baseline-v0.4",
+  "formal_owner_assessment_status": "pending",
+  "generated_artifact_sha256": {
+    "docs/stage_3b_v0_4_owner_assessment_guide.md": "EFDCBBEC1B9B71028F572D881AD7B2294EDF373C5D099E7DBE91EF3BD1D97777",
+    "owner_challenge_assessment_template.json": "33991E3BA481FE4079EFAF9C6E938BB347F058F8AA2870ED92DD505FA790F859",
+    "owner_challenge_review_packet.json": "0C95A1961E8C73409D9737E0C6A6DCB5AEEFDC3933CD75D10D78B650DD57B56E"
+  },
+  "held_out_access_status": "blocked",
+  "ingestion_report_sha256": "2009320EF83A4F9D7041E53B0F4430CB6CC2EF77055C2ECC58697F786B0E8171",
+  "matching_protocol_version": "0.1",
+  "no_owner_judgment_inferred": true,
+  "no_post_merge_semantic_tuning": true,
+  "owner_outcome_count": 0,
+  "owner_outcomes_populated": false,
+  "parent_merge_commit": "4e6a7af3cc4ad86b157485d99cd6cdd472e4a4bc",
+  "parsed_document_sha256": {
+    "S001": "F688930865E34C738B848169BF7C53A8F5373D7555119B747D9731A2DFD74ECE",
+    "S002": "39A8E6C106480A72CF907E3981D38CC2D84E6E4197DE7F791945C20F32881D4C",
+    "S003": "8002DC78C9F6716156226FB48F6E673CB71F65ED914B474D8640BF4A095801E0",
+    "S004": "268F07D63B0202100E0131A30EAF122554435520F9228E752DC35E4AAB8A83D2",
+    "S006": "D1BDB1166506E7C9A1A4725D374585BFC69A07A5D744C95D09B1DECCD766BCE2"
+  },
+  "parser_commit": "71148262f094d54ec7d95e45958bd1aaefc64793",
+  "pending_owner_assessment_count": 3,
+  "predicate_vocabulary_version": "0.1",
+  "preparation_does_not_freeze_or_finalize_baseline": true,
+  "preparation_state": "uncommitted_working_tree_preparation",
+  "preparation_status": "pending_project_owner_assessment",
+  "protected_committed_file_sha256": {
+    "configs/experiments/deterministic_baseline_v0.4.json": "6D659638C732102D3CB4AB77DDE17229E1E36129245266F213D7FA29217A405A",
+    "data/annotations/public_gold_cases_v0.1.jsonl": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+    "data/annotations/public_gold_facts_v0.1.jsonl": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+    "data/annotations/public_gold_v0.1_manifest.json": "6A799E336AAC378B824A91926FBFEC0E4E48F06335CE13DE282DF5B1B0D99A81",
+    "docs/stage_3b_matching_protocol.md": "18FD851347B395C2D54B6B02B632E94D3C4B15CFBD16A31C04EE2923D0991530",
+    "reports/stage_3b_v0_4_actor_value_diagnosis.json": "FC8EEFC61B307538948438ABBFF96F1280F1A9006DFFF56ED81A49FD69DE9573",
+    "reports/stage_3b_v0_4_actor_value_diagnosis.md": "B1DBA2CA9A2B7B44A2023E8B40CB38607F5D0FA069101350697918F7C3F4ACED",
+    "reports/stage_3b_v0_4_development_comparison.json": "AD7DC43386A693553240587367ACCB84A3BF353FAFB8930575CDB484E2A8D8B8",
+    "reports/stage_3b_v0_4_development_comparison.md": "3D3ED40ADAE58DF192400BB5CD35E0357CF22D7EF7C947BFDD182E83661CDB06",
+    "scripts/run_stage_3b_v0_4_development_comparison.py": "005115E40918CCD759C8665ABD7B7723968988D0A600E7F38E291BE466FC5403",
+    "src/document_intelligence/extraction/deterministic_rules_v0_4.py": "D254D0CC2F010CE4A9610D539720D189A47ABE329BFB85BDDC371D8A7434122A",
+    "src/document_intelligence/extraction/deterministic_v0_4.py": "71179DCE83AC31A032934D468BBF3309879F32A8F18532F36F25EED4D02D3F81",
+    "src/document_intelligence/extraction/deterministic_v0_4_cli.py": "034B6C70E8AF40D1C549F7167778772FEABAF6A474861B9BAD03A20446BD1A69",
+    "src/document_intelligence/extraction/matching.py": "D3FA0EA195381586064E6716D0141B25BCE0A861CE9B8192FEAF26D818A554EC",
+    "tests/test_deterministic_extractor_v0_4.py": "2A1712F2BC6028C0BAC3239E67E331DCA6025B8F904635BD3AB167E6EA884D2B",
+    "tests/test_stage_3b_v0_4_development_report_regression.py": "7C42D297ACAB6E60CBB658C6616B516AC006B87A2E13EAD628E895C4BFB54E85"
+  },
+  "public_gold_cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+  "public_gold_facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+  "public_gold_version": "public-gold-v0.1",
+  "schema_version": "0.1",
+  "sparse_gold_limitation": "The 25-fact development gold set is deliberately sparse; unmatched candidates are not independently confirmed semantic errors.",
+  "total_candidate_count": 178
+}
