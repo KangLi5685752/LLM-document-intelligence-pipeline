@@ -697,3 +697,52 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Store the completed assessments separately from the unchanged blank template with assessment method `project_owner_review`, exact owner identity, exact rationales and unchanged case, experiment, candidate and warning metadata. Validate candidate and warning reconciliation and evidence consistency without replacing qualitative judgment. Require independent read-only review before commit; completion alone does not freeze or finalize v0.4, authorize held-out access or imply strong overall precision. Any later semantic extraction change requires a new baseline version.
 - **Reason:** Explicit provenance and immutable preparation evidence prevent machine diagnostics from masquerading as human approval, make exact owner wording auditable and preserve the sparse-gold claim boundary.
 - **Trade-off:** The separate completed record and validator add another controlled artifact set, and v0.4 still requires independent review and a later finalization transaction before any freeze or held-out authorization.
+
+## DEC-088: Store independent review evidence separately from owner judgment
+
+- **Context:** The completed assessment contains project-owner judgments, while the later independent audit is machine review evidence about provenance, validation and file boundaries.
+- **Chosen option:** Add a strict independent-review record without changing the completed assessment, its rationales, the blank template or the historical validation report whose review status was still pending when written.
+- **Reason:** Separate artifacts prevent an automated reviewer from being represented as the author of an owner outcome.
+- **Trade-off:** Finalization must validate one additional evidence identity.
+
+## DEC-089: Merge the finalization implementation before real execution
+
+- **Context:** A real finalization would reproduce development candidates and create the canonical report, error analysis, finalization record and freeze manifest.
+- **Chosen option:** Implement and test the transaction with fictional inputs, obtain independent read-only review and merge the implementation before any real five-source execution.
+- **Reason:** The first real finalization must run against an immutable reviewed implementation commit rather than uncommitted workflow code.
+- **Trade-off:** v0.4 remains unfrozen for an additional reviewed milestone.
+
+## DEC-090: Require exact v0.4 reproduction before finalization
+
+- **Context:** The authoritative comparison already fixes five ParsedDocument hashes, five candidate-output hashes, source and predicate counts, strict matches and exact metric fractions.
+- **Chosen option:** Run the unchanged v0.4 extractor twice, require byte-identical primary and repeat outputs, verify every fixed hash and count, and reconcile through unchanged `match_strict_facts` before writing anything.
+- **Reason:** Exact reproduction detects implementation, input, schema or matching drift instead of silently creating a different v0.4 observation.
+- **Trade-off:** Any legitimate semantic correction must use a later baseline version.
+
+## DEC-091: Separate process acceptance from quality observations
+
+- **Context:** The weak strict score is an observed development result, while reproducibility, complete provenance and transactional integrity determine whether the observation can be frozen honestly.
+- **Chosen option:** Use a fixed ordered inventory of 28 mandatory process gates and record nine quality observations separately as explicit non-binding evidence. No minimum-F1 gate applies.
+- **Reason:** A weak but process-valid baseline remains a useful, auditable comparison point without presenting the score as strong performance.
+- **Trade-off:** Readers must interpret process acceptance and model quality as different dimensions.
+
+## DEC-092: Preserve the sparse-gold claim boundary in final error analysis
+
+- **Context:** The selected development gold contains 25 facts and is not proven exhaustive, so strict unmatched candidates are not automatically confirmed semantic errors.
+- **Chosen option:** Retain official TP, FP and FN for strict comparison, but label non-match diagnostics as structural and prohibit exhaustive-precision or universal-error claims.
+- **Reason:** This reports the fixed matcher result without overstating what the annotations establish.
+- **Trade-off:** Candidate-level semantic precision remains unknown without a separate exhaustive review.
+
+## DEC-093: Keep baseline freeze separate from held-out authorization
+
+- **Context:** A development freeze preserves process evidence but does not establish held-out generalization or approve the first held-out execution.
+- **Chosen option:** Fix held-out authorization to false in finalization evidence and require a later separately reviewed guard and explicit authorization even after a valid v0.4 freeze.
+- **Reason:** Reproducibility evidence must not become an implicit data-access bypass.
+- **Trade-off:** Another controlled milestone is required before held-out evaluation.
+
+## DEC-094: Require v0.5 for any post-v0.4 semantic change
+
+- **Context:** Finalization must reproduce the already observed v0.4 candidates and metrics without changing extraction, matching, gold, owner judgment or candidate normalization.
+- **Chosen option:** Treat any later change to candidate semantics, rules, matching, annotations, review routing or metric meaning as `deterministic-baseline-v0.5` rather than updating v0.4.
+- **Reason:** The v0.4 identity remains tied to one exact semantic implementation and observation.
+- **Trade-off:** Even bounded semantic corrections require another versioned plan, implementation and evidence cycle.
