@@ -1,0 +1,90 @@
+{
+  "assessment_method": "project_owner_review",
+  "assessment_status": "completed",
+  "assessments": [
+    {
+      "case_id": "PGC-V01-S001-001",
+      "expected_behavior": "preserve_missing",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "outcome": "passed",
+      "owner_confirmation_required": false,
+      "rationale": "Passed because recommendation 28 is represented as a separate recommendation requiring annual publication, while no effective start date, start year or deadline is added to the candidate or its qualifiers. The other five candidates linked to the same page retain distinct recommendation IDs and are not treated as supplying or satisfying the missing effective-start value.",
+      "related_candidate_ids": [
+        "V04-CAND-0C7DF3535A906A1D60028F8B5A4312B1E4131526E7059304A78330C72F6F1D60",
+        "V04-CAND-1E036D18C52232F3FF8ADCAE913C1EA5F14339D9E11496586804C9284FCD2FFF",
+        "V04-CAND-8B6F7E651A09ABE4CACB554F8ED3E8C6E69B51DF72A95033606710F40D5DE74F",
+        "V04-CAND-A2E5A81EBFFFB9D006FF5A9D8A949C9A7A2A36551C82BAAB231D9D6B2F3839D3",
+        "V04-CAND-B027B5351CC32D79242BEBBD68D02E8CC89476616D20A392D9B16F3791810EBD",
+        "V04-CAND-F1CF64CB2E26857F08C5ACCC86AD8520D07C9AA6BBE885D1DEA5BD2AF2166AE9"
+      ],
+      "related_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S001"
+    },
+    {
+      "case_id": "PGC-V01-S004-001",
+      "expected_behavior": "do_not_extract",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "outcome": "passed",
+      "owner_confirmation_required": false,
+      "rationale": "Passed because no v0.4 candidate references the contributed FCDO Services case-study evidence block. The local implementation is therefore not extracted or generalized into a government-wide finding, policy, requirement or commitment.",
+      "related_candidate_ids": [],
+      "related_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_commitment_ambiguous_heading_context",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_evidence_too_long",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_missing_subject",
+        "abstained_requirement_ineligible_action",
+        "abstained_requirement_ineligible_subject",
+        "abstained_subject_span_out_of_bounds"
+      ],
+      "source_id": "S004"
+    },
+    {
+      "case_id": "PGC-V01-S006-001",
+      "expected_behavior": "route_to_review",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "outcome": "passed",
+      "owner_confirmation_required": false,
+      "rationale": "Passed because all six percentage candidates linked to the challenge block are handled conservatively. Each uses confidence 0.5, has ambiguous evidence status, requires human review and carries the ambiguous_metric_value_relationship warning. None is accepted as an unambiguous population-and-measure fact.",
+      "related_candidate_ids": [
+        "V04-CAND-382C380406CA48D3386BB1251A9F33E4BB1B61A486CFF96DA058117B1BE02A0E",
+        "V04-CAND-5093FE7D66B8DB75F3782D2BA476F8AB33A4C2C371F91FA7AEE3F652A5783B5B",
+        "V04-CAND-7DE2F6856650F2C594C10A6ED920D7C445DF4E1F7E9EB55136B7C7B85408C21D",
+        "V04-CAND-9C582AE452864C871EB13FD2ED6669AB0632185DB2DED7D4312CF7DF84188B23",
+        "V04-CAND-B92FF70B6DAA97E1CD40F57B087522E64EDE54FF15B4CF005A1F1067BC612798",
+        "V04-CAND-FCA89031F33C23D4010B6490C8E535B2FE81280ED9AB4120925009726129FFE8"
+      ],
+      "related_warning_codes": [
+        "abstained_action_status_ineligible_subject",
+        "abstained_ambiguous_metric_bounds_exceeded",
+        "abstained_commitment_clause_like_subject",
+        "abstained_commitment_copular_or_passive",
+        "abstained_commitment_ineligible_subject",
+        "abstained_commitment_subject_too_long",
+        "abstained_incompatible_predicate_contract",
+        "abstained_ineligible_actor_noun_phrase",
+        "abstained_subject_span_out_of_bounds",
+        "ambiguous_metric_value_relationship"
+      ],
+      "source_id": "S006"
+    }
+  ],
+  "experiment_id": "deterministic-baseline-v0.4",
+  "owner_identity": "Kang Li",
+  "schema_version": "0.1"
+}

@@ -1,0 +1,41 @@
+{
+  "assessment_method": "project_owner_review",
+  "automated_diagnostics_populated_outcomes": false,
+  "baseline_finalization_remains_pending": true,
+  "baseline_freeze_status": "not_created",
+  "blank_template_sha256": "33991E3BA481FE4079EFAF9C6E938BB347F058F8AA2870ED92DD505FA790F859",
+  "candidate_reference_validation": "passed",
+  "case_metadata_validation": "passed",
+  "challenge_case_ids": [
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001"
+  ],
+  "completed_assessment_sha256": "8B1BEE334AAE3A1F3AF6A5DF8B9FBC039FE9DB79BBA9CEC931BE019DA68D7419",
+  "evidence_consistency_validation": "passed",
+  "experiment_id": "deterministic-baseline-v0.4",
+  "failed_count": 0,
+  "finalization_status": "not_performed",
+  "held_out_isolation": "passed",
+  "independent_read_only_review_status": "pending",
+  "null_outcome_count": 0,
+  "null_rationale_count": 0,
+  "outcomes": [
+    "passed",
+    "passed",
+    "passed"
+  ],
+  "owner_decisions_origin": "supplied_by_project_owner",
+  "owner_identity": "Kang Li",
+  "owner_versus_machine_separation": "passed",
+  "parent_preparation_merge_commit": "36fe312ef07716a3597ea62a5d146a12b1c9312b",
+  "passed_count": 3,
+  "pending_count": 0,
+  "preparation_manifest_sha256": "A401ABCEB77D9B73557283D12770DCF33E04E6DED7EEFE361719DF70678AB844",
+  "rationale_validation": "passed",
+  "review_packet_sha256": "0C95A1961E8C73409D9737E0C6A6DCB5AEEFDC3933CD75D10D78B650DD57B56E",
+  "schema_version": "0.1",
+  "validation_scope": "structural_and_evidence_consistency_without_replacing_owner_judgment",
+  "validation_status": "passed",
+  "warning_reference_validation": "passed"
+}

@@ -689,3 +689,11 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Keep all three owner outcomes and rationales null in the tracked preparation package. Require a later validated owner assessment and separate finalization transaction before any v0.4 freeze; keep held-out access blocked. Any later extraction or evaluation semantic change must use a new baseline version rather than editing v0.4.
 - **Reason:** Distinct gates preserve the merged evidence, prevent premature performance claims and keep the first held-out execution separately reviewable.
 - **Trade-off:** Additional reviewed milestones are required before v0.4 can be frozen or evaluated beyond development data.
+
+## DEC-087: Record owner-supplied v0.4 judgments separately from machine evidence
+
+- **Context:** After PR #20 merged the immutable blank template and evidence-complete review packet, project owner Kang Li explicitly supplied three outcomes and exact rationales. Automated diagnostics can validate predefined structural conditions but cannot author or replace qualitative owner judgment.
+- **Alternatives:** Infer formal outcomes from the 3/3 automated diagnostics; edit the tracked blank template; store a separate completed record that preserves the supplied owner text and all fixed preparation references.
+- **Chosen option:** Store the completed assessments separately from the unchanged blank template with assessment method `project_owner_review`, exact owner identity, exact rationales and unchanged case, experiment, candidate and warning metadata. Validate candidate and warning reconciliation and evidence consistency without replacing qualitative judgment. Require independent read-only review before commit; completion alone does not freeze or finalize v0.4, authorize held-out access or imply strong overall precision. Any later semantic extraction change requires a new baseline version.
+- **Reason:** Explicit provenance and immutable preparation evidence prevent machine diagnostics from masquerading as human approval, make exact owner wording auditable and preserve the sparse-gold claim boundary.
+- **Trade-off:** The separate completed record and validator add another controlled artifact set, and v0.4 still requires independent review and a later finalization transaction before any freeze or held-out authorization.
