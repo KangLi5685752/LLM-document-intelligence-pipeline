@@ -1359,8 +1359,36 @@ def _restore_targets_from_capsule(
             )
             staged.write_bytes(value)
 
+        validated_targets: list[tuple[str, Path]] = []
         for relative_path in reversed(FINAL_OUTPUT_RELATIVE_PATHS):
             target = _fixed_transaction_target(output_root, relative_path)
+            _validate_safe_path_chain(
+                repository_root=repository_root,
+                path=target.parent,
+                label="rollback final output parent",
+                containment_root=output_root,
+            )
+            _validate_safe_path_chain(
+                repository_root=repository_root,
+                path=target,
+                label="rollback final output target",
+                containment_root=output_root,
+            )
+            if os.path.lexists(target):
+                status = os.lstat(target)
+                if (
+                    stat.S_ISLNK(status.st_mode)
+                    or _has_reparse_attribute(status)
+                    or not stat.S_ISREG(status.st_mode)
+                ):
+                    raise DevelopmentFinalizationV04Error(
+                        "rollback target is not a regular file"
+                    )
+            validated_targets.append((relative_path, target))
+
+        for relative_path, target in validated_targets:
+            if target != _fixed_transaction_target(output_root, relative_path):
+                raise DevelopmentFinalizationV04Error("rollback target identity differs")
             _validate_safe_path_chain(
                 repository_root=repository_root,
                 path=target.parent,

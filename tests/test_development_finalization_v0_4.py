@@ -471,6 +471,85 @@ def test_interrupted_install_restores_exact_topology(
         assert not (output / "repeat").exists()
 
 
+def test_rollback_preflight_failure_does_not_delete_prior_targets(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = _prepared_repository(tmp_path)
+    payloads = _synthetic_payloads(root, monkeypatch)
+    before, prior_outputs, owner_before, unrelated_before = (
+        _prepare_forced_replacement_state(root)
+    )
+    original_backup = workflow._backup_existing_file
+    original_path_validation = workflow._validate_safe_path_chain
+    original_install = workflow._install_staged_file
+    backup_failure_injected = False
+    rollback_failure_injected = False
+    rollback_target_checks = 0
+    install_calls = 0
+
+    def fail_backup_once(*args: object, **kwargs: object) -> None:
+        nonlocal backup_failure_injected
+        if not backup_failure_injected:
+            backup_failure_injected = True
+            raise OSError("fictional failure before force backup")
+        original_backup(*args, **kwargs)
+
+    def fail_late_rollback_preflight(
+        *,
+        repository_root: Path,
+        path: Path,
+        label: str,
+        containment_root: Path | None = None,
+    ) -> Path:
+        nonlocal rollback_failure_injected, rollback_target_checks
+        if label == "rollback final output target":
+            rollback_target_checks += 1
+            if rollback_target_checks == 6 and not rollback_failure_injected:
+                rollback_failure_injected = True
+                raise workflow.DevelopmentFinalizationV04Error(
+                    "fictional rollback preflight target failure"
+                )
+        return original_path_validation(
+            repository_root=repository_root,
+            path=path,
+            label=label,
+            containment_root=containment_root,
+        )
+
+    def record_install(*args: object, **kwargs: object) -> None:
+        nonlocal install_calls
+        install_calls += 1
+        original_install(*args, **kwargs)
+
+    monkeypatch.setattr(workflow, "_backup_existing_file", fail_backup_once)
+    monkeypatch.setattr(
+        workflow, "_validate_safe_path_chain", fail_late_rollback_preflight
+    )
+    monkeypatch.setattr(workflow, "_install_staged_file", record_install)
+    with pytest.raises(
+        workflow.DevelopmentFinalizationV04Error,
+        match="original=OSError; rollback=DevelopmentFinalizationV04Error",
+    ):
+        workflow._install_transaction(
+            repository_root=root,
+            output_root=workflow.OUTPUT_RELATIVE_ROOT,
+            payloads=payloads,
+            force=True,
+        )
+
+    assert backup_failure_injected
+    assert rollback_failure_injected
+    assert rollback_target_checks == 6
+    assert install_calls == 0
+    _assert_forced_replacement_restored(
+        root=root,
+        before=before,
+        prior_outputs=prior_outputs,
+        owner_before=owner_before,
+        unrelated_before=unrelated_before,
+    )
+
+
 def test_late_created_directory_cleanup_failure_restores_forced_replacement(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
