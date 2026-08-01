@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -13,6 +12,7 @@ import pytest
 from document_intelligence.extraction.development_finalization_v0_4 import (
     FINAL_OUTPUT_RELATIVE_PATHS,
     OUTPUT_RELATIVE_ROOT,
+    REQUIRED_ANCESTORS,
 )
 
 
@@ -34,6 +34,7 @@ def _prepared_repository(tmp_path: Path) -> Path:
     root = tmp_path / "repository"
     root.mkdir(parents=True)
     _git(root, "init", "--quiet")
+    _git(root, "config", "core.autocrlf", "false")
     alternate = root / ".git/objects/info/alternates"
     alternate.parent.mkdir(parents=True, exist_ok=True)
     alternate.write_bytes(
@@ -52,12 +53,25 @@ def _prepared_repository(tmp_path: Path) -> Path:
     _git(root, "symbolic-ref", "HEAD", "refs/heads/fixture")
     _git(root, "reset", "--hard", "HEAD")
     destination = root / REVIEW_RELATIVE
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(REPOSITORY_ROOT / REVIEW_RELATIVE, destination)
+    assert destination.is_file()
+    checkpoint = root / ".fictional_finalization_cli_checkpoint"
+    checkpoint.write_bytes(b"fictional finalization CLI checkpoint\n")
     _git(root, "config", "user.name", "Fictional CLI Reviewer")
-    _git(root, "config", "user.email", "fictional-cli.invalid")
-    _git(root, "add", REVIEW_RELATIVE.as_posix())
+    _git(root, "config", "user.email", "fictional-cli@example.invalid")
+    _git(root, "add", checkpoint.name)
     _git(root, "commit", "--quiet", "-m", "test: add fictional CLI checkpoint")
+    status = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    assert status == ""
+    _git(root, "merge-base", "--is-ancestor", head, "HEAD")
+    for ancestor in REQUIRED_ANCESTORS:
+        _git(root, "cat-file", "-e", f"{ancestor}^{{commit}}")
+        _git(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
     return root
 
 

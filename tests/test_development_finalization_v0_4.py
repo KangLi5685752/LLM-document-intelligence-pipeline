@@ -37,6 +37,7 @@ def _prepared_repository(tmp_path: Path) -> Path:
     root = tmp_path / "repository"
     root.mkdir(parents=True)
     _run_git(root, "init", "--quiet")
+    _run_git(root, "config", "core.autocrlf", "false")
     alternate = root / ".git/objects/info/alternates"
     alternate.parent.mkdir(parents=True, exist_ok=True)
     alternate.write_bytes(
@@ -55,12 +56,25 @@ def _prepared_repository(tmp_path: Path) -> Path:
     _run_git(root, "symbolic-ref", "HEAD", "refs/heads/fixture")
     _run_git(root, "reset", "--hard", "HEAD")
     destination = root / REVIEW_RELATIVE
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(REPOSITORY_ROOT / REVIEW_RELATIVE, destination)
+    assert destination.is_file()
+    checkpoint = root / ".fictional_finalization_checkpoint"
+    checkpoint.write_bytes(b"fictional finalization checkpoint\n")
     _run_git(root, "config", "user.name", "Fictional Test Reviewer")
-    _run_git(root, "config", "user.email", "fictional.invalid")
-    _run_git(root, "add", REVIEW_RELATIVE.as_posix())
+    _run_git(root, "config", "user.email", "fictional@example.invalid")
+    _run_git(root, "add", checkpoint.name)
     _run_git(root, "commit", "--quiet", "-m", "test: add fictional audit checkpoint")
+    status = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    assert status == ""
+    _run_git(root, "merge-base", "--is-ancestor", head, "HEAD")
+    for ancestor in workflow.REQUIRED_ANCESTORS:
+        _run_git(root, "cat-file", "-e", f"{ancestor}^{{commit}}")
+        _run_git(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
     return root
 
 
