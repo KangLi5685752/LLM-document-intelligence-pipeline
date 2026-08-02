@@ -65,13 +65,26 @@ def _prepared_repository(tmp_path: Path) -> Path:
     _run_git(root, "update-ref", "refs/heads/fixture", head)
     _run_git(root, "symbolic-ref", "HEAD", "refs/heads/fixture")
     _run_git(root, "reset", "--hard", "HEAD")
+    output = root / workflow.OUTPUT_RELATIVE_ROOT
+    for relative_path in workflow.FINAL_OUTPUT_RELATIVE_PATHS:
+        final_output = output / relative_path
+        assert final_output.is_file()
+        final_output.unlink()
+    for directory_name in ("primary", "repeat"):
+        directory = output / directory_name
+        assert not any(directory.iterdir())
+        directory.rmdir()
     destination = root / REVIEW_RELATIVE
     assert destination.is_file()
+    assert all((output / name).is_file() for name in workflow.OWNER_EVIDENCE_NAMES)
+    assert not any(
+        (output / name).exists() for name in workflow.FINAL_OUTPUT_RELATIVE_PATHS
+    )
     checkpoint = root / ".fictional_finalization_checkpoint"
     checkpoint.write_bytes(b"fictional finalization checkpoint\n")
     _run_git(root, "config", "user.name", "Fictional Test Reviewer")
     _run_git(root, "config", "user.email", "fictional@example.invalid")
-    _run_git(root, "add", checkpoint.name)
+    _run_git(root, "add", "-A")
     _run_git(root, "commit", "--quiet", "-m", "test: add fictional audit checkpoint")
     status = subprocess.run(
         ["git", "status", "--porcelain"],
@@ -81,6 +94,10 @@ def _prepared_repository(tmp_path: Path) -> Path:
         text=True,
     ).stdout
     assert status == ""
+    assert all((output / name).is_file() for name in workflow.OWNER_EVIDENCE_NAMES)
+    assert not any(
+        (output / name).exists() for name in workflow.FINAL_OUTPUT_RELATIVE_PATHS
+    )
     _run_git(root, "merge-base", "--is-ancestor", head, "HEAD")
     for ancestor in workflow.REQUIRED_ANCESTORS:
         _run_git(root, "cat-file", "-e", f"{ancestor}^{{commit}}")

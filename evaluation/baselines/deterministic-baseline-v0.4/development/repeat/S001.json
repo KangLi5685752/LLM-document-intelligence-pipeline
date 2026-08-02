@@ -1,0 +1,961 @@
+{
+  "batch_id": "V04-BATCH-1CB2780642E0BEC251A2CC578ED03E141854E09FB67725DF92BB45825E716E9A",
+  "candidate_facts": [
+    {
+      "candidate_id": "V04-CAND-02968EFDB564D357577244D9BCAEA6C1ED6AC419684A8FE9436EF49E9EAE0745",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-384875B1EC8BB974F77113898AC6848530EB492DDEB13FDB0F0356B70A845C40"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Establish an internal headhunting capability on a par with top AI firms to bring a small number of elite individuals to the UK.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 20
+      },
+      "raw_value": "Establish an internal headhunting capability on a par with top AI firms to bring a small number of elite individuals to the UK.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 20",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-0C7DF3535A906A1D60028F8B5A4312B1E4131526E7059304A78330C72F6F1D60",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-63CE5BAD181C14917639FEDF72F0B1C92D2E3CDD7E755D66DBE7A6D47FC41146"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Commit to funding regulators to scale up their AI capabilities, some of which need urgent addressing.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 25
+      },
+      "raw_value": "Commit to funding regulators to scale up their AI capabilities, some of which need urgent addressing.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 25",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-1E036D18C52232F3FF8ADCAE913C1EA5F14339D9E11496586804C9284FCD2FFF",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-B3852B9D5411B8335B4B066E0C59577E22FC29B5296A3E31C0FF237861BD694C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Require all regulators to publish annually how they have enabled innovation and growth driven by AI in their sector.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 28
+      },
+      "raw_value": "Require all regulators to publish annually how they have enabled innovation and growth driven by AI in their sector.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 28",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-20F9418A9B2AA82D4C1C986AFFE7FE3277B93CE2FD62B3B96F443B3BCF0CB010",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-ACFC926B345BAC2A7E2C3FFB4558897D25FF848C4DCAD423C748406C24B0CDE0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must protect UK citizens",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must protect UK citizens",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-23E7C16A2147CFE1B1444EF4F06070D3777C6D96DE532941FFEC1EC8842FC6B8",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-04FC060E5633C89374D8DF64A6DA8276E94C8E9714026A0B66DB5CE6E5418FB0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must develop a clear position on which areas of AI research are",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must develop a clear position on which areas of AI research are",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "To achieve this, the unit",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-3A0DCE3B392ACD91BE7FC0C35122511333545891D317691C73BA38BB3B48D5DE",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-7093942A4E776A10C84AB18998FCF896D538591F2D0F9B6E014770203CF2E889"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must go further than existing measures",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must go further than existing measures",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The UK",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-40F1B535823677800FAD139F732C9F9DA3A02C21C5432A25B4961C898DA945A8",
+      "confidence": 0.7,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-9524B0E3C75917392E812D7A5009F5D139D52AC02EE2526D29B20B66247015E2"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Require the government to both take a long-term view and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will require the government to both take a long-term view and",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The Action Plan I have set out",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-416B9789316A021A7F7E3BFB6FE691DC83CF0238EF0C6EC02E71BBF0A2F91411",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-E9C6CDAFE0A4929524EAEBE097B2AE6C9300007BAD8C55CC500CB28280CF11C0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Establish ‘AI Growth Zones’ (AIGZs) to facilitate the accelerated build out of AI data centres.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 4
+      },
+      "raw_value": "Establish ‘AI Growth Zones’ (AIGZs) to facilitate the accelerated build out of AI data centres.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 4",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-46D3F26D9B5602152E016BA34D4157DB039D4E9412A025D41B812ABAA547D5F6",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-E2A65A0DAC9B1A5D91BDD18015D298842E89A2477EB376F5F0BD3B00E8ED3DD8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must be tailored – there is no one-size-fits-all",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must be tailored – there is no one-size-fits-all",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Interventions",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-593D82DC0F02AD3AF4DD02B31F4FD53B8E5FE3ADCF19D9763843D7DFB18B3256",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-E57C29B50068D5104F8620133FD88C67405F5F25EA494DD496119B43529649A0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Expand the Turing AI Fellowship offer.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 22
+      },
+      "raw_value": "Expand the Turing AI Fellowship offer.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 22",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-5F2C8F205845C56B438E5767DDADF4ACF2AA15DD67A29674DE8FE3AB48D98689",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-5FB1C68735782049BF178A608EECDA169FDF5B8E1AB7699AEEA8112D14581FC4"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must therefore secure access to a sufficient supply of compute.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must therefore secure access to a sufficient supply of compute.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-63C2815372DCE2422A2B5849A12F03A4B8E2A6127474E9E3C35626733D7DCABD",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-520A688DFE675040C703D721062CC5F996A74A84600798C97152D5044E4BB9E5"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Ensure its lifelong skills programme is ready for AI.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 19
+      },
+      "raw_value": "Ensure its lifelong skills programme is ready for AI.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 19",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-68CE503A6BEC918C4D3DB5915CFAE0AB0609B154C4F2C434625A79DB7904DB43",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-2AC4E5C00A718A0BEE1517EC3D073E30D7027A0425320FA80286F44A00D73C84"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "In the next three months, the Digital Centre of Government should identify a series of quick wins to support the adoption of the scan, pilot scale approach and enable public and private sector to reinforce each other.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 46
+      },
+      "raw_value": "In the next three months, the Digital Centre of Government should identify a series of quick wins to support the adoption of the scan, pilot scale approach and enable public and private sector to reinforce each other.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 46",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-7ADBAA2E19B47BC2E1DD2B95D2603C2570DE5210D1BC8C5DDA7359AA2A9AC14B",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-B49D718FA5A994240E91D01766D06D3A313A7ACFA968A0FF738C2E6503C3C0F1"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Launch a flagship undergraduate and master’s AI scholarship programme on the scale of Rhodes, Marshall or Fulbright for students to study in the UK.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 18
+      },
+      "raw_value": "Launch a flagship undergraduate and master’s AI scholarship programme on the scale of Rhodes, Marshall or Fulbright for students to study in the UK.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 18",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-88C771907FAC604E9B5ADDC907DACAC87EDE41D7B8D918E7E16A7817D728C2C9",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-4DB505531BA750E4D8C907734D5BFF48BCB62BE07F49AD7E8740A5C70A51EC65"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "shall or Fulbright for students to study in the UK.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "shall or Fulbright for students to study in the UK.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "scale of Rhodes, Mar",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-8B6F7E651A09ABE4CACB554F8ED3E8C6E69B51DF72A95033606710F40D5DE74F",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-FB4F7CD0250F378B9459945C26D092154B565FD4CBA82246E402A808B6E4B34D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Continue to support and grow the AI Safety Institute (AISI) to maintain and expand its research on model evaluations, foundational safety and societal resilience research.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 23
+      },
+      "raw_value": "Continue to support and grow the AI Safety Institute (AISI) to maintain and expand its research on model evaluations, foundational safety and societal resilience research.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 23",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-8F67A5A972162458724C6F76CA136185694D3826E13D1F70774E2A6FD6279272",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-36EE0B7E52434496BD025BB9D737D543AFBF5934AB1F1BCD133846DC3F70BAEE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Create a new unit, UK Sovereign AI, with the power to partner with the private sector to deliver the clear mandate of maximising the UK’s stake in frontier AI.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 50
+      },
+      "raw_value": "Create a new unit, UK Sovereign AI, with the power to partner with the private sector to deliver the clear mandate of maximising the UK’s stake in frontier AI.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 50",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-964E0C8A8383308B0D5B29F007F9C2FD8081D4CBC3CB2FC609FBCE2FA1B03AA6",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-F3CF0387F629259FE1DDF768CE7CCBEB1DAE10827A939F8A6B0B35E935835158"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Establish a copyright-cleared British media asset training data set, which can be licensed internationally at scale.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 13
+      },
+      "raw_value": "Establish a copyright-cleared British media asset training data set, which can be licensed internationally at scale.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 13",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-9F7DDD71D9F331BE6D8E4BD90F4A4D20F652EB9A8EA58621A33496A4794F5824",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-9AC91B3EC3ED9039FA3856E24BB787F44059B0A98DA45BB03134A87F9FDEDF8B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must show exceptional",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must show exceptional",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "Potential scholars",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-A2E5A81EBFFFB9D006FF5A9D8A949C9A7A2A36551C82BAAB231D9D6B2F3839D3",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-918A0701F19CFB66A7AF4C3F9A1620540292063B57976D6F06A3C92EAEBA65FB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Reform the UK text and data mining regime so that it is at least as competitive as the EU.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 24
+      },
+      "raw_value": "Reform the UK text and data mining regime so that it is at least as competitive as the EU.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 24",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-A607EC71F4EB30E881CB3E93A78A51AF9080E9DF0C128870669B70CECF6D49AF",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-CD71947E3066FF69F62E275EC84E82E544CEFF33162D384DAA0C539C4FB2B9EF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Develop and publish guidelines and best practices for releasing open government data sets that can be used for AI, including on the development of effective data structures and data dissemination methods.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 9
+      },
+      "raw_value": "Develop and publish guidelines and best practices for releasing open government data sets that can be used for AI, including on the development of effective data structures and data dissemination methods.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 9",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-A8BDFE91C76242BF7737E5FB9635514BCB357FDBB4DA464A3ECD67F991792ADF",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-EB073296807A41DEC14CEAA5193C6CE5522BB70C3F9F67E471903716E9BA8203"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Appoint AI Sector Champions in key industries like the life sciences, financial services and the creative industries to work with industry and government and develop AI adoption plans.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 48
+      },
+      "raw_value": "Appoint AI Sector Champions in key industries like the life sciences, financial services and the creative industries to work with industry and government and develop AI adoption plans.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 48",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-A9E0197557ED0E8C41116E6AF6E9771B91779D1F4FF0112AB499EB0FF9D98715",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-519C2F3D0C44EE31E7E5B93415084A34B921CB09C0FABB0B72C34186A98C0FCF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must make efforts to come",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must make efforts to come",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "accurately understanding the skills gap, and so government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-B027B5351CC32D79242BEBBD68D02E8CC89476616D20A392D9B16F3791810EBD",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-AB54239C84B630E5290C269F917382E7E761466B98126CB0BC92B4E8FD73169A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Work with regulators to accelerate AI in priority sectors and implement pro- innovation initiatives like regulatory sandboxes.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 27
+      },
+      "raw_value": "Work with regulators to accelerate AI in priority sectors and implement pro- innovation initiatives like regulatory sandboxes.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 27",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-BAF59E19F647580A29F6853DEBBDBFBAA6EDCBFC39A5439979AFC93BCFD511E2",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-033744FAD2995D63BC100489F1B64F7319FE35858AC63CE8E1E5701F29FD47D3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Expand education pathways into AI.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 17
+      },
+      "raw_value": "Expand education pathways into AI.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 17",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-C07B8DA5EFD59A53FD3A624CE89DEF1659E14788DA225858FA4A27D81C7B00B7",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-C14BF1E386BC7166666DF2F34EB7884485544CEE4984D39A90E03313E6D8862D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Set out, within six months, a long-term plan for the UK’s AI infrastructure needs, backed by a 10-year investment commitment.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 1
+      },
+      "raw_value": "Set out, within six months, a long-term plan for the UK’s AI infrastructure needs, backed by a 10-year investment commitment.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 1",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-CB61EA2A92CD5C112187C1DF88F30BD554B53D7DCBB534261CE782FCFE86BFAE",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-F49E03EEEA1FFE0FDEBCA6C385190AD41E9E39DB073DCA3D46AE244EA5BD005C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must make.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must make.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "asymmetric bet – and one the UK can and",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-D9314C8E1E864A3EE53A123BC3977286C22E4FB97D31BBB47F9FADCAB0C3229E",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-A12CF57B3E11A60B015D717AE222E1B46187F139C7F145E4713356E5C68FF7B6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Support Higher Education Institutions to increase the numbers of AI graduates and teach industry-relevant skills.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 15
+      },
+      "raw_value": "Support Higher Education Institutions to increase the numbers of AI graduates and teach industry-relevant skills.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 15",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-F1CF64CB2E26857F08C5ACCC86AD8520D07C9AA6BBE885D1DEA5BD2AF2166AE9",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-7A1D8597C96EABFAEF18BECE7970A967824A84A95ECD2980AF626FAC544F8B4A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Ensure all sponsor departments include a focus on enabling safe AI innovation in their strategic guidance to regulators.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 26
+      },
+      "raw_value": "Ensure all sponsor departments include a focus on enabling safe AI innovation in their strategic guidance to regulators.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 26",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-FEC6AD90371ECC25ED35A9991A2FECAA4413508E7D4D10CFF260F4B0DC81391E",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-2F0898276FA2EAC5B215A0368921E04F773248E3F407F9D21B4E8CE311AA2137"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Increase the diversity of the talent pool.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 16
+      },
+      "raw_value": "Increase the diversity of the talent pool.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 16",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-FF034D84FD1FB7A227F04D3FC960925F26065422D65AAEEA9C030071C75F1DDC",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-991A218B11F8960AD198D9CD36492B81279876FB38D9FE1164333760B80F1D99"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must maximise its ambition and ensure the UK has national champions at the",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must maximise its ambition and ensure the UK has national champions at the",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-FFD5C3CC9E391A6C19220EB7CE40ADCFA63994B766C7917CA328801CC751961E",
+      "confidence": 0.9,
+      "document_family": "DOC-S001",
+      "evidence_ids": [
+        "V04-EVID-50B7B176968F9CDC762064B2045CF53DD2D5F1D4BC5C2C44B9E9140EE224592A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Expand the capacity of the AI Research Resource (AIRR) by at least 20x by 2030 – starting within 6 months.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 2
+      },
+      "raw_value": "Expand the capacity of the AI Research Resource (AIRR) by at least 20x by 2030 – starting within 6 months.",
+      "review_status": "not_required",
+      "source_id": "S001",
+      "subject_text": "AI Opportunities Action Plan recommendation 2",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V04-EVID-033744FAD2995D63BC100489F1B64F7319FE35858AC63CE8E1E5701F29FD47D3",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "17. Expand education pathways into AI."
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V04-EVID-04FC060E5633C89374D8DF64A6DA8276E94C8E9714026A0B66DB5CE6E5418FB0",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "To achieve this, the unit must develop a clear position on which areas of AI research are"
+    },
+    {
+      "block_id": "DOC-S001-B0020",
+      "evidence_id": "V04-EVID-2AC4E5C00A718A0BEE1517EC3D073E30D7027A0425320FA80286F44A00D73C84",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "20",
+      "source_id": "S001",
+      "text_excerpt": "46. In the next three months, the Digital Centre of Government should identify a\nseries of quick wins to support the adoption of the scan, pilot scale approach and\nenable public and private sector to reinforce each other."
+    },
+    {
+      "block_id": "DOC-S001-B0012",
+      "evidence_id": "V04-EVID-2F0898276FA2EAC5B215A0368921E04F773248E3F407F9D21B4E8CE311AA2137",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S001",
+      "text_excerpt": "16. Increase the diversity of the talent pool."
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V04-EVID-36EE0B7E52434496BD025BB9D737D543AFBF5934AB1F1BCD133846DC3F70BAEE",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "50. Create a new unit, UK Sovereign AI, with the power to partner with the private\nsector to deliver the clear mandate of maximising the UK’s stake in frontier AI."
+    },
+    {
+      "block_id": "DOC-S001-B0014",
+      "evidence_id": "V04-EVID-384875B1EC8BB974F77113898AC6848530EB492DDEB13FDB0F0356B70A845C40",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S001",
+      "text_excerpt": "20. Establish an internal headhunting capability on a par with top AI firms to bring a\nsmall number of elite individuals to the UK."
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V04-EVID-4DB505531BA750E4D8C907734D5BFF48BCB62BE07F49AD7E8740A5C70A51EC65",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "scale of Rhodes, Marshall or Fulbright for students to study in the UK."
+    },
+    {
+      "block_id": "DOC-S001-B0009",
+      "evidence_id": "V04-EVID-50B7B176968F9CDC762064B2045CF53DD2D5F1D4BC5C2C44B9E9140EE224592A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S001",
+      "text_excerpt": "2. Expand the capacity of the AI Research Resource (AIRR) by at least 20x by 2030 –\nstarting within 6 months."
+    },
+    {
+      "block_id": "DOC-S001-B0012",
+      "evidence_id": "V04-EVID-519C2F3D0C44EE31E7E5B93415084A34B921CB09C0FABB0B72C34186A98C0FCF",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S001",
+      "text_excerpt": "accurately understanding the skills gap, and so government must make efforts to come"
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V04-EVID-520A688DFE675040C703D721062CC5F996A74A84600798C97152D5044E4BB9E5",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "19. Ensure its lifelong skills programme is ready for AI."
+    },
+    {
+      "block_id": "DOC-S001-B0008",
+      "evidence_id": "V04-EVID-5FB1C68735782049BF178A608EECDA169FDF5B8E1AB7699AEEA8112D14581FC4",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S001",
+      "text_excerpt": "The government must therefore secure access to a sufficient supply of compute."
+    },
+    {
+      "block_id": "DOC-S001-B0015",
+      "evidence_id": "V04-EVID-63CE5BAD181C14917639FEDF72F0B1C92D2E3CDD7E755D66DBE7A6D47FC41146",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S001",
+      "text_excerpt": "25. Commit to funding regulators to scale up their AI capabilities, some of which\nneed urgent addressing."
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V04-EVID-7093942A4E776A10C84AB18998FCF896D538591F2D0F9B6E014770203CF2E889",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "The UK must go further than existing measures"
+    },
+    {
+      "block_id": "DOC-S001-B0015",
+      "evidence_id": "V04-EVID-7A1D8597C96EABFAEF18BECE7970A967824A84A95ECD2980AF626FAC544F8B4A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S001",
+      "text_excerpt": "26. Ensure all sponsor departments include a focus on enabling safe AI innovation in\ntheir strategic guidance to regulators."
+    },
+    {
+      "block_id": "DOC-S001-B0015",
+      "evidence_id": "V04-EVID-918A0701F19CFB66A7AF4C3F9A1620540292063B57976D6F06A3C92EAEBA65FB",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S001",
+      "text_excerpt": "24. Reform the UK text and data mining regime so that it is at least as competitive as\nthe EU."
+    },
+    {
+      "block_id": "DOC-S001-B0025",
+      "evidence_id": "V04-EVID-9524B0E3C75917392E812D7A5009F5D139D52AC02EE2526D29B20B66247015E2",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "25",
+      "source_id": "S001",
+      "text_excerpt": "The Action Plan I have set out will require the government to both take a long-term view and"
+    },
+    {
+      "block_id": "DOC-S001-B0023",
+      "evidence_id": "V04-EVID-991A218B11F8960AD198D9CD36492B81279876FB38D9FE1164333760B80F1D99",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S001",
+      "text_excerpt": "The government must maximise its ambition and ensure the UK has national champions at the"
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V04-EVID-9AC91B3EC3ED9039FA3856E24BB787F44059B0A98DA45BB03134A87F9FDEDF8B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "Potential scholars must show exceptional"
+    },
+    {
+      "block_id": "DOC-S001-B0012",
+      "evidence_id": "V04-EVID-A12CF57B3E11A60B015D717AE222E1B46187F139C7F145E4713356E5C68FF7B6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S001",
+      "text_excerpt": "15. Support Higher Education Institutions to increase the numbers of AI graduates\nand teach industry-relevant skills."
+    },
+    {
+      "block_id": "DOC-S001-B0015",
+      "evidence_id": "V04-EVID-AB54239C84B630E5290C269F917382E7E761466B98126CB0BC92B4E8FD73169A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S001",
+      "text_excerpt": "27. Work with regulators to accelerate AI in priority sectors and implement pro-\ninnovation initiatives like regulatory sandboxes."
+    },
+    {
+      "block_id": "DOC-S001-B0014",
+      "evidence_id": "V04-EVID-ACFC926B345BAC2A7E2C3FFB4558897D25FF848C4DCAD423C748406C24B0CDE0",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S001",
+      "text_excerpt": "Government must protect UK citizens"
+    },
+    {
+      "block_id": "DOC-S001-B0015",
+      "evidence_id": "V04-EVID-B3852B9D5411B8335B4B066E0C59577E22FC29B5296A3E31C0FF237861BD694C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S001",
+      "text_excerpt": "28. Require all regulators to publish annually how they have enabled innovation and\ngrowth driven by AI in their sector."
+    },
+    {
+      "block_id": "DOC-S001-B0013",
+      "evidence_id": "V04-EVID-B49D718FA5A994240E91D01766D06D3A313A7ACFA968A0FF738C2E6503C3C0F1",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S001",
+      "text_excerpt": "18. Launch a flagship undergraduate and master’s AI scholarship programme on the\nscale of Rhodes, Marshall or Fulbright for students to study in the UK."
+    },
+    {
+      "block_id": "DOC-S001-B0009",
+      "evidence_id": "V04-EVID-C14BF1E386BC7166666DF2F34EB7884485544CEE4984D39A90E03313E6D8862D",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S001",
+      "text_excerpt": "1. Set out, within six months, a long-term plan for the UK’s AI infrastructure needs,\nbacked by a 10-year investment commitment."
+    },
+    {
+      "block_id": "DOC-S001-B0011",
+      "evidence_id": "V04-EVID-CD71947E3066FF69F62E275EC84E82E544CEFF33162D384DAA0C539C4FB2B9EF",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S001",
+      "text_excerpt": "9. Develop and publish guidelines and best practices for releasing open government\ndata sets that can be used for AI, including on the development of effective data\nstructures and data dissemination methods."
+    },
+    {
+      "block_id": "DOC-S001-B0012",
+      "evidence_id": "V04-EVID-E2A65A0DAC9B1A5D91BDD18015D298842E89A2477EB376F5F0BD3B00E8ED3DD8",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "12",
+      "source_id": "S001",
+      "text_excerpt": "Interventions must be tailored – there is no one-size-fits-all"
+    },
+    {
+      "block_id": "DOC-S001-B0014",
+      "evidence_id": "V04-EVID-E57C29B50068D5104F8620133FD88C67405F5F25EA494DD496119B43529649A0",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S001",
+      "text_excerpt": "22. Expand the Turing AI Fellowship offer."
+    },
+    {
+      "block_id": "DOC-S001-B0009",
+      "evidence_id": "V04-EVID-E9C6CDAFE0A4929524EAEBE097B2AE6C9300007BAD8C55CC500CB28280CF11C0",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S001",
+      "text_excerpt": "4. Establish ‘AI Growth Zones’ (AIGZs) to facilitate the accelerated build out of AI\ndata centres."
+    },
+    {
+      "block_id": "DOC-S001-B0021",
+      "evidence_id": "V04-EVID-EB073296807A41DEC14CEAA5193C6CE5522BB70C3F9F67E471903716E9BA8203",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "21",
+      "source_id": "S001",
+      "text_excerpt": "48. Appoint AI Sector Champions in key industries like the life sciences, financial\nservices and the creative industries to work with industry and government and\ndevelop AI adoption plans."
+    },
+    {
+      "block_id": "DOC-S001-B0011",
+      "evidence_id": "V04-EVID-F3CF0387F629259FE1DDF768CE7CCBEB1DAE10827A939F8A6B0B35E935835158",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S001",
+      "text_excerpt": "13. Establish a copyright-cleared British media asset training data set, which can be\nlicensed internationally at scale."
+    },
+    {
+      "block_id": "DOC-S001-B0007",
+      "evidence_id": "V04-EVID-F49E03EEEA1FFE0FDEBCA6C385190AD41E9E39DB073DCA3D46AE244EA5BD005C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S001",
+      "text_excerpt": "asymmetric bet – and one the UK can and must make."
+    },
+    {
+      "block_id": "DOC-S001-B0015",
+      "evidence_id": "V04-EVID-FB4F7CD0250F378B9459945C26D092154B565FD4CBA82246E402A808B6E4B34D",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S001",
+      "text_excerpt": "23. Continue to support and grow the AI Safety Institute (AISI) to maintain and\nexpand its research on model evaluations, foundational safety and societal\nresilience research."
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S001"
+  ],
+  "warnings": [
+    "abstained_action_status_ineligible_subject",
+    "abstained_commitment_clause_like_subject",
+    "abstained_commitment_copular_or_passive",
+    "abstained_commitment_ineligible_subject",
+    "abstained_commitment_subject_too_long",
+    "abstained_ineligible_actor_noun_phrase",
+    "abstained_requirement_ineligible_action",
+    "abstained_requirement_ineligible_subject",
+    "abstained_subject_span_out_of_bounds"
+  ]
+}

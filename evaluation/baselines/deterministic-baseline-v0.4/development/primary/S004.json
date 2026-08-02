@@ -1,0 +1,877 @@
+{
+  "batch_id": "V04-BATCH-AA6ADF41ED1C6D0DEA7951AA2CB8DB8AFB3DEC5CE762B02706EC04F95707DF6C",
+  "candidate_facts": [
+    {
+      "candidate_id": "V04-CAND-03AAFC302021F77E3950DF5F0D1CFE05EEEFA5CEAE5154845A04D99D95E5F46E",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-4E5E36E367076C18DB505E60AE08F29D83311A7C7BA9AD59D6794400119A06D3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "risk of using AI and the risk",
+      "predicate": "risk",
+      "qualifiers": {},
+      "raw_value": "risk  of  using  AI  and  the  risk",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "AI  security  risks  are  divided  into  2  main  categories:  the",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-0BD90A10D29D593FEA2BDB7FC74C9ADB6CB329094550237DA225531DB4F7C61E",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-57452D91FD297EC7F0F565E9B36C7BC8B9C4375406724AE351F0825EF2C096AC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must be trustworthy,",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must be trustworthy,",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "To meet quality assurance requirements, AI systems",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-0EC82EB5291EE5A9A8B4F8B0EDB0CC8CB567C103C991220798CECB2E1BE1A142",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-8A2E6F0147BF70F22A93A72C7F48B91DB45A8B1120345351135790296F56B881"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must ensure that any updates to the AI system have a quantitative testing and",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must ensure that any updates to the AI system have a quantitative testing and",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-2029D456F1C48A5DB240E7E502C462A49AFEEE7A9218A4E9C1CEBD17DBC7B1AD",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-DB379FD533AC792BFCD4471E324B497F174965001046966879329C7CF3BD520E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must be present to review the action.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must be present to review the action.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "In these situations a human",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-2398951347C438E0402CD630465F2B716A3E26DF1382E2A7399316AFC9120CC0",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-BBB9A0CE2AAB080B0A6719AF13F1692BEAB15AF0407F8D01BC0E0BF11EF8E7C7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must ensure you comply with procurement legislation.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must ensure you comply with procurement legislation.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "However you decide to source your requirement, you",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-23F88291E0957DCBAFF3583C45090EB5BF36BB9C5352D183D8C2A4D2FA4305AC",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-50CBE3EBC140251A9B8E017DB5C7869EFA29D18B4B7F25B99384A1E84700C67C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must build safe, secure and robust AI solutions.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must build safe, secure and robust AI solutions.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Safety, security and robustness You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-358D19459919039960528D4AB1AB1B5EE1A48D7A3C09B4979F4E057C300046D6",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-FE6015D5A44CC4119D6D9F4FA7F4B3DB89D565670606832451ACD32F36ABDC81"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "required to use the Algorithmic Transparency Recording Standard (ATRS).",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "required to use the Algorithmic Transparency Recording Standard (ATRS).",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "or an arm’s length body within scope, you’re",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-3C83F298D656134227E76C1D04548D79187E38DD5BB84F3DA08A51A069D3E3D8",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-357410103AC584150F3CF40F550B98702BB99E3840CE17D478FA7DBBC68281AA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must make sure that AI systems do not process personal data in ways that are",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must make sure that AI systems do not process personal data in ways that are",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-479A8EBE33859496A1097CB27C2596BCF03C910F81C33CE032663E9958C638E2",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-0A23C387AC25B02052A7AE029AD17F07984E7A35CA2658B78365182C87ACCA23"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must think about this at the start of your project to: ● encourage mindful creation and usage of AI systems ● ensure that people who design and deploy AI systems can be held",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must think about this at the start of your project to: ● encourage mindful creation and usage of AI systems ● ensure that people who design and deploy AI systems can be held",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-4E45DD5D702C5195B3BA203562F313172ED14B3A0C71531775F4713941DBBE99",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-29FA146313BDFB48501BD755D50B491A7C9D9558FF753FA8F9514E12561B79FC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must act in a way that is compatible with human rights.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must act in a way that is compatible with human rights.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Human rights Public authorities",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-4F62ACCA2FE8D6EA95F77AECC05D678E373CB32DB33184562D0939F5B2FF3E20",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-CA4B8875623F7CD179EC3197CCA15442792C8B6E07F2330D5CCF5C459CB14626"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must comply with the government’s Secure by Design principles before it can be deployed.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must comply with the government’s Secure by Design principles before it can be deployed.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "service",
+      "subject_type": "initiative",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-586D3845734DBB2862C10BEAD7D0E9F3FCA8C36AC43408FB9FFBBB284FEB0EA8",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-EA4BFCAD2001EAA723E5F021E8848720A0388B2CED2E122D40A4BA0D4D6CD28E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 1000,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "users_count",
+        "population": "users",
+        "unit": "users"
+      },
+      "raw_value": "1,000  users",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "users",
+      "subject_type": "metric",
+      "value_type": "number",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-5B37E07DE234B3325133D27581C9D78BC991EACA33527CA3CAA8C575D0FB947B",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-61306F42209367934DBB836E91BD7AB48D0FEEA2D80EB9543709063BD94DC3C7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "selected data to train models so they",
+      "predicate": "decision",
+      "qualifiers": {},
+      "raw_value": "selected  data  to  train  models  so  they",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Generative  AI  uses  large  quantities  of  carefully",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-5D91EC4C845C47EE6FA5BF0B3DE46808CAD1038CC92E14335C88A84EFB44D9EB",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-A45EB71D0AD460B0601F6D8C24BBB6C4C2239A5437EB75CD2AFC1F345C98B912"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "risk of a direct prompt injection attack.",
+      "predicate": "risk",
+      "qualifiers": {},
+      "raw_value": "risk  of  a  direct  prompt  injection  attack.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Recommendation  Deploying  an  LLM  chatbot  to  a  public-facing  government  website  comes  with  a  signiﬁcant",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-5E6D728ACF4BDD125EE295B97B5EBA8841D3D305BECEC07DFB684D6491A294B4",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-1111B6FAB800E0AB8C0A1C5EB20C9BBDF43751B0CEDA28ACA1AE7085A790016B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must ensure that AI systems generate a net positive impact on stakeholders",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must ensure that AI systems generate a net positive impact on stakeholders",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-5FFDAA0CAD4CF637A1B14429F2C6481D44F4F6536451FCB0C1234579DC4B9E60",
+      "confidence": 0.7,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-EE55CF68210AA069198CBFFAA8FBFE6076FD769464580B8B4002621F40BCC248"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Work with and report to their",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with and report to their",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "● set out how the programme or project team",
+      "subject_type": "programme",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-6A6E57AC910BEC8B50028C9D4CDC13CBE8C9260A390906AECF3B9852F6F95536",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-EA784434186DFEEE99C17D05442C3552A7ACCB61144FB079B607ACAAD63B86FD"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must reconsider if AI should be used at all.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must reconsider if AI should be used at all.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "too high, you",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-72BF57D05E0A87156841F871F7F46DEC15D774FD09906C279B59733A8030BB8C",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-E1312FCCB3A0DED7F5AF421C2B6AB3086BC5202AD4BF39519A2A58D8050B8DE7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must also put the necessary oversight and human-in-the-loop processes in",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must also put the necessary oversight and human-in-the-loop processes in",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-74F6C02157EF72E943E5E918C54E2E5D3FB66A54889BB19C57155DF9899DEA2A",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-7751DD942DCBB55836D24B1CBD667CA2F45B40859D78F5D00CE6878973B79C6A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must understand that considerations of privacy extend beyond the requirements set out in the UK General Data Protection Regulation (UK GDPR), the Data Protection Act 2018 and other relevant legislation.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must understand that considerations of privacy extend beyond the requirements set out in the UK General Data Protection Regulation (UK GDPR), the Data Protection Act 2018 and other relevant legislation.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-80956A787613F2581ADBCCEF8BE6003F6BB56647C8290ABBEE7927200265CD1C",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-784DD0ED1BF1580D62806F082C798B1AD6B85ED0FFBC177379DA9995146242C5"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must document information about any algorithmic tools you use in decision-making processes and",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must document information about any algorithmic tools you use in decision-making processes and",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "This means you",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-A6F92BC3CF426D413A02D79698AEB84E472E8EB3E04BA9F6287DB12FB2765360",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-D89449C170A5CDEE76FCA27AE2DB9258E52A3B61AE82DBA5624BD4D74999FF6D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 69.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "users_thought_tool_percentage",
+        "population": "users  thought  the  tool",
+        "unit": "percent"
+      },
+      "raw_value": "69%",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "users  thought  the  tool",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-AEAD33159E00EABB9DF3B7C4FF5015BDF6A54BB653C244F55602FC9E1CE16EFC",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-DFA8EE01DF6698E2898FCDC9A3002D04CF662E1B853BB606E16D12484EDE983F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "risk of user harm if a user is tricked into using an unsafe prompt that then results in harmful content being returned and acted on.",
+      "predicate": "risk",
+      "qualifiers": {},
+      "raw_value": "risk  of  user  harm  if  a  user  is  tricked  into  using  an  unsafe  prompt  that  then  results  in  harmful  content  being  returned  and  acted  on.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Impact  Actual",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-B9D5D0D50C1FF9C201189DA1E8B42AC074EFF0A246CD06E40F739DB876AA7F42",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-7BC8A8D9762452CFF6CF0D3E9A2821F871E3E1C6A1B744EC705AE33C100609CD"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "risk of individuals being identiﬁed through the processing of their personal data by using appropriate de-identiﬁcation techniques (such as redaction, pseudonymisation and encryption).",
+      "predicate": "risk",
+      "qualifiers": {},
+      "raw_value": "risk  of  individuals  being  identiﬁed  through  the  processing  of  their  personal  data  by  using  appropriate  de-identiﬁcation  techniques  (such  as  redaction,  pseudonymisation  and  encryption).",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Reduce  the",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-D0D9DDCCE6AB628D83A59F0C72F8A64374696D3AD671FDEFCD1D983838C18712",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-71AC3680D0B5D2E58C811AF711EC8484571C37B22B3A747879BA3087551F83EC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must ensure that AI systems generate a positive impact on stakeholders and",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must ensure that AI systems generate a positive impact on stakeholders and",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-D4CDD0A62972CC61CA61438386EB654FABFA02A482DF9A9020CFD06F78887291",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-FAD969E04881D8501A3FAD0696A060BF26B7428C1AEF965830A24620C1F089D9"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "approved the tools you use to",
+      "predicate": "decision",
+      "qualifiers": {},
+      "raw_value": "approved  the  tools  you  use  to",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You  should  make  sure  your  cybersecurity  team  has",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-F236A1E42345CD231E3FCB2447029B5B9631CABBDEF59AA8D31DB7F57725FAF4",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-0DE05CFB25389813B08D623C76DB1B9634020F3920BA4C12D819D36164994091"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "risk of direct prompt injection is acceptable under the speciﬁc use case.",
+      "predicate": "risk",
+      "qualifiers": {},
+      "raw_value": "risk  of  direct  prompt  injection  is  acceptable  under  the  speciﬁc  use  case.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Avoid  putting  LLM  chatbots  on  public-facing  government  websites  unless  the",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-F926170ABECF21A7AF956CB3C677D87E66716A66B8035FF8D0F17EAD677126E7",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-A7B5629C0CA6078BD50CCFD4892CA5B46A7C216140773CBB5FFCDEF0842D5162"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must comply with the Secure by Design principles, which were developed by the Central Digital and Data Oﬃce (CDDO), and the government’s Cyber Security Standard.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must comply with the Secure by Design principles, which were developed by the Central Digital and Data Oﬃce (CDDO), and the government’s Cyber Security Standard.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Your service",
+      "subject_type": "initiative",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-FA05D661D6BA852F0D956F240706A24A6A47A9A9BE86672D204CFCAEEA248F96",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-A17937601AF1F59643A16726D57D563CB719D756176C4C5C1E596218404BD45F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must ensure fairness in the development and use of AI solutions to comply with",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must ensure fairness in the development and use of AI solutions to comply with",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-FB6A048DA984380914211B40BC03F2137A6BE64D8CF0EEA3B12E436151859822",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-F2CFB7654BF3857855F32A6AD9C7C66F41038E5920D5A3E9DB09D6721592B556"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must be ready to collaborate with other teams in your organisation to address occasional knowledge and capability gaps in your team.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must be ready to collaborate with other teams in your organisation to address occasional knowledge and capability gaps in your team.",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "You",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-FF5EBBC25D45E282E538D401924A54FBCB1E33663106FAB8D9B6C6C24944C105",
+      "confidence": 0.9,
+      "document_family": "DOC-S004",
+      "evidence_ids": [
+        "V04-EVID-76A95EDED61F21B29C09C2C1D9A56E9290E196F6EA59B488ED2610DE61A93E9A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "risk of legal challenges and ensures you",
+      "predicate": "risk",
+      "qualifiers": {},
+      "raw_value": "risk  of  legal  challenges  and  ensures  you",
+      "review_status": "not_required",
+      "source_id": "S004",
+      "subject_text": "Understanding  legislative  constraints  helps  mitigate  the",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S004-B0053",
+      "evidence_id": "V04-EVID-0A23C387AC25B02052A7AE029AD17F07984E7A35CA2658B78365182C87ACCA23",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "53",
+      "source_id": "S004",
+      "text_excerpt": "You  must  think  about  this  at  the  start  of  your  project  to:   ●  encourage  mindful  creation  and  usage  of  AI  systems  ●  ensure  that  people  who  design  and  deploy  AI  systems  can  be  held"
+    },
+    {
+      "block_id": "DOC-S004-B0096",
+      "evidence_id": "V04-EVID-0DE05CFB25389813B08D623C76DB1B9634020F3920BA4C12D819D36164994091",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "96",
+      "source_id": "S004",
+      "text_excerpt": "Avoid  putting  LLM  chatbots  on  public-facing  government  websites  unless  the  risk  of  direct  prompt  injection  is  acceptable  under  the  speciﬁc  use  case."
+    },
+    {
+      "block_id": "DOC-S004-B0058",
+      "evidence_id": "V04-EVID-1111B6FAB800E0AB8C0A1C5EB20C9BBDF43751B0CEDA28ACA1AE7085A790016B",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "58",
+      "source_id": "S004",
+      "text_excerpt": "You  must  ensure  that  AI  systems  generate  a  net  positive  impact  on  stakeholders"
+    },
+    {
+      "block_id": "DOC-S004-B0063",
+      "evidence_id": "V04-EVID-29FA146313BDFB48501BD755D50B491A7C9D9558FF753FA8F9514E12561B79FC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "63",
+      "source_id": "S004",
+      "text_excerpt": "Human  rights  Public  authorities  must  act  in  a  way  that  is  compatible  with  human  rights."
+    },
+    {
+      "block_id": "DOC-S004-B0070",
+      "evidence_id": "V04-EVID-357410103AC584150F3CF40F550B98702BB99E3840CE17D478FA7DBBC68281AA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "70",
+      "source_id": "S004",
+      "text_excerpt": "You  must  make  sure  that  AI  systems  do  not  process  personal  data  in  ways  that  are"
+    },
+    {
+      "block_id": "DOC-S004-B0078",
+      "evidence_id": "V04-EVID-4E5E36E367076C18DB505E60AE08F29D83311A7C7BA9AD59D6794400119A06D3",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "78",
+      "source_id": "S004",
+      "text_excerpt": "AI  security  risks  are  divided  into  2  main  categories:  the  risk  of  using  AI  and  the  risk"
+    },
+    {
+      "block_id": "DOC-S004-B0047",
+      "evidence_id": "V04-EVID-50CBE3EBC140251A9B8E017DB5C7869EFA29D18B4B7F25B99384A1E84700C67C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "47",
+      "source_id": "S004",
+      "text_excerpt": "Safety,  security  and  robustness  You  must  build  safe,  secure  and  robust  AI  solutions."
+    },
+    {
+      "block_id": "DOC-S004-B0100",
+      "evidence_id": "V04-EVID-57452D91FD297EC7F0F565E9B36C7BC8B9C4375406724AE351F0825EF2C096AC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "100",
+      "source_id": "S004",
+      "text_excerpt": "To  meet  quality  assurance  requirements,  AI  systems  must  be  trustworthy,"
+    },
+    {
+      "block_id": "DOC-S004-B0022",
+      "evidence_id": "V04-EVID-61306F42209367934DBB836E91BD7AB48D0FEEA2D80EB9543709063BD94DC3C7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "22",
+      "source_id": "S004",
+      "text_excerpt": "Generative  AI  uses  large  quantities  of  carefully  selected  data  to  train  models  so  they"
+    },
+    {
+      "block_id": "DOC-S004-B0011",
+      "evidence_id": "V04-EVID-71AC3680D0B5D2E58C811AF711EC8484571C37B22B3A747879BA3087551F83EC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S004",
+      "text_excerpt": "You  must  ensure  that  AI  systems  generate  a  positive  impact  on  stakeholders  and"
+    },
+    {
+      "block_id": "DOC-S004-B0063",
+      "evidence_id": "V04-EVID-76A95EDED61F21B29C09C2C1D9A56E9290E196F6EA59B488ED2610DE61A93E9A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "63",
+      "source_id": "S004",
+      "text_excerpt": "Understanding  legislative  constraints  helps  mitigate  the  risk  of  legal  challenges  and  ensures  you"
+    },
+    {
+      "block_id": "DOC-S004-B0048",
+      "evidence_id": "V04-EVID-7751DD942DCBB55836D24B1CBD667CA2F45B40859D78F5D00CE6878973B79C6A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "48",
+      "source_id": "S004",
+      "text_excerpt": "You  must  understand  that  considerations  of  privacy  extend  beyond  the  requirements  set  out  in  the  UK  General  Data  Protection  Regulation  (UK  GDPR),  the  Data  Protection  Act  2018 and  other  relevant  legislation."
+    },
+    {
+      "block_id": "DOC-S004-B0013",
+      "evidence_id": "V04-EVID-784DD0ED1BF1580D62806F082C798B1AD6B85ED0FFBC177379DA9995146242C5",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S004",
+      "text_excerpt": "This  means  you  must  document  information  about  any  algorithmic  tools  you  use  in  decision-making  processes  and"
+    },
+    {
+      "block_id": "DOC-S004-B0072",
+      "evidence_id": "V04-EVID-7BC8A8D9762452CFF6CF0D3E9A2821F871E3E1C6A1B744EC705AE33C100609CD",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "72",
+      "source_id": "S004",
+      "text_excerpt": "Reduce  the  risk  of  individuals  being  identiﬁed  through  the  processing  of  their  personal  data  by  using  appropriate  de-identiﬁcation  techniques  (such  as  redaction,  pseudonymisation  and  encryption)."
+    },
+    {
+      "block_id": "DOC-S004-B0101",
+      "evidence_id": "V04-EVID-8A2E6F0147BF70F22A93A72C7F48B91DB45A8B1120345351135790296F56B881",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "101",
+      "source_id": "S004",
+      "text_excerpt": "You  must  ensure  that  any  updates  to  the  AI  system  have  a  quantitative  testing  and"
+    },
+    {
+      "block_id": "DOC-S004-B0051",
+      "evidence_id": "V04-EVID-A17937601AF1F59643A16726D57D563CB719D756176C4C5C1E596218404BD45F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "51",
+      "source_id": "S004",
+      "text_excerpt": "You  must  ensure  fairness  in  the  development  and  use  of  AI  solutions  to  comply  with"
+    },
+    {
+      "block_id": "DOC-S004-B0092",
+      "evidence_id": "V04-EVID-A45EB71D0AD460B0601F6D8C24BBB6C4C2239A5437EB75CD2AFC1F345C98B912",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "92",
+      "source_id": "S004",
+      "text_excerpt": "Recommendation  Deploying  an  LLM  chatbot  to  a  public-facing  government  website  comes  with  a  signiﬁcant  risk  of  a  direct  prompt  injection  attack."
+    },
+    {
+      "block_id": "DOC-S004-B0011",
+      "evidence_id": "V04-EVID-A7B5629C0CA6078BD50CCFD4892CA5B46A7C216140773CBB5FFCDEF0842D5162",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S004",
+      "text_excerpt": "Your  service  must  comply  with  the  Secure  by  Design principles,  which  were  developed  by  the  Central  Digital  and  Data  Oﬃce  (CDDO),  and  the  government’s  Cyber  Security  Standard."
+    },
+    {
+      "block_id": "DOC-S004-B0041",
+      "evidence_id": "V04-EVID-BBB9A0CE2AAB080B0A6719AF13F1692BEAB15AF0407F8D01BC0E0BF11EF8E7C7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "41",
+      "source_id": "S004",
+      "text_excerpt": "However  you  decide  to  source  your  requirement,  you  must  ensure  you  comply  with  procurement  legislation."
+    },
+    {
+      "block_id": "DOC-S004-B0074",
+      "evidence_id": "V04-EVID-CA4B8875623F7CD179EC3197CCA15442792C8B6E07F2330D5CCF5C459CB14626",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "74",
+      "source_id": "S004",
+      "text_excerpt": "service  must  comply  with  the  government’s  Secure  by  Design  principles before  it  can  be  deployed."
+    },
+    {
+      "block_id": "DOC-S004-B0107",
+      "evidence_id": "V04-EVID-D89449C170A5CDEE76FCA27AE2DB9258E52A3B61AE82DBA5624BD4D74999FF6D",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "107",
+      "source_id": "S004",
+      "text_excerpt": "Value  delivered  Overall,  69%  of  users  thought  the  tool  was  useful  or  very  useful."
+    },
+    {
+      "block_id": "DOC-S004-B0096",
+      "evidence_id": "V04-EVID-DB379FD533AC792BFCD4471E324B497F174965001046966879329C7CF3BD520E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "96",
+      "source_id": "S004",
+      "text_excerpt": "In  these  situations  a  human  must  be  present  to  review  the  action."
+    },
+    {
+      "block_id": "DOC-S004-B0091",
+      "evidence_id": "V04-EVID-DFA8EE01DF6698E2898FCDC9A3002D04CF662E1B853BB606E16D12484EDE983F",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "91",
+      "source_id": "S004",
+      "text_excerpt": "Impact  Actual  risk  of  user  harm  if  a  user  is  tricked  into  using  an  unsafe  prompt  that  then  results  in  harmful  content  being  returned  and  acted  on."
+    },
+    {
+      "block_id": "DOC-S004-B0054",
+      "evidence_id": "V04-EVID-E1312FCCB3A0DED7F5AF421C2B6AB3086BC5202AD4BF39519A2A58D8050B8DE7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "54",
+      "source_id": "S004",
+      "text_excerpt": "You  must  also  put  the  necessary  oversight  and  human-in-the-loop  processes  in"
+    },
+    {
+      "block_id": "DOC-S004-B0107",
+      "evidence_id": "V04-EVID-EA4BFCAD2001EAA723E5F021E8848720A0388B2CED2E122D40A4BA0D4D6CD28E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "107",
+      "source_id": "S004",
+      "text_excerpt": "In  the  second  phase  of  testing,  we  invited  1,000  users  to  test  GOV.UK  Chat  via  a"
+    },
+    {
+      "block_id": "DOC-S004-B0054",
+      "evidence_id": "V04-EVID-EA784434186DFEEE99C17D05442C3552A7ACCB61144FB079B607ACAAD63B86FD",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "54",
+      "source_id": "S004",
+      "text_excerpt": "too  high,  you  must  reconsider  if  AI  should  be  used  at  all."
+    },
+    {
+      "block_id": "DOC-S004-B0099",
+      "evidence_id": "V04-EVID-EE55CF68210AA069198CBFFAA8FBFE6076FD769464580B8B4002621F40BCC248",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "99",
+      "source_id": "S004",
+      "text_excerpt": "●  set  out  how  the  programme  or  project  team  will  work  with  and  report  to  their"
+    },
+    {
+      "block_id": "DOC-S004-B0032",
+      "evidence_id": "V04-EVID-F2CFB7654BF3857855F32A6AD9C7C66F41038E5920D5A3E9DB09D6721592B556",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "32",
+      "source_id": "S004",
+      "text_excerpt": "You  must  be  ready  to  collaborate  with  other  teams  in  your  organisation to  address  occasional  knowledge  and  capability  gaps  in  your  team."
+    },
+    {
+      "block_id": "DOC-S004-B0081",
+      "evidence_id": "V04-EVID-FAD969E04881D8501A3FAD0696A060BF26B7428C1AEF965830A24620C1F089D9",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "81",
+      "source_id": "S004",
+      "text_excerpt": "You  should  make  sure  your  cybersecurity  team  has  approved  the  tools  you  use  to"
+    },
+    {
+      "block_id": "DOC-S004-B0013",
+      "evidence_id": "V04-EVID-FE6015D5A44CC4119D6D9F4FA7F4B3DB89D565670606832451ACD32F36ABDC81",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S004",
+      "text_excerpt": "or  an  arm’s  length  body  within  scope,  you’re  required  to  use  the  Algorithmic  Transparency  Recording  Standard  (ATRS)."
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S004"
+  ],
+  "warnings": [
+    "abstained_action_status_ineligible_subject",
+    "abstained_commitment_ambiguous_heading_context",
+    "abstained_commitment_clause_like_subject",
+    "abstained_commitment_copular_or_passive",
+    "abstained_commitment_ineligible_subject",
+    "abstained_commitment_subject_too_long",
+    "abstained_evidence_too_long:DOC-S004-B0002:1011-1394:V02-RULE-METRIC-001",
+    "abstained_evidence_too_long:DOC-S004-B0060:1461-1801:V02-RULE-RISK-001",
+    "abstained_evidence_too_long:DOC-S004-B0072:1022-1294:V02-RULE-COM-WEAK-002",
+    "abstained_ineligible_actor_noun_phrase",
+    "abstained_missing_subject:DOC-S004-B0064:348-657:V02-RULE-RISK-001",
+    "abstained_missing_subject:DOC-S004-B0064:92-186:V02-RULE-RISK-001",
+    "abstained_requirement_ineligible_action",
+    "abstained_requirement_ineligible_subject",
+    "abstained_subject_span_out_of_bounds"
+  ]
+}

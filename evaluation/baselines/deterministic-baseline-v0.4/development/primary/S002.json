@@ -1,0 +1,527 @@
+{
+  "batch_id": "V04-BATCH-9365A1B6F2F7F4D81E6B0DBAA89FC83820BF21C936364C6778890D06E628CB7C",
+  "candidate_facts": [
+    {
+      "candidate_id": "V04-CAND-022709AAE7AD7595D7335A16E96172C35325A08384CD17F133B4E42E1746F5F6",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-53DAE76B7061A4F06075497D7E51FB1B5C865C8861317C2734DE4D55F7288E19"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Launch a new function with the mandate to",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will launch a new function with the mandate to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "To seize this opportunity, the government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-14776FE5FCFCDB4812E1EC43132A0BD3B8E7F2C10FA12F21D048921E9EE75BAE",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-174A4F47DEB06445FAFB633A9A0124A81B6198669784A57BB93FB5D75BDF2FCA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Commit to stressing the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "commit to stressing the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "departments",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-1CA0B7B75EA302D7A0D7A97E4B1C13E0E3749930E0BCFFAD252CC2C18A5636EF",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-0CF40B234973049D581D27F4426C485AD890BE004884CBB3F78EA748A977505A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Appoint an AI",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will appoint an AI",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Government, DSIT",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-1F0ED644FA52C3B86D22F1FEB0AE171ADDD4735C9359E810C66428C54552A9D9",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-FF333ADED89B33A8A78C3E3D3890A4847A1A5421983FB9F83A7088A3A3D29639"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Appoint an AI lead for each mission to help identify where AI could be a solution.",
+      "predicate": "recommendation",
+      "qualifiers": {
+        "recommendation_id": 5
+      },
+      "raw_value": "Appoint an AI lead for each mission to help identify where AI could be a solution.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "AI Opportunities Action Plan Government Response recommendation 5",
+      "subject_type": "recommendation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-2CBB7E8015519234BD0AED30BF2FDB088BCC866A1E50D88BEF55B5AED02207B4",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-6BDCC6527612B5E42EEB98C4C325B25A0FA51AE3B20F77AF26E23B4D5A5B71EA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Also work with stakeholders to develop a long-term compute strategy that",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also work with stakeholders to develop a long-term compute strategy that",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-3C81DCE8131ED8A722B836E424572AFD51B2DB780BD8AB0973B81208FBA219B5",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-EDE4E09C2778087394DFB296EE0EBD9DC5BFC0EA0A7BBA5F5E6FC54485329139"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Intends to establish AISI",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "intends to establish AISI",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-4457518208ADFFF65B9614DBD31BCC7C14C1F0710738A9BE59F3D58B5C340C83",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-154E8AC6B39A44798C6E1195784A2A1A79497CA623FDFAFE1D443283C1530378"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Provide further details by Spring 2025.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will provide further details by Spring 2025.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-4C7B2B71727B34C05458F3EAB37AED68538E70287B4C850127CBDDB2914AD53E",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-18BABA1D723D4A8279A0AEC4EF86B1F224E38B7CFD11B3FFCBC57C8112C104FC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Appoint AI Champions in particular sectors highlighted in the Industrial",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will appoint AI Champions in particular sectors highlighted in the Industrial",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-7DB2F0AC9DCD826BCD6E431B712B995D003CFBE4E7B74AD646436B75A2D808FC",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-0B80AB87442357C7F2E2C7013F4EF0D309A4D5EF913E884F943E955FEEAA28B3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "shall or Fulbright for students to",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "shall or Fulbright for students to",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Mar",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-7EB43C47F62A2C7FBA781FBC4ACE13F036F03F1C7808CA283F695BAFBD5E6180",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-2BD87A5991E0BCACCD694E35B51DE810E069E5EAFFD028BFEC21866B396E2E79"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Continue to develop its policy response to the Action Plan as part of the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will continue to develop its policy response to the Action Plan as part of the",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-8810A5EB8F8C1B503D359191B55251C1CDE846E53CCEF4F288F418F2568C051F",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-C59A1749B9DA185FB84B8B053B6F18C43B1C7E7EDAF90BA6C5F0672B97281C8C"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must maximise opportunities to crowd in private sector",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must maximise opportunities to crowd in private sector",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "As the Action Plan sets out, the UK",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-99DF7660F07E6939FA3F8256996AB0BB469879AB962D1A2F484F3123F9387838",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-08569964A7005209C34F9B5FF265872EC99BA3AD5382518974C0A5A088491092"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Work with DBT",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will work with DBT",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "strategy, the RIO",
+      "subject_type": "policy",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-A0395CA3D0F01D5A2C760F18780BDB39CA6C9FE36542AB1EF81BBC16BE39825D",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-7B465AF462D52BEFA2A82702CC5B68567E6404179F8DC2BE85D84EEE993DF343"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Provide expert insight on the energy needs of",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will provide expert insight on the energy needs of",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The Energy Council",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-B04E86FBD06FF55098DA0FC46E05974A66FC5C52376517BCBEBB8E8BD66A8A80",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-ABF77066A18BBB60C1B93763257E1CEE5B477231F7E03883D73F55726025BF69"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Create",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will create",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-BDCEA3C13C51119E679ECF120DD915471BF3562438BB8A02891D0DF3B47E8CE0",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-FF83EDD8FF7F71D97DF19E91331053D1A9DB057291E9E3577CC7A77CB4E896A7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Create a",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will create a",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-BFEF9FAB9C15B2656F25585697F358197DD516008BF7767E22FB6C4B05719F14",
+      "confidence": 0.9,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-67B856F102B2A2D362D2F348FDD7A359EAE7F6C598D3E6A25B0EC6343DD52525"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must continue to move fast.",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must continue to move fast.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "Nonetheless, this race is speeding up and we",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-C40A7560BF1A9CD01D138731DBF180235F795D01026813B46C40B8DC3D13CF72",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-3FE18C21F26577177F7CE5B68DE984035E3A62B40FEEC3D3DDD0D9AD77DF870A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Publish the Compute Strategy in Spring 2025.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will publish the Compute Strategy in Spring 2025.",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-D9E8A1EB3D65B788B4158882CCD47F6657A6231DB12FEA27CB970C91FDE8C07C",
+      "confidence": 0.7,
+      "document_family": "DOC-S002",
+      "evidence_ids": [
+        "V04-EVID-775DD4CAC29E1FC9BA499DAC74CB568CBAC33796818CAF76308B8387CCBBEBE3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Deliver",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will deliver",
+      "review_status": "not_required",
+      "source_id": "S002",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "V04-EVID-08569964A7005209C34F9B5FF265872EC99BA3AD5382518974C0A5A088491092",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "strategy, the RIO will work with DBT"
+    },
+    {
+      "block_id": "DOC-S002-B0013",
+      "evidence_id": "V04-EVID-0B80AB87442357C7F2E2C7013F4EF0D309A4D5EF913E884F943E955FEEAA28B3",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S002",
+      "text_excerpt": "Marshall or Fulbright for students to"
+    },
+    {
+      "block_id": "DOC-S002-B0016",
+      "evidence_id": "V04-EVID-0CF40B234973049D581D27F4426C485AD890BE004884CBB3F78EA748A977505A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S002",
+      "text_excerpt": "Government, DSIT will appoint an AI"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "V04-EVID-154E8AC6B39A44798C6E1195784A2A1A79497CA623FDFAFE1D443283C1530378",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "The government will provide further details by Spring 2025."
+    },
+    {
+      "block_id": "DOC-S002-B0015",
+      "evidence_id": "V04-EVID-174A4F47DEB06445FAFB633A9A0124A81B6198669784A57BB93FB5D75BDF2FCA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S002",
+      "text_excerpt": "departments commit to stressing the"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "V04-EVID-18BABA1D723D4A8279A0AEC4EF86B1F224E38B7CFD11B3FFCBC57C8112C104FC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "Government will appoint AI Champions in particular sectors highlighted in the Industrial"
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "V04-EVID-2BD87A5991E0BCACCD694E35B51DE810E069E5EAFFD028BFEC21866B396E2E79",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "The government will continue to develop its policy response to the Action Plan as part of the"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "V04-EVID-3FE18C21F26577177F7CE5B68DE984035E3A62B40FEEC3D3DDD0D9AD77DF870A",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "The government will publish the Compute Strategy in Spring 2025."
+    },
+    {
+      "block_id": "DOC-S002-B0008",
+      "evidence_id": "V04-EVID-53DAE76B7061A4F06075497D7E51FB1B5C865C8861317C2734DE4D55F7288E19",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S002",
+      "text_excerpt": "To seize this opportunity, the government will launch a new function with the mandate to"
+    },
+    {
+      "block_id": "DOC-S002-B0005",
+      "evidence_id": "V04-EVID-67B856F102B2A2D362D2F348FDD7A359EAE7F6C598D3E6A25B0EC6343DD52525",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S002",
+      "text_excerpt": "Nonetheless, this race is speeding up and we must continue to move fast."
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "V04-EVID-6BDCC6527612B5E42EEB98C4C325B25A0FA51AE3B20F77AF26E23B4D5A5B71EA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "The government will also work with stakeholders to develop a long-term compute strategy that"
+    },
+    {
+      "block_id": "DOC-S002-B0009",
+      "evidence_id": "V04-EVID-775DD4CAC29E1FC9BA499DAC74CB568CBAC33796818CAF76308B8387CCBBEBE3",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S002",
+      "text_excerpt": "The government will deliver"
+    },
+    {
+      "block_id": "DOC-S002-B0007",
+      "evidence_id": "V04-EVID-7B465AF462D52BEFA2A82702CC5B68567E6404179F8DC2BE85D84EEE993DF343",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S002",
+      "text_excerpt": "The Energy Council will provide expert insight on the energy needs of"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "V04-EVID-ABF77066A18BBB60C1B93763257E1CEE5B477231F7E03883D73F55726025BF69",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "The government will create"
+    },
+    {
+      "block_id": "DOC-S002-B0006",
+      "evidence_id": "V04-EVID-C59A1749B9DA185FB84B8B053B6F18C43B1C7E7EDAF90BA6C5F0672B97281C8C",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S002",
+      "text_excerpt": "As the Action Plan sets out, the UK must maximise opportunities to crowd in private sector"
+    },
+    {
+      "block_id": "DOC-S002-B0014",
+      "evidence_id": "V04-EVID-EDE4E09C2778087394DFB296EE0EBD9DC5BFC0EA0A7BBA5F5E6FC54485329139",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S002",
+      "text_excerpt": "government intends to establish AISI"
+    },
+    {
+      "block_id": "DOC-S002-B0020",
+      "evidence_id": "V04-EVID-FF333ADED89B33A8A78C3E3D3890A4847A1A5421983FB9F83A7088A3A3D29639",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "20",
+      "source_id": "S002",
+      "text_excerpt": "5. Appoint an AI lead for each\nmission to help identify where\nAI could be a solution."
+    },
+    {
+      "block_id": "DOC-S002-B0021",
+      "evidence_id": "V04-EVID-FF83EDD8FF7F71D97DF19E91331053D1A9DB057291E9E3577CC7A77CB4E896A7",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "21",
+      "source_id": "S002",
+      "text_excerpt": "The government will create a"
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S002"
+  ],
+  "warnings": [
+    "abstained_commitment_clause_like_subject",
+    "abstained_commitment_copular_or_passive",
+    "abstained_commitment_ineligible_subject",
+    "abstained_commitment_subject_too_long",
+    "abstained_ineligible_actor_noun_phrase",
+    "abstained_missing_subject:DOC-S002-B0006:1308-1400:V02-RULE-BUD-001",
+    "abstained_subject_span_out_of_bounds"
+  ]
+}
