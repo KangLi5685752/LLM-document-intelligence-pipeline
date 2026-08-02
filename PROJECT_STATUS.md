@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B.5E-1 deterministic-baseline-v0.4 finalization transaction implementation in progress; no real finalization or freeze has run
-- **Last updated:** 2026-07-31
-- **Latest milestone:** PR #21 merged the completed and independently audited owner-assessment package at `d9cddfd21a302151213ea5cde27f400a382e1e64`; formal owner outcomes are 3/3 passed and remain distinct from 3/3 passed automated diagnostics
+- **Current stage:** Stage 3B completed; next-stage planning pending
+- **Last updated:** 2026-08-02
+- **Latest milestone:** PR #25 merged at `3d16248` and committed the frozen `deterministic-baseline-v0.4` evidence
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -27,30 +27,34 @@
 - PR #20 merged the Stage 3B.5C owner-review preparation package at `36fe312ef07716a3597ea62a5d146a12b1c9312b`.
 - Stage 3B.5D formal v0.4 owner assessment: Kang Li supplied `passed` outcomes and exact evidence-based rationales for `PGC-V01-S001-001`, `PGC-V01-S004-001` and `PGC-V01-S006-001`. The separate completed record retains candidate counts 6, 0 and 6, preserves the blank template, and passes deterministic metadata, reference, evidence-consistency, owner-versus-machine and held-out-isolation checks.
 - PR #21 merged Stage 3B.5D through commit `d9cddfd21a302151213ea5cde27f400a382e1e64`. The required independent read-only audit passed with no critical findings or required corrections and is recorded separately as machine review evidence.
+- Stage 3B.5E-1 finalization and freeze transaction implementation completed through PR #22, with the predicate string-counting correction in PR #23 and lifecycle-safe read-only audit coverage in PR #24. The finalization implementation commit is `d798868bd8b66a30babfc1b14450fb253f2dbc63`.
+- Stage 3B.5E-2 controlled real finalization completed successfully with freeze date `2026-08-02`. PR #25 merged the finalized evidence and post-finalization test compatibility at `3d16248` and closed Stage 3B.
+- The committed finalization inventory contains exactly fourteen artifacts: five primary candidate outputs, five repeat candidate outputs, `development_evaluation_report.json`, `final_error_analysis.json`, `finalization_record.json` and `baseline_freeze_manifest.json`. Every primary/repeat pair is byte-identical.
+- The frozen `deterministic-baseline-v0.4` development observation contains 178 candidates and 25 commitment candidates, with TP 5, FP 173, FN 20, precision 0.028089887640449437, recall 0.2, F1 0.04926108374384237, zero duplicate candidates and zero S002 strict matches.
+- Formal project-owner outcomes passed 3/3: S001 `preserve_missing`, S004 `do_not_extract` and S006 `route_to_review`. Automated diagnostics also passed 3/3 but remain separate from formal owner judgment.
+- Public validation at the implementation commit returned `valid`; all fourteen artifacts were present, all 28 process gates passed, nine quality observations remained non-binding, the independent review verdict was `approved_for_evidence_commit`, transaction residue was absent, and evidence and candidate hashes remained fixed.
+- The final post-finalization suite passed with 1107 tests and 6 skips. GitHub Actions passed on Python 3.10, 3.11 and 3.12.
+- Stage 3B is closed as a reproducible engineering and evaluation milestone, not as evidence of strong extraction quality, exhaustive candidate precision, held-out generalization or production readiness. Held-out execution remained unauthorized; no S005 or S007 ParsedDocument was opened or executed during finalization, and held-out semantic annotations were not loaded for execution.
 
 ## In progress
 
-- Stage 3B.5E-1 additive v0.4 finalization and freeze transaction implementation, using fictional temporary repositories and fictional candidate outputs for write-path tests only.
-
-The authoritative v0.1 observation and complete v0.2 and v0.3 baselines remain frozen and immutable. The merged v0.4 implementation retains candidate schema `0.1`, predicate vocabulary `0.1`, matching protocol `0.1` and unchanged `match_strict_facts`. Formal owner outcomes and automated diagnostics remain separate provenance fields. This implementation milestone has not opened any real development ParsedDocument, run real v0.4 extraction, or created any real finalization output. No v0.4 freeze manifest exists. No held-out semantic annotation model was deserialized; no S005 or S007 ParsedDocument was opened or executed. Held-out execution remains blocked pending a separate guard and explicit authorization. No held-out extraction result, LLM extractor or LLM reconciliation layer exists. The sparse development gold does not establish exhaustive candidate precision.
+- The next stage has not yet been scoped or started.
 
 ## Next tasks
 
-1. Complete the Stage 3B.5E-1 finalization transaction implementation and independent read-only review.
-2. Merge the reviewed implementation before any real finalization execution.
-3. Run the public read-only prerequisite audit on the merged commit.
-4. Execute the exact five-source finalization once with an explicit freeze date only if all 28 process gates pass.
-5. Validate the installed fourteen-file transaction without rewriting it.
-6. Keep held-out execution blocked behind a later separate guard and explicit authorization.
+1. Scope and review the next stage separately before selecting or implementing any new architecture.
+2. Preserve `deterministic-baseline-v0.4` and its committed evidence as immutable; any semantic change requires `deterministic-baseline-v0.5`.
+3. Keep held-out execution blocked behind a later separately reviewed guard and explicit authorization.
+4. Carry forward the weak-development-quality, sparse-gold, no-held-out-generalization and no-production-readiness claim boundaries.
 
 ## Blockers
 
-- v0.1 cannot be finalized.
-- The Stage 3B.5E-1 implementation must pass independent read-only review and be merged before real finalization.
-- v0.4 is not frozen; no real finalization may run until the merged transaction reproduces the exact candidate hashes and all 28 process gates pass.
+- Stage 3B has no remaining implementation work; the next-stage scope has not yet been reviewed or approved.
+- Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
+- `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
-- Held-out access remains blocked pending a separate reviewed guard and explicit authorization.
+- The weak development score does not support strong extraction-quality, held-out-generalization or production-readiness claims.
 
 ## AG News replacement status
 
-Not yet eligible. Replacement remains conservative until extraction quality improves beyond the small development recovery, benchmark limitations are presented clearly and the project presentation is portfolio-ready.
+Not yet eligible. The frozen baseline is an engineering and evaluation milestone, but weak development quality, the absence of held-out results, the absence of an LLM extraction layer and the lack of a final portfolio presentation still prevent replacement.
