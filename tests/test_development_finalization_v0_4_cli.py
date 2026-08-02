@@ -11,6 +11,7 @@ import pytest
 
 from document_intelligence.extraction.development_finalization_v0_4 import (
     FINAL_OUTPUT_RELATIVE_PATHS,
+    OWNER_EVIDENCE_NAMES,
     OUTPUT_RELATIVE_ROOT,
     REQUIRED_ANCESTORS,
 )
@@ -52,13 +53,24 @@ def _prepared_repository(tmp_path: Path) -> Path:
     _git(root, "update-ref", "refs/heads/fixture", head)
     _git(root, "symbolic-ref", "HEAD", "refs/heads/fixture")
     _git(root, "reset", "--hard", "HEAD")
+    output = root / OUTPUT_RELATIVE_ROOT
+    for relative_path in FINAL_OUTPUT_RELATIVE_PATHS:
+        final_output = output / relative_path
+        assert final_output.is_file()
+        final_output.unlink()
+    for directory_name in ("primary", "repeat"):
+        directory = output / directory_name
+        assert not any(directory.iterdir())
+        directory.rmdir()
     destination = root / REVIEW_RELATIVE
     assert destination.is_file()
+    assert all((output / name).is_file() for name in OWNER_EVIDENCE_NAMES)
+    assert not any((output / name).exists() for name in FINAL_OUTPUT_RELATIVE_PATHS)
     checkpoint = root / ".fictional_finalization_cli_checkpoint"
     checkpoint.write_bytes(b"fictional finalization CLI checkpoint\n")
     _git(root, "config", "user.name", "Fictional CLI Reviewer")
     _git(root, "config", "user.email", "fictional-cli@example.invalid")
-    _git(root, "add", checkpoint.name)
+    _git(root, "add", "-A")
     _git(root, "commit", "--quiet", "-m", "test: add fictional CLI checkpoint")
     status = subprocess.run(
         ["git", "status", "--porcelain"],
@@ -68,11 +80,28 @@ def _prepared_repository(tmp_path: Path) -> Path:
         text=True,
     ).stdout
     assert status == ""
+    assert all((output / name).is_file() for name in OWNER_EVIDENCE_NAMES)
+    assert not any((output / name).exists() for name in FINAL_OUTPUT_RELATIVE_PATHS)
     _git(root, "merge-base", "--is-ancestor", head, "HEAD")
     for ancestor in REQUIRED_ANCESTORS:
         _git(root, "cat-file", "-e", f"{ancestor}^{{commit}}")
         _git(root, "merge-base", "--is-ancestor", ancestor, "HEAD")
     return root
+
+
+def _final_output_snapshot(
+    root: Path,
+) -> tuple[tuple[str, bool, bool, bytes | None], ...]:
+    output = root / OUTPUT_RELATIVE_ROOT
+    snapshot: list[tuple[str, bool, bool, bytes | None]] = []
+    for relative_path in FINAL_OUTPUT_RELATIVE_PATHS:
+        path = output / relative_path
+        exists = path.exists()
+        is_file = path.is_file()
+        snapshot.append(
+            (relative_path, exists, is_file, path.read_bytes() if is_file else None)
+        )
+    return tuple(snapshot)
 
 
 def _hook_environment(tmp_path: Path, repository_root: Path) -> dict[str, str]:
@@ -217,6 +246,7 @@ def test_expected_cli_failure_is_bounded_and_leaves_no_partial_output(
     root = _prepared_repository(tmp_path)
     environment = _hook_environment(tmp_path, root)
     environment["V04_TEST_FAIL"] = "repeat"
+    before_outputs = _final_output_snapshot(root)
     completed = subprocess.run(
         _finalize_command(root),
         cwd=root,
@@ -228,8 +258,7 @@ def test_expected_cli_failure_is_bounded_and_leaves_no_partial_output(
     assert completed.returncode == 2
     assert "primary and repeat outputs differ" in completed.stderr
     assert "Traceback" not in completed.stderr
-    output = root / OUTPUT_RELATIVE_ROOT
-    assert not any((output / name).exists() for name in FINAL_OUTPUT_RELATIVE_PATHS)
+    assert _final_output_snapshot(root) == before_outputs
 
 
 def test_redirected_primary_parent_is_a_bounded_cli_failure_without_outside_write(

@@ -202,6 +202,9 @@ def test_validation_report_reconciles_completed_and_preparation_hashes() -> None
 
 def test_validation_report_keeps_owner_machine_freeze_and_held_out_boundaries() -> None:
     report = _load_model(VALIDATION_REPORT_PATH, OwnerAssessmentValidationReportV04)
+    freeze_path = ROOT / ASSESSMENT_ROOT / "baseline_freeze_manifest.json"
+    assert freeze_path.is_file()
+    freeze = json.loads(freeze_path.read_text(encoding="utf-8"))
 
     assert report.validation_status == "passed"
     assert report.owner_decisions_origin == "supplied_by_project_owner"
@@ -212,7 +215,11 @@ def test_validation_report_keeps_owner_machine_freeze_and_held_out_boundaries() 
     assert report.finalization_status == "not_performed"
     assert report.independent_read_only_review_status == "pending"
     assert report.baseline_finalization_remains_pending is True
-    assert not (ROOT / ASSESSMENT_ROOT / "baseline_freeze_manifest.json").exists()
+    assert sha256_bytes(_canonical_json_file_bytes(ROOT / VALIDATION_REPORT_PATH)) == (
+        freeze["input_references"]["owner_validation_report_sha256"]
+    )
+    assert freeze["owner_and_machine_provenance_separate"] is True
+    assert freeze["held_out_execution_authorized"] is False
 
 
 def test_tracked_completed_and_validation_files_have_no_machine_specific_fields() -> None:

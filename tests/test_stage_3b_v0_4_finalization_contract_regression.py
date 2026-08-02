@@ -213,14 +213,52 @@ def test_synthetic_serialized_report_matches_independent_observation_literals() 
     ) == EXPECTED_QUALITY_OUTCOMES
 
 
-def test_real_future_finalization_outputs_remain_absent() -> None:
+def test_real_finalization_outputs_and_owner_evidence_match_committed_lifecycle() -> None:
     output = REPOSITORY_ROOT / workflow.OUTPUT_RELATIVE_ROOT
-    assert tuple(
+    committed_inventory = {
         path.relative_to(output).as_posix()
-        for path in sorted(output.rglob("*"))
+        for path in output.rglob("*")
         if path.is_file()
-    ) == tuple(sorted(workflow.OWNER_EVIDENCE_NAMES))
-    assert not any((output / name).exists() for name in workflow.FINAL_OUTPUT_RELATIVE_PATHS)
+    }
+    owner_evidence = set(workflow.OWNER_EVIDENCE_NAMES)
+    final_outputs = set(workflow.FINAL_OUTPUT_RELATIVE_PATHS)
+
+    assert committed_inventory == owner_evidence | final_outputs
+    assert all((output / name).is_file() for name in owner_evidence)
+    assert all((output / name).is_file() for name in final_outputs)
+    assert {name for name in final_outputs if name.startswith("primary/")} == {
+        f"primary/{source_id}.json" for source_id in EXPECTED_SOURCE_IDS
+    }
+    assert {name for name in final_outputs if name.startswith("repeat/")} == {
+        f"repeat/{source_id}.json" for source_id in EXPECTED_SOURCE_IDS
+    }
+
+    report = json.loads((output / workflow.REPORT_NAME).read_text(encoding="utf-8"))
+    error_analysis = json.loads(
+        (output / workflow.ERROR_ANALYSIS_NAME).read_text(encoding="utf-8")
+    )
+    finalization = json.loads(
+        (output / workflow.FINALIZATION_NAME).read_text(encoding="utf-8")
+    )
+    freeze = json.loads((output / workflow.FREEZE_NAME).read_text(encoding="utf-8"))
+
+    assert finalization["held_out_execution_authorized"] is False
+    assert freeze["held_out_execution_authorized"] is False
+    assert freeze["freeze_does_not_authorize_held_out"] is True
+    assert error_analysis["development_generalizes_to_held_out"] is False
+    assert all(
+        payload["production_readiness_claimed"] is False
+        for payload in (report, error_analysis, finalization, freeze)
+    )
+    for payload in (report, finalization, freeze):
+        observations = {
+            item["observation_id"]: item["outcome"]
+            for item in payload["non_binding_quality_observations"]
+        }
+        assert observations["exhaustive_precision_established"] == "not_applicable"
+    assert "Sparse gold does not establish exhaustive precision." in error_analysis[
+        "known_limitations"
+    ]
 
 
 def test_v0_1_v0_2_v0_3_and_existing_v0_4_evidence_are_unmodified() -> None:
