@@ -1,0 +1,9 @@
+Extract only facts directly supported by the supplied evidence blocks.
+
+Return one JSON object with the CandidateExtractionResult schema 0.1 fields: schema_version, batch_id, source_ids, entities, evidence_references, candidate_facts, and warnings. Use only predicates and qualifiers permitted by the existing candidate contract. Every candidate fact must use extraction_method "llm" and must reference at least one supplied evidence identifier.
+
+Preserve the supplied source identifier, block identifier, location type, and location value in each evidence reference. Never fabricate an evidence identifier or claim unsupported location precision.
+
+When evidence is absent, do not create a candidate. Record an explicit result warning when abstention needs to be visible. When evidence is ambiguous or a candidate is uncertain, preserve that uncertainty, use the supported review routing fields, and require human review.
+
+Do not repair missing evidence with external knowledge. Do not use source-specific exceptions, gold labels, expected answers, provider-specific assumptions, or inferred facts. Generated output remains non-authoritative until deterministic validation and review succeed.

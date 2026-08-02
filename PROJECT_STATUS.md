@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4A LLM extraction planning in progress
+- **Current stage:** Stage 4B provider-neutral LLM extraction contracts implemented; Stage 4C pending
 - **Last updated:** 2026-08-03
-- **Latest milestone:** Stage 3B closed with the immutable `deterministic-baseline-v0.4` development freeze; Stage 4A now defines a controlled development-only LLM comparator contract
+- **Latest milestone:** Stage 4B implemented strict provider-neutral envelopes, a deterministic offline mock, versioned prompt assets and fail-closed validation through the existing candidate contract
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -35,21 +35,22 @@
 - Public validation at the implementation commit returned `valid`; all fourteen artifacts were present, all 28 process gates passed, nine quality observations remained non-binding, the independent review verdict was `approved_for_evidence_commit`, transaction residue was absent, and evidence and candidate hashes remained fixed.
 - The final post-finalization suite passed with 1107 tests and 6 skips. GitHub Actions passed on Python 3.10, 3.11 and 3.12.
 - Stage 3B is closed as a reproducible engineering and evaluation milestone, not as evidence of strong extraction quality, exhaustive candidate precision, held-out generalization or production readiness. Held-out execution remained unauthorized; no S005 or S007 ParsedDocument was opened or executed during finalization, and held-out semantic annotations were not loaded for execution.
+- Stage 4A planning completed with the reviewed `llm-extraction-baseline-v0.1` development-only experiment contract and DEC-096 through DEC-099.
+- Stage 4B implemented a narrow provider protocol, strict request and response envelopes, pure development-source allowlist validation, deterministic mock fixtures, installation-safe versioned prompts, canonical prompt/request hashes and fail-closed structured output validation that reuses `CandidateExtractionResult` schema `0.1` and predicate vocabulary `0.1`.
+- Stage 4B focused tests passed 44/44 and the complete suite passed 1151 tests with 6 unchanged platform-specific skips. No provider SDK or HTTP dependency was added.
 
 ## In progress
 
-- Stage 4A planning for `llm-extraction-baseline-v0.1`: development-only scope, provider decision gate, prompt/output contract, request budget, cache and provenance, strict comparison and LLM-specific evaluation metrics.
-- No provider or model has been selected, no LLM API has been called, and no Stage 4 extraction or evaluation result exists.
+- Stage 4C development runner, append-only local cache and complete execution provenance remain pending and have not started.
+- No real provider or model has been selected, no LLM API request has been made, and no Stage 4 extraction or evaluation result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Complete and review Stage 4A planning and the `llm-extraction-baseline-v0.1` experiment contract.
-2. Stage 4B: implement the provider-neutral interface, deterministic mock mode and versioned prompt/output contracts without real network calls.
-3. Stage 4C: implement the development-only runner, append-only local cache and complete request/response provenance using mock execution.
-4. Accept a separate provider/model decision, then Stage 4D may perform one bounded five-source development execution with at most one provider.
-5. Stage 4E: evaluate fixed candidates with the unchanged matcher, complete error analysis and owner review, and optionally freeze only if every mandatory process gate passes.
-6. Preserve immutable deterministic v0.4 evidence and keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
+1. Stage 4C: implement the development-only runner, append-only local cache and complete request/response provenance using mock execution.
+2. Accept a separate provider/model decision, then Stage 4D may perform one bounded five-source development execution with at most one provider.
+3. Stage 4E: evaluate fixed candidates with the unchanged matcher, complete error analysis and owner review, and optionally freeze only if every mandatory process gate passes.
+4. Preserve immutable deterministic v0.4 evidence and keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
@@ -62,4 +63,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. Stage 4A is a plan rather than an implemented LLM extraction layer. Weak deterministic development quality, no LLM comparison result, no held-out result and the lack of a final portfolio presentation still prevent replacement.
+Not yet eligible. Stage 4B provides offline contracts and validation but has not selected a model or executed LLM extraction. Weak deterministic development quality, no LLM comparison result, no held-out result and the lack of a final portfolio presentation still prevent replacement.

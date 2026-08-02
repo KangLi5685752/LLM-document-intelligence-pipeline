@@ -29,6 +29,9 @@ dev = [
 where = ["src"]
 include = ["document_intelligence*"]
 
+[tool.setuptools.package-data]
+"document_intelligence.llm_extraction" = ["prompts/*.txt"]
+
 [tool.pytest.ini_options]
 addopts = "-ra"
 testpaths = ["tests"]
