@@ -1,0 +1,399 @@
+{
+  "artifact_sha256": {
+    "development_evaluation_report.json": "4C254390B1EC8D3EF999E7140C122C7E7794E9E123ECC19FCF9C24D709334B88",
+    "final_error_analysis.json": "343F751EE12544EE735AAFE07695C22536A481D1AA5D9610774F2AC957D9FAAD",
+    "finalization_record.json": "D2CC44861F0956C21F1165B2B891F4F0C1C603390607488523B1D8051B32B4E9"
+  },
+  "automated_diagnostic_pass_count": 3,
+  "candidate_outputs": [
+    {
+      "byte_identical": true,
+      "candidate_count": 32,
+      "primary_relative_path": "primary/S001.json",
+      "primary_sha256": "2D7668A267586A1B370C23FB856A94D39D661137ED3217B3102569ED5CDA0AD1",
+      "repeat_relative_path": "repeat/S001.json",
+      "repeat_sha256": "2D7668A267586A1B370C23FB856A94D39D661137ED3217B3102569ED5CDA0AD1",
+      "source_id": "S001"
+    },
+    {
+      "byte_identical": true,
+      "candidate_count": 18,
+      "primary_relative_path": "primary/S002.json",
+      "primary_sha256": "3DD2760F0398E88E624F77168197CBB41B99635E32211075FBB907ECBA011C92",
+      "repeat_relative_path": "repeat/S002.json",
+      "repeat_sha256": "3DD2760F0398E88E624F77168197CBB41B99635E32211075FBB907ECBA011C92",
+      "source_id": "S002"
+    },
+    {
+      "byte_identical": true,
+      "candidate_count": 13,
+      "primary_relative_path": "primary/S003.json",
+      "primary_sha256": "9CB4151E66B80C5FCF25E7102C3B5A9B233D767FF0524261BD04C9C0FFCC670B",
+      "repeat_relative_path": "repeat/S003.json",
+      "repeat_sha256": "9CB4151E66B80C5FCF25E7102C3B5A9B233D767FF0524261BD04C9C0FFCC670B",
+      "source_id": "S003"
+    },
+    {
+      "byte_identical": true,
+      "candidate_count": 30,
+      "primary_relative_path": "primary/S004.json",
+      "primary_sha256": "30522C9B3D285CF099AAB4F3F512B6F843340BA5FECD1BB7E58AE0085731D243",
+      "repeat_relative_path": "repeat/S004.json",
+      "repeat_sha256": "30522C9B3D285CF099AAB4F3F512B6F843340BA5FECD1BB7E58AE0085731D243",
+      "source_id": "S004"
+    },
+    {
+      "byte_identical": true,
+      "candidate_count": 85,
+      "primary_relative_path": "primary/S006.json",
+      "primary_sha256": "7E6DF1EAD8F9BA4F95A5F53AC8D36B55D3B537BDE14FB083CEE6395717664C98",
+      "repeat_relative_path": "repeat/S006.json",
+      "repeat_sha256": "7E6DF1EAD8F9BA4F95A5F53AC8D36B55D3B537BDE14FB083CEE6395717664C98",
+      "source_id": "S006"
+    }
+  ],
+  "candidate_schema_version": "0.1",
+  "corpus_version": "stage1-corpus-v1.0",
+  "development_challenge_case_ids": [
+    "PGC-V01-S001-001",
+    "PGC-V01-S004-001",
+    "PGC-V01-S006-001"
+  ],
+  "development_source_ids": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S006"
+  ],
+  "experiment_id": "deterministic-baseline-v0.4",
+  "experiment_version": "0.4",
+  "finalization_implementation_commit": "d798868bd8b66a30babfc1b14450fb253f2dbc63",
+  "formal_owner_pass_count": 3,
+  "freeze_date": "2026-08-02",
+  "freeze_does_not_authorize_held_out": true,
+  "freeze_schema_version": "0.1",
+  "freeze_status": "frozen_after_development_process_acceptance",
+  "held_out_execution_authorized": false,
+  "held_out_status": "still_blocked_pending_separate_guard_and_explicit_authorization",
+  "input_references": {
+    "blank_template_sha256": "33991E3BA481FE4079EFAF9C6E938BB347F058F8AA2870ED92DD505FA790F859",
+    "comparison_report_sha256": "AD7DC43386A693553240587367ACCB84A3BF353FAFB8930575CDB484E2A8D8B8",
+    "completed_assessment_sha256": "8B1BEE334AAE3A1F3AF6A5DF8B9FBC039FE9DB79BBA9CEC931BE019DA68D7419",
+    "config_sha256": "6D659638C732102D3CB4AB77DDE17229E1E36129245266F213D7FA29217A405A",
+    "diagnosis_report_sha256": "FC8EEFC61B307538948438ABBFF96F1280F1A9006DFFF56ED81A49FD69DE9573",
+    "independent_review_record_sha256": "58455CA84300C94D0DCB1AEAF0EC30023BB22EF4FDC1BF598A77DA40AAC9E0D9",
+    "matching_implementation_sha256": "D3FA0EA195381586064E6716D0141B25BCE0A861CE9B8192FEAF26D818A554EC",
+    "matching_protocol_sha256": "18FD851347B395C2D54B6B02B632E94D3C4B15CFBD16A31C04EE2923D0991530",
+    "owner_markdown_record_sha256": "8F0ECA3E37A97198CE8C24737274317F2394077F7F71EB6860132D530411D309",
+    "owner_validation_report_sha256": "D7940A01E30FF1F0B735CCE94504BC76A23F0EB1BF6454F6264D7D56ED557E94",
+    "preparation_manifest_sha256": "A401ABCEB77D9B73557283D12770DCF33E04E6DED7EEFE361719DF70678AB844",
+    "public_gold_cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+    "public_gold_facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+    "review_packet_sha256": "0C95A1961E8C73409D9737E0C6A6DCB5AEEFDC3933CD75D10D78B650DD57B56E"
+  },
+  "matched_annotation_ids": [
+    "PG-V01-S001-001",
+    "PG-V01-S001-004",
+    "PG-V01-S003-001",
+    "PG-V01-S003-002",
+    "PG-V01-S003-003"
+  ],
+  "matching_protocol_version": "0.1",
+  "minimum_f1_gate_applies": false,
+  "no_post_v0_4_semantic_change": "Finalization reproduces deterministic-baseline-v0.4 without post-v0.4 semantic change.",
+  "non_binding_quality_observations": [
+    {
+      "evidence": "Five strict true positives were observed.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "strict_tp_greater_than_zero",
+      "outcome": "met"
+    },
+    {
+      "evidence": "178 candidates is below the v0.2 total.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "total_candidates_below_v0_2",
+      "outcome": "met"
+    },
+    {
+      "evidence": "25 commitments is below the v0.2 total.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "commitment_candidates_below_v0_2",
+      "outcome": "met"
+    },
+    {
+      "evidence": "Strict duplicate count is zero.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "duplicate_candidate_count_zero",
+      "outcome": "met"
+    },
+    {
+      "evidence": "Formal owner outcomes are 3 of 3 passed.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "owner_challenge_pass_rate_three_of_three",
+      "outcome": "met"
+    },
+    {
+      "evidence": "Ambiguous metric relationships remain routed to review.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "ambiguous_metric_relationship_routed_to_review",
+      "outcome": "met"
+    },
+    {
+      "evidence": "S002 has zero strict matches.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "s002_strict_commitment_recovery",
+      "outcome": "not_met"
+    },
+    {
+      "evidence": "Observed strict F1 is above zero.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "f1_above_zero",
+      "outcome": "met"
+    },
+    {
+      "evidence": "Sparse gold cannot establish exhaustive precision.",
+      "experiment_id": "deterministic-baseline-v0.4",
+      "non_binding": true,
+      "observation_id": "exhaustive_precision_established",
+      "outcome": "not_applicable"
+    }
+  ],
+  "owner_and_machine_provenance_separate": true,
+  "owner_assessment_merge_commit": "d9cddfd21a302151213ea5cde27f400a382e1e64",
+  "owner_review_preparation_merge_commit": "36fe312ef07716a3597ea62a5d146a12b1c9312b",
+  "parsed_document_sha256": {
+    "S001": "F688930865E34C738B848169BF7C53A8F5373D7555119B747D9731A2DFD74ECE",
+    "S002": "39A8E6C106480A72CF907E3981D38CC2D84E6E4197DE7F791945C20F32881D4C",
+    "S003": "8002DC78C9F6716156226FB48F6E673CB71F65ED914B474D8640BF4A095801E0",
+    "S004": "268F07D63B0202100E0131A30EAF122554435520F9228E752DC35E4AAB8A83D2",
+    "S006": "D1BDB1166506E7C9A1A4725D374585BFC69A07A5D744C95D09B1DECCD766BCE2"
+  },
+  "parser_commit": "71148262f094d54ec7d95e45958bd1aaefc64793",
+  "predicate_vocabulary_version": "0.1",
+  "process_gate_outcomes": [
+    {
+      "evidence": "All four authoritative v0.4 commits are ancestors of the finalization commit.",
+      "gate_id": "required_commit_ancestry_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Git reported no tracked, staged, or untracked change before execution.",
+      "gate_id": "repository_clean_before_finalization",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The fixed ordered five-source development inventory was used.",
+      "gate_id": "exact_development_source_inventory",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The fixed ordered three-case challenge inventory was used.",
+      "gate_id": "exact_development_challenge_inventory",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "All preparation-manifest protected committed blobs retained their SHA-256.",
+      "gate_id": "protected_v0_4_hashes_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Preparation manifest, packet, and blank-template hashes reconciled.",
+      "gate_id": "owner_preparation_hashes_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The completed owner-assessment SHA-256 reconciled.",
+      "gate_id": "completed_owner_assessment_hash_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The owner validation-report SHA-256 reconciled.",
+      "gate_id": "owner_validation_report_hash_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The additive independent-review record and approved verdict validated.",
+      "gate_id": "independent_review_record_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "All five fixed ParsedDocument SHA-256 values reconciled.",
+      "gate_id": "parsed_document_hashes_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Primary and repeat extraction completed for all five sources.",
+      "gate_id": "all_sources_complete_both_passes",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "No unhandled extraction exception occurred in either pass.",
+      "gate_id": "zero_unhandled_extraction_exceptions",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "All ten candidate results validated against schema 0.1.",
+      "gate_id": "candidate_schema_valid",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Primary and repeat canonical bytes matched for all five sources.",
+      "gate_id": "repeat_outputs_byte_identical",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "All candidate hashes matched the preparation manifest.",
+      "gate_id": "candidate_output_hashes_match_preparation",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Source, predicate, commitment, and total candidate counts reconciled.",
+      "gate_id": "candidate_counts_reconciled",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The exact five strict annotation matches and zero S002 matches reconciled.",
+      "gate_id": "strict_matches_reconciled",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "TP 5, FP 173, FN 20, exact fractions, and duplicate zero reconciled.",
+      "gate_id": "exact_metrics_reconciled",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Formal owner outcomes were three passed, zero failed, and zero pending.",
+      "gate_id": "owner_assessments_complete",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Owner judgments and automated diagnostics retained separate fields.",
+      "gate_id": "owner_and_machine_provenance_separate",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Three automated challenge diagnostics remained passed.",
+      "gate_id": "automated_challenge_diagnostics_reconciled",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Reproduction used the protected merged v0.4 semantic implementation.",
+      "gate_id": "no_post_v0_4_semantic_change",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Protected source-independent v0.4 rules retained their reviewed hashes.",
+      "gate_id": "source_independent_rules",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The 25-fact sparse-gold limitation remained explicit.",
+      "gate_id": "sparse_gold_limitation_preserved",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "No held-out semantic annotation object was loaded.",
+      "gate_id": "held_out_semantics_not_loaded",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "The transaction carried no held-out execution authorization.",
+      "gate_id": "held_out_execution_not_authorized",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "All fourteen future outputs installed as one successful transaction.",
+      "gate_id": "output_transaction_complete",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "Candidate, report, record, and freeze identities cross-reconciled.",
+      "gate_id": "artifact_identities_agree",
+      "outcome": "passed"
+    }
+  ],
+  "production_readiness_claimed": false,
+  "provenance": {
+    "candidate_schema_version": "0.1",
+    "corpus_version": "stage1-corpus-v1.0",
+    "experiment_id": "deterministic-baseline-v0.4",
+    "finalization_implementation_commit": "d798868bd8b66a30babfc1b14450fb253f2dbc63",
+    "input_references": {
+      "blank_template_sha256": "33991E3BA481FE4079EFAF9C6E938BB347F058F8AA2870ED92DD505FA790F859",
+      "comparison_report_sha256": "AD7DC43386A693553240587367ACCB84A3BF353FAFB8930575CDB484E2A8D8B8",
+      "completed_assessment_sha256": "8B1BEE334AAE3A1F3AF6A5DF8B9FBC039FE9DB79BBA9CEC931BE019DA68D7419",
+      "config_sha256": "6D659638C732102D3CB4AB77DDE17229E1E36129245266F213D7FA29217A405A",
+      "diagnosis_report_sha256": "FC8EEFC61B307538948438ABBFF96F1280F1A9006DFFF56ED81A49FD69DE9573",
+      "independent_review_record_sha256": "58455CA84300C94D0DCB1AEAF0EC30023BB22EF4FDC1BF598A77DA40AAC9E0D9",
+      "matching_implementation_sha256": "D3FA0EA195381586064E6716D0141B25BCE0A861CE9B8192FEAF26D818A554EC",
+      "matching_protocol_sha256": "18FD851347B395C2D54B6B02B632E94D3C4B15CFBD16A31C04EE2923D0991530",
+      "owner_markdown_record_sha256": "8F0ECA3E37A97198CE8C24737274317F2394077F7F71EB6860132D530411D309",
+      "owner_validation_report_sha256": "D7940A01E30FF1F0B735CCE94504BC76A23F0EB1BF6454F6264D7D56ED557E94",
+      "preparation_manifest_sha256": "A401ABCEB77D9B73557283D12770DCF33E04E6DED7EEFE361719DF70678AB844",
+      "public_gold_cases_sha256": "328844F6CD1D5E74A62FEC37B912D807FD3ABFFCC6F935A7985A5576C802A237",
+      "public_gold_facts_sha256": "CA38D77B323220D5E51877F87D4BEAD901A0DE6A3493EDBFF6AF691C2027A690",
+      "review_packet_sha256": "0C95A1961E8C73409D9737E0C6A6DCB5AEEFDC3933CD75D10D78B650DD57B56E"
+    },
+    "matching_protocol_version": "0.1",
+    "owner_assessment_merge_commit": "d9cddfd21a302151213ea5cde27f400a382e1e64",
+    "owner_review_preparation_merge_commit": "36fe312ef07716a3597ea62a5d146a12b1c9312b",
+    "parsed_document_sha256": {
+      "S001": "F688930865E34C738B848169BF7C53A8F5373D7555119B747D9731A2DFD74ECE",
+      "S002": "39A8E6C106480A72CF907E3981D38CC2D84E6E4197DE7F791945C20F32881D4C",
+      "S003": "8002DC78C9F6716156226FB48F6E673CB71F65ED914B474D8640BF4A095801E0",
+      "S004": "268F07D63B0202100E0131A30EAF122554435520F9228E752DC35E4AAB8A83D2",
+      "S006": "D1BDB1166506E7C9A1A4725D374585BFC69A07A5D744C95D09B1DECCD766BCE2"
+    },
+    "parser_commit": "71148262f094d54ec7d95e45958bd1aaefc64793",
+    "predicate_vocabulary_version": "0.1",
+    "primary_candidate_sha256": {
+      "S001": "2D7668A267586A1B370C23FB856A94D39D661137ED3217B3102569ED5CDA0AD1",
+      "S002": "3DD2760F0398E88E624F77168197CBB41B99635E32211075FBB907ECBA011C92",
+      "S003": "9CB4151E66B80C5FCF25E7102C3B5A9B233D767FF0524261BD04C9C0FFCC670B",
+      "S004": "30522C9B3D285CF099AAB4F3F512B6F843340BA5FECD1BB7E58AE0085731D243",
+      "S006": "7E6DF1EAD8F9BA4F95A5F53AC8D36B55D3B537BDE14FB083CEE6395717664C98"
+    },
+    "public_gold_version": "public-gold-v0.1",
+    "repeat_candidate_sha256": {
+      "S001": "2D7668A267586A1B370C23FB856A94D39D661137ED3217B3102569ED5CDA0AD1",
+      "S002": "3DD2760F0398E88E624F77168197CBB41B99635E32211075FBB907ECBA011C92",
+      "S003": "9CB4151E66B80C5FCF25E7102C3B5A9B233D767FF0524261BD04C9C0FFCC670B",
+      "S004": "30522C9B3D285CF099AAB4F3F512B6F843340BA5FECD1BB7E58AE0085731D243",
+      "S006": "7E6DF1EAD8F9BA4F95A5F53AC8D36B55D3B537BDE14FB083CEE6395717664C98"
+    },
+    "semantic_implementation_merge_commit": "4e6a7af3cc4ad86b157485d99cd6cdd472e4a4bc"
+  },
+  "public_gold_version": "public-gold-v0.1",
+  "semantic_implementation_merge_commit": "4e6a7af3cc4ad86b157485d99cd6cdd472e4a4bc",
+  "sparse_gold_limitation": "The selected 25-fact development gold set is deliberately sparse; strict unmatched candidates are not independently confirmed semantic errors.",
+  "strict_metrics": {
+    "duplicate_candidate_count": 0,
+    "f1": {
+      "denominator": 203,
+      "numerator": 10,
+      "value": 0.04926108374384237
+    },
+    "false_negative": 20,
+    "false_positive": 173,
+    "precision": {
+      "denominator": 178,
+      "numerator": 5,
+      "value": 0.028089887640449437
+    },
+    "recall": {
+      "denominator": 25,
+      "numerator": 5,
+      "value": 0.2
+    },
+    "true_positive": 5
+  }
+}

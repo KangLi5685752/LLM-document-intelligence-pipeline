@@ -1,0 +1,2438 @@
+{
+  "batch_id": "V04-BATCH-7530B6B84B096F920A9ABFE128A78DB0BB726506067EB34E4978C371DB7A58C4",
+  "candidate_facts": [
+    {
+      "candidate_id": "V04-CAND-00A927B172D74960DF5F33C5054A45DBC7A51E68D7279B97D1AE4DE931A9A111",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-CB62436E2AC0706D9BF7F54CF26CFC892F3717F3B3153FE5C2A60514E5A9134B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 1.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "just_over_third_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "1%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Just over a third (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-01CDDEE93474093DABB9DC73A1673D10C95C6449C7514F36390169A8A52FC54F",
+      "confidence": 0.9,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E82A0C9E736822566B5ADC1A12255FB3BAC1655BC09DB268656B8E781681E1F2"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 9.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "survey_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "9%",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "survey",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-01EEC4D8A1499019946FA58D5B9FC0AF96C0FB414CA4854D23E5E4BF28EE4061",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E775A30C9B71B646B27C4B7ED40374E02866C6C07B512508164BAF6CA2D57DEF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 21.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "use_ai_in_next_1_2_years_compared_to_medium",
+        "unit": "percent"
+      },
+      "raw_value": "21%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "use AI in the next 1-2 years compared to medium (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-02723E53F2F1C4C83DBFF7DAFD070C5613F4E174BEC0732EB38C34664F98776B",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D304C00D6324E58BA4B71652FEF7D977BCD7C462981346EEA235496E8AACAC18"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 15.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "report_using_machine_learning_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "15%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "report using machine learning (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-0E3C7D7B6E0BE39F2CD0221251FF665158FC84BC36CD0DD8489319BFB3D59407",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E11D285E9BDFA220E35988A1CABAC73D0D36411499B8ED5D3138FF47ACD170F3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 57.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "three_quarters_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "57%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Three quarters (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-0E7EDFF9911C2E1FB6A171D7B8A4D6B67076DA4BF8DD45BCBCF5F4CC1CCB4E23",
+      "confidence": 0.9,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-096B2CE31A77DB5BA3C9783DC4C39FA9CE82C3F2457DAE17D95DEC5682389B20"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 13.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "large_businesses_percentage",
+        "population": "large businesses",
+        "unit": "percent"
+      },
+      "raw_value": "13%",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "large businesses",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-0EB65E3A7270EF4C07179B3869C8279E32C76ED2C752FF45E6917CA21E132950",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-A351653E9D5BDDFDD6BEE2916CB58EAA599D34F654D89CE8528596B953B56CBB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 6.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "around_third_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "6%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Around a third (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-101BCCDD96ECDB0A4804AE924B06E867BC4CBB6E0AD80A859F6604B230423E2C",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-74D0878ED3217DFD338ACACA996806BDD25AA51B7B04B77E5374227E23BBA63D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 3.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "application_engineering_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "3%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "application/engineering (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-11C0691D6091D8D64388482CA1FCD9B90916B64B91A055FC996051DF4FBEA824",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-A351653E9D5BDDFDD6BEE2916CB58EAA599D34F654D89CE8528596B953B56CBB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 32.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "around_third_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "32%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Around a third (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-1301CFAA4D631527EF0919ECFF06FB04861B718F0FCC8BCBB57DEF8C0893DED2",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-A21499A49500A83925404F6232CF45C790B5E1BC2DF97E928D1732F1C1197A7E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 39.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "unclear_or_uncertain_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "39%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "unclear or uncertain (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-13306B019B789A4EBCA9EEB64156028701D3BF854D6FF2C3BE0B4A69A6CC85E7",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-0EDFF309DB7F2387F8E3F2FFA0ECF958F67744A65565F3F16CA86CCE730B037F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 18.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "this_compares_to_average_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "18%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "This compares to an average of",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-1435DAB2EE197A906BEB0F4B94E918EBDD2732E9AA306D3974E8904B425A9C0E",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-ED7D41AF12E1EAE2261B0F69FE1B7060CD88A817DCFBF0D288DBE16A9A31D91F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 67.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "generation_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "67%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "generation (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-14ACE54C780F7B791A379F090E40F8D23F060C647B503C430E6043FD505EEEBF",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-C234E158F474766746EE80BCD77A2F4AB4EE23DC54C8F19D4AAD9E8454319534"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 47.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "creation_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "47%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "creation",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-2273E625EAC01F078A38E9A16414869C444DC505AFED919A6B32346DF2E5BB32",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-5BD38EBDE96375EAF5835B5375DEEA9F1D774F8F133811BD0AB9DF5F49C82476"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 75.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "businesses_expected_increase_rising_to_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "75%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "businesses expected an increase, rising to",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-22E412B83FE804FFDC2099DE936154FBDFAE0963C8559E11BE448D232251112A",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-12BD26DD13A53EFB2CF210DF7729A5C499E322DD7EF77FAE6E467C3E58214C2F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 59.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "applications_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "59%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "applications (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-2425F5B4BD6A46B21C764543A220A74A1350022CE18BCF07B424BD149CAA7A37",
+      "confidence": 0.9,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-EECA326F3CCBC2D402173E63A3F38BA361026EE33E2282D706173016B03FDB02"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "agreed to be contacted to take part in a follow-up interview.",
+      "predicate": "decision",
+      "qualifiers": {},
+      "raw_value": "agreed to be contacted to take part in a follow-up interview.",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "survey and",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-2D0FAE394BB9296A2252EEBDD139F2FCC9DBE10542E90006C34D7D16ABA9341C",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-0E38D4ECFB96D9CF0D738261356D35E2F05FA81751402F751533AFD7BC5A4AB1"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 39.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "frequently_reported_among_large_businesses_with_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "39%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "frequently reported among large businesses, with",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-34B1E96F9299775C0E056A648E10C57817B6FE626C537FFDD3388AA76968D4E3",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-2E4923976EA893204545FAF7D77D1927C711E949F504959189F6421429D195E7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 19.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "organisations_in_construction_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "19%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "organisations in construction (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-382C380406CA48D3386BB1251A9F33E4BB1B61A486CFF96DA058117B1BE02A0E",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-42F1BF68E876AC4810425DBDFB734FFA2679009FA929F5BAA90D807A89D55FBF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 36.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "large_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "36%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Large (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-39DFEF555EBFC106D2B153B8C1EAAE1674B8372D330A74F6E5946DD93725A87E",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-5BD38EBDE96375EAF5835B5375DEEA9F1D774F8F133811BD0AB9DF5F49C82476"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 67.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "businesses_expected_increase_rising_to_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "67%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "businesses expected an increase, rising to",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-3C6611CCDB3D8011090066618C929BA5431D57DDDA67586D70ABA859E61478BE",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-02473A4B2536B782B22D21B9229226B1A78132253CBEAEF3942B6BB91F20A843"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 13.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "just_over_half_organisations_already_using_ai_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "13%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Just over half of organisations already using AI (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-3CDF4D477814860BD623D44FC72B7083077D10E608142B529FE41557AD27323B",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-4B50C930518D357B01148975C451ED1AAB0F96B702649B5BCB298B04F31186A2"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 12.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "workforce_tasks_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "12%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "workforce tasks (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-3CE77B072F39FC76BA50D37F55A980D57A06E220CA96318B7094071B51DE38C2",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-76A1F239747C6250AD12F0F8DA47990FB7877542A2A081A97AE2162076A4B8E6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 43.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "reductions_in_production_or_operating_costs_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "43%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "reductions in production or operating costs (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-3E458E2E0F24449A5359B18B343A0C11914E986E004702ACBA8E8DE62240308D",
+      "confidence": 0.9,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-63F3CABB544FDA88E015BE0DAF48C187F0A0FC72F61C32D21D7F60950C409494"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 30.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "staff_percentage",
+        "population": "staff",
+        "unit": "percent"
+      },
+      "raw_value": "30%",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "staff",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-3E659FE94A1C28CE75B591D19FDD97B7E4D57AB174B0BF37430EF405CAB3F31D",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-0324BF97776EFBBEDF94F4F53D9C9FA1FC3239EEB523CC477600A7CC27FC41AF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 10.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "sectors_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "10%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "sectors (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-3EE5038F63A115EB6BFEEA045CA24F7C87EBC59BA87B0123DFC8B684E0DFE015",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-0324BF97776EFBBEDF94F4F53D9C9FA1FC3239EEB523CC477600A7CC27FC41AF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 5.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "sectors_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "5%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "sectors (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-41F9765BC6E8DEAA525FAF23D80F42D36EAC12DEFEADB72B8E85AF4EB51B978D",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-FFA185B7A195DC6B240736A09139D633F5C522124D199D8D8A437252BFBAFD67"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 34.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "to_adopting_ai_more_widely_across_their_whole_organisation_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "34%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "to adopting AI more widely across their whole organisation (",
+      "subject_type": "organisation",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-48A8F64100B97A1D6C2297C93125CB6A68D7FDB4B80E0731A61B5F6EB12238FA",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-57426880EF706C48D13BBA7FBAD321DDEDE2215F4DDA8C55C3851B70D2BA47D0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 27.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "quarter_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "27%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "a quarter (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-4A0285CA6666E1BE468C0913A88D49E2E9E8DD32E291EF68E3C72BCC28977706",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-C3F3F4F284F367D66D6DABBC4EC609A550FF5B9D2810E6E4258E19C01184BB09"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 69.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "energy_sectors_were_more_likely_to_report_limited_ai_skills",
+        "unit": "percent"
+      },
+      "raw_value": "69%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "energy sectors were more likely to report limited AI skills (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-4E44C6A031D73DBBDD4CFABDB9AC6F1CEFC5587F86A536F6CFB202935388EF41",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D15862FA77B1B9DE139F44AF7B1B37043D10EC5BE530BCF20B0598F15A6E4216"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 70.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "by_large_businesses_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "70%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "by large businesses (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-5093FE7D66B8DB75F3782D2BA476F8AB33A4C2C371F91FA7AEE3F652A5783B5B",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-43370A22F72ED8D76F7A9C37370B2B7E557D103AD9EEB71987CD607484C7A0EE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 88.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "across_sectors_those_in_construction_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "88%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Across sectors, those in the construction (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-54A0E60B1D4A1E578F5F2053EBD2C0B0DA87DD0B03F8CD476F7B4A0186D2AFE0",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D3521DEBE39D7F1B791B66827E7E487FB1E391D0EA55D5D525C3823100DE5483"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 3.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "using_it_few_times_year_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "3%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "using it a few times a year (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-569E21F49387BE97AD1ACD2E7104B015A86676C663DA40F6967EEBE51AF4EC12",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E23D7D1AEED01DCFA9EA2D08231AB86477B88163CB2BD82EC754C35E1CC4461E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 86.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "catering_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "86%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "catering (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-57667DD24042F82E11D9097672ED45EA70ED6C1FFC55A8383075DC8FE0794650",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E775A30C9B71B646B27C4B7ED40374E02866C6C07B512508164BAF6CA2D57DEF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 19.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "use_ai_in_next_1_2_years_compared_to_medium",
+        "unit": "percent"
+      },
+      "raw_value": "19%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "use AI in the next 1-2 years compared to medium (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-5CFF384658DF2B629F50B0E38E840356BD4F62799049CA60BEDB3B1353433BF0",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-65F0FFC3E54199E2E825D51BDCE9C395F7588ECB8541D5634A075261F696159D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 87.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "large_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "87%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Large (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-6052B747D1795173F5B6A917AE3F7551E359DB3BB00E360669FD01F5B6887669",
+      "confidence": 0.9,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-458115668F1936688E44C5245E67A6E02B2532A1644853C00C60F4D06F4E35D0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 38.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "their_staff_percentage",
+        "population": "their staff",
+        "unit": "percent"
+      },
+      "raw_value": "38%",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "their staff",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-6543D76B7A6609696E00503E51079211CE070258D512DA0B94B47B4C09AA6712",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-A21499A49500A83925404F6232CF45C790B5E1BC2DF97E928D1732F1C1197A7E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 43.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "unclear_or_uncertain_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "43%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "unclear or uncertain (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-68ADC9456B7B7B31C2A9CC37EEDFC21BC3199CAE6F84FAD5937321E6A718801F",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-F45904FC6006BB852B625196D05A05B4700C16E04C1964F3E91FF3864C4406C8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 33.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "among_this_group_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "33%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Among this group",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-7DE2F6856650F2C594C10A6ED920D7C445DF4E1F7E9EB55136B7C7B85408C21D",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-3292EA673369F7CE1BA177E974472C6FA49C3818B73A494F37918B12632F75DA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 90.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "storage_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "90%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "storage (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-7EB79761DC58D4CD93B870DA06169E3188ED82323A594560FB6107228EB6E27D",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E23D7D1AEED01DCFA9EA2D08231AB86477B88163CB2BD82EC754C35E1CC4461E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 74.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "catering_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "74%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "catering (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-82ECA1C4F181E55014A6D6FEF1D7EE70590141D6FED386F70CF21703CF2F017C",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D15862FA77B1B9DE139F44AF7B1B37043D10EC5BE530BCF20B0598F15A6E4216"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 84.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "by_large_businesses_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "84%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "by large businesses (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-83C1C574656078FDAFD742D02C0D79A68963B7A8C038BAFFDF7C6D3D6779B0A2",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-F45904FC6006BB852B625196D05A05B4700C16E04C1964F3E91FF3864C4406C8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 32.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "among_this_group_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "32%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Among this group",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-8415BB55698EFC5B0918670918201F9234539C1E8E22340E76327E9B4E613C99",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-FD1A5B140B82402C6986AF269158CDF35F467CEA96FC3649474EEBB955678D59"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 72.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "barriers_were_high_costs_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "72%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "barriers were high costs (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-84AEEBF88EA00139C6541EA287045B1A05B290A0DC0C67FDEF4DF9294675165E",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-44D91397B7776062E849A05A08936EE2F8CE5A7E14E8F4F14EE9AEF94D4F168A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 25.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "businesses_overall_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "25%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "businesses overall (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-85181397D1E8E44058BB2D593BEBE986186A93D8A8EFE33C25D63004994746C0",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D301D194281AFC5531E163072286801514E28BCB9F5E147A5727C3F7B0BE8E7F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 43.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "micro_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "43%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Micro (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-882DE49C35CC9E0F3A785BC24271EC4D286418850EA175CDED43B73B2FA3C646",
+      "confidence": 0.7,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-1D5CBB1374DA1C0AE53D9281089E25C80D7AF6190A943545158AEF4157C4ED71"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Plans to adopt in the future, or has no",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "plans to adopt in the future, or has no",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "organisation is currently using it (including piloting), not currently but have",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-8D6DF6A7DBC796E10E93BEAFB48099F3B0A53C39CAAD735EB6A474C898676111",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-FD1A5B140B82402C6986AF269158CDF35F467CEA96FC3649474EEBB955678D59"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 76.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "barriers_were_high_costs_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "76%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "barriers were high costs (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-8EDE8BBB980F76567246D8223382BF57EFBFFA3ABE21FBFBFEA3A40FE8986F0F",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D6E834791D74A7F2EEFB63BF898C047D403D4284537ECAED7AEE303839F1DFA0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 52.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "next_12_months_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "52%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "the next 12 months (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-961FF13C6C2C1C6C638572DAD417F9DD1FAE01892F41B5390519C790503E324D",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-C45E64447DAC1DD66BC272C5B025B46A723C9A9A4654E6D1F0B42051E1E0D2B0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 64.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "marketing_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "64%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "marketing (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-99E48E0EEBCB0C5F592205B4383D2CD231F92EFB49643D94AC31F0B10A71B06A",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-12BD26DD13A53EFB2CF210DF7729A5C499E322DD7EF77FAE6E467C3E58214C2F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 65.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "applications_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "65%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "applications (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-9B04192888BA070488DE25D6E36DA34A676FB1EEFC25DE660FBA5B554700BAFF",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-4B50C930518D357B01148975C451ED1AAB0F96B702649B5BCB298B04F31186A2"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 16.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "workforce_tasks_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "16%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "workforce tasks (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-9C582AE452864C871EB13FD2ED6669AB0632185DB2DED7D4312CF7DF84188B23",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-43370A22F72ED8D76F7A9C37370B2B7E557D103AD9EEB71987CD607484C7A0EE"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 86.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "across_sectors_those_in_construction_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "86%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Across sectors, those in the construction (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-9D15CD7075CF7BF5365F2AD9A0CFCC3DE305EC21A0EED59D0401FAD9CECEE3C8",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D15862FA77B1B9DE139F44AF7B1B37043D10EC5BE530BCF20B0598F15A6E4216"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 81.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "by_large_businesses_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "81%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "by large businesses (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-9E337CC60ACBB4BD40A849CFEC283F4E0E542DC13428EAE35553D1359D24D1C5",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-2E4923976EA893204545FAF7D77D1927C711E949F504959189F6421429D195E7"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 23.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "organisations_in_construction_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "23%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "organisations in construction (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-AB8E710FC5F1627DC689719BD7BC4D6B41DFF1D0275AF26CC1C86A63E04B8141",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-9766805F72EC04FC4CCB1A5A031B73043AB54843CB7BFEB7D014B9777E01AB8F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 64.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "in_marketing_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "64%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "in marketing (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-AC8015616FD43DA0828ACCCD3698FFC90D0E0B0BBDF17DD379745C241D5BE95A",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-0324BF97776EFBBEDF94F4F53D9C9FA1FC3239EEB523CC477600A7CC27FC41AF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 12.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "sectors_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "12%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "sectors (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-B90C927A71393247B6EBDE56CB44F535A3566C16F31E99D330644BEC1A4546D1",
+      "confidence": 0.9,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D58BE068EC18876A59D98474132BA26ED8B8F4E9ADCD8CB5438DC6415A947F49"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 34.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "businesses_percentage",
+        "population": "businesses",
+        "unit": "percent"
+      },
+      "raw_value": "34%",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "businesses",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-B92FF70B6DAA97E1CD40F57B087522E64EDE54FF15B4CF005A1F1067BC612798",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-42F1BF68E876AC4810425DBDFB734FFA2679009FA929F5BAA90D807A89D55FBF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 23.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "large_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "23%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Large (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-B939C38EB34F20391243040345CC71B9432BB5833A05EC12DE29B302A10E83AD",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-C3F3F4F284F367D66D6DABBC4EC609A550FF5B9D2810E6E4258E19C01184BB09"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 37.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "energy_sectors_were_more_likely_to_report_limited_ai_skills",
+        "unit": "percent"
+      },
+      "raw_value": "37%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "energy sectors were more likely to report limited AI skills (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-BE5720F58BDA23DEE651CB879865BE457E9AC6E50BAF646C0BA1237CF0C767E7",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-C45E64447DAC1DD66BC272C5B025B46A723C9A9A4654E6D1F0B42051E1E0D2B0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 72.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "marketing_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "72%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "marketing (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-C08CBA88F40CB79BD8988C690C38FFC3E77EF8D011221AF96F126DADF664FCDD",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-76A1F239747C6250AD12F0F8DA47990FB7877542A2A081A97AE2162076A4B8E6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 29.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "reductions_in_production_or_operating_costs_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "29%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "reductions in production or operating costs (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-C597F7E57BCA25C897174F6E1308F41A21AB46623C81B38432E993A036033838",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E11D285E9BDFA220E35988A1CABAC73D0D36411499B8ED5D3138FF47ACD170F3"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 75.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "three_quarters_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "75%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Three quarters (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-C61E989471E95E6009654DF33EC1ECCB59F21135EDFA69FE37F388EF1A7CF652",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D301D194281AFC5531E163072286801514E28BCB9F5E147A5727C3F7B0BE8E7F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 32.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "micro_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "32%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Micro (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-CB3E18EF7A2C8A7E868C3FE5D700BD42D9634733AB3697C4BE37A99D171B2412",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-9766805F72EC04FC4CCB1A5A031B73043AB54843CB7BFEB7D014B9777E01AB8F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 72.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "in_marketing_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "72%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "in marketing (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-CC584D5D77E402C8974A5E51CBF5A3CAD68FB3AC95FA62970127ED11D8677573",
+      "confidence": 0.9,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-602C5D88BA5143E080892FBF79B4DA6367BBA578B0D979A8D335D00C5CF86368"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must involve",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must involve",
+      "review_status": "not_required",
+      "source_id": "S006",
+      "subject_text": "For businesses, safe AI usage",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-CECEEEDD83C2426445697F38290844D114C2D5518E2BD11744A90BF223C7D909",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-E23D7D1AEED01DCFA9EA2D08231AB86477B88163CB2BD82EC754C35E1CC4461E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 76.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "catering_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "76%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "catering (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-D296E489960AEA20506A310F49FCC9122A13D6B37F8B4FA6528245B989F006E4",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-44D91397B7776062E849A05A08936EE2F8CE5A7E14E8F4F14EE9AEF94D4F168A"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 61.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "businesses_overall_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "61%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "businesses overall (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-D2D5F00226A01B2FBB94DD779F492AB93577088E559DA0F4343CFFB88EE17C3E",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-A351653E9D5BDDFDD6BEE2916CB58EAA599D34F654D89CE8528596B953B56CBB"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 12.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "around_third_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "12%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Around a third (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-DC8A7461E9DF04060F0CC3234ADADFEE0D4849344AFEDC1050383C37D0EF0A3F",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-CB62436E2AC0706D9BF7F54CF26CFC892F3717F3B3153FE5C2A60514E5A9134B"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 35.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "just_over_third_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "35%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Just over a third (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-E1312F9224EF57B82C09D9A242D3CB2326D2CDDCCADD1F73843AD04B1BAB62B4",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D3521DEBE39D7F1B791B66827E7E487FB1E391D0EA55D5D525C3823100DE5483"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 2.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "using_it_few_times_year_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "2%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "using it a few times a year (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-E2F4B5EAB36A95C9C8D2C87E2F8CEEA590BFAF4EDC0E56E1A96FDAE380D91C77",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-74D0878ED3217DFD338ACACA996806BDD25AA51B7B04B77E5374227E23BBA63D"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 1.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "application_engineering_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "1%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "application/engineering (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-E2FAD121012CC6D813F77032C3A9F2026D2F9456A0217AD7F6A0337963019295",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-0E38D4ECFB96D9CF0D738261356D35E2F05FA81751402F751533AFD7BC5A4AB1"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 46.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "frequently_reported_among_large_businesses_with_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "46%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "frequently reported among large businesses, with",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-E481170009828BAB0EB5735DBFCCC55CD2409BBC743FB42639656159B60DE105",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-F45904FC6006BB852B625196D05A05B4700C16E04C1964F3E91FF3864C4406C8"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 34.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "among_this_group_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "34%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Among this group",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-EAB8236D5DF7D320F46ED410CCB17C6358950FDA958ADC498BDE8D70E55747DB",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-FFA185B7A195DC6B240736A09139D633F5C522124D199D8D8A437252BFBAFD67"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 32.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "to_adopting_ai_more_widely_across_their_whole_organisation_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "32%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "to adopting AI more widely across their whole organisation (",
+      "subject_type": "organisation",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-EAF209FCD6AF29C5BBE03F8BFC022FE9967E514C5BD4DC1BE56401DBAD57CCA2",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-C234E158F474766746EE80BCD77A2F4AB4EE23DC54C8F19D4AAD9E8454319534"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 56.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "creation_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "56%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "creation",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-F136BBE2E4F1EA1C1786B6DC72AD5C54AE58A98142A54390EEA299BF3E0ECE0C",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-64364D589704709154EC578C754939F7050BF44B11EE0442591190190B8C1ED6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 72.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "large_organisations_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "72%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "large organisations (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-F4A97351AD83E881073CD3DB623065571FC145E25AF0205A748E86C959ADD3F9",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D6E834791D74A7F2EEFB63BF898C047D403D4284537ECAED7AEE303839F1DFA0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 48.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "next_12_months_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "48%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "the next 12 months (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-F86357F00AB5E83175A83A763CD528A7FD496193A818CC6C9FD6ED69F799B70E",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-64364D589704709154EC578C754939F7050BF44B11EE0442591190190B8C1ED6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 90.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "large_organisations_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "90%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "large organisations (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-F92B03DA8FDCE6F2DA54BA1E7F27397D645A13F0F2728DA56FDA459F0BAB1789",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-C234E158F474766746EE80BCD77A2F4AB4EE23DC54C8F19D4AAD9E8454319534"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 70.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "creation_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "70%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "creation",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-FAD10F55EF6DC65FA0EB64363459B92F9DE7A0833BE3AF28651FD1CDCB32FE13",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-02473A4B2536B782B22D21B9229226B1A78132253CBEAEF3942B6BB91F20A843"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 54.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "just_over_half_organisations_already_using_ai_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "54%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "Just over half of organisations already using AI (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-FB044808285898E302C0DFF87FE54D91D01DB5A27E20A81C3E8FCD0254252B22",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-57426880EF706C48D13BBA7FBAD321DDEDE2215F4DDA8C55C3851B70D2BA47D0"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 80.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "quarter_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "80%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "a quarter (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-FB877535E704C7856374BD8B7EC453999C291DC4D0ED1A61E47288E497D446E5",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-0EDFF309DB7F2387F8E3F2FFA0ECF958F67744A65565F3F16CA86CCE730B037F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 26.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "this_compares_to_average_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "26%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "This compares to an average of",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-FCA89031F33C23D4010B6490C8E535B2FE81280ED9AB4120925009726129FFE8",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-3292EA673369F7CE1BA177E974472C6FA49C3818B73A494F37918B12632F75DA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 88.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "storage_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "88%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "storage (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-FDE2BEA2039F7262E5C45F412E15E691F2E2BA94BCE806F084428195C8F1B02C",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-D304C00D6324E58BA4B71652FEF7D977BCD7C462981346EEA235496E8AACAC18"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 24.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "report_using_machine_learning_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "24%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "report using machine learning (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    },
+    {
+      "candidate_id": "V04-CAND-FE64D923CDB923156125345CC9C91AA905033B8A147B789A54BAECCC0CCE761D",
+      "confidence": 0.5,
+      "document_family": "DOC-S006",
+      "evidence_ids": [
+        "V04-EVID-ED7D41AF12E1EAE2261B0F69FE1B7060CD88A817DCFBF0D288DBE16A9A31D91F"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": 29.0,
+      "predicate": "metric",
+      "qualifiers": {
+        "metric_name": "generation_percentage",
+        "unit": "percent"
+      },
+      "raw_value": "29%",
+      "review_status": "required",
+      "source_id": "S006",
+      "subject_text": "generation (",
+      "subject_type": "metric",
+      "value_type": "percentage",
+      "warnings": [
+        "ambiguous_metric_value_relationship"
+      ]
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S006-B0007",
+      "evidence_id": "V04-EVID-02473A4B2536B782B22D21B9229226B1A78132253CBEAEF3942B6BB91F20A843",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S006",
+      "text_excerpt": "Just over half of organisations already using AI (54%) feel ready to scale their use, with 13%"
+    },
+    {
+      "block_id": "DOC-S006-B0017",
+      "evidence_id": "V04-EVID-0324BF97776EFBBEDF94F4F53D9C9FA1FC3239EEB523CC477600A7CC27FC41AF",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S006",
+      "text_excerpt": "sectors (12%) and those in information and communication (10%), compared to 5% among"
+    },
+    {
+      "block_id": "DOC-S006-B0029",
+      "evidence_id": "V04-EVID-096B2CE31A77DB5BA3C9783DC4C39FA9CE82C3F2457DAE17D95DEC5682389B20",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "29",
+      "source_id": "S006",
+      "text_excerpt": "For example, 13% of large businesses reported a focus on developing new or"
+    },
+    {
+      "block_id": "DOC-S006-B0031",
+      "evidence_id": "V04-EVID-0E38D4ECFB96D9CF0D738261356D35E2F05FA81751402F751533AFD7BC5A4AB1",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "31",
+      "source_id": "S006",
+      "text_excerpt": "frequently reported among large businesses, with 46% planning to build models and 39%"
+    },
+    {
+      "block_id": "DOC-S006-B0023",
+      "evidence_id": "V04-EVID-0EDFF309DB7F2387F8E3F2FFA0ECF958F67744A65565F3F16CA86CCE730B037F",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S006",
+      "text_excerpt": "This compares to an average of 26% among small businesses, 18% among medium"
+    },
+    {
+      "block_id": "DOC-S006-B0007",
+      "evidence_id": "V04-EVID-12BD26DD13A53EFB2CF210DF7729A5C499E322DD7EF77FAE6E467C3E58214C2F",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S006",
+      "text_excerpt": "applications (65%) and embedding AI into existing tools or systems (59%)."
+    },
+    {
+      "block_id": "DOC-S006-B0016",
+      "evidence_id": "V04-EVID-1D5CBB1374DA1C0AE53D9281089E25C80D7AF6190A943545158AEF4157C4ED71",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S006",
+      "text_excerpt": "organisation is currently using it (including piloting), not currently but have plans to adopt in the future, or has no"
+    },
+    {
+      "block_id": "DOC-S006-B0029",
+      "evidence_id": "V04-EVID-2E4923976EA893204545FAF7D77D1927C711E949F504959189F6421429D195E7",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "29",
+      "source_id": "S006",
+      "text_excerpt": "organisations in construction (23%) and information and communications (19%) were more"
+    },
+    {
+      "block_id": "DOC-S006-B0013",
+      "evidence_id": "V04-EVID-3292EA673369F7CE1BA177E974472C6FA49C3818B73A494F37918B12632F75DA",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S006",
+      "text_excerpt": "storage (90%) and hotel / catering (88%) sectors are more likely to neither use nor have plans"
+    },
+    {
+      "block_id": "DOC-S006-B0013",
+      "evidence_id": "V04-EVID-42F1BF68E876AC4810425DBDFB734FFA2679009FA929F5BAA90D807A89D55FBF",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S006",
+      "text_excerpt": "Large (36%) and mid-sized (23%) businesses are more"
+    },
+    {
+      "block_id": "DOC-S006-B0013",
+      "evidence_id": "V04-EVID-43370A22F72ED8D76F7A9C37370B2B7E557D103AD9EEB71987CD607484C7A0EE",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S006",
+      "text_excerpt": "Across sectors, those in the construction (88%), retail / distribution (86%), transport and"
+    },
+    {
+      "block_id": "DOC-S006-B0016",
+      "evidence_id": "V04-EVID-44D91397B7776062E849A05A08936EE2F8CE5A7E14E8F4F14EE9AEF94D4F168A",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S006",
+      "text_excerpt": "businesses overall (61% and 25% respectively)."
+    },
+    {
+      "block_id": "DOC-S006-B0023",
+      "evidence_id": "V04-EVID-458115668F1936688E44C5245E67A6E02B2532A1644853C00C60F4D06F4E35D0",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "23",
+      "source_id": "S006",
+      "text_excerpt": "Among micro businesses with 5-9 employees, on average, 38% of their staff are currently"
+    },
+    {
+      "block_id": "DOC-S006-B0007",
+      "evidence_id": "V04-EVID-4B50C930518D357B01148975C451ED1AAB0F96B702649B5BCB298B04F31186A2",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S006",
+      "text_excerpt": "workforce tasks (16%), and reducing costs (12%)."
+    },
+    {
+      "block_id": "DOC-S006-B0007",
+      "evidence_id": "V04-EVID-57426880EF706C48D13BBA7FBAD321DDEDE2215F4DDA8C55C3851B70D2BA47D0",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S006",
+      "text_excerpt": "a quarter (27%) said they use AI at least once a week, meaning eight in ten businesses (80%)"
+    },
+    {
+      "block_id": "DOC-S006-B0030",
+      "evidence_id": "V04-EVID-5BD38EBDE96375EAF5835B5375DEEA9F1D774F8F133811BD0AB9DF5F49C82476",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "30",
+      "source_id": "S006",
+      "text_excerpt": "businesses expected an increase, rising to 67% of small businesses, 75% of mid-sized"
+    },
+    {
+      "block_id": "DOC-S006-B0046",
+      "evidence_id": "V04-EVID-602C5D88BA5143E080892FBF79B4DA6367BBA578B0D979A8D335D00C5CF86368",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "46",
+      "source_id": "S006",
+      "text_excerpt": "For businesses, safe AI usage must involve"
+    },
+    {
+      "block_id": "DOC-S006-B0006",
+      "evidence_id": "V04-EVID-63F3CABB544FDA88E015BE0DAF48C187F0A0FC72F61C32D21D7F60950C409494",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "6",
+      "source_id": "S006",
+      "text_excerpt": "On average, 30% of staff are currently using AI."
+    },
+    {
+      "block_id": "DOC-S006-B0035",
+      "evidence_id": "V04-EVID-64364D589704709154EC578C754939F7050BF44B11EE0442591190190B8C1ED6",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "35",
+      "source_id": "S006",
+      "text_excerpt": "large organisations (90%) and less likely to be reported by micro businesses (72%)."
+    },
+    {
+      "block_id": "DOC-S006-B0028",
+      "evidence_id": "V04-EVID-65F0FFC3E54199E2E825D51BDCE9C395F7588ECB8541D5634A075261F696159D",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "28",
+      "source_id": "S006",
+      "text_excerpt": "Large (87%) and micro (87%) businesses were more likely to have at least some input or"
+    },
+    {
+      "block_id": "DOC-S006-B0025",
+      "evidence_id": "V04-EVID-74D0878ED3217DFD338ACACA996806BDD25AA51B7B04B77E5374227E23BBA63D",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "25",
+      "source_id": "S006",
+      "text_excerpt": "application/engineering (1%) and creative process and design (3%)."
+    },
+    {
+      "block_id": "DOC-S006-B0043",
+      "evidence_id": "V04-EVID-76A1F239747C6250AD12F0F8DA47990FB7877542A2A081A97AE2162076A4B8E6",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "43",
+      "source_id": "S006",
+      "text_excerpt": "reductions in production or operating costs (43%), and entry into new markets (29%)."
+    },
+    {
+      "block_id": "DOC-S006-B0007",
+      "evidence_id": "V04-EVID-9766805F72EC04FC4CCB1A5A031B73043AB54843CB7BFEB7D014B9777E01AB8F",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S006",
+      "text_excerpt": "in marketing (72%), administration (72%) and IT (64%)."
+    },
+    {
+      "block_id": "DOC-S006-B0039",
+      "evidence_id": "V04-EVID-A21499A49500A83925404F6232CF45C790B5E1BC2DF97E928D1732F1C1197A7E",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "39",
+      "source_id": "S006",
+      "text_excerpt": "unclear or uncertain (39%), the cost being too high (43%), and data complexity (39%)."
+    },
+    {
+      "block_id": "DOC-S006-B0017",
+      "evidence_id": "V04-EVID-A351653E9D5BDDFDD6BEE2916CB58EAA599D34F654D89CE8528596B953B56CBB",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "17",
+      "source_id": "S006",
+      "text_excerpt": "Around a third (32%) were using two technologies, 12% were using three, and 6% were using"
+    },
+    {
+      "block_id": "DOC-S006-B0021",
+      "evidence_id": "V04-EVID-C234E158F474766746EE80BCD77A2F4AB4EE23DC54C8F19D4AAD9E8454319534",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "21",
+      "source_id": "S006",
+      "text_excerpt": "creation, 70% administrative and support, 56% data and analytics and just under half (47%)"
+    },
+    {
+      "block_id": "DOC-S006-B0039",
+      "evidence_id": "V04-EVID-C3F3F4F284F367D66D6DABBC4EC609A550FF5B9D2810E6E4258E19C01184BB09",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "39",
+      "source_id": "S006",
+      "text_excerpt": "energy sectors were more likely to report limited AI skills (69%) and high costs (37%)."
+    },
+    {
+      "block_id": "DOC-S006-B0025",
+      "evidence_id": "V04-EVID-C45E64447DAC1DD66BC272C5B025B46A723C9A9A4654E6D1F0B42051E1E0D2B0",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "25",
+      "source_id": "S006",
+      "text_excerpt": "marketing (72%), administration (72%) and IT (64%)."
+    },
+    {
+      "block_id": "DOC-S006-B0008",
+      "evidence_id": "V04-EVID-CB62436E2AC0706D9BF7F54CF26CFC892F3717F3B3153FE5C2A60514E5A9134B",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S006",
+      "text_excerpt": "Just over a third (35%) reported no change and just 1%"
+    },
+    {
+      "block_id": "DOC-S006-B0035",
+      "evidence_id": "V04-EVID-D15862FA77B1B9DE139F44AF7B1B37043D10EC5BE530BCF20B0598F15A6E4216",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "35",
+      "source_id": "S006",
+      "text_excerpt": "by large businesses (84%) and those in finance and real estate (81%), compared to 70%"
+    },
+    {
+      "block_id": "DOC-S006-B0024",
+      "evidence_id": "V04-EVID-D301D194281AFC5531E163072286801514E28BCB9F5E147A5727C3F7B0BE8E7F",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "24",
+      "source_id": "S006",
+      "text_excerpt": "Micro (43%) and small (32%) businesses were more likely to expect over half of their staff to"
+    },
+    {
+      "block_id": "DOC-S006-B0016",
+      "evidence_id": "V04-EVID-D304C00D6324E58BA4B71652FEF7D977BCD7C462981346EEA235496E8AACAC18",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S006",
+      "text_excerpt": "report using machine learning (24%) compared to 15% across businesses overall."
+    },
+    {
+      "block_id": "DOC-S006-B0026",
+      "evidence_id": "V04-EVID-D3521DEBE39D7F1B791B66827E7E487FB1E391D0EA55D5D525C3823100DE5483",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "26",
+      "source_id": "S006",
+      "text_excerpt": "using it a few times a year (3%) or rarely (2%)."
+    },
+    {
+      "block_id": "DOC-S006-B0032",
+      "evidence_id": "V04-EVID-D58BE068EC18876A59D98474132BA26ED8B8F4E9ADCD8CB5438DC6415A947F49",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "32",
+      "source_id": "S006",
+      "text_excerpt": "with the exception of Wales, where only 34% of businesses reported feeling ready to scale"
+    },
+    {
+      "block_id": "DOC-S006-B0020",
+      "evidence_id": "V04-EVID-D6E834791D74A7F2EEFB63BF898C047D403D4284537ECAED7AEE303839F1DFA0",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "20",
+      "source_id": "S006",
+      "text_excerpt": "the next 12 months (48% and 52% respectively), potentially reflecting the higher confidence in"
+    },
+    {
+      "block_id": "DOC-S006-B0042",
+      "evidence_id": "V04-EVID-E11D285E9BDFA220E35988A1CABAC73D0D36411499B8ED5D3138FF47ACD170F3",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "42",
+      "source_id": "S006",
+      "text_excerpt": "Three quarters (75%) reported improved productivity of the workforce and over half (57%)"
+    },
+    {
+      "block_id": "DOC-S006-B0024",
+      "evidence_id": "V04-EVID-E23D7D1AEED01DCFA9EA2D08231AB86477B88163CB2BD82EC754C35E1CC4461E",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "24",
+      "source_id": "S006",
+      "text_excerpt": "catering (86%), retail and distribution (76%) and arts/other (74%) sectors were more likely to"
+    },
+    {
+      "block_id": "DOC-S006-B0024",
+      "evidence_id": "V04-EVID-E775A30C9B71B646B27C4B7ED40374E02866C6C07B512508164BAF6CA2D57DEF",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "24",
+      "source_id": "S006",
+      "text_excerpt": "use AI in the next 1-2 years compared to medium (21%) and large (19%) businesses."
+    },
+    {
+      "block_id": "DOC-S006-B0057",
+      "evidence_id": "V04-EVID-E82A0C9E736822566B5ADC1A12255FB3BAC1655BC09DB268656B8E781681E1F2",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "57",
+      "source_id": "S006",
+      "text_excerpt": "survey was 9% (shown in Table 8)."
+    },
+    {
+      "block_id": "DOC-S006-B0016",
+      "evidence_id": "V04-EVID-ED7D41AF12E1EAE2261B0F69FE1B7060CD88A817DCFBF0D288DBE16A9A31D91F",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "16",
+      "source_id": "S006",
+      "text_excerpt": "generation (67%) or computer vision/ image processing and generation (29%) compared to"
+    },
+    {
+      "block_id": "DOC-S006-B0005",
+      "evidence_id": "V04-EVID-EECA326F3CCBC2D402173E63A3F38BA361026EE33E2282D706173016B03FDB02",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S006",
+      "text_excerpt": "survey and agreed to be contacted to take part in a follow-up interview."
+    },
+    {
+      "block_id": "DOC-S006-B0007",
+      "evidence_id": "V04-EVID-F45904FC6006BB852B625196D05A05B4700C16E04C1964F3E91FF3864C4406C8",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S006",
+      "text_excerpt": "Among this group, 34% feel ready, 33% are unsure and 32% said they are not ready."
+    },
+    {
+      "block_id": "DOC-S006-B0007",
+      "evidence_id": "V04-EVID-FD1A5B140B82402C6986AF269158CDF35F467CEA96FC3649474EEBB955678D59",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "7",
+      "source_id": "S006",
+      "text_excerpt": "barriers were high costs (76%) and the regulation being unclear or uncertain (72%)."
+    },
+    {
+      "block_id": "DOC-S006-B0039",
+      "evidence_id": "V04-EVID-FFA185B7A195DC6B240736A09139D633F5C522124D199D8D8A437252BFBAFD67",
+      "evidence_status": "ambiguous",
+      "location_type": "page",
+      "location_value": "39",
+      "source_id": "S006",
+      "text_excerpt": "to adopting AI more widely across their whole organisation (34% and 32% respectively)."
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S006"
+  ],
+  "warnings": [
+    "abstained_action_status_ineligible_subject",
+    "abstained_ambiguous_metric_bounds_exceeded",
+    "abstained_commitment_clause_like_subject",
+    "abstained_commitment_copular_or_passive",
+    "abstained_commitment_ineligible_subject",
+    "abstained_commitment_subject_too_long",
+    "abstained_incompatible_predicate_contract",
+    "abstained_ineligible_actor_noun_phrase",
+    "abstained_subject_span_out_of_bounds"
+  ]
+}

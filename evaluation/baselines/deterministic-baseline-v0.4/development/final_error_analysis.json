@@ -1,0 +1,48 @@
+{
+  "all_unmatched_candidates_manually_reviewed": false,
+  "ambiguous_evidence_candidate_count": 36,
+  "automated_diagnostic_pass_count": 3,
+  "candidate_counts_by_predicate": {
+    "action_status": 2,
+    "budget": 2,
+    "commitment": 25,
+    "decision": 3,
+    "metric": 84,
+    "recommendation": 22,
+    "requirement": 34,
+    "risk": 6
+  },
+  "candidate_counts_by_source": {
+    "S001": 32,
+    "S002": 18,
+    "S003": 13,
+    "S004": 30,
+    "S006": 85
+  },
+  "development_generalizes_to_held_out": false,
+  "experiment_id": "deterministic-baseline-v0.4",
+  "formal_owner_outcomes": [
+    "passed",
+    "passed",
+    "passed"
+  ],
+  "known_limitations": [
+    "Development evidence does not establish held-out generalization.",
+    "Sparse gold does not establish exhaustive precision.",
+    "Strict non-match is structural and does not prove factual invalidity."
+  ],
+  "matched_annotation_ids": [
+    "PG-V01-S001-001",
+    "PG-V01-S001-004",
+    "PG-V01-S003-001",
+    "PG-V01-S003-002",
+    "PG-V01-S003-003"
+  ],
+  "production_readiness_claimed": false,
+  "review_required_candidate_count": 77,
+  "schema_version": "0.1",
+  "sparse_gold_limitation": "The selected 25-fact development gold set is deliberately sparse; strict unmatched candidates are not independently confirmed semantic errors.",
+  "strict_false_positive_label_is_structural_only": true,
+  "strict_unmatched_annotation_count": 20,
+  "strict_unmatched_candidate_count": 173
+}

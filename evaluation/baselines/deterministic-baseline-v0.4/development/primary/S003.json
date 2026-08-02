@@ -1,0 +1,401 @@
+{
+  "batch_id": "V04-BATCH-5C84691F4A25D92882863326BFE342F07A477487C04E26521BF6D0D61A7729C7",
+  "candidate_facts": [
+    {
+      "candidate_id": "V04-CAND-0E93080DF2F29A54967563949016D082F427A8F342A724E94952E7C1579CC640",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-0D757551EFDC0BF2B5E712469BCF718352D301F33DCCEC0A0CD6F2FB08E72C22"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Invest in and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will invest in and",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "delivered by the Department of Science, Innovation and Technology, and",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-2245F033E38E8C320442EEAE9D9F90A0D658E09AAC26422380140C74C6FF6CB7",
+      "confidence": 0.9,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-9DB42623AD4A35ACFC6F802994CFF349927E2D08BF967BB457067606DFF19F89"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": {
+        "amount": "600000000",
+        "currency": "GBP"
+      },
+      "predicate": "budget",
+      "qualifiers": {
+        "budget_status": "committed"
+      },
+      "raw_value": "launch of the Health Data Research Service: the government and Wellcome have committed up to £600 million",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Health Data Research Service",
+      "subject_type": "programme",
+      "value_type": "money",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-2BA45A8F9D3E737F063CABBF09B5B2151968FB1D8B6941D725EB07FA60DCB735",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-2020C3D20E55F1A6CE03BEF8453F5CC8FFF4F48A33C83185F9C8F3E3ABCA24FA"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Launch the next phase of the Sovereign AI Unit in April 2026.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will launch the next phase of the Sovereign AI Unit in April 2026.",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-2E79FC62400F8B1CD9AF295B67E07003D00616B17568B88ED727E33D0F799E04",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-2303FEBAA5DE67821CA9F887F3CB96EC22C9FE2679C791EA252DFAACB19035E6"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Take proven AI tools in public services – from diagnostics to planning to digital assistants – and scale them nationwide so people everywhere can benefit.",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will take proven AI tools in public services – from diagnostics to planning to digital assistants – and scale them nationwide so people everywhere can benefit.",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Department for Science, Innovation and Technology",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-3A5E42329E3E046C56A47CFF79DBC41388AA1E5135FA6B64FE996342FEB37CAE",
+      "confidence": 0.9,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-DF917F89C3AA309C994FC90AC8944770817879E9B8B09878A2EE2526E1ADC424"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "38 of 50 actions met",
+      "predicate": "action_status",
+      "qualifiers": {},
+      "raw_value": "Commitments met against 38 of the 50 actions.",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "AI Opportunities Action Plan",
+      "subject_type": "policy",
+      "value_type": "status",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-444723DA1D7E1927015DB216317BD7A6C76EAA9F0BE3A0A8C24F914555328332",
+      "confidence": 0.9,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-EB0B14865E9D68635B6FC76F3372947906DC5653F0FC6B6E8E15EB6862387CFC"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": {
+        "amount": "187000000",
+        "currency": "GBP"
+      },
+      "predicate": "budget",
+      "qualifiers": {
+        "budget_status": "committed"
+      },
+      "raw_value": "have committed £187 million to TechFirst",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "TechFirst",
+      "subject_type": "programme",
+      "value_type": "money",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-8E2CB50F10109479FE8B2B6067ADBE440C08FA8502018304122769654A89EE10",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-90B3FB5278198AA1D192434EB6A5C758F7FCBBBE4252BB583DC37202D5A290FF"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Provide the best analysis and",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will provide the best analysis and",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "panel of experts from business and trade unions, the unit",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-970A47AE27DBA9104531751CE73D83C339BC3A0A95F6ADFF02F0EA7169AF65AE",
+      "confidence": 0.9,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-71EEF2E115D67067FD00611B31514DA87B9106A4AFB7D78648719C23E2D5AF38"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "must make sure these technologies work for everyone, supporting growth while",
+      "predicate": "requirement",
+      "qualifiers": {},
+      "raw_value": "must make sure these technologies work for everyone, supporting growth while",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "We",
+      "subject_type": "other",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-AB1C9D3EE03BB611AA8BC5D6A0CE7E6DC376C985444AE0BFF94CA063172068A6",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-7CF885F6F9BD7B9270030E70F51F77DDD53D278E4C403D027707D8E924D6F44E"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Scale to support up to 900",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will scale to support up to 900",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "The government",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-AF026CB9CF0628A17A1857B54E7A9160BC8688DF78CBE14BEFA658B6E92756B3",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-C224FCB0AEB608C30DAC0EA78E79A26FD8B69E3B9FB44719592DF9471D2CFAC5"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Publish a plan",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will publish a plan",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Following strategic guidance issued by the government this year, regulators",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-D5D1384E4D0DBCC6440CC3DCF812411C7544F486CE9A413AEEACFC1E88E9EABA",
+      "confidence": 0.9,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-E97C17225776A0CF038074B86D6928955D13F40C7B4A187B030D480CED16D825"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "delivered",
+      "predicate": "action_status",
+      "qualifiers": {},
+      "raw_value": "delivered",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "Future of Work programme, to be",
+      "subject_type": "programme",
+      "value_type": "status",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-EE48B42AE45A95D6168457346ED00534C6C19EF9CF6A000A4A693AA84A2E5199",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-F6BE5258A9B7017DB3980CED3CE649E9FD018D4E2C4F48D024B852A29723B397"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Plans to expand Innovate UK’s",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "plans to expand Innovate UK’s",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "At Autumn Budget 2025, the government set out",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    },
+    {
+      "candidate_id": "V04-CAND-FDE582B43C7E87ADC7165654F31007B4F64143E8A3ED27AF0177C4D9729DA835",
+      "confidence": 0.7,
+      "document_family": "DOC-S003",
+      "evidence_ids": [
+        "V04-EVID-C188ACE59652FE96C9B5B8AC822CC3EAAB51C40C482274428397B216DA60D9F4"
+      ],
+      "extraction_method": "deterministic",
+      "normalized_value": "Also procure to increase the supercomputer capacity at the",
+      "predicate": "commitment",
+      "qualifiers": {},
+      "raw_value": "will also procure to increase the supercomputer capacity at the",
+      "review_status": "not_required",
+      "source_id": "S003",
+      "subject_text": "government confirmed it",
+      "subject_type": "organisation",
+      "value_type": "string",
+      "warnings": []
+    }
+  ],
+  "entities": [],
+  "evidence_references": [
+    {
+      "block_id": "DOC-S003-B0015",
+      "evidence_id": "V04-EVID-0D757551EFDC0BF2B5E712469BCF718352D301F33DCCEC0A0CD6F2FB08E72C22",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S003",
+      "text_excerpt": "delivered by the Department of Science, Innovation and Technology, and will invest in and"
+    },
+    {
+      "block_id": "DOC-S003-B0015",
+      "evidence_id": "V04-EVID-2020C3D20E55F1A6CE03BEF8453F5CC8FFF4F48A33C83185F9C8F3E3ABCA24FA",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "15",
+      "source_id": "S003",
+      "text_excerpt": "The government will launch the next phase of the Sovereign AI Unit in April 2026."
+    },
+    {
+      "block_id": "DOC-S003-B0005",
+      "evidence_id": "V04-EVID-2303FEBAA5DE67821CA9F887F3CB96EC22C9FE2679C791EA252DFAACB19035E6",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S003",
+      "text_excerpt": "We will take proven AI tools in public services – from diagnostics to planning to digital\nassistants – and scale them nationwide so people everywhere can benefit."
+    },
+    {
+      "block_id": "DOC-S003-B0005",
+      "evidence_id": "V04-EVID-71EEF2E115D67067FD00611B31514DA87B9106A4AFB7D78648719C23E2D5AF38",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "5",
+      "source_id": "S003",
+      "text_excerpt": "We must make sure these technologies work for everyone, supporting growth while"
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V04-EVID-7CF885F6F9BD7B9270030E70F51F77DDD53D278E4C403D027707D8E924D6F44E",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "The government will scale to support up to 900"
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V04-EVID-90B3FB5278198AA1D192434EB6A5C758F7FCBBBE4252BB583DC37202D5A290FF",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "panel of experts from business and trade unions, the unit will provide the best analysis and"
+    },
+    {
+      "block_id": "DOC-S003-B0010",
+      "evidence_id": "V04-EVID-9DB42623AD4A35ACFC6F802994CFF349927E2D08BF967BB457067606DFF19F89",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "10",
+      "source_id": "S003",
+      "text_excerpt": "launch of the Health Data Research Service: the government and Wellcome have\ncommitted up to £600 million"
+    },
+    {
+      "block_id": "DOC-S003-B0009",
+      "evidence_id": "V04-EVID-C188ACE59652FE96C9B5B8AC822CC3EAAB51C40C482274428397B216DA60D9F4",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "9",
+      "source_id": "S003",
+      "text_excerpt": "government confirmed it will also procure to increase the supercomputer capacity at the"
+    },
+    {
+      "block_id": "DOC-S003-B0013",
+      "evidence_id": "V04-EVID-C224FCB0AEB608C30DAC0EA78E79A26FD8B69E3B9FB44719592DF9471D2CFAC5",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "13",
+      "source_id": "S003",
+      "text_excerpt": "Following strategic guidance issued by the government this year, regulators will publish a plan"
+    },
+    {
+      "block_id": "DOC-S003-B0008",
+      "evidence_id": "V04-EVID-DF917F89C3AA309C994FC90AC8944770817879E9B8B09878A2EE2526E1ADC424",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "8",
+      "source_id": "S003",
+      "text_excerpt": "have now met our commitments against 38 of the 50\nactions"
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V04-EVID-E97C17225776A0CF038074B86D6928955D13F40C7B4A187B030D480CED16D825",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "Future of Work programme, to be delivered by a new cross-government unit."
+    },
+    {
+      "block_id": "DOC-S003-B0011",
+      "evidence_id": "V04-EVID-EB0B14865E9D68635B6FC76F3372947906DC5653F0FC6B6E8E15EB6862387CFC",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "11",
+      "source_id": "S003",
+      "text_excerpt": "have committed £187 million to TechFirst"
+    },
+    {
+      "block_id": "DOC-S003-B0014",
+      "evidence_id": "V04-EVID-F6BE5258A9B7017DB3980CED3CE649E9FD018D4E2C4F48D024B852A29723B397",
+      "evidence_status": "supported",
+      "location_type": "page",
+      "location_value": "14",
+      "source_id": "S003",
+      "text_excerpt": "At Autumn Budget 2025, the government set out plans to expand Innovate UK’s"
+    }
+  ],
+  "schema_version": "0.1",
+  "source_ids": [
+    "S003"
+  ],
+  "warnings": [
+    "abstained_action_status_ineligible_subject",
+    "abstained_commitment_clause_like_subject",
+    "abstained_commitment_copular_or_passive",
+    "abstained_commitment_ineligible_subject",
+    "abstained_commitment_subject_too_long",
+    "abstained_ineligible_actor_noun_phrase",
+    "abstained_missing_subject:DOC-S003-B0005:618-704:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0009:877-970:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0009:971-1063:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0010:1240-1332:V02-RULE-BUD-001",
+    "abstained_missing_subject:DOC-S003-B0015:531-613:V02-RULE-BUD-001",
+    "abstained_subject_span_out_of_bounds",
+    "abstained_unsupported_subject_type:DOC-S003-B0013:43-128:V02-RULE-BUD-001"
+  ]
+}
