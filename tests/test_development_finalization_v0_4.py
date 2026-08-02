@@ -358,6 +358,17 @@ def test_real_public_audit_reloads_all_current_committed_inputs(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     forbidden_calls: list[str] = []
+    output = REPOSITORY_ROOT / workflow.OUTPUT_RELATIVE_ROOT
+
+    def snapshot_final_outputs() -> tuple[tuple[str, bool, bool, bytes | None], ...]:
+        snapshot: list[tuple[str, bool, bool, bytes | None]] = []
+        for relative_path in workflow.FINAL_OUTPUT_RELATIVE_PATHS:
+            path = output.joinpath(*relative_path.split("/"))
+            exists = os.path.lexists(path)
+            is_regular_file = exists and stat.S_ISREG(os.lstat(path).st_mode)
+            contents = path.read_bytes() if is_regular_file else None
+            snapshot.append((relative_path, exists, is_regular_file, contents))
+        return tuple(snapshot)
 
     def forbid(name: str):
         def blocked(*args: object, **kwargs: object) -> None:
@@ -374,6 +385,7 @@ def test_real_public_audit_reloads_all_current_committed_inputs(
         "_install_transaction",
     ):
         monkeypatch.setattr(workflow, name, forbid(name))
+    before_outputs = snapshot_final_outputs()
     before_status = subprocess.run(
         ["git", "status", "--short"],
         cwd=REPOSITORY_ROOT,
@@ -400,8 +412,7 @@ def test_real_public_audit_reloads_all_current_committed_inputs(
     ).stdout
     assert forbidden_calls == []
     assert after_status == before_status
-    output = REPOSITORY_ROOT / workflow.OUTPUT_RELATIVE_ROOT
-    assert not any((output / name).exists() for name in workflow.FINAL_OUTPUT_RELATIVE_PATHS)
+    assert snapshot_final_outputs() == before_outputs
 
 
 @pytest.mark.parametrize(
