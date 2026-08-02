@@ -812,7 +812,7 @@ def _reproduce_v0_4(
     evidence = tuple(
         item for result in primary_results for item in result.evidence_references
     )
-    by_predicate = Counter(fact.predicate.value for fact in all_facts)
+    by_predicate = Counter(fact.predicate for fact in all_facts)
     matched_ids = tuple(
         sorted(item.annotation_id for item in matching.strict_matches)
     )

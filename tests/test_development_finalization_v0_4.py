@@ -17,7 +17,17 @@ from document_intelligence.extraction import development_finalization_v0_4 as wo
 from document_intelligence.extraction.deterministic_v0_4 import (
     canonical_candidate_result_json_v0_4,
 )
-from document_intelligence.extraction.models import CandidateExtractionResult
+from document_intelligence.extraction.models import (
+    CandidateEvidenceReference,
+    CandidateExtractionResult,
+    CandidateFact,
+    CandidateReviewStatus,
+    EvidenceStatus,
+    ExtractionMethod,
+    SubjectType,
+    ValueType,
+)
+from document_intelligence.ingestion.models import LocationType
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -99,6 +109,131 @@ def _synthetic_bundle() -> workflow.ReproductionBundleV04:
         review_required_candidate_count=77,
         ambiguous_evidence_candidate_count=6,
     )
+
+
+def test_reproduction_counts_schema_predicate_strings(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    ingestion_path = tmp_path / "fictional_ingestion.json"
+    ingestion_bytes = b'{"fictional": true}\n'
+    ingestion_path.write_bytes(ingestion_bytes)
+    documents = tuple(
+        SimpleNamespace(source_id=source_id)
+        for source_id in contracts.DEVELOPMENT_SOURCE_IDS
+    )
+    predicates = {
+        "S001": "commitment",
+        "S002": "commitment",
+        "S003": "commitment",
+        "S004": "metric",
+        "S006": "metric",
+    }
+
+    def fictional_result(source_id: str) -> CandidateExtractionResult:
+        predicate = predicates[source_id]
+        evidence = CandidateEvidenceReference(
+            evidence_id=f"FICTIONAL-EVIDENCE-{source_id}",
+            source_id=source_id,
+            block_id=f"FICTIONAL-BLOCK-{source_id}",
+            location_type=LocationType.PAGE,
+            location_value="1",
+            text_excerpt="Fictional predicate-counting evidence.",
+            evidence_status=EvidenceStatus.SUPPORTED,
+        )
+        fact = CandidateFact(
+            candidate_id=f"FICTIONAL-CANDIDATE-{source_id}",
+            source_id=source_id,
+            document_family="fictional_public_document",
+            subject_text=f"Fictional subject {source_id}",
+            subject_type=(
+                SubjectType.METRIC
+                if predicate == "metric"
+                else SubjectType.ORGANISATION
+            ),
+            predicate=predicate,
+            raw_value="7 percent" if predicate == "metric" else "publish a plan",
+            normalized_value=7.0 if predicate == "metric" else "publish a plan",
+            value_type=(
+                ValueType.PERCENTAGE
+                if predicate == "metric"
+                else ValueType.STRING
+            ),
+            qualifiers={"metric_name": "fictional adoption"}
+            if predicate == "metric"
+            else {},
+            evidence_ids=[evidence.evidence_id],
+            confidence=0.9,
+            review_status=CandidateReviewStatus.NOT_REQUIRED,
+            extraction_method=ExtractionMethod.DETERMINISTIC,
+            warnings=[],
+        )
+        assert type(fact.predicate) is str
+        return CandidateExtractionResult(
+            batch_id=f"FICTIONAL-PREDICATE-{source_id}",
+            source_ids=[source_id],
+            evidence_references=[evidence],
+            candidate_facts=[fact],
+        )
+
+    results = {
+        source_id: fictional_result(source_id)
+        for source_id in contracts.DEVELOPMENT_SOURCE_IDS
+    }
+
+    def fictional_document_loader(
+        root: Path, parsed_root: Path, expected_hashes: object
+    ) -> tuple[SimpleNamespace, ...]:
+        assert root == tmp_path
+        assert parsed_root == Path("fictional/parsed")
+        assert expected_hashes == {}
+        return documents
+
+    def fictional_extractor(document: SimpleNamespace) -> CandidateExtractionResult:
+        return results[document.source_id]
+
+    def fictional_gold_loader(
+        *, repository_root: Path, access_mode: object
+    ) -> SimpleNamespace:
+        assert repository_root == tmp_path
+        assert access_mode is workflow.BaselineGoldAccessMode.DEVELOPMENT
+        return SimpleNamespace(facts=())
+
+    def fictional_matcher(
+        candidates: list[CandidateExtractionResult], gold_facts: tuple[()]
+    ) -> SimpleNamespace:
+        assert all(isinstance(item, CandidateExtractionResult) for item in candidates)
+        assert gold_facts == ()
+        candidate_ids = tuple(
+            fact.candidate_id for item in candidates for fact in item.candidate_facts
+        )
+        return SimpleNamespace(
+            strict_matches=(),
+            unmatched_candidate_ids=candidate_ids,
+            unmatched_annotation_ids=(),
+            duplicate_candidate_count=0,
+        )
+
+    monkeypatch.setattr(workflow, "_load_parsed_documents", fictional_document_loader)
+    monkeypatch.setattr(
+        workflow, "extract_deterministic_candidates_v0_4", fictional_extractor
+    )
+    monkeypatch.setattr(workflow, "load_baseline_gold", fictional_gold_loader)
+    monkeypatch.setattr(workflow, "match_strict_facts", fictional_matcher)
+
+    bundle = workflow._reproduce_v0_4(
+        repository_root=tmp_path,
+        parsed_root=Path("fictional/parsed"),
+        ingestion_report=Path(ingestion_path.name),
+        preparation=SimpleNamespace(
+            ingestion_report_sha256=workflow._sha256_bytes(ingestion_bytes),
+            parsed_document_sha256={},
+        ),
+    )
+
+    assert bundle.candidate_counts_by_predicate == {"commitment": 3, "metric": 2}
+    assert bundle.candidate_counts_by_source == {
+        source_id: 1 for source_id in contracts.DEVELOPMENT_SOURCE_IDS
+    }
 
 
 def _patch_synthetic_reproduction(
