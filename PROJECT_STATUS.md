@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 3B completed; next-stage planning pending
-- **Last updated:** 2026-08-02
-- **Latest milestone:** PR #25 merged at `3d16248` and committed the frozen `deterministic-baseline-v0.4` evidence
+- **Current stage:** Stage 4A LLM extraction planning in progress
+- **Last updated:** 2026-08-03
+- **Latest milestone:** Stage 3B closed with the immutable `deterministic-baseline-v0.4` development freeze; Stage 4A now defines a controlled development-only LLM comparator contract
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -38,23 +38,28 @@
 
 ## In progress
 
-- The next stage has not yet been scoped or started.
+- Stage 4A planning for `llm-extraction-baseline-v0.1`: development-only scope, provider decision gate, prompt/output contract, request budget, cache and provenance, strict comparison and LLM-specific evaluation metrics.
+- No provider or model has been selected, no LLM API has been called, and no Stage 4 extraction or evaluation result exists.
+- Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Scope and review the next stage separately before selecting or implementing any new architecture.
-2. Preserve `deterministic-baseline-v0.4` and its committed evidence as immutable; any semantic change requires `deterministic-baseline-v0.5`.
-3. Keep held-out execution blocked behind a later separately reviewed guard and explicit authorization.
-4. Carry forward the weak-development-quality, sparse-gold, no-held-out-generalization and no-production-readiness claim boundaries.
+1. Complete and review Stage 4A planning and the `llm-extraction-baseline-v0.1` experiment contract.
+2. Stage 4B: implement the provider-neutral interface, deterministic mock mode and versioned prompt/output contracts without real network calls.
+3. Stage 4C: implement the development-only runner, append-only local cache and complete request/response provenance using mock execution.
+4. Accept a separate provider/model decision, then Stage 4D may perform one bounded five-source development execution with at most one provider.
+5. Stage 4E: evaluate fixed candidates with the unchanged matcher, complete error analysis and owner review, and optionally freeze only if every mandatory process gate passes.
+6. Preserve immutable deterministic v0.4 evidence and keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
-- Stage 3B has no remaining implementation work; the next-stage scope has not yet been reviewed or approved.
+- Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
+- The Stage 4 provider and model have not been selected; real-provider implementation and execution remain blocked until a separate reviewed decision is accepted.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
-- The weak development score does not support strong extraction-quality, held-out-generalization or production-readiness claims.
+- The weak deterministic development score and absence of any LLM result do not support model-superiority, held-out-generalization or production-readiness claims.
 
 ## AG News replacement status
 
-Not yet eligible. The frozen baseline is an engineering and evaluation milestone, but weak development quality, the absence of held-out results, the absence of an LLM extraction layer and the lack of a final portfolio presentation still prevent replacement.
+Not yet eligible. Stage 4A is a plan rather than an implemented LLM extraction layer. Weak deterministic development quality, no LLM comparison result, no held-out result and the lack of a final portfolio presentation still prevent replacement.

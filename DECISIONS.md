@@ -1,6 +1,6 @@
 # Decision Log
 
-DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. Stage 3B.3 deterministic-rule decisions DEC-058 to DEC-061 and Stage 3B.4A evaluator decisions DEC-062 to DEC-065 were accepted on 2026-07-25. Stage 3B.4B execution and failed-observation decisions DEC-066 to DEC-072 and Stage 3B.4C v0.2 planning decisions DEC-073 to DEC-078 were accepted on 2026-07-26. Stage 3B continuation, owner review, finalization and closure decisions DEC-079 through DEC-095 were accepted through 2026-08-02. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
+DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stage 1A decisions DEC-011 to DEC-015 were accepted on 2026-07-17. Stage 1B decisions DEC-016 and DEC-017 were accepted on 2026-07-18. Stage 1B synthetic-corpus decisions DEC-018 to DEC-020 and Stage 1 completion decisions DEC-021 to DEC-025 were accepted on 2026-07-20. Stage 2A ingestion decisions DEC-026 to DEC-030 and Stage 2B validation decisions DEC-031 to DEC-034 were accepted on 2026-07-21. Stage 3A decisions DEC-035 to DEC-048 were accepted on 2026-07-23. Stage 3B.1 deterministic-baseline planning decisions DEC-049 to DEC-054 and Stage 3B.2 access-control decisions DEC-055 to DEC-057 were accepted on 2026-07-24. Stage 3B.3 deterministic-rule decisions DEC-058 to DEC-061 and Stage 3B.4A evaluator decisions DEC-062 to DEC-065 were accepted on 2026-07-25. Stage 3B.4B execution and failed-observation decisions DEC-066 to DEC-072 and Stage 3B.4C v0.2 planning decisions DEC-073 to DEC-078 were accepted on 2026-07-26. Stage 3B continuation, owner review, finalization and closure decisions DEC-079 through DEC-095 were accepted through 2026-08-02. Stage 4A planning decisions DEC-096 through DEC-099 were accepted on 2026-08-03. They may be revisited when evidence from source review, implementation, or evaluation justifies a change.
 
 ## DEC-001: Final project title
 
@@ -754,3 +754,35 @@ DEC-001 to DEC-010 were accepted on 2026-07-16 for the Stage 0A foundation. Stag
 - **Chosen option:** Close Stage 3B at the committed v0.4 development freeze. Keep `deterministic-baseline-v0.4` immutable, keep held-out execution unauthorized, make no production-readiness or exhaustive-precision claim, require `deterministic-baseline-v0.5` for any semantic change, and require a separate decision before defining the next-stage scope.
 - **Reason:** The committed artifacts establish a reproducible engineering and evaluation milestone with fixed provenance, deterministic outputs and explicit limitations, which is sufficient to close Stage 3B without overstating model quality or generalization.
 - **Trade-off:** Stage 3B closes with weak development quality and no held-out result; any semantic improvement, held-out authorization or next-stage architecture requires a new separately reviewed decision.
+
+## DEC-096: Build a development-only LLM extraction comparator before RAG
+
+- **Context:** Stage 3B closed with a reproducible but weak deterministic development baseline, while the portfolio still lacks an LLM-assisted extraction comparison. Building retrieval first would not establish whether candidate knowledge is extracted accurately or with valid evidence.
+- **Alternatives:** Begin RAG and retrieval immediately; stop after the deterministic baseline; build a controlled development-only LLM extraction comparator before downstream architecture.
+- **Chosen option:** Plan and implement `llm-extraction-baseline-v0.1` as a development-only, evidence-linked candidate extraction comparator before any RAG, reconciliation, cloud or user-interface work.
+- **Reason:** A bounded comparator demonstrates prompt, schema, evidence, provenance, cost, cache and evaluation engineering while preserving the project's evaluate-before-RAG principle.
+- **Trade-off:** Retrieval and presentation work remain deferred, and the LLM comparator may not outperform the deterministic baseline.
+
+## DEC-097: Preserve existing candidate and matching contracts for fair comparison
+
+- **Context:** Changing the candidate schema, predicate vocabulary, public gold or matcher while introducing an LLM would make any observed difference difficult to attribute.
+- **Alternatives:** Design an LLM-specific schema and matcher; relax strict credit for generated candidates; preserve the existing contracts unless a later reviewed schema decision is necessary.
+- **Chosen option:** Preserve the Common Document Object input, `CandidateExtractionResult` schema `0.1`, predicate vocabulary `0.1`, `public-gold-v0.1`, matching protocol `0.1`, unchanged strict matcher and development sources S001, S002, S003, S004 and S006 for `llm-extraction-baseline-v0.1`.
+- **Reason:** Fixed inputs and scoring provide the clearest comparison with immutable `deterministic-baseline-v0.4` and prevent apparent gains through changed evaluation semantics.
+- **Trade-off:** The existing strict contracts may under-credit plausible LLM outputs and may require abstention where a future separately versioned schema could represent nuance better.
+
+## DEC-098: Use one provider behind a narrow interface with mock mode
+
+- **Context:** Direct provider coupling, multiple providers and networked unit tests would increase cost, secret exposure, nondeterminism and provenance complexity before the extraction contract is established.
+- **Alternatives:** Call multiple providers directly from extraction code; choose and embed one provider in this planning PR; define one provider-neutral interface with a deterministic mock and defer the real provider/model choice to a separate gate.
+- **Chosen option:** Permit at most one real provider behind a narrow provider-neutral interface and require a deterministic mock for tests. Unit tests make no network calls, credentials come only from environment configuration, and a separate reviewed decision must select the provider and model before a real adapter is implemented or invoked.
+- **Reason:** The interface isolates transport from extraction semantics, mock mode supports deterministic failure testing, and the later decision gate can assess model identity, data terms, cost and operational limits without prematurely coupling the plan.
+- **Trade-off:** Stage 4 v0.1 will not compare providers, and real execution remains blocked until the provider/model gate is accepted.
+
+## DEC-099: Keep held-out authorization separate from LLM development and freeze
+
+- **Context:** Sending a held-out document to an LLM is an execution event that could disclose source content and reveal performance, while a development freeze establishes only reproducibility on approved development sources.
+- **Alternatives:** Treat LLM development or a valid development freeze as implicit held-out authorization; permit exploratory held-out calls; retain a separate reviewed guard and explicit project-owner authorization.
+- **Chosen option:** Keep Stage 4A-E development only. No held-out source, `ParsedDocument` or semantic annotation may be opened or executed, a development freeze does not authorize held-out access, and any later held-out invocation requires a separately reviewed guard plus explicit project-owner authorization.
+- **Reason:** Separating access from implementation and freeze prevents accidental leakage, preserves the evaluation boundary and stops development evidence from being presented as held-out generalization.
+- **Trade-off:** Stage 4 cannot report held-out results, and a later controlled milestone is required before any generalization assessment.
