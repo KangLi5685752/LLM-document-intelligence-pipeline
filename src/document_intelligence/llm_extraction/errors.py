@@ -51,6 +51,16 @@ class Stage4BErrorCode(str, Enum):
     MISSING_OUTPUT_TEXT = "missing_output_text"
     MISSING_PROVIDER_METADATA = "missing_provider_metadata"
     PROVIDER_REFUSAL = "provider_refusal"
+    PREFLIGHT_AUTHORIZATION_INVALID = "preflight_authorization_invalid"
+    PREFLIGHT_TERMS_INVALID = "preflight_terms_invalid"
+    PREFLIGHT_VERSION_PROVENANCE_INVALID = (
+        "preflight_version_provenance_invalid"
+    )
+    PREFLIGHT_PROVIDER_METADATA_INVALID = (
+        "preflight_provider_metadata_invalid"
+    )
+    PREFLIGHT_OUTPUT_INVALID = "preflight_output_invalid"
+    PREFLIGHT_RECORD_HASH_MISMATCH = "preflight_record_hash_mismatch"
 
 
 class Stage4BError(ValueError):
