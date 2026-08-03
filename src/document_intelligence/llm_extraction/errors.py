@@ -23,6 +23,21 @@ class Stage4BErrorCode(str, Enum):
     CANONICAL_REQUEST_HASH_MISMATCH = "canonical_request_hash_mismatch"
     RESPONSE_REQUEST_MISMATCH = "response_request_mismatch"
     MOCK_RESPONSE_NOT_FOUND = "mock_response_not_found"
+    INVALID_MANIFEST = "invalid_manifest"
+    MANIFEST_HASH_MISMATCH = "manifest_hash_mismatch"
+    DUPLICATE_INVOCATION = "duplicate_invocation"
+    REQUEST_BUDGET_EXCEEDED = "request_budget_exceeded"
+    ATTEMPT_BUDGET_EXCEEDED = "attempt_budget_exceeded"
+    COST_BUDGET_EXCEEDED = "cost_budget_exceeded"
+    CACHE_MISS = "cache_miss"
+    CACHE_CONFLICT = "cache_conflict"
+    CACHE_RECORD_INVALID = "cache_record_invalid"
+    CACHE_HASH_MISMATCH = "cache_hash_mismatch"
+    CACHE_PATH_ESCAPE = "cache_path_escape"
+    CACHE_WRITE_FAILED = "cache_write_failed"
+    RETRY_NOT_PERMITTED = "retry_not_permitted"
+    EXECUTION_FAILED = "execution_failed"
+    REPORT_CONFLICT = "report_conflict"
 
 
 class Stage4BError(ValueError):

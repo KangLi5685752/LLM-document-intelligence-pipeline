@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4B provider-neutral LLM extraction contracts implemented; Stage 4C pending
+- **Current stage:** Stage 4C mock-only development runner, append-only cache, manifest and provenance foundation implemented; Stage 4D gated
 - **Last updated:** 2026-08-03
-- **Latest milestone:** Stage 4B implemented strict provider-neutral envelopes, a deterministic offline mock, versioned prompt assets and fail-closed validation through the existing candidate contract
+- **Latest milestone:** Stage 4C implemented deterministic mock-only manifest execution with append-only verified caching, bounded budgets and complete request/response provenance
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -38,19 +38,21 @@
 - Stage 4A planning completed with the reviewed `llm-extraction-baseline-v0.1` development-only experiment contract and DEC-096 through DEC-099.
 - Stage 4B implemented a narrow provider protocol, strict request and response envelopes, pure development-source allowlist validation, deterministic mock fixtures, installation-safe versioned prompts, canonical prompt/request hashes and fail-closed structured output validation that reuses `CandidateExtractionResult` schema `0.1` and predicate vocabulary `0.1`.
 - Stage 4B focused tests passed 44/44 and the complete suite passed 1151 tests with 6 unchanged platform-specific skips. No provider SDK or HTTP dependency was added.
+- Stage 4C implemented a strict canonical request manifest, opaque append-only local response cache, original-call and local-parse provenance, fixed request/retry/attempt/timeout/cost budgets, cache-first mock runner and deterministic non-evaluative report. Focused tests passed 49/49 and the complete suite passed 1200 tests with the same 6 platform-specific skips.
 
 ## In progress
 
-- Stage 4C development runner, append-only local cache and complete execution provenance remain pending and have not started.
+- A separately reviewed provider/model decision and controlled real five-source development manifest remain pending before any Stage 4D execution.
 - No real provider or model has been selected, no LLM API request has been made, and no Stage 4 extraction or evaluation result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Stage 4C: implement the development-only runner, append-only local cache and complete request/response provenance using mock execution.
-2. Accept a separate provider/model decision, then Stage 4D may perform one bounded five-source development execution with at most one provider.
-3. Stage 4E: evaluate fixed candidates with the unchanged matcher, complete error analysis and owner review, and optionally freeze only if every mandatory process gate passes.
-4. Preserve immutable deterministic v0.4 evidence and keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
+1. Review and accept a separate provider/model decision before any real-provider adapter or request is implemented.
+2. Prepare and independently review the controlled five-source Stage 4D development request manifest.
+3. Stage 4D: perform one bounded development execution with the approved provider and model, preserving immutable cache and provenance evidence.
+4. Stage 4E: evaluate fixed candidates with the unchanged matcher, complete error analysis and owner review, and optionally freeze only if every mandatory process gate passes.
+5. Preserve immutable deterministic v0.4 evidence and keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
@@ -63,4 +65,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. Stage 4B provides offline contracts and validation but has not selected a model or executed LLM extraction. Weak deterministic development quality, no LLM comparison result, no held-out result and the lack of a final portfolio presentation still prevent replacement.
+Not yet eligible. Stage 4C provides a tested mock-only runner, cache and provenance foundation but has not selected a model or executed real development extraction. Weak deterministic development quality, no LLM comparison result, no held-out result and the lack of a final portfolio presentation still prevent replacement.
