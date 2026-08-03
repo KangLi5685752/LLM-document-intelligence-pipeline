@@ -6,6 +6,7 @@ import json
 import time
 from collections.abc import Callable
 from copy import deepcopy
+from dataclasses import dataclass
 from importlib.metadata import version as package_version
 from typing import Any, Literal, Protocol
 
@@ -110,6 +111,14 @@ class OpenAIClient(Protocol):
     ) -> ConfiguredOpenAIClient:
         """Return a client with bounded timeout and retries disabled."""
         ...
+
+
+@dataclass(frozen=True)
+class _OpenAIResponsesCallResult:
+    """Transient mapped response plus the exact SDK response from one call."""
+
+    response: LLMProviderResponse
+    sdk_response: object
 
 
 def _validated_request(request: LLMExtractionRequest) -> LLMExtractionRequest:
@@ -419,6 +428,10 @@ class OpenAIResponsesProvider:
 
     def generate(self, request: LLMExtractionRequest) -> LLMProviderResponse:
         """Perform one non-retrying call after complete local request validation."""
+        return self._execute(request).response
+
+    def _execute(self, request: LLMExtractionRequest) -> _OpenAIResponsesCallResult:
+        """Perform and map one call while transiently retaining its SDK response."""
         payload = build_openai_responses_payload(request, self._configuration)
         started = self._clock()
         try:
@@ -476,19 +489,22 @@ class OpenAIResponsesProvider:
         provider_response_id = _required_provider_text(response, "id")
         provider_request_id = _required_provider_text(response, "_request_id")
         raw_response = _exact_output_text(response)
-        return LLMProviderResponse(
-            request_id=request.request_id,
-            provider_identifier=self._configuration.provider_identifier,
-            model_identifier=model_identifier,
-            provider_request_id=provider_request_id,
-            provider_response_id=provider_response_id,
-            provider_sdk_version=OPENAI_INSTALLED_SDK_VERSION,
-            terminal_status=ProviderTerminalStatus.SUCCESS,
-            raw_response=raw_response,
-            raw_response_sha256=uppercase_sha256(raw_response),
-            token_usage=_token_usage(response),
-            latency_ms=latency_ms,
-            retry_count=0,
+        return _OpenAIResponsesCallResult(
+            response=LLMProviderResponse(
+                request_id=request.request_id,
+                provider_identifier=self._configuration.provider_identifier,
+                model_identifier=model_identifier,
+                provider_request_id=provider_request_id,
+                provider_response_id=provider_response_id,
+                provider_sdk_version=OPENAI_INSTALLED_SDK_VERSION,
+                terminal_status=ProviderTerminalStatus.SUCCESS,
+                raw_response=raw_response,
+                raw_response_sha256=uppercase_sha256(raw_response),
+                token_usage=_token_usage(response),
+                latency_ms=latency_ms,
+                retry_count=0,
+            ),
+            sdk_response=response,
         )
 
 

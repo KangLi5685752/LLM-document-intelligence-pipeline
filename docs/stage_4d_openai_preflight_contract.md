@@ -68,10 +68,31 @@ observation additionally reconciles metadata values. These semantic checks are
 independent of, and run before acceptance of, a correctly recomputed record
 self-hash.
 
-The offline same-call observation contract is implemented in Stage 4D-2A. The
-real OpenAI SDK bridge that extracts and binds public response metadata remains
-pending as a separately reviewed Stage 4D-2B task. No live version metadata has
-been extracted and no real preflight has occurred.
+The offline same-call observation contract is implemented in Stage 4D-2A.
+Stage 4D-2B implements and tests the SDK bridge offline. The bridge delegates to
+the existing adapter's shared execution primitive exactly once and binds the
+validated provider response to the exact SDK response object returned by that
+injected call. It inspects only the SDK response's public
+`model_dump(mode="python")` mapping, records the four required standard metadata
+entries, and requires the dumped top-level `id` and `model` to reconcile exactly
+with the mapped provider response. It recursively discovers separately exposed
+version-like string fields in mappings, lists and tuples, using deterministic
+zero-based index path segments, while excluding identity, every descendant of a
+normalized `sdk` or `*_sdk` namespace, and sensitive content fields. Every valid
+separate identifier is preserved with its full response path; unsupported
+iterable containers fail closed without being consumed outside sensitive
+subtrees, invalid values and normalized duplicates fail closed, and when no
+identifier is exposed the bridge records the literal `unavailable`. Ordinary
+public-serialization exceptions are mapped to the typed preflight metadata
+failure without catching process-control base exceptions.
+
+Implementation and testing constructed no real OpenAI client, accessed no API
+key, made no network or API request, and did not run the real synthetic
+preflight. Project-account access, the returned live model identity, any live
+snapshot or version identity, current pricing and data-control terms, and live
+strict-schema compatibility therefore remain unverified. One real preflight
+call still requires explicit project-owner authorization and same-day reviewed
+terms.
 
 ## Downstream gates
 
