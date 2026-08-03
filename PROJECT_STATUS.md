@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D-1 OpenAI adapter implemented and tested offline; exact-identity preflight and controlled development execution remain gated
-- **Last updated:** 2026-08-03
-- **Latest milestone:** A dependency-injected OpenAI Responses adapter now preserves strict request controls and response provenance without configuring credentials or making an API request
+- **Current stage:** Stage 4D-2A offline OpenAI preflight contract and harness implemented; real SDK metadata bridge, preflight and controlled development execution remain gated
+- **Last updated:** 2026-08-04
+- **Latest milestone:** Shared observation-and-record semantics now enforce required metadata paths, reject SDK identity as model provenance and prevent correctly rehashed records from bypassing version-provenance reconciliation
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -41,25 +41,28 @@
 - Stage 4C implemented a strict canonical request manifest, opaque append-only local response cache, original-call and local-parse provenance, fixed request/retry/attempt/timeout/cost budgets, cache-first mock runner and deterministic non-evaluative report. Focused tests passed 50 tests with 4 platform-specific skips, and the complete suite passed 1201 tests with 10 platform-specific skips.
 - Stage 4D provider/model decision selected OpenAI, the Responses API and requested model alias `gpt-5.4-mini` for the development-only comparator. The decision requires text-only strict JSON Schema output, `store=false`, no tools, a separately authorized exact-identity and pricing preflight, and explicit project-owner authorization before real execution.
 - Stage 4D-1 added the exactly pinned `openai==2.46.0` dependency and a synchronous dependency-injected Responses adapter with deterministic text-only payload construction, predicate-specific strict JSON Schema request configuration, disabled provider retries, bounded timeout, fail-closed SDK outcome mapping, additive provider request/response/SDK provenance and legacy cache/report hash compatibility. Focused tests passed 98 tests with 4 unchanged Windows symlink-privilege skips; the complete suite passed 1242 tests with 10 unchanged platform-specific skips. All adapter tests used fictional requests and injected fake responses, with no API key, client construction, network request, development-document access, extraction, evaluation or evidence generation.
+- Stage 4D-2A implemented the offline `openai-gpt-5.4-mini-synthetic-preflight-v0.1` contract and harness: explicit one-call owner authorization, a fixed synthetic S001 administrative placeholder request, full production strict-schema and payload hashes, dated caller-supplied pricing and data-control observations, and a same-call provider observation that accepts only typed safe-scalar public metadata. The observation internally derives its canonical metadata SHA and ordered field inventory and reconciles mandatory request/response/SDK metadata values. One shared semantic validator protects both observation and final record: it requires all exact standard metadata paths, requires explicit snapshot/version provenance paths, rejects literal `unavailable` when normalized model-version, snapshot or revision metadata is present, and prevents SDK identity from serving as model provenance while preserving `sdk.version` as required SDK metadata. Record tests recompute correct canonical self-hashes and still fail closed on semantic violations. Only the derived hash and paths enter the canonical record; transient metadata values do not. Zero-candidate abstention validation and cost reconciliation remain fail-closed. The corrected preflight suite passed 121 tests, the unchanged Stage 4D-1 adapter suite passed 29 tests, and the complete suite passed 1363 tests with 10 unchanged platform-specific skips. Tests used fictional injected providers only; no OpenAI client, API key, network request, account verification, real document access, manifest, extraction, cache or evidence artifact was created. The real OpenAI SDK same-call metadata bridge remains pending Stage 4D-2B.
 
 ## In progress
 
 - The OpenAI SDK is pinned and the provider adapter is implemented, but no API key or default client has been configured and no API request has been made.
-- Exact returned model identity, any separately exposed snapshot/version identifier, live strict-schema compatibility, current pricing and project-account access remain pending verification through a separately authorized preflight.
+- The real OpenAI SDK same-call metadata bridge remains unimplemented pending Stage 4D-2B, and the real one-call synthetic preflight remains unauthorized. Exact returned model identity, any separately exposed snapshot/version identifier, live strict-schema compatibility, current pricing, current data-control terms and project-account access remain unverified.
 - The controlled five-source development request manifest remains pending and no Stage 4 extraction or evaluation result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Verify exact returned model identity, any available snapshot/version identifier, live structured-output compatibility, current pricing and account access through a separately authorized preflight.
-2. Generate and independently review the controlled five-source development manifest.
-3. Explicitly authorize and perform the bounded Stage 4D development run.
-4. Proceed to Stage 4E evaluation and owner review.
+1. Stage 4D-2B: implement and independently review the real OpenAI SDK bridge that returns response and public version/snapshot metadata as one bound observation.
+2. Obtain explicit project-owner authorization for exactly one real synthetic OpenAI preflight call and supply same-day reviewed pricing and data-control observations.
+3. Run and independently review the bounded synthetic preflight without transmitting development or held-out text.
+4. Only after a successful reviewed preflight, generate and independently review the controlled five-source development manifest.
+5. Explicitly authorize and perform the bounded Stage 4D development run.
+6. Proceed to Stage 4E evaluation and owner review.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- The OpenAI Responses API and requested model alias `gpt-5.4-mini` are selected and the offline adapter is implemented, but real execution remains blocked until the exact-identity and pricing preflight, manifest review and explicit project-owner authorization are complete.
+- The OpenAI Responses API and requested model alias `gpt-5.4-mini` are selected and the offline adapter and preflight harness are implemented, but the real preflight remains blocked pending the separately reviewed Stage 4D-2B SDK metadata bridge, explicit one-call authorization and current reviewed terms. Five-source manifest generation and execution remain separately blocked pending a successful reviewed preflight and their own authorization gates.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -67,4 +70,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. Stage 4D has selected a provider and requested model alias and implemented an offline-tested SDK adapter, but no API request, real development extraction, LLM comparison result or held-out result exists. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
+Not yet eligible. Stage 4D has selected a provider and requested model alias and implemented offline-tested adapter and preflight contracts, but no API request, account verification, real development extraction, LLM comparison result or held-out result exists. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
