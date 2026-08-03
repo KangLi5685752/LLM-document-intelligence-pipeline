@@ -27,6 +27,13 @@ APPROVED_DEVELOPMENT_SOURCE_IDS = frozenset(
     {"S001", "S002", "S003", "S004", "S006"}
 )
 SHA256_PATTERN = r"^[0-9A-F]{64}$"
+ADDITIVE_PROVIDER_METADATA_FIELDS = frozenset(
+    {
+        "provider_request_id",
+        "provider_response_id",
+        "provider_sdk_version",
+    }
+)
 
 
 def _require_trimmed(value: str, field_name: str) -> str:
@@ -152,6 +159,9 @@ class LLMProviderResponse(BaseModel):
     request_id: str
     provider_identifier: str
     model_identifier: str
+    provider_request_id: str | None = None
+    provider_response_id: str | None = None
+    provider_sdk_version: str | None = None
     terminal_status: ProviderTerminalStatus
     raw_response: str
     raw_response_sha256: str = Field(pattern=SHA256_PATTERN)
@@ -166,6 +176,26 @@ class LLMProviderResponse(BaseModel):
         """Verify exact raw identity and coherent terminal metadata."""
         for field_name in ("request_id", "provider_identifier", "model_identifier"):
             _require_trimmed(getattr(self, field_name), field_name)
+        provider_metadata = (
+            self.provider_request_id,
+            self.provider_response_id,
+            self.provider_sdk_version,
+        )
+        for field_name in (
+            "provider_request_id",
+            "provider_response_id",
+            "provider_sdk_version",
+        ):
+            value = getattr(self, field_name)
+            if value is not None:
+                _require_trimmed(value, field_name)
+        if any(value is not None for value in provider_metadata) and not all(
+            value is not None for value in provider_metadata
+        ):
+            raise ValueError(
+                "provider request ID, response ID, and SDK version must be "
+                "supplied together"
+            )
         if self.raw_response_sha256 != uppercase_sha256(self.raw_response):
             raise ValueError("raw_response_sha256 must match exact raw_response UTF-8 bytes")
         for label, codes in (
@@ -195,8 +225,18 @@ class ValidatedCandidateOutput(BaseModel):
     canonical_output_sha256: str = Field(pattern=SHA256_PATTERN)
 
 
+def absent_additive_provider_metadata(value: object) -> set[str]:
+    """Return only additive metadata fields that are absent on a model."""
+    return {
+        field_name
+        for field_name in ADDITIVE_PROVIDER_METADATA_FIELDS
+        if getattr(value, field_name, None) is None
+    }
+
+
 __all__ = [
     "APPROVED_DEVELOPMENT_SOURCE_IDS",
+    "ADDITIVE_PROVIDER_METADATA_FIELDS",
     "EXPERIMENT_ID",
     "OUTPUT_CONTRACT_ID",
     "PROMPT_VERSION",
@@ -207,6 +247,7 @@ __all__ = [
     "ProviderTerminalStatus",
     "ProviderTokenUsage",
     "ValidatedCandidateOutput",
+    "absent_additive_provider_metadata",
     "uppercase_sha256",
     "validate_development_source_id",
 ]

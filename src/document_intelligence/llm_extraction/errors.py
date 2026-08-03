@@ -38,6 +38,19 @@ class Stage4BErrorCode(str, Enum):
     RETRY_NOT_PERMITTED = "retry_not_permitted"
     EXECUTION_FAILED = "execution_failed"
     REPORT_CONFLICT = "report_conflict"
+    PROVIDER_CONFIGURATION_MISMATCH = "provider_configuration_mismatch"
+    MODEL_CONFIGURATION_MISMATCH = "model_configuration_mismatch"
+    INVALID_PROVIDER_REQUEST = "invalid_provider_request"
+    TIMEOUT = "timeout"
+    RATE_LIMIT = "rate_limit"
+    TRANSPORT_ERROR = "transport_error"
+    PROVIDER_API_FAILURE = "provider_api_failure"
+    INCOMPLETE_RESPONSE = "incomplete_response"
+    FAILED_RESPONSE = "failed_response"
+    RESPONSE_NOT_COMPLETED = "response_not_completed"
+    MISSING_OUTPUT_TEXT = "missing_output_text"
+    MISSING_PROVIDER_METADATA = "missing_provider_metadata"
+    PROVIDER_REFUSAL = "provider_refusal"
 
 
 class Stage4BError(ValueError):

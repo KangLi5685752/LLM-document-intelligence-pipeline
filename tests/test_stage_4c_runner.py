@@ -18,6 +18,7 @@ from document_intelligence.llm_extraction import (
     DeterministicMockProvider,
     ExecutionBudget,
     InvocationRole,
+    LLMProviderResponse,
     MockResponseFixture,
     ProviderTerminalStatus,
     ProviderTokenUsage,
@@ -201,6 +202,71 @@ def test_cache_miss_then_hit_performs_no_second_provider_call(tmp_path) -> None:
     assert cached.original_attempts == first.ordered_invocation_provenance[0].attempts
 
 
+def test_cache_hit_retains_openai_style_metadata_without_provider_call(
+    tmp_path,
+) -> None:
+    request = _request()
+    base_response = _provider(request, _abstention(request)).generate(request)
+    response_payload = base_response.model_dump(mode="python")
+    response_payload.update(
+        {
+            "provider_identifier": "openai",
+            "model_identifier": "gpt-5.4-mini-fictional-snapshot",
+            "provider_request_id": "req_fictional_001",
+            "provider_response_id": "resp_fictional_001",
+            "provider_sdk_version": "2.46.0",
+            "token_usage": ProviderTokenUsage(input_tokens=23, output_tokens=11),
+            "latency_ms": 125,
+        }
+    )
+
+    class CountingProvider:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def generate(self, generated_request):
+            self.calls += 1
+            assert generated_request == request
+            return LLMProviderResponse.model_validate(response_payload)
+
+    provider = CountingProvider()
+    manifest = build_request_manifest((request,))
+    cache = ResponseCache(tmp_path / "cache")
+    first = run_mock_development(
+        manifest=manifest,
+        provider=provider,
+        cache=cache,
+        clock=_clock,
+        budget=ExecutionBudget(estimated_cost_per_attempt_usd=Decimal("0.10")),
+    )
+    second = run_mock_development(
+        manifest=manifest,
+        provider=provider,
+        cache=cache,
+        clock=lambda: NOW + timedelta(minutes=1),
+        budget=ExecutionBudget(estimated_cost_per_attempt_usd=Decimal("0.10")),
+    )
+
+    fresh = first.ordered_invocation_provenance[0]
+    cached = second.ordered_invocation_provenance[0]
+    assert provider.calls == 1
+    assert fresh.provider_request_id == cached.provider_request_id == "req_fictional_001"
+    assert fresh.provider_response_id == cached.provider_response_id == "resp_fictional_001"
+    assert fresh.provider_sdk_version == cached.provider_sdk_version == "2.46.0"
+    assert fresh.token_usage == cached.token_usage == ProviderTokenUsage(
+        input_tokens=23, output_tokens=11
+    )
+    assert fresh.latency_ms == cached.latency_ms == 125
+    assert cached.original_provider_call_timestamp == NOW
+    assert cached.local_parse_event_timestamp == NOW + timedelta(minutes=1)
+    assert cached.provider_call_performed is False
+    assert cached.attempts == ()
+    assert cached.original_attempts == fresh.attempts
+    assert second.provider_call_count == 0
+    assert second.attempt_count == 0
+    assert second.total_estimated_cost_usd == Decimal("0")
+
+
 def test_provider_failure_is_preserved_without_candidate_output(tmp_path) -> None:
     request = _request()
     report = run_mock_development(
@@ -240,6 +306,38 @@ def test_timeout_is_explicit_and_can_be_configured_without_retry(tmp_path) -> No
 
     assert report.timeout_outcome_count == 1
     assert report.provider_call_count == 1
+
+
+def test_typed_timeout_exception_is_counted_without_adapter_side_retry(
+    tmp_path,
+) -> None:
+    request = _request()
+
+    class TimeoutProvider:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def generate(self, generated_request):
+            self.calls += 1
+            assert generated_request == request
+            raise Stage4BError(Stage4BErrorCode.TIMEOUT, "fictional timeout")
+
+    provider = TimeoutProvider()
+    report = run_mock_development(
+        manifest=build_request_manifest((request,)),
+        provider=provider,
+        cache=ResponseCache(tmp_path / "cache"),
+        clock=_clock,
+        budget=ExecutionBudget(max_retries_per_invocation=0),
+    )
+
+    provenance = report.ordered_invocation_provenance[0]
+    assert provider.calls == 1
+    assert report.timeout_outcome_count == 1
+    assert report.provider_call_count == 1
+    assert provenance.terminal_status is ProviderTerminalStatus.TIMEOUT
+    assert provenance.attempts[0].terminal_status is ProviderTerminalStatus.TIMEOUT
+    assert provenance.failure_codes == (Stage4BErrorCode.TIMEOUT.value,)
 
 
 def test_one_retry_is_permitted_and_a_second_retry_never_occurs(tmp_path) -> None:

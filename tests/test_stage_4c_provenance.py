@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
@@ -14,11 +15,16 @@ from document_intelligence.llm_extraction import (
     CacheStatus,
     InvocationProvenance,
     InvocationRole,
+    MockRunReport,
     ProviderTerminalStatus,
     ProviderTokenUsage,
     ValidationStatus,
     build_mock_run_report,
     mock_run_report_bytes,
+)
+from document_intelligence.llm_extraction.prompting import (
+    canonical_json_bytes,
+    uppercase_sha256_bytes,
 )
 
 
@@ -72,6 +78,63 @@ def _provenance(*, hit: bool = False) -> InvocationProvenance:
     )
 
 
+def _provenance_with_provider_metadata() -> InvocationProvenance:
+    payload = _provenance().model_dump(mode="python")
+    payload.update(
+        {
+            "provider_identifier": "openai",
+            "model_identifier": "gpt-5.4-mini-fictional-snapshot",
+            "provider_request_id": "req_fictional_001",
+            "provider_response_id": "resp_fictional_001",
+            "provider_sdk_version": "2.46.0",
+        }
+    )
+    return InvocationProvenance.model_validate(payload)
+
+
+def _legacy_report_bytes() -> bytes:
+    legacy_invocation = _provenance().model_dump(
+        mode="json",
+        exclude={
+            "provider_request_id",
+            "provider_response_id",
+            "provider_sdk_version",
+        },
+    )
+    assert not {
+        "provider_request_id",
+        "provider_response_id",
+        "provider_sdk_version",
+    } & set(legacy_invocation)
+    payload = {
+        "report_schema_version": "0.1",
+        "experiment_id": "llm-extraction-baseline-v0.1",
+        "manifest_sha256": "B" * 64,
+        "invocation_total": 1,
+        "primary_invocation_count": 1,
+        "repeat_invocation_count": 0,
+        "cache_hit_count": 0,
+        "cache_miss_count": 1,
+        "provider_call_count": 1,
+        "attempt_count": 1,
+        "successful_terminal_response_count": 1,
+        "provider_failure_count": 0,
+        "timeout_outcome_count": 0,
+        "validation_success_count": 1,
+        "validation_failure_count": 0,
+        "abstention_count": 1,
+        "review_required_output_count": 0,
+        "total_reported_input_tokens": 10,
+        "total_reported_output_tokens": 4,
+        "total_estimated_cost_usd": "0.50",
+        "ordered_invocation_provenance": [legacy_invocation],
+    }
+    payload["report_sha256"] = uppercase_sha256_bytes(
+        canonical_json_bytes(payload)
+    )
+    return canonical_json_bytes(payload)
+
+
 def test_invocation_provenance_is_complete_and_separates_cache_parse_event() -> None:
     fresh = _provenance()
     cached = _provenance(hit=True)
@@ -82,6 +145,53 @@ def test_invocation_provenance_is_complete_and_separates_cache_parse_event() -> 
     assert cached.original_attempts == fresh.original_attempts
     assert cached.original_provider_call_timestamp == CALL_TIME
     assert cached.local_parse_event_timestamp > cached.original_provider_call_timestamp
+
+
+def test_provenance_serializes_explicit_provider_identity_metadata() -> None:
+    provenance = _provenance_with_provider_metadata()
+    report = build_mock_run_report(
+        manifest_sha256="B" * 64, invocations=(provenance,)
+    )
+    raw = mock_run_report_bytes(report)
+
+    assert provenance.provider_request_id == "req_fictional_001"
+    assert provenance.provider_response_id == "resp_fictional_001"
+    assert provenance.provider_sdk_version == "2.46.0"
+    assert b'"provider_request_id":"req_fictional_001"' in raw
+    assert b'"provider_response_id":"resp_fictional_001"' in raw
+    assert b'"provider_sdk_version":"2.46.0"' in raw
+
+
+def test_pre_metadata_legacy_report_remains_hash_valid() -> None:
+    legacy_bytes = _legacy_report_bytes()
+
+    report = MockRunReport.model_validate_json(legacy_bytes)
+    provenance = report.ordered_invocation_provenance[0]
+
+    assert provenance.provider_request_id is None
+    assert provenance.provider_response_id is None
+    assert provenance.provider_sdk_version is None
+    assert mock_run_report_bytes(report) == legacy_bytes
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    ("provider_request_id", "provider_response_id", "provider_sdk_version"),
+)
+def test_present_provider_metadata_is_covered_by_report_hash(
+    field_name: str,
+) -> None:
+    report = build_mock_run_report(
+        manifest_sha256="B" * 64,
+        invocations=(_provenance_with_provider_metadata(),),
+    )
+    payload = json.loads(mock_run_report_bytes(report))
+    payload["ordered_invocation_provenance"][0][field_name] = (
+        f"tampered-{field_name}"
+    )
+
+    with pytest.raises(ValidationError, match="report_sha256"):
+        MockRunReport.model_validate_json(canonical_json_bytes(payload))
 
 
 @pytest.mark.parametrize(
