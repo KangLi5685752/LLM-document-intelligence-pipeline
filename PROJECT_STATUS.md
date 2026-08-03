@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4C mock-only development runner, append-only cache, manifest and provenance foundation implemented; Stage 4D gated
+- **Current stage:** Stage 4D provider/model decision accepted; adapter, exact-identity preflight and controlled development execution remain gated
 - **Last updated:** 2026-08-03
-- **Latest milestone:** Stage 4C implemented deterministic mock-only manifest execution with append-only verified caching, bounded budgets and complete request/response provenance
+- **Latest milestone:** OpenAI Responses API and `gpt-5.4-mini` selected for the development-only comparator without implementing an SDK adapter or authorizing an API request
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -39,25 +39,27 @@
 - Stage 4B implemented a narrow provider protocol, strict request and response envelopes, pure development-source allowlist validation, deterministic mock fixtures, installation-safe versioned prompts, canonical prompt/request hashes and fail-closed structured output validation that reuses `CandidateExtractionResult` schema `0.1` and predicate vocabulary `0.1`.
 - Stage 4B focused tests passed 44/44 and the complete suite passed 1151 tests with 6 unchanged platform-specific skips. No provider SDK or HTTP dependency was added.
 - Stage 4C implemented a strict canonical request manifest, opaque append-only local response cache, original-call and local-parse provenance, fixed request/retry/attempt/timeout/cost budgets, cache-first mock runner and deterministic non-evaluative report. Focused tests passed 49/49 and the complete suite passed 1200 tests with the same 6 platform-specific skips.
+- Stage 4D provider/model decision selected OpenAI, the Responses API and requested model alias `gpt-5.4-mini` for the development-only comparator. The decision requires text-only strict JSON Schema output, `store=false`, no tools, a separately authorized exact-identity and pricing preflight, and explicit project-owner authorization before real execution.
 
 ## In progress
 
-- A separately reviewed provider/model decision and controlled real five-source development manifest remain pending before any Stage 4D execution.
-- No real provider or model has been selected, no LLM API request has been made, and no Stage 4 extraction or evaluation result exists.
+- No OpenAI SDK or real-provider adapter has been implemented, and the repository has not configured an API key or made an API request.
+- Exact model identity, SDK version, structured-output compatibility, current pricing and project-account access remain pending verification through a separately authorized preflight.
+- The controlled five-source development request manifest remains pending and no Stage 4 extraction or evaluation result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Review and accept a separate provider/model decision before any real-provider adapter or request is implemented.
-2. Prepare and independently review the controlled five-source Stage 4D development request manifest.
-3. Stage 4D: perform one bounded development execution with the approved provider and model, preserving immutable cache and provenance evidence.
-4. Stage 4E: evaluate fixed candidates with the unchanged matcher, complete error analysis and owner review, and optionally freeze only if every mandatory process gate passes.
-5. Preserve immutable deterministic v0.4 evidence and keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
+1. Implement and test the single OpenAI adapter without executing real development requests.
+2. Verify exact model identity, SDK version, structured-output compatibility, pricing and account access through a separately authorized preflight.
+3. Generate and independently review the controlled five-source development manifest.
+4. Explicitly authorize and perform the bounded Stage 4D development run.
+5. Proceed to Stage 4E evaluation and owner review.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- The Stage 4 provider and model have not been selected; real-provider implementation and execution remain blocked until a separate reviewed decision is accepted.
+- The OpenAI Responses API and requested model alias `gpt-5.4-mini` are selected, but real execution remains blocked until the adapter, exact-identity and pricing preflight, manifest review and explicit project-owner authorization are complete.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -65,4 +67,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. Stage 4C provides a tested mock-only runner, cache and provenance foundation but has not selected a model or executed real development extraction. Weak deterministic development quality, no LLM comparison result, no held-out result and the lack of a final portfolio presentation still prevent replacement.
+Not yet eligible. Stage 4D has selected a provider and requested model alias, but no SDK adapter, API request, real development extraction, LLM comparison result or held-out result exists. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
