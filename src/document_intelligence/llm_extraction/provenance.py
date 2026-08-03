@@ -22,6 +22,7 @@ from document_intelligence.llm_extraction.contracts import (
     ProviderTerminalStatus,
     ProviderTokenUsage,
     SHA256_PATTERN,
+    absent_additive_provider_metadata,
 )
 from document_intelligence.llm_extraction.prompting import (
     canonical_json_bytes,
@@ -100,6 +101,9 @@ class InvocationProvenance(BaseModel):
     source_id: str
     provider_identifier: str | None = None
     model_identifier: str | None = None
+    provider_request_id: str | None = None
+    provider_response_id: str | None = None
+    provider_sdk_version: str | None = None
     canonical_request_sha256: str = Field(pattern=SHA256_PATTERN)
     provider_configuration_id: str
     model_configuration_id: str
@@ -147,6 +151,25 @@ class InvocationProvenance(BaseModel):
         for value in (self.provider_identifier, self.model_identifier):
             if value is not None and (not value.strip() or value != value.strip()):
                 raise ValueError("provider and model identifiers must be trimmed")
+        provider_metadata = (
+            self.provider_request_id,
+            self.provider_response_id,
+            self.provider_sdk_version,
+        )
+        for value in provider_metadata:
+            if value is not None and (not value.strip() or value != value.strip()):
+                raise ValueError("provider metadata values must be trimmed and non-blank")
+        if any(value is not None for value in provider_metadata) and not all(
+            value is not None for value in provider_metadata
+        ):
+            raise ValueError(
+                "provider request ID, response ID, and SDK version must be "
+                "supplied together"
+            )
+        if any(value is not None for value in provider_metadata) and (
+            self.provider_identifier is None or self.model_identifier is None
+        ):
+            raise ValueError("provider metadata requires provider and model identifiers")
         if self.cache_status is CacheStatus.HIT and self.provider_call_performed:
             raise ValueError("cache hits must not be reported as provider calls")
         if self.cache_status is CacheStatus.HIT and not self.original_attempts:
@@ -218,11 +241,39 @@ class MockRunReport(BaseModel):
         for field_name, value in expected.items():
             if getattr(self, field_name) != value:
                 raise ValueError(f"{field_name} does not reconcile with provenance")
-        payload = self.model_dump(mode="json", exclude={"report_sha256"})
+        payload = _mock_run_report_payload(self, include_hash=False)
         expected_hash = uppercase_sha256_bytes(canonical_json_bytes(payload))
         if self.report_sha256 != expected_hash:
             raise ValueError("report_sha256 does not match canonical report bytes")
         return self
+
+
+def invocation_provenance_payload(
+    provenance: InvocationProvenance,
+) -> dict[str, object]:
+    """Serialize provenance while preserving the pre-metadata null contract."""
+    return provenance.model_dump(
+        mode="json",
+        exclude=absent_additive_provider_metadata(provenance),
+    )
+
+
+def _mock_run_report_payload(
+    report: MockRunReport,
+    *,
+    include_hash: bool,
+) -> dict[str, object]:
+    payload = report.model_dump(
+        mode="json",
+        exclude={"ordered_invocation_provenance", "report_sha256"},
+    )
+    payload["ordered_invocation_provenance"] = [
+        invocation_provenance_payload(item)
+        for item in report.ordered_invocation_provenance
+    ]
+    if include_hash:
+        payload["report_sha256"] = report.report_sha256
+    return payload
 
 
 def _report_counts(
@@ -306,7 +357,7 @@ def build_mock_run_report(
         **counts,
         "total_estimated_cost_usd": format(total_cost, "f"),
         "ordered_invocation_provenance": [
-            item.model_dump(mode="json") for item in invocations
+            invocation_provenance_payload(item) for item in invocations
         ],
     }
     report_hash = uppercase_sha256_bytes(canonical_json_bytes(payload))
@@ -316,7 +367,9 @@ def build_mock_run_report(
 def mock_run_report_bytes(report: MockRunReport) -> bytes:
     """Return canonical report bytes after complete reconciliation."""
     validated = MockRunReport.model_validate(report.model_dump(mode="python"))
-    return canonical_json_bytes(validated.model_dump(mode="json"))
+    return canonical_json_bytes(
+        _mock_run_report_payload(validated, include_hash=True)
+    )
 
 
 __all__ = [
@@ -328,5 +381,6 @@ __all__ = [
     "MockRunReport",
     "ValidationStatus",
     "build_mock_run_report",
+    "invocation_provenance_payload",
     "mock_run_report_bytes",
 ]

@@ -246,7 +246,11 @@ def run_mock_development(
                     attempts.append(
                         AttemptProvenance(
                             attempt_number=attempt_number,
-                            terminal_status=ProviderTerminalStatus.FAILURE,
+                            terminal_status=(
+                                ProviderTerminalStatus.TIMEOUT
+                                if provider_error.code is Stage4BErrorCode.TIMEOUT
+                                else ProviderTerminalStatus.FAILURE
+                            ),
                             provider_call_performed=True,
                             response_sha256=None,
                             latency_ms=None,
@@ -320,7 +324,11 @@ def run_mock_development(
         abstained = False
 
         if response is None:
-            terminal_status = ProviderTerminalStatus.FAILURE
+            terminal_status = (
+                current_attempts[-1].terminal_status
+                if current_attempts
+                else ProviderTerminalStatus.FAILURE
+            )
             if current_attempts:
                 last_code = current_attempts[-1].failure_code
                 failure_codes = (last_code,) if last_code is not None else ()
@@ -365,6 +373,15 @@ def run_mock_development(
                 ),
                 model_identifier=(
                     response.model_identifier if response is not None else None
+                ),
+                provider_request_id=(
+                    response.provider_request_id if response is not None else None
+                ),
+                provider_response_id=(
+                    response.provider_response_id if response is not None else None
+                ),
+                provider_sdk_version=(
+                    response.provider_sdk_version if response is not None else None
                 ),
                 canonical_request_sha256=request.canonical_request_sha256,
                 provider_configuration_id=request.provider_configuration_id,

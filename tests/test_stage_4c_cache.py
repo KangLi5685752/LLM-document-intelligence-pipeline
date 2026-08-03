@@ -18,8 +18,10 @@ from document_intelligence.llm_extraction import (
     CacheIdentity,
     DeterministicMockProvider,
     InvocationRole,
+    LLMProviderResponse,
     MockResponseFixture,
     ProviderTerminalStatus,
+    ProviderTokenUsage,
     ResponseCache,
     Stage4BError,
     Stage4BErrorCode,
@@ -27,7 +29,10 @@ from document_intelligence.llm_extraction import (
     build_request_envelope,
     cache_record_bytes,
 )
-from document_intelligence.llm_extraction.prompting import canonical_json_bytes
+from document_intelligence.llm_extraction.prompting import (
+    canonical_json_bytes,
+    uppercase_sha256_bytes,
+)
 
 
 NOW = datetime(2026, 8, 3, 1, 2, 3, tzinfo=timezone.utc)
@@ -116,6 +121,69 @@ def _record(
     )
 
 
+def _record_with_provider_metadata():
+    base = _record()
+    response_payload = base.response.model_dump(mode="python")
+    response_payload.update(
+        {
+            "provider_identifier": "openai",
+            "model_identifier": "gpt-5.4-mini-fictional-snapshot",
+            "provider_request_id": "req_fictional_001",
+            "provider_response_id": "resp_fictional_001",
+            "provider_sdk_version": "2.46.0",
+            "token_usage": ProviderTokenUsage(input_tokens=23, output_tokens=11),
+            "latency_ms": 125,
+        }
+    )
+    return build_cache_record(
+        identity=base.identity,
+        response=LLMProviderResponse.model_validate(response_payload),
+        original_provider_call_timestamp=base.original_provider_call_timestamp,
+        original_attempts=base.original_attempts,
+        estimated_cost_usd=base.estimated_cost_usd,
+    )
+
+
+def _legacy_cache_bytes() -> tuple[CacheIdentity, bytes]:
+    identity = CacheIdentity.from_request(_request())
+    raw_response = _raw()
+    response_sha256 = uppercase_sha256_bytes(raw_response.encode("utf-8"))
+    payload = {
+        "cache_schema_version": "0.1",
+        "identity": identity.model_dump(mode="json"),
+        "response": {
+            "request_id": identity.request_id,
+            "provider_identifier": "stage4b-deterministic-mock-provider",
+            "model_identifier": "stage4b-deterministic-mock-model",
+            "terminal_status": "success",
+            "raw_response": raw_response,
+            "raw_response_sha256": response_sha256,
+            "token_usage": None,
+            "latency_ms": 4,
+            "retry_count": 0,
+            "warning_codes": [],
+            "failure_codes": [],
+        },
+        "original_provider_call_timestamp": "2026-08-03T01:02:03Z",
+        "original_attempts": [
+            {
+                "attempt_number": 1,
+                "terminal_status": "success",
+                "provider_call_performed": True,
+                "response_sha256": response_sha256,
+                "latency_ms": 4,
+                "retry_reason": None,
+                "failure_code": None,
+            }
+        ],
+        "estimated_cost_usd": "0.25",
+    }
+    payload["cache_record_sha256"] = uppercase_sha256_bytes(
+        canonical_json_bytes(payload)
+    )
+    return identity, canonical_json_bytes(payload)
+
+
 def test_cache_miss_is_explicit(tmp_path) -> None:
     cache = ResponseCache(tmp_path / "cache")
     with pytest.raises(Stage4BError) as captured:
@@ -135,6 +203,58 @@ def test_cache_append_and_read_preserve_exact_original_record(tmp_path) -> None:
     assert cache.path_for(record.identity).read_bytes() == cache_record_bytes(record)
     assert loaded.original_provider_call_timestamp == NOW
     assert loaded.response.raw_response == _raw()
+
+
+def test_pre_metadata_legacy_cache_record_remains_hash_valid(tmp_path) -> None:
+    cache = ResponseCache(tmp_path / "cache")
+    identity, legacy_bytes = _legacy_cache_bytes()
+    target = cache.path_for(identity)
+    target.write_bytes(legacy_bytes)
+
+    loaded = cache.read(identity)
+
+    assert loaded.response.provider_request_id is None
+    assert loaded.response.provider_response_id is None
+    assert loaded.response.provider_sdk_version is None
+    assert cache_record_bytes(loaded) == legacy_bytes
+
+
+def test_cache_preserves_additive_provider_metadata_exactly(tmp_path) -> None:
+    cache = ResponseCache(tmp_path / "cache")
+    record = _record_with_provider_metadata()
+
+    cache.append(record)
+    loaded = cache.read(record.identity)
+
+    assert loaded == record
+    assert loaded.response.provider_request_id == "req_fictional_001"
+    assert loaded.response.provider_response_id == "resp_fictional_001"
+    assert loaded.response.provider_sdk_version == "2.46.0"
+    assert loaded.response.token_usage == ProviderTokenUsage(
+        input_tokens=23, output_tokens=11
+    )
+    assert loaded.response.latency_ms == 125
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    ("provider_request_id", "provider_response_id", "provider_sdk_version"),
+)
+def test_present_provider_metadata_is_covered_by_cache_hash(
+    tmp_path, field_name: str
+) -> None:
+    cache = ResponseCache(tmp_path / "cache")
+    record = _record_with_provider_metadata()
+    cache.append(record)
+    target = cache.path_for(record.identity)
+    payload = json.loads(target.read_bytes())
+    payload["response"][field_name] = f"tampered-{field_name}"
+    target.write_bytes(canonical_json_bytes(payload))
+
+    with pytest.raises(Stage4BError) as captured:
+        cache.read(record.identity)
+
+    assert captured.value.code is Stage4BErrorCode.CACHE_HASH_MISMATCH
 
 
 def test_identical_append_is_a_read_without_rewrite(tmp_path) -> None:

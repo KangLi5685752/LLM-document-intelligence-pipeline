@@ -28,6 +28,7 @@ from document_intelligence.llm_extraction.contracts import (
     LLMProviderResponse,
     ProviderTerminalStatus,
     SHA256_PATTERN,
+    absent_additive_provider_metadata,
 )
 from document_intelligence.llm_extraction.errors import (
     Stage4BError,
@@ -122,7 +123,7 @@ class CacheRecord(BaseModel):
                 Stage4BErrorCode.CACHE_RECORD_INVALID,
                 "cached original attempts do not reconcile with the response",
             )
-        payload = self.model_dump(mode="json", exclude={"cache_record_sha256"})
+        payload = _cache_record_payload(self, include_hash=False)
         expected_hash = uppercase_sha256_bytes(canonical_json_bytes(payload))
         if self.cache_record_sha256 != expected_hash:
             raise Stage4BError(
@@ -139,6 +140,35 @@ def cache_identity_sha256(identity: CacheIdentity) -> str:
     )
 
 
+def _provider_response_payload(response: LLMProviderResponse) -> dict[str, Any]:
+    return response.model_dump(
+        mode="json",
+        exclude=absent_additive_provider_metadata(response),
+    )
+
+
+def _cache_record_payload(
+    record: CacheRecord,
+    *,
+    include_hash: bool,
+) -> dict[str, Any]:
+    payload = {
+        "cache_schema_version": record.cache_schema_version,
+        "identity": record.identity.model_dump(mode="json"),
+        "response": _provider_response_payload(record.response),
+        "original_provider_call_timestamp": _require_utc(
+            record.original_provider_call_timestamp
+        ).isoformat().replace("+00:00", "Z"),
+        "original_attempts": [
+            item.model_dump(mode="json") for item in record.original_attempts
+        ],
+        "estimated_cost_usd": format(record.estimated_cost_usd, "f"),
+    }
+    if include_hash:
+        payload["cache_record_sha256"] = record.cache_record_sha256
+    return payload
+
+
 def build_cache_record(
     *,
     identity: CacheIdentity,
@@ -151,7 +181,7 @@ def build_cache_record(
     payload = {
         "cache_schema_version": CACHE_SCHEMA_VERSION,
         "identity": identity.model_dump(mode="json"),
-        "response": response.model_dump(mode="json"),
+        "response": _provider_response_payload(response),
         "original_provider_call_timestamp": _require_utc(
             original_provider_call_timestamp
         ).isoformat().replace("+00:00", "Z"),
@@ -169,7 +199,7 @@ def build_cache_record(
 def cache_record_bytes(record: CacheRecord) -> bytes:
     """Return exact canonical bytes after complete hash validation."""
     validated = CacheRecord.model_validate(record.model_dump(mode="python"))
-    return canonical_json_bytes(validated.model_dump(mode="json"))
+    return canonical_json_bytes(_cache_record_payload(validated, include_hash=True))
 
 
 def _has_reparse_attribute(stat_result: os.stat_result) -> bool:
