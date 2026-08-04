@@ -10,25 +10,29 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
+import httpx
 import pytest
+from openai import APIStatusError
 
 import document_intelligence.llm_extraction.openai_preflight_cli as cli
-import document_intelligence.llm_extraction.openai_preflight_execution as execution
+import document_intelligence.llm_extraction.openai_preflight_execution_v0_2 as execution
 from document_intelligence.llm_extraction.errors import (
     Stage4BError,
     Stage4BErrorCode,
 )
 from document_intelligence.llm_extraction.openai_preflight import (
-    PREFLIGHT_AUTHORIZATION_SCOPE,
     OpenAIDataControlsObservation,
-    OpenAIPreflightAuthorization,
     OpenAIPricingObservation,
+)
+from document_intelligence.llm_extraction.openai_preflight_v0_2 import (
+    PREFLIGHT_AUTHORIZATION_SCOPE,
+    OpenAIPreflightAuthorizationV02,
 )
 from document_intelligence.llm_extraction.prompting import canonical_json_bytes
 
 
 NOW = datetime(2026, 8, 5, 12, 0, tzinfo=timezone.utc)
-FICTIONAL_KEY = "fictional-cli-key"
+FICTIONAL_KEY = "sk-proj-" + "C" * 116
 
 
 def _write(path: Path, model: object) -> None:
@@ -43,7 +47,7 @@ def _paths(tmp_path: Path) -> tuple[Path, Path, Path]:
     controls = tmp_path / "controls.json"
     _write(
         authorization,
-        OpenAIPreflightAuthorization(
+        OpenAIPreflightAuthorizationV02(
             authorization_id="fictional-cli-authorization",
             authorized_by="Fictional CLI Owner",
             authorized_at_utc=NOW - timedelta(minutes=5),
@@ -169,6 +173,43 @@ class FakeClient:
 
     def with_options(self, *, max_retries: int, timeout: float):
         return self
+
+
+def _api_status_error_with_diagnostic(
+    *,
+    error_field: str,
+    value: str,
+) -> APIStatusError:
+    provider_type = "invalid_request_error"
+    provider_code = "invalid_api_key"
+    request_id = "req_fictional_001"
+    if error_field == "provider_type":
+        provider_type = value
+    elif error_field == "provider_code":
+        provider_code = value
+    elif error_field == "request_id":
+        request_id = value
+    else:
+        raise AssertionError("unsupported fictional diagnostic field")
+    request = httpx.Request("POST", "https://api.openai.invalid/v1/responses")
+    response = httpx.Response(
+        401,
+        request=request,
+        headers={
+            "x-request-id": request_id,
+            "authorization": f"Bearer {FICTIONAL_KEY}",
+        },
+        content=f'{{"unsafe":"{FICTIONAL_KEY}"}}'.encode("utf-8"),
+    )
+    return APIStatusError(
+        f"unsafe fictional provider message {FICTIONAL_KEY}",
+        response=response,
+        body={
+            "type": provider_type,
+            "code": provider_code,
+            "message": FICTIONAL_KEY,
+        },
+    )
 
 
 def test_readiness_cli_returns_zero_without_secret_client_or_artifacts(
@@ -414,6 +455,39 @@ def test_invalid_real_confirmation_returns_two_before_secret_read(
     )
 
 
+def test_truncated_credential_returns_two_without_echo_or_artifact(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    paths = _paths(tmp_path)
+    truncated = "sk-fictional-truncated"
+
+    code = cli._main_for_tests(
+        [
+            *_arguments(paths),
+            "--execute-real-preflight",
+            "--confirmation",
+            execution.EXECUTION_CONFIRMATION,
+        ],
+        repository_root=tmp_path,
+        clock=lambda: NOW,
+        api_key_reader=lambda: truncated,
+        client_factory=lambda supplied: (_ for _ in ()).throw(
+            AssertionError("truncated credential reached client construction")
+        ),
+    )
+
+    captured = capsys.readouterr()
+    assert code == 2
+    assert captured.out == ""
+    assert json.loads(captured.err) == {
+        "error_code": "preflight_api_key_invalid",
+        "message": "OPENAI_API_KEY has an invalid local shape",
+    }
+    assert truncated not in captured.err
+    assert not tmp_path.joinpath(*execution.OUTPUT_DIRECTORY.parts).exists()
+
+
 def test_fake_execution_failure_returns_one_and_sanitizes_secret_exception(
     tmp_path: Path,
     capsys: pytest.CaptureFixture[str],
@@ -443,6 +517,69 @@ def test_fake_execution_failure_returns_one_and_sanitizes_secret_exception(
     assert captured.out == ""
     assert error["error_code"] == "execution_failed"
     assert FICTIONAL_KEY not in captured.err
+
+
+@pytest.mark.parametrize(
+    ("record_field", "error_field"),
+    (
+        ("provider_error_type", "provider_type"),
+        ("provider_error_code", "provider_code"),
+        ("provider_request_id", "request_id"),
+    ),
+)
+@pytest.mark.parametrize(
+    "unsafe_diagnostic",
+    (
+        FICTIONAL_KEY,
+        "trace-sk-fictional_fragment",
+        FICTIONAL_KEY[:80],
+        FICTIONAL_KEY[-80:],
+    ),
+    ids=("complete", "sk-fragment", "long-prefix", "long-suffix"),
+)
+def test_cli_and_failure_artifact_scrub_credential_derived_diagnostics(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    record_field: str,
+    error_field: str,
+    unsafe_diagnostic: str,
+) -> None:
+    paths = _paths(tmp_path)
+    client = FakeClient(
+        _api_status_error_with_diagnostic(
+            error_field=error_field,
+            value=unsafe_diagnostic,
+        )
+    )
+
+    code = cli._main_for_tests(
+        [
+            *_arguments(paths),
+            "--execute-real-preflight",
+            "--confirmation",
+            execution.EXECUTION_CONFIRMATION,
+        ],
+        repository_root=tmp_path,
+        clock=lambda: NOW,
+        api_key_reader=lambda: FICTIONAL_KEY,
+        client_factory=lambda supplied: client,
+    )
+
+    captured = capsys.readouterr()
+    failure_path = tmp_path.joinpath(*execution.FAILURE_RECORD_RELATIVE_PATH.parts)
+    record = execution.load_openai_preflight_failure_record(failure_path)
+    artifact_text = failure_path.read_text(encoding="utf-8")
+    assert code == 1
+    assert captured.out == ""
+    assert json.loads(captured.err) == {
+        "error_code": "provider_api_failure",
+        "message": "OpenAI Responses API returned a non-retryable failure",
+    }
+    assert getattr(record, record_field) is None
+    for forbidden in (FICTIONAL_KEY, unsafe_diagnostic):
+        assert forbidden not in captured.out
+        assert forbidden not in captured.err
+        assert forbidden not in artifact_text
 
 
 def test_valid_fake_real_cli_returns_only_safe_summary(

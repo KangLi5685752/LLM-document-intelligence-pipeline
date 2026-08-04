@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from collections.abc import Callable
 from copy import deepcopy
@@ -57,6 +58,91 @@ OPENAI_INSTALLED_SDK_VERSION = package_version("openai")
 OPENAI_MAX_TIMEOUT_SECONDS = 120.0
 OPENAI_MAX_OUTPUT_TOKENS: Final[Literal[4096]] = 4096
 OPENAI_REASONING_EFFORT: Final[Literal["none"]] = "none"
+_SAFE_PROVIDER_DIAGNOSTIC_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}")
+
+
+class OpenAIProviderFailureDiagnostics(BaseModel):
+    """Immutable allowlisted fields extracted from one SDK status failure."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    http_status_code: int | None = Field(default=None, ge=100, le=599)
+    provider_error_type: str | None = None
+    provider_error_code: str | None = None
+    provider_request_id: str | None = None
+
+    @field_validator("http_status_code", mode="before")
+    @classmethod
+    def validate_status_code(cls, value: object) -> object:
+        if value is not None and type(value) is not int:
+            raise ValueError("http_status_code must use an integer")
+        return value
+
+    @field_validator(
+        "provider_error_type",
+        "provider_error_code",
+        "provider_request_id",
+        mode="before",
+    )
+    @classmethod
+    def validate_safe_text(cls, value: object) -> object:
+        if value is None:
+            return None
+        if type(value) is not str or _SAFE_PROVIDER_DIAGNOSTIC_PATTERN.fullmatch(
+            value
+        ) is None:
+            raise ValueError("provider diagnostic text is not safely representable")
+        return value
+
+
+class OpenAIProviderFailure(Stage4BError):
+    """Stable provider failure carrying only sanitized immutable diagnostics."""
+
+    def __init__(
+        self,
+        code: Stage4BErrorCode,
+        diagnostics: OpenAIProviderFailureDiagnostics,
+    ) -> None:
+        if code not in {
+            Stage4BErrorCode.RATE_LIMIT,
+            Stage4BErrorCode.PROVIDER_API_FAILURE,
+        }:
+            raise ValueError("provider status failure code is not supported")
+        self.diagnostics = OpenAIProviderFailureDiagnostics.model_validate(
+            diagnostics.model_dump(mode="python")
+        )
+        message = (
+            "OpenAI Responses request was rate limited"
+            if code is Stage4BErrorCode.RATE_LIMIT
+            else "OpenAI Responses API returned a non-retryable failure"
+        )
+        super().__init__(code, message)
+
+
+def _safe_provider_diagnostic(value: object) -> str | None:
+    if type(value) is not str:
+        return None
+    if _SAFE_PROVIDER_DIAGNOSTIC_PATTERN.fullmatch(value) is None:
+        return None
+    return value
+
+
+def _status_failure(
+    error: APIStatusError,
+    code: Stage4BErrorCode,
+) -> OpenAIProviderFailure:
+    status = getattr(error, "status_code", None)
+    if type(status) is not int or not 100 <= status <= 599:
+        status = None
+    diagnostics = OpenAIProviderFailureDiagnostics(
+        http_status_code=status,
+        provider_error_type=_safe_provider_diagnostic(getattr(error, "type", None)),
+        provider_error_code=_safe_provider_diagnostic(getattr(error, "code", None)),
+        provider_request_id=_safe_provider_diagnostic(
+            getattr(error, "request_id", None)
+        ),
+    )
+    return OpenAIProviderFailure(code, diagnostics)
 
 
 class OpenAIResponsesConfiguration(BaseModel):
@@ -457,37 +543,43 @@ class OpenAIResponsesProvider:
         """Perform and map one call while transiently retaining its SDK response."""
         payload = build_openai_responses_payload(request, self._configuration)
         started = self._clock()
+        failure: Stage4BError | None = None
+        response: Any | None = None
         try:
             configured_client = self._client.with_options(
                 max_retries=0,
                 timeout=self._configuration.timeout_seconds,
             )
             response = configured_client.responses.create(**payload)
-        except APITimeoutError as error:
-            raise Stage4BError(
+        except APITimeoutError:
+            failure = Stage4BError(
                 Stage4BErrorCode.TIMEOUT,
                 "OpenAI Responses request timed out",
-            ) from error
+            )
         except RateLimitError as error:
-            raise Stage4BError(
-                Stage4BErrorCode.RATE_LIMIT,
-                "OpenAI Responses request was rate limited",
-            ) from error
-        except APIConnectionError as error:
-            raise Stage4BError(
+            failure = _status_failure(error, Stage4BErrorCode.RATE_LIMIT)
+        except APIConnectionError:
+            failure = Stage4BError(
                 Stage4BErrorCode.TRANSPORT_ERROR,
                 "OpenAI Responses transport failed",
-            ) from error
+            )
         except APIStatusError as error:
-            raise Stage4BError(
+            failure = _status_failure(
+                error,
                 Stage4BErrorCode.PROVIDER_API_FAILURE,
-                "OpenAI Responses API returned a non-retryable failure",
-            ) from error
-        except APIError as error:
-            raise Stage4BError(
+            )
+        except APIError:
+            failure = Stage4BError(
                 Stage4BErrorCode.PROVIDER_API_FAILURE,
                 "OpenAI SDK reported a non-retryable provider failure",
-            ) from error
+            )
+        if failure is not None:
+            raise failure
+        if response is None:
+            raise Stage4BError(
+                Stage4BErrorCode.PROVIDER_API_FAILURE,
+                "OpenAI SDK returned no response",
+            )
         elapsed_seconds = self._clock() - started
         latency_ms = max(0, round(elapsed_seconds * 1000))
 
@@ -544,6 +636,8 @@ __all__ = [
     "OPENAI_REQUIRED_SDK_VERSION",
     "OPENAI_REASONING_EFFORT",
     "OPENAI_RESPONSE_SCHEMA_NAME",
+    "OpenAIProviderFailure",
+    "OpenAIProviderFailureDiagnostics",
     "OpenAIResponsesConfiguration",
     "OpenAIResponsesProvider",
     "audit_openai_strict_schema",
