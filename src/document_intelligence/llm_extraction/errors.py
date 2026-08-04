@@ -61,6 +61,11 @@ class Stage4BErrorCode(str, Enum):
     )
     PREFLIGHT_OUTPUT_INVALID = "preflight_output_invalid"
     PREFLIGHT_RECORD_HASH_MISMATCH = "preflight_record_hash_mismatch"
+    PREFLIGHT_EXECUTION_GATE_INVALID = "preflight_execution_gate_invalid"
+    PREFLIGHT_INPUT_FILE_INVALID = "preflight_input_file_invalid"
+    PREFLIGHT_ATTEMPT_ALREADY_EXISTS = "preflight_attempt_already_exists"
+    PREFLIGHT_ARTIFACT_WRITE_FAILED = "preflight_artifact_write_failed"
+    PREFLIGHT_API_KEY_MISSING = "preflight_api_key_missing"
 
 
 class Stage4BError(ValueError):
