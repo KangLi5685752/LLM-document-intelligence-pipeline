@@ -2,13 +2,36 @@
 
 ## Scope
 
-Stage 4D-3A implements and offline-tests the local execution boundary for one
-possible future synthetic OpenAI preflight. It does not perform that preflight,
-construct a real client during testing, create real authorization or terms
-evidence, or access development or held-out documents.
+Stage 4D-3B implements and offline-tests a separate v0.2 local execution
+boundary for one possible future synthetic OpenAI preflight. This correction
+does not authorize or perform that preflight, construct a real client during
+testing, create real authorization or terms evidence, or access development or
+held-out documents.
+
+## Closed v0.1 incident
+
+The authorized v0.1 local transaction created the permanent attempt marker
+`openai-gpt-5.4-mini-synthetic-preflight-v0.1.attempt.json` for execution plan
+`3FCFBEE20038F4FF0E2406EAD0DB62C683CFD5A3D9313759F29BCF41D006038D`.
+The unchanged 517-byte marker has file SHA-256
+`5B75790CE978B2AC7C6ECC2CFC00C1B21BF398AB5C622F04F2F67EE05A8B61AC`
+and canonical self-hash
+`9B5952B20A88152EBC4FD14026515AAB70397144736A0ED1762585ECEAF93967`.
+It produced no successful record and returned the stable local error
+`provider_api_failure`. More than one hour later, the OpenAI project evidence
+showed Last used as Never, no Responses logs, zero requests, zero tokens and
+USD 0.00 spend. A truncated clipboard credential is the leading inference for
+the local failure, not a proven fact.
+
+The v0.1 marker is permanent historical evidence. V0.1 is closed, must not be
+retried, and is not an authorization for v0.2. The v0.2 preflight ID,
+authorization scope, confirmation phrase, request/evidence identifiers and
+attempt, success and failure filenames are all distinct. V0.2 does not inspect,
+modify, replace or count the v0.1 marker.
 
 The deterministic execution plan contains only fixed identifiers, canonical
-hashes, a one-call limit and the two fixed repository-relative artifact paths.
+hashes, a one-call limit and the three fixed v0.2 repository-relative artifact
+paths.
 Every hash anchor is derived at runtime from the existing production request,
 prompt, strict-schema and provider-payload builders in the same readiness
 transaction. This necessarily reads only the two frozen installed prompt text
@@ -60,23 +83,31 @@ checked without reopening it for JSON parsing.
 
 ## Real-mode gate
 
-Real mode requires all of the following before credential access:
+V0.2 real mode requires all of the following before credential access:
 
 - `--execute-real-preflight`;
-- the exact confirmation `EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_1`;
+- the exact confirmation `EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_2`;
 - valid authorization for the frozen one-call scope;
 - authorization no later than the captured UTC execution time;
 - pricing and data-control observations dated on that same UTC date;
-- absence of both fixed output artifacts.
+- absence of all three fixed v0.2 output artifacts.
 
-Only after those local gates pass may the command read the nonblank
-`OPENAI_API_KEY` environment value and lazily construct the pinned SDK client.
-The key is not accepted through arguments or JSON and is not included in
-messages or artifacts. CLI option abbreviation is disabled, and invalid syntax
-returns a fixed status-2 error without echoing supplied argument names or
-values. This program does not control shell history or operating-system process
-listings. `store=false` remains a request requirement, not a zero-retention
-guarantee.
+Only after those local gates pass may the command read `OPENAI_API_KEY`. Before
+directory creation, marker creation, client construction or provider entry,
+the v0.2 gate requires an exact string with the generic `sk-` prefix, a
+conservative minimum of 120 characters, a maximum of 512 characters, and only
+non-whitespace printable supported key characters. The 120-character floor is
+intentionally conservative for the current long project-scoped key profile so
+plausible partial clipboard values fail locally; it does not inspect a real key
+or claim to validate provider authentication. Shape failures use a stable local
+code and never include the
+supplied value, any portion of it, its length, hash, fingerprint or
+representation. The key is not accepted through arguments or JSON and is not
+included in messages or artifacts. CLI option abbreviation is disabled, and
+invalid syntax returns a fixed status-2 error without echoing supplied argument
+names or values. This program does not control shell history or operating-system
+process listings. `store=false` remains a request requirement, not a
+zero-retention guarantee.
 
 The immutable provider configuration sets reasoning effort to `none` and
 `max_output_tokens` to exactly `4096`, explicitly capping the combined output
@@ -87,7 +118,7 @@ override.
 
 ## One-call transaction
 
-The fixed attempt marker is created with exclusive semantics immediately before
+The fixed v0.2 attempt marker is created with exclusive semantics immediately before
 the plan-bound provider wrapper, existing same-call metadata bridge and
 preflight runner may invoke the provider. Its state is
 `provider_call_may_have_started`. Request, schema, payload or returned-record
@@ -95,24 +126,40 @@ anchor drift fails without retry, preserves the marker and creates no successful
 record. The marker also remains after success, timeout, rate limiting, provider
 failure, invalid output, local validation failure or later record-write failure.
 Its existence blocks automatic retries before credential access or client
-construction.
+construction. SDK retries remain disabled, and the provider-call counter cannot
+exceed one.
 
-Only a fully validated `OpenAIPreflightRecord` is serialized, using the existing
-canonical serializer, to the fixed successful-record path. That write is also
-exclusive. A provider or validation failure creates no successful record, and
-a record-write failure preserves the marker without retrying the provider. Raw
-SDK responses and transient public metadata values are never serialized by this
-transaction boundary.
+Only a fully validated v0.2 success record is serialized to the fixed successful
+record path, using exclusive creation. After a marker exists, an ordinary
+client, provider, validation or success-write failure instead installs one
+exclusive immutable v0.2 failure record when filesystem state permits. The
+self-hashed record binds the authorization, plan, exact installed marker-file
+hash, UTC failure time, failure stage, stable local error, retry and call counts,
+and the fact that no successful record was written. It may include only a
+sanitized HTTP status, provider error type/code and provider request ID from the
+pinned SDK interface. Before those text diagnostics reach the final exception or
+record, the transaction rejects values containing `sk-`, the complete supplied
+credential or a meaningful credential fragment, prefix or suffix. Ordinary
+values such as `invalid_request_error`, `invalid_api_key` and a non-sensitive
+request ID remain eligible. Provider bodies, raw messages, headers, prompts,
+evidence, outputs and credentials are excluded, and the original SDK exception
+is not attached as cause or context. Stable stages distinguish client and
+provider construction, the provider call, post-response provider validation,
+final record validation and successful-record writing. The public failure-record
+loader verifies the canonical self-hash first and maps a mismatch to
+`preflight_failure_record_hash_mismatch`. A failure record cannot coexist with a
+successful record. A process crash can still leave only the permanent marker;
+the transaction does not claim otherwise.
 
 ## Remaining gate
 
-Paid execution remains unauthorized. No real API request or preflight occurred
-during implementation or cost-hardening testing, and no real authorization,
-pricing observation or data-control observation was created. Current pricing,
-project-account access, returned live model identity, live version metadata and
-live strict-schema compatibility remain unverified.
-Stage 4D-3B requires separate explicit project-owner authorization and same-day
-reviewed observations before the one-call real mode may be used. A successful
-preflight would not authorize five-source development execution or any held-out
-access. These local controls do not claim resistance to arbitrary mutation by a
-privileged local actor and do not establish production readiness.
+V0.2 paid execution remains unauthorized. No real API request or preflight
+occurred during this corrective implementation or its offline tests, and no
+v0.2 authorization, pricing observation or data-control observation was
+created. Current pricing, project-account access, returned live model identity,
+live version metadata and live strict-schema compatibility remain unverified.
+A future v0.2 attempt requires separate explicit project-owner authorization
+and same-day reviewed observations. A successful v0.2 preflight would not
+authorize five-source development execution or any held-out access. These local
+controls do not claim resistance to arbitrary mutation by a privileged local
+actor and do not establish production readiness.

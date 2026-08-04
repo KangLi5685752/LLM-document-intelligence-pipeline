@@ -66,6 +66,10 @@ class Stage4BErrorCode(str, Enum):
     PREFLIGHT_ATTEMPT_ALREADY_EXISTS = "preflight_attempt_already_exists"
     PREFLIGHT_ARTIFACT_WRITE_FAILED = "preflight_artifact_write_failed"
     PREFLIGHT_API_KEY_MISSING = "preflight_api_key_missing"
+    PREFLIGHT_API_KEY_INVALID = "preflight_api_key_invalid"
+    PREFLIGHT_FAILURE_RECORD_HASH_MISMATCH = (
+        "preflight_failure_record_hash_mismatch"
+    )
 
 
 class Stage4BError(ValueError):

@@ -44,6 +44,7 @@ from document_intelligence.llm_extraction.openai_provider import (
     OPENAI_REQUESTED_MODEL_ALIAS,
     OPENAI_REQUIRED_SDK_VERSION,
     OPENAI_REASONING_EFFORT,
+    OpenAIProviderFailure,
     OpenAIResponsesConfiguration,
     OpenAIResponsesProvider,
     audit_openai_strict_schema,
@@ -688,6 +689,90 @@ def test_sdk_failures_are_typed_and_never_retried(
         {"max_retries": 0, "timeout": OPENAI_MAX_TIMEOUT_SECONDS}
     ]
     assert len(client.responses.calls) == 1
+
+
+def test_api_status_failure_retains_only_sanitized_safe_diagnostics() -> None:
+    fictional_secret = "sk-fictional-provider-secret-must-not-be-retained"
+    request = httpx.Request("POST", "https://api.openai.invalid/v1/responses")
+    response = httpx.Response(
+        401,
+        request=request,
+        headers={
+            "x-request-id": "req_fictional_safe_001",
+            "authorization": f"Bearer {fictional_secret}",
+            "x-fictional-sensitive-header": fictional_secret,
+        },
+        content=f'{{"unsafe":"{fictional_secret}"}}'.encode("utf-8"),
+    )
+    error = APIStatusError(
+        f"unsafe raw message {fictional_secret}",
+        response=response,
+        body={
+            "type": "invalid_request_error",
+            "code": "invalid_api_key",
+            "message": fictional_secret,
+            "prompt": "fictional prompt must not be retained",
+        },
+    )
+    client = FakeOpenAIClient(error)
+
+    with pytest.raises(OpenAIProviderFailure) as captured:
+        OpenAIResponsesProvider(client=client).generate(_request())
+
+    failure = captured.value
+    assert failure.code is Stage4BErrorCode.PROVIDER_API_FAILURE
+    assert failure.diagnostics.model_dump(mode="python") == {
+        "http_status_code": 401,
+        "provider_error_type": "invalid_request_error",
+        "provider_error_code": "invalid_api_key",
+        "provider_request_id": "req_fictional_safe_001",
+    }
+    serialized = json.dumps(failure.diagnostics.model_dump(mode="json"))
+    for forbidden in (
+        fictional_secret,
+        "unsafe raw message",
+        "fictional prompt",
+        "authorization",
+        "x-fictional-sensitive-header",
+    ):
+        assert forbidden not in serialized
+        assert forbidden not in str(failure)
+        assert forbidden not in repr(failure)
+    assert failure.__cause__ is None
+    assert failure.__context__ is None
+    assert client.option_calls == [
+        {"max_retries": 0, "timeout": OPENAI_MAX_TIMEOUT_SECONDS}
+    ]
+    assert len(client.responses.calls) == 1
+
+
+def test_unsafe_provider_diagnostic_values_are_omitted() -> None:
+    request = httpx.Request("POST", "https://api.openai.invalid/v1/responses")
+    response = httpx.Response(
+        400,
+        request=request,
+        headers={"x-request-id": "unsafe request id with spaces"},
+    )
+    client = FakeOpenAIClient(
+        APIStatusError(
+            "fictional unsafe diagnostics",
+            response=response,
+            body={
+                "type": "unsafe type with spaces",
+                "code": "unsafe\ncode",
+            },
+        )
+    )
+
+    with pytest.raises(OpenAIProviderFailure) as captured:
+        OpenAIResponsesProvider(client=client).generate(_request())
+
+    assert captured.value.diagnostics.model_dump(mode="python") == {
+        "http_status_code": 400,
+        "provider_error_type": None,
+        "provider_error_code": None,
+        "provider_request_id": None,
+    }
 
 
 @pytest.mark.parametrize(

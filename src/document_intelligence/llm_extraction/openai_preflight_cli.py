@@ -14,7 +14,9 @@ from document_intelligence.llm_extraction.errors import (
     Stage4BError,
     Stage4BErrorCode,
 )
-from document_intelligence.llm_extraction import openai_preflight_execution as execution
+from document_intelligence.llm_extraction import (
+    openai_preflight_execution_v0_2 as execution,
+)
 
 
 _INVALID_EXIT_CODES = frozenset(
@@ -25,6 +27,7 @@ _INVALID_EXIT_CODES = frozenset(
         Stage4BErrorCode.PREFLIGHT_INPUT_FILE_INVALID,
         Stage4BErrorCode.PREFLIGHT_ATTEMPT_ALREADY_EXISTS,
         Stage4BErrorCode.PREFLIGHT_API_KEY_MISSING,
+        Stage4BErrorCode.PREFLIGHT_API_KEY_INVALID,
     }
 )
 
