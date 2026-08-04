@@ -35,12 +35,16 @@ from document_intelligence.llm_extraction import (
     validate_provider_output,
 )
 from document_intelligence.llm_extraction.openai_provider import (
+    DEFAULT_OPENAI_RESPONSES_CONFIGURATION,
     OPENAI_INSTALLED_SDK_VERSION,
+    OPENAI_MAX_OUTPUT_TOKENS,
     OPENAI_MAX_TIMEOUT_SECONDS,
     OPENAI_MODEL_CONFIGURATION_ID,
     OPENAI_PROVIDER_CONFIGURATION_ID,
     OPENAI_REQUESTED_MODEL_ALIAS,
     OPENAI_REQUIRED_SDK_VERSION,
+    OPENAI_REASONING_EFFORT,
+    OpenAIResponsesConfiguration,
     OpenAIResponsesProvider,
     audit_openai_strict_schema,
     build_openai_candidate_schema,
@@ -48,6 +52,7 @@ from document_intelligence.llm_extraction.openai_provider import (
 )
 from document_intelligence.llm_extraction.prompting import (
     PromptAssets,
+    canonical_json_bytes,
     canonical_prompt_bytes,
     canonical_request_sha256,
     load_prompt_assets,
@@ -283,6 +288,10 @@ def test_payload_is_deterministic_text_only_and_strict() -> None:
 
     assert first == second
     assert first["model"] == OPENAI_REQUESTED_MODEL_ALIAS == "gpt-5.4-mini"
+    assert first["max_output_tokens"] == OPENAI_MAX_OUTPUT_TOKENS == 4096
+    assert first["reasoning"] == {
+        "effort": OPENAI_REASONING_EFFORT,
+    } == {"effort": "none"}
     assert first["store"] is False
     assert first["stream"] is False
     assert first["background"] is False
@@ -319,6 +328,81 @@ def test_payload_is_deterministic_text_only_and_strict() -> None:
         "web_search",
     ):
         assert forbidden not in first
+
+
+def test_configuration_requires_immutable_exact_cost_controls() -> None:
+    configuration = DEFAULT_OPENAI_RESPONSES_CONFIGURATION
+
+    assert configuration.max_output_tokens == 4096
+    assert configuration.reasoning_effort == "none"
+    with pytest.raises(ValidationError, match="Instance is frozen"):
+        configuration.max_output_tokens = 1  # type: ignore[misc]
+    with pytest.raises(ValidationError, match="Instance is frozen"):
+        configuration.reasoning_effort = "low"  # type: ignore[misc]
+
+
+@pytest.mark.parametrize("missing_field", ("max_output_tokens", "reasoning_effort"))
+def test_configuration_reconstruction_rejects_missing_cost_control(
+    missing_field: str,
+) -> None:
+    payload = DEFAULT_OPENAI_RESPONSES_CONFIGURATION.model_dump(mode="python")
+    del payload[missing_field]
+
+    with pytest.raises(ValidationError):
+        OpenAIResponsesConfiguration.model_validate(payload)
+
+
+@pytest.mark.parametrize(
+    "invalid_value",
+    (True, False, 0, -1, 4095, 4097, 4096.0, "4096", None),
+)
+def test_configuration_rejects_non_exact_max_output_tokens(
+    invalid_value: object,
+) -> None:
+    payload = DEFAULT_OPENAI_RESPONSES_CONFIGURATION.model_dump(mode="python")
+    payload["max_output_tokens"] = invalid_value
+
+    with pytest.raises(ValidationError):
+        OpenAIResponsesConfiguration.model_validate(payload)
+
+
+@pytest.mark.parametrize(
+    "invalid_value",
+    ("low", "minimal", "NONE", "none ", 0, None),
+)
+def test_configuration_rejects_non_exact_reasoning_effort(
+    invalid_value: object,
+) -> None:
+    payload = DEFAULT_OPENAI_RESPONSES_CONFIGURATION.model_dump(mode="python")
+    payload["reasoning_effort"] = invalid_value
+
+    with pytest.raises(ValidationError):
+        OpenAIResponsesConfiguration.model_validate(payload)
+
+
+@pytest.mark.parametrize(
+    ("field_name", "changed_value"),
+    (
+        ("max_output_tokens", None),
+        ("max_output_tokens", 4095),
+        ("reasoning", None),
+        ("reasoning", {"effort": "low"}),
+    ),
+)
+def test_cost_control_omission_or_change_alters_canonical_payload_hash(
+    field_name: str,
+    changed_value: object,
+) -> None:
+    payload = build_openai_responses_payload(_request())
+    changed = json.loads(json.dumps(payload))
+    if changed_value is None:
+        del changed[field_name]
+    else:
+        changed[field_name] = changed_value
+
+    original_hash = hashlib.sha256(canonical_json_bytes(payload)).digest()
+    changed_hash = hashlib.sha256(canonical_json_bytes(changed)).digest()
+    assert changed_hash != original_hash
 
 
 def _assert_every_declared_object_is_closed_and_required(node: object) -> None:
@@ -543,7 +627,9 @@ def test_completed_response_maps_exact_output_identity_usage_and_options() -> No
     assert client.option_calls == [
         {"max_retries": 0, "timeout": OPENAI_MAX_TIMEOUT_SECONDS}
     ]
-    assert len(client.responses.calls) == 1
+    assert client.responses.calls == [build_openai_responses_payload(_request())]
+    assert client.responses.calls[0]["max_output_tokens"] == 4096
+    assert client.responses.calls[0]["reasoning"] == {"effort": "none"}
 
 
 def test_additive_response_metadata_is_immutable_complete_and_nonblank() -> None:

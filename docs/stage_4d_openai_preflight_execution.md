@@ -78,6 +78,13 @@ values. This program does not control shell history or operating-system process
 listings. `store=false` remains a request requirement, not a zero-retention
 guarantee.
 
+The immutable provider configuration sets reasoning effort to `none` and
+`max_output_tokens` to exactly `4096`, explicitly capping the combined output
+and reasoning tokens for the paid request. Both fields are part of the
+canonical provider payload and therefore its execution-plan, provider-entry
+and returned-record bindings. They have no caller-controlled production or CLI
+override.
+
 ## One-call transaction
 
 The fixed attempt marker is created with exclusive semantics immediately before
@@ -99,10 +106,11 @@ transaction boundary.
 
 ## Remaining gate
 
-No real API request or preflight occurred during implementation or testing, and
-no real authorization, pricing observation or data-control observation was
-created. Current pricing, project-account access, returned live model identity,
-live version metadata and live strict-schema compatibility remain unverified.
+Paid execution remains unauthorized. No real API request or preflight occurred
+during implementation or cost-hardening testing, and no real authorization,
+pricing observation or data-control observation was created. Current pricing,
+project-account access, returned live model identity, live version metadata and
+live strict-schema compatibility remain unverified.
 Stage 4D-3B requires separate explicit project-owner authorization and same-day
 reviewed observations before the one-call real mode may be used. A successful
 preflight would not authorize five-source development execution or any held-out

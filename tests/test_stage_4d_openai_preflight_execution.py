@@ -282,6 +282,33 @@ def test_changed_production_schema_builder_changes_runtime_plan(
     assert changed.execution_plan_sha256 != original.execution_plan_sha256
 
 
+@pytest.mark.parametrize(
+    ("field_name", "changed_value"),
+    (
+        ("max_output_tokens", 4095),
+        ("reasoning", {"effort": "low"}),
+    ),
+)
+def test_changed_cost_control_changes_runtime_plan(
+    monkeypatch: pytest.MonkeyPatch,
+    field_name: str,
+    changed_value: object,
+) -> None:
+    original_builder = execution.build_openai_responses_payload
+    original = execution.build_openai_preflight_execution_plan()
+
+    def changed_builder(request: object) -> dict[str, Any]:
+        payload = original_builder(request)  # type: ignore[arg-type]
+        payload[field_name] = changed_value
+        return payload
+
+    monkeypatch.setattr(execution, "build_openai_responses_payload", changed_builder)
+    changed = execution.build_openai_preflight_execution_plan()
+
+    assert changed.provider_payload_sha256 != original.provider_payload_sha256
+    assert changed.execution_plan_sha256 != original.execution_plan_sha256
+
+
 def test_readiness_plan_uses_one_transaction_derived_anchor_set(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -1048,9 +1075,18 @@ def test_schema_drift_fails_before_provider_call(
     assert client.responses.calls == []
 
 
-def test_payload_drift_fails_before_provider_call(
+@pytest.mark.parametrize(
+    ("field_name", "changed_value"),
+    (
+        ("max_output_tokens", 4095),
+        ("reasoning", {"effort": "low"}),
+    ),
+)
+def test_cost_control_payload_drift_fails_before_provider_call(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
+    field_name: str,
+    changed_value: object,
 ) -> None:
     paths = _input_paths(tmp_path)
     marker, record = _artifact_paths(tmp_path)
@@ -1060,7 +1096,7 @@ def test_payload_drift_fails_before_provider_call(
     def install_drift_after_readiness() -> str:
         def changed_payload(request: object) -> dict[str, Any]:
             payload = original_builder(request)  # type: ignore[arg-type]
-            payload["x-fictional-provider-entry-drift"] = True
+            payload[field_name] = changed_value
             return payload
 
         monkeypatch.setattr(

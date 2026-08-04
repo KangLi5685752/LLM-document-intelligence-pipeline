@@ -8,7 +8,7 @@ from collections.abc import Callable
 from copy import deepcopy
 from dataclasses import dataclass
 from importlib.metadata import version as package_version
-from typing import Any, Literal, Protocol
+from typing import Any, Final, Literal, Protocol
 
 from openai import (
     APIConnectionError,
@@ -17,7 +17,7 @@ from openai import (
     APITimeoutError,
     RateLimitError,
 )
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
 from document_intelligence.extraction.models import CandidateExtractionResult
 from document_intelligence.extraction.predicates import PREDICATE_DEFINITIONS
@@ -55,6 +55,8 @@ OPENAI_RESPONSE_SCHEMA_NAME: Literal[
 OPENAI_REQUIRED_SDK_VERSION: Literal["2.46.0"] = "2.46.0"
 OPENAI_INSTALLED_SDK_VERSION = package_version("openai")
 OPENAI_MAX_TIMEOUT_SECONDS = 120.0
+OPENAI_MAX_OUTPUT_TOKENS: Final[Literal[4096]] = 4096
+OPENAI_REASONING_EFFORT: Final[Literal["none"]] = "none"
 
 
 class OpenAIResponsesConfiguration(BaseModel):
@@ -76,14 +78,33 @@ class OpenAIResponsesConfiguration(BaseModel):
     response_schema_name: Literal[
         "candidate_extraction_result_0_1"
     ] = OPENAI_RESPONSE_SCHEMA_NAME
+    max_output_tokens: Literal[4096]
+    reasoning_effort: Literal["none"]
     timeout_seconds: float = Field(
         default=OPENAI_MAX_TIMEOUT_SECONDS,
         gt=0,
         le=OPENAI_MAX_TIMEOUT_SECONDS,
     )
 
+    @field_validator("max_output_tokens", mode="before")
+    @classmethod
+    def _require_exact_max_output_tokens(cls, value: object) -> object:
+        if type(value) is not int or value != OPENAI_MAX_OUTPUT_TOKENS:
+            raise ValueError("max_output_tokens must be exactly 4096")
+        return value
 
-DEFAULT_OPENAI_RESPONSES_CONFIGURATION = OpenAIResponsesConfiguration()
+    @field_validator("reasoning_effort", mode="before")
+    @classmethod
+    def _require_exact_reasoning_effort(cls, value: object) -> object:
+        if type(value) is not str or value != OPENAI_REASONING_EFFORT:
+            raise ValueError("reasoning_effort must be exactly none")
+        return value
+
+
+DEFAULT_OPENAI_RESPONSES_CONFIGURATION = OpenAIResponsesConfiguration(
+    max_output_tokens=OPENAI_MAX_OUTPUT_TOKENS,
+    reasoning_effort=OPENAI_REASONING_EFFORT,
+)
 
 
 class ResponsesResource(Protocol):
@@ -313,6 +334,8 @@ def build_openai_responses_payload(
 
     return {
         "model": configuration.requested_model_alias,
+        "max_output_tokens": configuration.max_output_tokens,
+        "reasoning": {"effort": configuration.reasoning_effort},
         "input": [
             {
                 "role": "system",
@@ -512,12 +535,14 @@ __all__ = [
     "DEFAULT_OPENAI_RESPONSES_CONFIGURATION",
     "OPENAI_API_SURFACE",
     "OPENAI_INSTALLED_SDK_VERSION",
+    "OPENAI_MAX_OUTPUT_TOKENS",
     "OPENAI_MAX_TIMEOUT_SECONDS",
     "OPENAI_MODEL_CONFIGURATION_ID",
     "OPENAI_PROVIDER_CONFIGURATION_ID",
     "OPENAI_PROVIDER_IDENTIFIER",
     "OPENAI_REQUESTED_MODEL_ALIAS",
     "OPENAI_REQUIRED_SDK_VERSION",
+    "OPENAI_REASONING_EFFORT",
     "OPENAI_RESPONSE_SCHEMA_NAME",
     "OpenAIResponsesConfiguration",
     "OpenAIResponsesProvider",
