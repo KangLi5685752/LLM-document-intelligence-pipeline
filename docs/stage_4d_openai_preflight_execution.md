@@ -2,7 +2,7 @@
 
 ## Scope
 
-Stage 4D-3B implements and offline-tests a separate v0.2 local execution
+Stage 4D-3B implements and offline-tests a separate v0.3 local execution
 boundary for one possible future synthetic OpenAI preflight. This correction
 does not authorize or perform that preflight, construct a real client during
 testing, create real authorization or terms evidence, or access development or
@@ -24,13 +24,31 @@ USD 0.00 spend. A truncated clipboard credential is the leading inference for
 the local failure, not a proven fact.
 
 The v0.1 marker is permanent historical evidence. V0.1 is closed, must not be
-retried, and is not an authorization for v0.2. The v0.2 preflight ID,
-authorization scope, confirmation phrase, request/evidence identifiers and
-attempt, success and failure filenames are all distinct. V0.2 does not inspect,
-modify, replace or count the v0.1 marker.
+retried, and is not an authorization for any later preflight.
+
+## Closed v0.2 incident
+
+The separately authorized v0.2 transaction created its permanent attempt marker
+and made exactly one provider call with zero retries. Its immutable failure
+record states `failure_stage=post_provider_validation`,
+`local_error_code=preflight_output_invalid` and
+`successful_record_written=false`. The provider response had returned and
+`validate_provider_output` had completed, but the v0.2 runner then rejected the
+validated result because a separate assertion required empty entity, evidence
+and candidate collections plus the expected abstention warning.
+
+That assertion incorrectly mixed technical API/schema compatibility with model
+semantic behaviour. The v0.2 response contents are not reproduced or inferred
+here, and no exact v0.2 token usage or cost is claimed. Its marker and failure
+record remain immutable historical evidence; v0.2 is closed and must not be
+retried or retroactively given a success record.
+
+V0.3 uses a distinct preflight ID, authorization scope, confirmation phrase,
+request/evidence identifiers and attempt, success and failure filenames. It
+does not inspect, modify, replace or count v0.1 or v0.2 artifacts.
 
 The deterministic execution plan contains only fixed identifiers, canonical
-hashes, a one-call limit and the three fixed v0.2 repository-relative artifact
+hashes, a one-call limit and the three fixed v0.3 repository-relative artifact
 paths.
 Every hash anchor is derived at runtime from the existing production request,
 prompt, strict-schema and provider-payload builders in the same readiness
@@ -83,18 +101,18 @@ checked without reopening it for JSON parsing.
 
 ## Real-mode gate
 
-V0.2 real mode requires all of the following before credential access:
+V0.3 real mode requires all of the following before credential access:
 
 - `--execute-real-preflight`;
-- the exact confirmation `EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_2`;
+- the exact confirmation `EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_3`;
 - valid authorization for the frozen one-call scope;
 - authorization no later than the captured UTC execution time;
 - pricing and data-control observations dated on that same UTC date;
-- absence of all three fixed v0.2 output artifacts.
+- absence of all three fixed v0.3 output artifacts.
 
 Only after those local gates pass may the command read `OPENAI_API_KEY`. Before
 directory creation, marker creation, client construction or provider entry,
-the v0.2 gate requires an exact string with the generic `sk-` prefix, a
+the v0.3 gate requires an exact string with the generic `sk-` prefix, a
 conservative minimum of 120 characters, a maximum of 512 characters, and only
 non-whitespace printable supported key characters. The 120-character floor is
 intentionally conservative for the current long project-scoped key profile so
@@ -118,7 +136,7 @@ override.
 
 ## One-call transaction
 
-The fixed v0.2 attempt marker is created with exclusive semantics immediately before
+The fixed v0.3 attempt marker is created with exclusive semantics immediately before
 the plan-bound provider wrapper, existing same-call metadata bridge and
 preflight runner may invoke the provider. Its state is
 `provider_call_may_have_started`. Request, schema, payload or returned-record
@@ -129,10 +147,10 @@ Its existence blocks automatic retries before credential access or client
 construction. SDK retries remain disabled, and the provider-call counter cannot
 exceed one.
 
-Only a fully validated v0.2 success record is serialized to the fixed successful
+Only a fully validated v0.3 compatibility record is serialized to the fixed successful
 record path, using exclusive creation. After a marker exists, an ordinary
 client, provider, validation or success-write failure instead installs one
-exclusive immutable v0.2 failure record when filesystem state permits. The
+exclusive immutable v0.3 failure record when filesystem state permits. The
 self-hashed record binds the authorization, plan, exact installed marker-file
 hash, UTC failure time, failure stage, stable local error, retry and call counts,
 and the fact that no successful record was written. It may include only a
@@ -151,15 +169,37 @@ loader verifies the canonical self-hash first and maps a mismatch to
 successful record. A process crash can still leave only the permanent marker;
 the transaction does not claim otherwise.
 
+## Compatibility and semantic diagnostic
+
+V0.3 marks technical compatibility as passed only after one completed provider
+call, strict structured-output and `validate_provider_output` success, complete
+same-call request/response/model/SDK/token metadata, zero retries, reconciled
+request/prompt/document/schema/payload hashes and exclusive success-record
+installation. The record retains returned model and version provenance,
+provider IDs, pinned SDK version, token usage, latency, cost estimate,
+raw-response hash and parsed-output hash without storing raw provider output.
+
+Semantic behaviour is then recorded separately as a frozen diagnostic containing
+only entity, evidence-reference and candidate-fact counts plus a canonical
+warning inventory. Exact zero-candidate abstention is classified
+`expected_abstention`; every other schema-valid result is
+`valid_semantic_variance`. Non-empty semantic collections or different warnings
+cannot independently turn a technical compatibility pass into failure.
+
+When technical validation fails after a response has returned, the v0.3 failure
+record retains the available contractually valid safe metadata. It never stores
+raw output, prompts, provider bodies, headers or credentials.
+
 ## Remaining gate
 
-V0.2 paid execution remains unauthorized. No real API request or preflight
+V0.3 paid execution remains unauthorized. No real v0.3 API request or preflight
 occurred during this corrective implementation or its offline tests, and no
-v0.2 authorization, pricing observation or data-control observation was
+v0.3 authorization, pricing observation or data-control observation was
 created. Current pricing, project-account access, returned live model identity,
 live version metadata and live strict-schema compatibility remain unverified.
-A future v0.2 attempt requires separate explicit project-owner authorization
-and same-day reviewed observations. A successful v0.2 preflight would not
-authorize five-source development execution or any held-out access. These local
+A future v0.3 attempt requires separate explicit project-owner authorization
+and same-day reviewed observations. A successful v0.3 preflight would not
+authorize the five-source development manifest or execution, which remain
+separately blocked, and would not authorize any held-out access. These local
 controls do not claim resistance to arbitrary mutation by a privileged local
 actor and do not establish production readiness.
