@@ -15,3 +15,7 @@ src/document_intelligence/extraction/deterministic_rules_v0_2.py text eol=lf
 src/document_intelligence/extraction/deterministic_v0_2.py text eol=lf
 src/document_intelligence/extraction/deterministic_v0_2_cli.py text eol=lf
 tests/test_deterministic_extractor_v0_2.py text eol=lf
+
+# Keep frozen Stage 4D preflight evidence byte-identical across platforms.
+reports/llm_extraction/openai_preflight/openai-gpt-5.4-mini-synthetic-preflight-v0.3.attempt.json text eol=lf
+reports/llm_extraction/openai_preflight/openai-gpt-5.4-mini-synthetic-preflight-v0.3.record.json text eol=lf
