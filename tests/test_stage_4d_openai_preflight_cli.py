@@ -15,7 +15,7 @@ import pytest
 from openai import APIStatusError
 
 import document_intelligence.llm_extraction.openai_preflight_cli as cli
-import document_intelligence.llm_extraction.openai_preflight_execution_v0_2 as execution
+import document_intelligence.llm_extraction.openai_preflight_execution_v0_3 as execution
 from document_intelligence.llm_extraction.errors import (
     Stage4BError,
     Stage4BErrorCode,
@@ -24,9 +24,9 @@ from document_intelligence.llm_extraction.openai_preflight import (
     OpenAIDataControlsObservation,
     OpenAIPricingObservation,
 )
-from document_intelligence.llm_extraction.openai_preflight_v0_2 import (
+from document_intelligence.llm_extraction.openai_preflight_v0_3 import (
     PREFLIGHT_AUTHORIZATION_SCOPE,
-    OpenAIPreflightAuthorizationV02,
+    OpenAIPreflightAuthorizationV03,
 )
 from document_intelligence.llm_extraction.prompting import canonical_json_bytes
 
@@ -47,7 +47,7 @@ def _paths(tmp_path: Path) -> tuple[Path, Path, Path]:
     controls = tmp_path / "controls.json"
     _write(
         authorization,
-        OpenAIPreflightAuthorizationV02(
+        OpenAIPreflightAuthorizationV03(
             authorization_id="fictional-cli-authorization",
             authorized_by="Fictional CLI Owner",
             authorized_at_utc=NOW - timedelta(minutes=5),

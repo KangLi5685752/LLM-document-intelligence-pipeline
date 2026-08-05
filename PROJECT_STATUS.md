@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D-3B offline v0.2 synthetic-preflight recovery boundary implemented; v0.2 execution and controlled development execution remain unauthorized
+- **Current stage:** Stage 4D-3B additive v0.3 compatibility-first synthetic-preflight boundary implemented offline; paid v0.3 and controlled development execution remain unauthorized
 - **Last updated:** 2026-08-05
-- **Latest milestone:** A separate v0.2 boundary now rejects malformed credentials before artifact creation and records sanitized self-hashed post-marker failures without altering permanent v0.1 evidence
+- **Latest milestone:** V0.3 now separates technical API/schema compatibility from frozen semantic diagnostics without altering immutable v0.1 or v0.2 incident evidence
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -47,19 +47,21 @@
 - Stage 4D-3B-0 hardened the paid-request boundary offline by requiring immutable exact `max_output_tokens=4096` and reasoning effort `none` configuration values. Both enter the deterministic provider payload and existing execution-plan, provider-entry and returned-record reconciliation. The correction preserved one call, disabled retries, the 120-second timeout, strict structured output, `store=false` and no tools. Paid execution remains unauthorized, and no real key, client, API request, preflight or document access occurred.
 - The authorized v0.1 synthetic-preflight transaction created its permanent attempt marker, produced no successful record and returned `provider_api_failure`. More than one hour later, the OpenAI project showed Last used as Never, no Responses logs, zero requests, zero tokens and USD 0.00 spend. Credential truncation is the leading inference, not a proven fact. V0.1 is permanently closed and must not be retried.
 - Stage 4D-3B added the isolated v0.2 preflight ID, authorization scope, confirmation phrase, synthetic request/evidence IDs and attempt, success and failure paths. Its conservative 120-character project-key shape floor precedes output-directory and marker creation. Credential-aware transaction scrubbing removes complete credentials, `sk-` patterns and meaningful credential fragments from pinned-SDK diagnostics before final exceptions or immutable self-hashed failure records. Stable failure stages distinguish the provider call from post-response validation, and the public failure-record loader maps a tampered canonical self-hash to its exact stable error code. The v0.1 marker is neither modified nor counted as v0.2. All tests used fictional credentials and injected fake clients; no real v0.2 authorization, real key access, production client, network request, live preflight or document access occurred.
+- The separately authorized v0.2 transaction made one provider call with zero retries. Its immutable failure evidence records `post_provider_validation`, `preflight_output_invalid` and no successful record. The response had returned and structured local validation passed, but an over-restrictive runner assertion then required exact zero-candidate abstention. The exact response contents, token usage and cost are not claimed. V0.2 is closed, must not be retried and must not receive a retroactive success record.
+- Stage 4D-3B added the separate v0.3 contract and transaction. Technical compatibility now requires a completed one-call response, strict structured-output and provider-output validation, complete safe metadata, zero retries, reconciled hashes and exclusive success-record installation. A frozen semantic diagnostic separately records collection counts and canonical warnings as either `expected_abstention` or `valid_semantic_variance`; schema-valid semantic variance cannot cause `preflight_output_invalid`. Genuine post-response failures retain only available contractually valid safe metadata. All implementation tests used fictional credentials and injected fake clients; no real v0.3 key, client, request, preflight or document access occurred.
 
 ## In progress
 
-- The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, v0.2 credential gate and v0.2 failure record are implemented and tested with fictional inputs and injected fake clients.
-- The v0.1 preflight is permanently closed. A real one-call v0.2 synthetic preflight remains unauthorized. Exact returned model identity, any separately exposed snapshot/version identifier, live strict-schema compatibility, current pricing, current data-control terms and project-account access remain unverified.
+- The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
+- V0.1 and v0.2 are permanently closed historical incidents. A real one-call v0.3 synthetic preflight remains separately unauthorized. Exact returned model identity, any separately exposed snapshot/version identifier, current pricing, current data-control terms and project-account access remain unverified for v0.3.
 - The controlled five-source development request manifest remains pending and no Stage 4 extraction or evaluation result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Independently review the isolated v0.2 credential, artifact and sanitized-failure boundary.
-2. Obtain separate explicit project-owner authorization for exactly one v0.2 synthetic OpenAI preflight call and supply same-day reviewed pricing and data-control observations.
-3. Only after that authorization, run and independently review the bounded v0.2 synthetic preflight without transmitting development or held-out text.
+1. Independently review the additive v0.3 compatibility and semantic-diagnostic boundary.
+2. Obtain separate explicit project-owner authorization for exactly one v0.3 synthetic OpenAI preflight call and supply same-day reviewed pricing and data-control observations.
+3. Only after that authorization, run and independently review the bounded v0.3 synthetic preflight without transmitting development or held-out text.
 4. Only after a successful reviewed preflight, generate and independently review the controlled five-source development manifest.
 5. Explicitly authorize and perform the bounded Stage 4D development run.
 6. Proceed to Stage 4E evaluation and owner review.
@@ -67,7 +69,7 @@
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- The OpenAI Responses API and requested model alias `gpt-5.4-mini` are selected, and the offline adapter, preflight harness, same-call SDK metadata bridge and isolated v0.2 execution gate are implemented. V0.1 is closed. A v0.2 attempt remains blocked pending independent review, separate explicit one-call authorization and current reviewed terms. Five-source manifest generation and execution remain separately blocked pending a successful reviewed v0.2 preflight and their own authorization gates.
+- The OpenAI Responses API and requested model alias `gpt-5.4-mini` are selected, and the offline adapter, preflight harness, same-call SDK metadata bridge and additive v0.3 execution gate are implemented. V0.1 and v0.2 are closed. A v0.3 attempt remains blocked pending independent review, separate explicit one-call authorization and current reviewed terms. Five-source manifest generation and execution remain separately blocked pending a successful reviewed v0.3 preflight and their own authorization gates.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -75,4 +77,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. Stage 4D has selected a provider and requested model alias and implemented an offline-tested adapter, preflight contracts, same-call SDK metadata bridge and isolated v0.2 execution gate. The v0.1 local attempt produced no successful record, while provider-project evidence showed zero requests, tokens and spend; no account verification, real development extraction, LLM comparison result or held-out result exists. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
+Not yet eligible. Stage 4D has selected a provider and requested model alias and implemented an offline-tested adapter, preflight contracts, same-call SDK metadata bridge and additive v0.3 compatibility-first execution gate. V0.1 and v0.2 are closed without a successful compatibility record, no real v0.3 call occurred, and no development extraction, LLM comparison result or held-out result exists. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
