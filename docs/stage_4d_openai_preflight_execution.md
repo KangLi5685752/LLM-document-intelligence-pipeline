@@ -2,11 +2,13 @@
 
 ## Scope
 
-Stage 4D-3B implements and offline-tests a separate v0.3 local execution
-boundary for one possible future synthetic OpenAI preflight. This correction
-does not authorize or perform that preflight, construct a real client during
-testing, create real authorization or terms evidence, or access development or
-held-out documents.
+Stage 4D-3B originally implemented and offline-tested a separate v0.3 local
+execution boundary for one synthetic OpenAI preflight. A later separately
+authorized real v0.3 transaction completed successfully, and its attempt marker
+and successful compatibility record are now frozen as evidence. The transaction
+made one provider call with zero retries and did not access development or
+held-out documents. The implementation tests remained offline and used only
+fictional credentials and injected fake clients.
 
 ## Closed v0.1 incident
 
@@ -65,6 +67,26 @@ metadata bridge only when all five values equal the readiness plan. After the
 runner returns, the successful record's corresponding five anchors must
 independently reconcile with that same plan before serialization or file
 creation.
+
+## Frozen v0.3 live result
+
+The separately authorized transaction used preflight ID
+`openai-gpt-5.4-mini-synthetic-preflight-v0.3`, authorization scope
+`single-synthetic-openai-preflight-v0.3` and execution-plan SHA-256
+`21DEC6F5DE7E79EAC2F80F93ABA41CB96BA815F5000AED9810831F671657D5C5`.
+It completed with compatibility and preflight status `passed`, one provider
+call and zero retries. The returned model identifier was
+`gpt-5.4-mini-2026-03-17`; no separate model-version or snapshot field was
+exposed, so that provenance is recorded literally as `unavailable`. The pinned
+provider SDK version was `2.46.0`.
+
+Observed usage was 7,332 input tokens and 155 output tokens, latency was 4,600
+ms and estimated actual cost was USD 0.0061965. The semantic diagnostic was
+`valid_semantic_variance`: zero entities, one evidence reference, zero candidate
+facts and the warning `No extractable candidate facts were supported by the
+supplied evidence blocks.` This classification remained separate from the
+successful technical compatibility result. Raw provider output, prompts,
+provider bodies, headers and credentials are not stored in the frozen record.
 
 ## Readiness mode
 
@@ -192,14 +214,17 @@ raw output, prompts, provider bodies, headers or credentials.
 
 ## Remaining gate
 
-V0.3 paid execution remains unauthorized. No real v0.3 API request or preflight
-occurred during this corrective implementation or its offline tests, and no
-v0.3 authorization, pricing observation or data-control observation was
-created. Current pricing, project-account access, returned live model identity,
-live version metadata and live strict-schema compatibility remain unverified.
-A future v0.3 attempt requires separate explicit project-owner authorization
-and same-day reviewed observations. A successful v0.3 preflight would not
-authorize the five-source development manifest or execution, which remain
-separately blocked, and would not authorize any held-out access. These local
-controls do not claim resistance to arbitrary mutation by a privileged local
-actor and do not establish production readiness.
+The separately authorized v0.3 transaction completed successfully after the
+corrective implementation and offline tests. Its one-call authorization is
+consumed, v0.3 is closed and it must not be retried. The frozen result verifies
+live Responses API and strict-schema compatibility only for the fixed synthetic
+request; its semantic variance is diagnostic evidence, not an extraction-quality
+result.
+
+The successful synthetic preflight does not authorize the five-source
+development manifest or provider execution. Those steps remain separately
+blocked pending their own independent review and explicit project-owner
+authorization. Held-out access remains unauthorized behind a later separately
+reviewed guard. These controls and the preflight result do not establish model
+superiority, held-out generalization, production readiness or resistance to
+arbitrary mutation by a privileged local actor.
