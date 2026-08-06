@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D reviewed context-limit observation v0.1 frozen and independently reviewed; the actual five-source no-call manifest remains pending
+- **Current stage:** Stage 4D actual five-source hash-only manifest v0.1 frozen and independently reviewed; bounded development execution remains pending and separately unauthorized
 - **Last updated:** 2026-08-06
-- **Latest milestone:** A canonical self-hashed no-call context-limit observation records the reviewed `gpt-5.4-mini` 400,000-token context window, fixed snapshot identity, conservative byte-upper-bound admission rule and explicit non-assertion of undocumented token-sharing semantics
+- **Latest milestone:** The canonical 90,809-byte actual five-source manifest freezes seven primary requests, one deterministic S004 repeat, zero retries, a USD 0.9953895 conservative ceiling and explicit `not_provided` execution authorization
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -52,27 +52,27 @@
 - The later separately authorized v0.3 synthetic transaction completed successfully with compatibility and preflight status `passed`, one provider call and zero retries. It returned model identifier `gpt-5.4-mini-2026-03-17`; no separate model-version or snapshot field was exposed, so provenance is recorded literally as `unavailable`. Observed usage was 7,332 input tokens and 155 output tokens, latency was 4,600 ms and estimated actual cost was USD 0.0061965. The semantic diagnostic was `valid_semantic_variance` with zero entities, one evidence reference, zero candidate facts and the warning `No extractable candidate facts were supported by the supplied evidence blocks.` This is fixed-request compatibility evidence, not extraction-quality evidence. The authorization is consumed, v0.3 is closed and it must not be retried.
 - Stage 4D offline development-manifest preparation now has an additive, immutable and self-hashed contract. It preserves the generic Stage 4C manifest unchanged; binds the closed v0.3 preflight through canonical LF-content and record identities; validates approved source IDs before path construction or file access; accepts only reviewed repository-relative routes; partitions exact production payloads with the fixed 200,000-byte whole-block greedy policy; selects one deterministic largest-payload repeat; stores hash-only request, ParsedDocument, evidence and cache identities; derives planning and conservative costs under a fixed USD 1.25 planned cap; enforces zero retries; and preserves explicit cache, gold, owner-outcome and held-out denial. A structurally valid preparation remains blocked without a self-hashed reviewed context-limit observation, and every final invocation must satisfy payload bytes plus 4,096 within the reviewed boundary. A review-eligible manifest records that execution authorization is required and not provided. Tests use fictional temporary ParsedDocuments and fictional context, pricing, data-control and review observations. No real five-source manifest, development cache, attempt marker, provider call, candidate output, evaluation or held-out access was created.
 - Stage 4D context-limit observation v0.1 was generated as canonical hash-only evidence from the reviewed official model page. It records `400000` context tokens, snapshot `gpt-5.4-mini-2026-03-17`, support for the existing 4,096-token output allowance and reasoning effort `none`, while conservatively setting undocumented input/output/reasoning sharing to `false`. The artifact has self-hash `09717CDFE8EFBF669047515AB2258E1C42BF1527AE2A7E7A79F8E2602D2FADF2`, LF-content SHA-256 `3A7B8D498AEE0A6D14C153890DA0056E5240143C1D6A671BFCF7DB80919557B2` and focused validation 4/4 passed. No client, key, provider call, real manifest, authorization or held-out access occurred.
+- The actual Stage 4D five-source development manifest v0.1 is frozen and independently reviewed. Its canonical 90,809-byte artifact has self-hash `05ABF3D0FA785B845E0853B907B911EE1A9439F0997052D3603E025AAAA30D0E` and LF-content SHA-256 `15DF5E959040B399EDF8CA5455B5060EF71B6672C97D9901E6DB084FE9ACC069`. It binds approved routes for S001, S002, S003, S004 and S006; partitions them into seven primary requests; selects `llm-v0.1-S004-primary-001` for one deterministic repeat; caps the largest payload at 199,892 bytes; allows eight retry-zero calls; and records USD 0.3594405 planning cost and USD 0.9953895 conservative cost below the USD 1.25 planned authorization cap. The artifact remains hash-only and records execution authorization as required but `not_provided`. Artifact-specific tests passed 6/6 and combined affected tests passed 78 with one unchanged Windows link skip. No client, key, provider call, cache response, candidate output, evaluation or held-out access occurred.
 
 ## In progress
 
 - The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
 - V0.1, v0.2 and v0.3 are closed historical transactions. The v0.3 attempt and successful record are committed evidence and remain immutable.
-- The offline development-manifest contract and frozen context-limit observation v0.1 have completed independent read-only review. No actual five-source manifest exists. Execution, extraction, evaluation and owner review remain pending and separately unauthorized. No development-comparison LLM result exists.
+- The offline development-manifest contract, context-limit observation v0.1 and actual five-source hash-only manifest v0.1 have completed independent read-only review. The bounded execution transaction, explicit project-owner authorization, extraction, evaluation and owner review remain pending and separately unauthorized. No development-comparison LLM result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Generate and independently review the actual hash-only five-source manifest in a separate no-call change.
-2. Implement and review the separate bounded development-execution transaction.
-3. Obtain new explicit project-owner authorization bound to the reviewed manifest and execution plan.
-4. Perform the bounded Stage 4D development run only after every manifest, context, terms, cache and authorization gate passes.
-5. Proceed to Stage 4E evaluation, error analysis and owner review only after fixed candidate evidence exists.
-6. Keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
+1. Implement and independently review the separate bounded development-execution transaction.
+2. Obtain new explicit project-owner authorization bound to the reviewed manifest and execution plan.
+3. Perform the bounded Stage 4D development run only after every manifest, context, terms, cache and authorization gate passes.
+4. Proceed to Stage 4E evaluation, error analysis and owner review only after fixed candidate evidence exists.
+5. Keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- V0.3 completed successfully, its one-call authorization is consumed and it must not be retried. The reviewed context-limit evidence is frozen; the actual five-source manifest remains pending separate no-call generation and independent review. Execution remains separately blocked pending manifest review, a reviewed execution transaction and new owner authorization.
+- V0.3 completed successfully, its one-call authorization is consumed and it must not be retried. The reviewed context-limit evidence and actual five-source manifest are frozen. Execution remains separately blocked pending a reviewed bounded execution transaction, same-day pricing and data-control gates and new explicit project-owner authorization.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
