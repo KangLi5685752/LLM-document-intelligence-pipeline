@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D actual five-source hash-only manifest v0.1 frozen and independently reviewed; bounded development execution remains pending and separately unauthorized
+- **Current stage:** Stage 4D bounded development-execution plan v0.1 frozen and independently reviewed; transaction implementation and provider execution remain pending and separately unauthorized
 - **Last updated:** 2026-08-06
-- **Latest milestone:** The canonical 90,809-byte actual five-source manifest freezes seven primary requests, one deterministic S004 repeat, zero retries, a USD 0.9953895 conservative ceiling and explicit `not_provided` execution authorization
+- **Latest milestone:** The canonical 12,641-byte bounded execution plan freezes eight ordered invocation identities, cache-first append-only handling, zero retries, a USD 0.9953895 conservative ceiling and a new-authorization requirement
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -54,11 +54,13 @@
 - Stage 4D context-limit observation v0.1 was generated as canonical hash-only evidence from the reviewed official model page. It records `400000` context tokens, snapshot `gpt-5.4-mini-2026-03-17`, support for the existing 4,096-token output allowance and reasoning effort `none`, while conservatively setting undocumented input/output/reasoning sharing to `false`. The artifact has self-hash `09717CDFE8EFBF669047515AB2258E1C42BF1527AE2A7E7A79F8E2602D2FADF2`, LF-content SHA-256 `3A7B8D498AEE0A6D14C153890DA0056E5240143C1D6A671BFCF7DB80919557B2` and focused validation 4/4 passed. No client, key, provider call, real manifest, authorization or held-out access occurred.
 - The actual Stage 4D five-source development manifest v0.1 is frozen and independently reviewed. Its canonical 90,809-byte artifact has self-hash `05ABF3D0FA785B845E0853B907B911EE1A9439F0997052D3603E025AAAA30D0E` and LF-content SHA-256 `15DF5E959040B399EDF8CA5455B5060EF71B6672C97D9901E6DB084FE9ACC069`. It binds approved routes for S001, S002, S003, S004 and S006; partitions them into seven primary requests; selects `llm-v0.1-S004-primary-001` for one deterministic repeat; caps the largest payload at 199,892 bytes; allows eight retry-zero calls; and records USD 0.3594405 planning cost and USD 0.9953895 conservative cost below the USD 1.25 planned authorization cap. The artifact remains hash-only and records execution authorization as required but `not_provided`. Artifact-specific tests passed 6/6 and combined affected tests passed 78 with one unchanged Windows link skip. No client, key, provider call, cache response, candidate output, evaluation or held-out access occurred.
 
+- The Stage 4D bounded development-execution plan v0.1 is frozen and independently reviewed. Its canonical 12,641-byte artifact has self-hash `F92DBA083F5A92E6EFFF0E7D58B9D05553934AD3689FB90A3D091BD39D9D29A7` and LF-content SHA-256 `FFFE07FEA0F19FF46B4B5F060B012699BA1A68E6C9BDE94AF7E7CF93E6956F93`. It binds the reviewed 90,809-byte manifest, OpenAI provider and model configuration, seven primaries plus one S004 repeat, eight distinct cache/attempt/failure identities, eight retry-zero calls and attempts, a 120-second timeout, USD 0.9953895 conservative cost and USD 1.25 authorization cap. It requires cache-first append-only handling, exclusive attempt markers before client construction, stop-on-first-failure behavior, preserved completed cache and a new project-owner authorization bound to the plan and manifest. Contract tests passed 7/7, frozen-artifact tests passed 6/6, combined tests passed 13/13 and the complete suite passed 1779 tests with 13 unchanged Windows link skips. No authorization, key access, client, provider call, cache operation, attempt marker, candidate output, evaluation or held-out access occurred.
+
 ## In progress
 
 - The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
 - V0.1, v0.2 and v0.3 are closed historical transactions. The v0.3 attempt and successful record are committed evidence and remain immutable.
-- The offline development-manifest contract, context-limit observation v0.1 and actual five-source hash-only manifest v0.1 have completed independent read-only review. The bounded execution transaction, explicit project-owner authorization, extraction, evaluation and owner review remain pending and separately unauthorized. No development-comparison LLM result exists.
+- The offline development-manifest contract, context-limit observation v0.1, actual five-source hash-only manifest v0.1 and bounded development-execution plan v0.1 have completed independent read-only review. The transaction implementation, explicit project-owner authorization, provider execution, extraction, evaluation and owner review remain pending and separately unauthorized. No development-comparison LLM result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
