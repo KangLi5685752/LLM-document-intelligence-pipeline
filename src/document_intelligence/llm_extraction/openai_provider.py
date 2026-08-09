@@ -24,6 +24,8 @@ from document_intelligence.extraction.models import CandidateExtractionResult
 from document_intelligence.extraction.predicates import PREDICATE_DEFINITIONS
 from document_intelligence.llm_extraction.contracts import (
     LLMExtractionRequest,
+    LLMExtractionRequestAny,
+    LLMExtractionRequestV02,
     LLMProviderResponse,
     ProviderTerminalStatus,
     ProviderTokenUsage,
@@ -228,11 +230,16 @@ class _OpenAIResponsesCallResult:
     sdk_response: object
 
 
-def _validated_request(request: LLMExtractionRequest) -> LLMExtractionRequest:
+def _validated_request(request: LLMExtractionRequestAny) -> LLMExtractionRequestAny:
     validate_request_identity(request)
     validate_development_source_id(request.source_id)
     try:
-        return LLMExtractionRequest.model_validate(request.model_dump(mode="python"))
+        request_type = (
+            LLMExtractionRequestV02
+            if isinstance(request, LLMExtractionRequestV02)
+            else LLMExtractionRequest
+        )
+        return request_type.model_validate(request.model_dump(mode="python"))
     except ValidationError as error:
         raise Stage4BError(
             Stage4BErrorCode.INVALID_PROVIDER_REQUEST,

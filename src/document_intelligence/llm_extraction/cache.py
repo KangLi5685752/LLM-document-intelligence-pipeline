@@ -9,7 +9,7 @@ import tempfile
 from datetime import datetime, timedelta
 from decimal import Decimal
 from pathlib import Path, PurePosixPath, PureWindowsPath
-from typing import Any, Literal
+from typing import Any, Literal, TypeAlias
 
 from pydantic import (
     BaseModel,
@@ -23,8 +23,11 @@ from pydantic import (
 
 from document_intelligence.llm_extraction.contracts import (
     EXPERIMENT_ID,
+    EXPERIMENT_ID_V0_2,
     InvocationRole,
     LLMExtractionRequest,
+    LLMExtractionRequestAny,
+    LLMExtractionRequestV02,
     LLMProviderResponse,
     ProviderTerminalStatus,
     SHA256_PATTERN,
@@ -46,6 +49,9 @@ from document_intelligence.llm_extraction.provenance import AttemptProvenance
 
 
 CACHE_SCHEMA_VERSION: Literal["0.1"] = "0.1"
+V0_2_OPENAI_CACHE_ROOT = (
+    ".cache/llm_extraction/llm-extraction-baseline-v0.2/openai/"
+)
 
 
 def _require_utc(value: datetime) -> datetime:
@@ -82,6 +88,35 @@ class CacheIdentity(BaseModel):
             prompt_sha256=request.prompt_sha256,
             document_sha256=request.document_sha256,
         )
+
+
+class CacheIdentityV02(CacheIdentity):
+    """Additive cache identity for prompt-v0.2 requests."""
+
+    experiment_id: Literal["llm-extraction-baseline-v0.2"] = EXPERIMENT_ID_V0_2
+
+    @classmethod
+    def from_request(cls, request: LLMExtractionRequestV02) -> CacheIdentityV02:
+        return cls(
+            experiment_id=request.experiment_id,
+            invocation_role=request.invocation_role,
+            request_id=request.request_id,
+            canonical_request_sha256=request.canonical_request_sha256,
+            provider_configuration_id=request.provider_configuration_id,
+            model_configuration_id=request.model_configuration_id,
+            prompt_sha256=request.prompt_sha256,
+            document_sha256=request.document_sha256,
+        )
+
+
+CacheIdentityAny: TypeAlias = CacheIdentity | CacheIdentityV02
+
+
+def cache_identity_from_request(request: LLMExtractionRequestAny) -> CacheIdentityAny:
+    """Select the cache identity model from the explicit request version."""
+    if isinstance(request, LLMExtractionRequestV02):
+        return CacheIdentityV02.from_request(request)
+    return CacheIdentity.from_request(request)
 
 
 class OpenAIOriginalCallProvenanceV01(BaseModel):
@@ -151,7 +186,7 @@ class CacheRecord(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     cache_schema_version: Literal["0.1"] = CACHE_SCHEMA_VERSION
-    identity: CacheIdentity
+    identity: CacheIdentity | CacheIdentityV02
     response: LLMProviderResponse
     original_provider_call_timestamp: datetime
     original_attempts: tuple[AttemptProvenance, ...] = Field(min_length=1)
@@ -219,7 +254,7 @@ class CacheRecord(BaseModel):
         return self
 
 
-def cache_identity_sha256(identity: CacheIdentity) -> str:
+def cache_identity_sha256(identity: CacheIdentityAny) -> str:
     """Return the opaque filename identity without interpolating user strings."""
     return uppercase_sha256_bytes(
         canonical_json_bytes(identity.model_dump(mode="json"))
@@ -261,7 +296,7 @@ def _cache_record_payload(
 
 def build_cache_record(
     *,
-    identity: CacheIdentity,
+    identity: CacheIdentityAny,
     response: LLMProviderResponse,
     original_provider_call_timestamp: datetime,
     original_attempts: tuple[AttemptProvenance, ...],
@@ -466,12 +501,12 @@ class ResponseCache:
                 "cache root must be a regular directory",
             )
 
-    def path_for(self, identity: CacheIdentity) -> Path:
+    def path_for(self, identity: CacheIdentityAny) -> Path:
         """Return the opaque, root-contained entry path for an identity."""
         filename = f"{cache_identity_sha256(identity)}.json"
         return safe_cache_path(self.root, filename)
 
-    def read(self, identity: CacheIdentity) -> CacheRecord:
+    def read(self, identity: CacheIdentityAny) -> CacheRecord:
         """Return a fully verified record or raise an explicit cache miss."""
         target = self.path_for(identity)
         if not os.path.lexists(target):
@@ -555,11 +590,15 @@ class ResponseCache:
 __all__ = [
     "CACHE_SCHEMA_VERSION",
     "CacheIdentity",
+    "CacheIdentityAny",
+    "CacheIdentityV02",
     "CacheRecord",
     "OpenAIOriginalCallProvenanceV01",
     "ResponseCache",
     "build_cache_record",
+    "cache_identity_from_request",
     "cache_identity_sha256",
     "cache_record_bytes",
     "safe_cache_path",
+    "V0_2_OPENAI_CACHE_ROOT",
 ]
