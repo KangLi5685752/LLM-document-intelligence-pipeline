@@ -10,11 +10,15 @@ from typing import Any, Iterable
 
 from document_intelligence.llm_extraction.contracts import (
     EXPERIMENT_ID,
+    EXPERIMENT_ID_V0_2,
     OUTPUT_CONTRACT_ID,
     PROMPT_VERSION,
+    PROMPT_VERSION_V0_2,
     ApprovedEvidenceBlock,
     InvocationRole,
     LLMExtractionRequest,
+    LLMExtractionRequestAny,
+    LLMExtractionRequestV02,
 )
 from document_intelligence.llm_extraction.errors import (
     Stage4BError,
@@ -25,6 +29,8 @@ from document_intelligence.llm_extraction.errors import (
 PROMPT_PACKAGE = "document_intelligence.llm_extraction.prompts"
 SYSTEM_PROMPT_NAME = "system_v0_1.txt"
 EXTRACTION_PROMPT_NAME = "extraction_v0_1.txt"
+SYSTEM_PROMPT_NAME_V0_2 = "system_v0_2.txt"
+EXTRACTION_PROMPT_NAME_V0_2 = "extraction_v0_2.txt"
 
 
 @dataclass(frozen=True)
@@ -64,13 +70,22 @@ def _canonical_prompt_asset_bytes(value: bytes, name: str) -> bytes:
     return normalized.encode("utf-8")
 
 
-def load_prompt_assets() -> PromptAssets:
+def _prompt_asset_names(prompt_version: str) -> tuple[str, str]:
+    if prompt_version == PROMPT_VERSION:
+        return SYSTEM_PROMPT_NAME, EXTRACTION_PROMPT_NAME
+    if prompt_version == PROMPT_VERSION_V0_2:
+        return SYSTEM_PROMPT_NAME_V0_2, EXTRACTION_PROMPT_NAME_V0_2
+    raise ValueError(f"unsupported prompt version: {prompt_version!r}")
+
+
+def load_prompt_assets(prompt_version: str = PROMPT_VERSION) -> PromptAssets:
     """Load versioned prompt assets through the installed package."""
+    system_prompt_name, extraction_prompt_name = _prompt_asset_names(prompt_version)
     prompt_root = resources.files(PROMPT_PACKAGE)
     return PromptAssets(
-        system_prompt_bytes=prompt_root.joinpath(SYSTEM_PROMPT_NAME).read_bytes(),
+        system_prompt_bytes=prompt_root.joinpath(system_prompt_name).read_bytes(),
         extraction_prompt_bytes=prompt_root.joinpath(
-            EXTRACTION_PROMPT_NAME
+            extraction_prompt_name
         ).read_bytes(),
     )
 
@@ -84,12 +99,13 @@ def canonical_prompt_bytes(
     assets: PromptAssets | None = None,
 ) -> bytes:
     """Compose exact prompt identity from prompts, blocks, and output contract."""
-    selected_assets = assets or load_prompt_assets()
+    system_prompt_name, extraction_prompt_name = _prompt_asset_names(prompt_version)
+    selected_assets = assets or load_prompt_assets(prompt_version)
     system_bytes = _canonical_prompt_asset_bytes(
-        selected_assets.system_prompt_bytes, SYSTEM_PROMPT_NAME
+        selected_assets.system_prompt_bytes, system_prompt_name
     )
     extraction_bytes = _canonical_prompt_asset_bytes(
-        selected_assets.extraction_prompt_bytes, EXTRACTION_PROMPT_NAME
+        selected_assets.extraction_prompt_bytes, extraction_prompt_name
     )
     blocks = tuple(evidence_blocks)
     payload = {
@@ -127,7 +143,7 @@ def prompt_sha256(
     )
 
 
-def canonical_request_bytes(request: LLMExtractionRequest) -> bytes:
+def canonical_request_bytes(request: LLMExtractionRequestAny) -> bytes:
     """Serialize a request identity excluding its self-referential hash."""
     return canonical_json_bytes(
         request.model_dump(
@@ -137,7 +153,7 @@ def canonical_request_bytes(request: LLMExtractionRequest) -> bytes:
     )
 
 
-def canonical_request_sha256(request: LLMExtractionRequest) -> str:
+def canonical_request_sha256(request: LLMExtractionRequestAny) -> str:
     """Return the uppercase identity of the canonical request bytes."""
     return uppercase_sha256_bytes(canonical_request_bytes(request))
 
@@ -181,7 +197,47 @@ def build_request_envelope(
     )
 
 
-def validate_request_identity(request: LLMExtractionRequest) -> None:
+def build_request_envelope_v0_2(
+    *,
+    invocation_role: InvocationRole,
+    request_id: str,
+    source_id: str,
+    document_sha256: str,
+    provider_configuration_id: str,
+    model_configuration_id: str,
+    evidence_blocks: Iterable[ApprovedEvidenceBlock],
+) -> LLMExtractionRequestV02:
+    """Build an additive canonical prompt-v0.2 request envelope."""
+    blocks = tuple(evidence_blocks)
+    prompt_identity = prompt_sha256(
+        evidence_blocks=blocks,
+        model_configuration_id=model_configuration_id,
+        prompt_version=PROMPT_VERSION_V0_2,
+    )
+    provisional = LLMExtractionRequestV02(
+        experiment_id=EXPERIMENT_ID_V0_2,
+        invocation_role=invocation_role,
+        request_id=request_id,
+        source_id=source_id,
+        document_sha256=document_sha256,
+        prompt_version=PROMPT_VERSION_V0_2,
+        prompt_sha256=prompt_identity,
+        canonical_request_sha256="0" * 64,
+        provider_configuration_id=provider_configuration_id,
+        model_configuration_id=model_configuration_id,
+        output_contract_id=OUTPUT_CONTRACT_ID,
+        evidence_blocks=blocks,
+    )
+    request_identity = canonical_request_sha256(provisional)
+    return LLMExtractionRequestV02.model_validate(
+        {
+            **provisional.model_dump(mode="python"),
+            "canonical_request_sha256": request_identity,
+        }
+    )
+
+
+def validate_request_identity(request: LLMExtractionRequestAny) -> None:
     """Fail closed when prompt or canonical request identity has drifted."""
     expected_prompt = prompt_sha256(
         evidence_blocks=request.evidence_blocks,
@@ -205,6 +261,7 @@ def validate_request_identity(request: LLMExtractionRequest) -> None:
 __all__ = [
     "PromptAssets",
     "build_request_envelope",
+    "build_request_envelope_v0_2",
     "canonical_json_bytes",
     "canonical_prompt_bytes",
     "canonical_request_bytes",

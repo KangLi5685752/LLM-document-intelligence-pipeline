@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from enum import Enum
-from typing import Literal
+from typing import Literal, TypeAlias
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -16,10 +17,16 @@ from document_intelligence.llm_extraction.errors import (
 )
 
 
-EXPERIMENT_ID: Literal["llm-extraction-baseline-v0.1"] = (
+EXPERIMENT_ID_V0_1: Literal["llm-extraction-baseline-v0.1"] = (
     "llm-extraction-baseline-v0.1"
 )
-PROMPT_VERSION: Literal["0.1"] = "0.1"
+EXPERIMENT_ID_V0_2: Literal["llm-extraction-baseline-v0.2"] = (
+    "llm-extraction-baseline-v0.2"
+)
+PROMPT_VERSION_V0_1: Literal["0.1"] = "0.1"
+PROMPT_VERSION_V0_2: Literal["0.2"] = "0.2"
+EXPERIMENT_ID: Literal["llm-extraction-baseline-v0.1"] = EXPERIMENT_ID_V0_1
+PROMPT_VERSION: Literal["0.1"] = PROMPT_VERSION_V0_1
 OUTPUT_CONTRACT_ID: Literal["candidate-extraction-result-0.1"] = (
     "candidate-extraction-result-0.1"
 )
@@ -142,6 +149,36 @@ class LLMExtractionRequest(BaseModel):
         return self
 
 
+class LLMExtractionRequestV02(LLMExtractionRequest):
+    """Additive prompt-v0.2 request without widening the v0.1 model."""
+
+    experiment_id: Literal["llm-extraction-baseline-v0.2"] = EXPERIMENT_ID_V0_2
+    prompt_version: Literal["0.2"] = PROMPT_VERSION_V0_2
+
+    @model_validator(mode="after")
+    def validate_v0_2_identity(self) -> LLMExtractionRequestV02:
+        """Require exact v0.2 request and evidence identity templates."""
+        match = re.fullmatch(
+            rf"llm-v0\.2-{re.escape(self.source_id)}-"
+            rf"{self.invocation_role.value}-(\d{{3}})",
+            self.request_id,
+        )
+        if match is None or int(match.group(1)) < 1:
+            raise ValueError("request_id must use the exact v0.2 identity template")
+        for block in self.evidence_blocks:
+            expected = f"llm-evidence-v0.2-{self.source_id}-{block.block_id}"
+            if block.evidence_id != expected:
+                raise ValueError(
+                    "evidence_id must use the exact v0.2 evidence identity template"
+                )
+        return self
+
+
+LLMExtractionRequestAny: TypeAlias = (
+    LLMExtractionRequest | LLMExtractionRequestV02
+)
+
+
 class ProviderTokenUsage(BaseModel):
     """Optional exact token usage reported by a provider transport."""
 
@@ -238,11 +275,17 @@ __all__ = [
     "APPROVED_DEVELOPMENT_SOURCE_IDS",
     "ADDITIVE_PROVIDER_METADATA_FIELDS",
     "EXPERIMENT_ID",
+    "EXPERIMENT_ID_V0_1",
+    "EXPERIMENT_ID_V0_2",
     "OUTPUT_CONTRACT_ID",
     "PROMPT_VERSION",
+    "PROMPT_VERSION_V0_1",
+    "PROMPT_VERSION_V0_2",
     "ApprovedEvidenceBlock",
     "InvocationRole",
     "LLMExtractionRequest",
+    "LLMExtractionRequestAny",
+    "LLMExtractionRequestV02",
     "LLMProviderResponse",
     "ProviderTerminalStatus",
     "ProviderTokenUsage",

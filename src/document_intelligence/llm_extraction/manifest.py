@@ -93,6 +93,14 @@ class RequestManifestInvocation(BaseModel):
     @model_validator(mode="after")
     def validate_invocation(self) -> RequestManifestInvocation:
         validate_development_source_id(self.source_id)
+        if (
+            self.request.experiment_id != EXPERIMENT_ID
+            or self.request.prompt_version != PROMPT_VERSION
+        ):
+            raise Stage4BError(
+                Stage4BErrorCode.INVALID_MANIFEST,
+                "the v0.1 manifest cannot contain another request version",
+            )
         validate_request_identity(self.request)
         expected = {
             "source_id": self.request.source_id,
