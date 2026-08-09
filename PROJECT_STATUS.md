@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D bounded development-execution transaction implemented and independently reviewed; provider execution remains separately unauthorized
-- **Last updated:** 2026-08-09
-- **Latest milestone:** The default-deny eight-invocation transaction passed independent review and the complete offline suite with 1834 passed and 14 expected Windows link/reparse skips
+- **Current stage:** Stage 4D v0.1 failed development execution closed as immutable evidence; offline v0.2 semantic hardening next
+- **Last updated:** 2026-08-10
+- **Latest milestone:** The first bounded development invocation made one successful OpenAI call, installed a verified immutable cache record, then failed closed during deterministic semantic validation; invocations 2-8 were not attempted
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -57,26 +57,28 @@
 - The Stage 4D bounded development-execution plan v0.1 is frozen and independently reviewed. Its canonical 12,641-byte artifact has self-hash `F92DBA083F5A92E6EFFF0E7D58B9D05553934AD3689FB90A3D091BD39D9D29A7` and LF-content SHA-256 `FFFE07FEA0F19FF46B4B5F060B012699BA1A68E6C9BDE94AF7E7CF93E6956F93`. It binds the reviewed 90,809-byte manifest, OpenAI provider and model configuration, seven primaries plus one S004 repeat, eight distinct cache/attempt/failure identities, eight retry-zero calls and attempts, a 120-second timeout, USD 0.9953895 conservative cost and USD 1.25 authorization cap. It requires cache-first append-only handling, exclusive attempt markers before client construction, stop-on-first-failure behavior, preserved completed cache and a new project-owner authorization bound to the plan and manifest. Contract tests passed 7/7, frozen-artifact tests passed 6/6, combined tests passed 13/13 and the complete suite passed 1779 tests with 13 unchanged Windows link skips. No authorization, key access, client, provider call, cache operation, attempt marker, candidate output, evaluation or held-out access occurred.
 
 - The Stage 4D bounded development-execution transaction is implemented and independently reviewed with verdict `approved_for_evidence_commit`. It validates the exact frozen plan and manifest, reconstructs all eight requests through production builders, requires a new execution-specific owner authorization and same-day UTC terms, enforces cache-first append-only execution, installs invocation markers before credential/client/provider boundaries, permits eight calls and attempts with zero retries, caches successful provider responses before local candidate validation, preserves exact same-call model-version/snapshot provenance across cache-only recovery, stops after the first durable provider or local failure and installs a final execution record only after all eight invocations validate. Pre-attempt safety refusals do not consume an invocation, existing markers are reconciled to the current authorization and invocation, and durable marker state is assigned only after successful exclusive installation. The production CLI is default-deny and is exposed as `run-openai-development-execution`. Final transaction/CLI/cache validation passed 75 tests with 5 expected Windows link skips, the broader affected Stage 4B-4D suite passed 727 tests with 8 expected skips, and the complete offline suite passed 1834 tests with 14 expected Windows link/reparse skips and zero failures. No real authorization, API-key access, OpenAI client, provider call, network request, real development cache record, evaluation or held-out access occurred.
+- The first real Stage 4D bounded development execution v0.1 is closed as immutable failed evidence. Invocation 1, `llm-v0.1-S001-primary-001`, made exactly one OpenAI Responses API call with zero retries. The call returned `gpt-5.4-mini-2026-03-17` successfully, used 20,921 input and 638 output tokens, took 9,015 ms and incurred an estimated USD 0.01856175. Its immutable cache installation completed and verified before deterministic local parsing rejected `entities.0` because an alias equalled `canonical_name` after casefold. The failure is application-level semantic validation, not an OpenAI transport/API failure. The transaction stopped immediately; invocations 2-8 were not attempted, no final execution record exists, no LLM-versus-baseline evaluation result exists and held-out access remained zero. V0.1 must not be rerun or repaired; any recovery requires a new separately reviewed additive version.
 
 ## In progress
 
 - The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
-- V0.1, v0.2 and v0.3 are closed historical transactions. The v0.3 attempt and successful record are committed evidence and remain immutable.
-- The offline development-manifest contract, context-limit observation v0.1, actual five-source hash-only manifest v0.1, bounded development-execution plan v0.1 and bounded development-execution transaction have completed independent read-only review. Transaction integration through commit, PR and CI is pending. Explicit project-owner authorization, provider execution, extraction, evaluation and owner review remain separately pending and unauthorized. No development-comparison LLM result exists.
+- Synthetic-preflight v0.1, v0.2 and v0.3 are closed historical transactions. The v0.3 attempt and successful record are committed evidence and remain immutable.
+- The failed bounded development execution v0.1 is being closed through sanitized evidence and semantic-contract coverage documentation. Its S001 attempt marker, failure record and cache record are immutable. Offline additive development-recovery v0.2 prompt/schema/request hardening is the next controlled task; no recovery implementation, manifest, authorization, provider call or execution exists. No development-comparison LLM result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Integrate the independently reviewed bounded development-execution transaction through commit, PR and CI.
-2. After integration, prepare fresh same-day pricing and data-control observations and obtain a new explicit project-owner authorization bound to the reviewed manifest and execution plan.
-3. Perform the bounded Stage 4D development run only after every manifest, context, terms, cache and authorization gate passes.
-4. Proceed to Stage 4E evaluation, error analysis and owner review only after fixed candidate evidence exists.
-5. Keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
+1. Independently review and integrate the immutable v0.1 failed-execution evidence closure.
+2. Create and review an additive Stage 4D v0.2 semantic-hardening plan without provider access.
+3. Implement and offline-test new prompt/schema/request identities only after that plan is frozen.
+4. Prepare a new reviewed v0.2 manifest, execution plan and authorization boundary before any future provider call is considered.
+5. Proceed to Stage 4E evaluation, error analysis and owner review only after one complete fixed versioned candidate run exists.
+6. Keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- V0.3 completed successfully, its one-call authorization is consumed and it must not be retried. The reviewed context-limit evidence, actual five-source manifest, bounded execution plan and bounded transaction are frozen or independently reviewed as applicable. Provider execution remains separately blocked pending transaction integration, fresh same-day pricing and data-control observations and a new explicit project-owner authorization.
+- The v0.1 bounded development execution is closed after one successful provider call and deterministic local semantic failure. Its marker, cache and failure evidence must not be modified, repaired or retried. A v0.2 provider execution cannot be considered until an additive hardening plan, implementation, manifest, execution plan and authorization receive separate review.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -84,4 +86,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. The v0.3 synthetic preflight verified fixed-request technical compatibility but did not execute the development corpus or establish extraction quality. No development extraction, LLM comparison result or held-out result exists. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
+Not yet eligible. The v0.3 synthetic preflight verified fixed-request technical compatibility. The later v0.1 development transaction attempted only S001 and failed during deterministic local semantic validation after one successful cached provider call, so it produced no complete development extraction, LLM comparison result or held-out result. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.

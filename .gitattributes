@@ -28,3 +28,7 @@ reports/llm_extraction/openai_development_manifest/openai-gpt-5.4-mini-five-sour
 
 # Keep the frozen Stage 4D bounded development execution plan byte-identical across platforms.
 reports/llm_extraction/openai_development_execution_plan/openai-gpt-5.4-mini-five-source-development-execution-plan-v0.1.json text eol=lf
+
+# Keep immutable Stage 4D bounded-development execution evidence byte-identical across platforms.
+reports/llm_extraction/openai_development_execution/openai-gpt-5.4-mini-five-source-development-v0.1/attempts/*.attempt.json text eol=lf
+reports/llm_extraction/openai_development_execution/openai-gpt-5.4-mini-five-source-development-v0.1/failures/*.failure.json text eol=lf
