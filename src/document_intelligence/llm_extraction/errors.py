@@ -70,6 +70,17 @@ class Stage4BErrorCode(str, Enum):
     PREFLIGHT_FAILURE_RECORD_HASH_MISMATCH = (
         "preflight_failure_record_hash_mismatch"
     )
+    DEVELOPMENT_EXECUTION_GATE_INVALID = "development_execution_gate_invalid"
+    DEVELOPMENT_AUTHORIZATION_INVALID = "development_authorization_invalid"
+    DEVELOPMENT_INPUT_FILE_INVALID = "development_input_file_invalid"
+    DEVELOPMENT_ATTEMPT_ALREADY_EXISTS = "development_attempt_already_exists"
+    DEVELOPMENT_ARTIFACT_WRITE_FAILED = "development_artifact_write_failed"
+    DEVELOPMENT_FAILURE_RECORD_HASH_MISMATCH = (
+        "development_failure_record_hash_mismatch"
+    )
+    DEVELOPMENT_EXECUTION_RECORD_HASH_MISMATCH = (
+        "development_execution_record_hash_mismatch"
+    )
 
 
 class Stage4BError(ValueError):
