@@ -34,6 +34,10 @@ from document_intelligence.llm_extraction.errors import (
     Stage4BError,
     Stage4BErrorCode,
 )
+from document_intelligence.llm_extraction.openai_preflight import (
+    ModelVersionOrSnapshotProvenance,
+    _validate_provenance_path_inventory,
+)
 from document_intelligence.llm_extraction.prompting import (
     canonical_json_bytes,
     uppercase_sha256_bytes,
@@ -80,6 +84,67 @@ class CacheIdentity(BaseModel):
         )
 
 
+class OpenAIOriginalCallProvenanceV01(BaseModel):
+    """Safe same-call metadata retained before local output validation."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    provenance_schema_version: Literal["0.1"] = "0.1"
+    model_version_or_snapshot_provenance: ModelVersionOrSnapshotProvenance
+    version_provenance_source_response_id: str
+    provider_public_metadata_sha256: str = Field(pattern=SHA256_PATTERN)
+    provider_public_metadata_field_paths: tuple[str, ...]
+    observed_from_same_provider_call: Literal[True] = True
+
+    @field_validator("version_provenance_source_response_id")
+    @classmethod
+    def validate_source_response_id(cls, value: str) -> str:
+        if not value.strip() or value != value.strip():
+            raise ValueError(
+                "version_provenance_source_response_id must be trimmed and nonblank"
+            )
+        return value
+
+    @model_validator(mode="after")
+    def validate_provenance(self) -> OpenAIOriginalCallProvenanceV01:
+        try:
+            _validate_provenance_path_inventory(
+                self.model_version_or_snapshot_provenance,
+                self.provider_public_metadata_field_paths,
+            )
+        except Stage4BError as error:
+            raise ValueError(error.message) from error
+        return self
+
+
+def _openai_provenance_projection(
+    provenance: OpenAIOriginalCallProvenanceV01,
+    response: LLMProviderResponse,
+) -> dict[str, object]:
+    if (
+        response.provider_response_id is None
+        or response.provider_request_id is None
+        or response.provider_sdk_version is None
+    ):
+        raise Stage4BError(
+            Stage4BErrorCode.CACHE_RECORD_INVALID,
+            "OpenAI original-call provenance requires complete response identity",
+        )
+    projection: dict[str, object] = {
+        "response.id": response.provider_response_id,
+        "response.model": response.model_identifier,
+        "response._request_id": response.provider_request_id,
+        "sdk.version": response.provider_sdk_version,
+    }
+    version_provenance = provenance.model_version_or_snapshot_provenance
+    if version_provenance != "unavailable":
+        projection.update(
+            (identifier.field_name, identifier.value)
+            for identifier in version_provenance
+        )
+    return projection
+
+
 class CacheRecord(BaseModel):
     """Canonical cached response with immutable original-call provenance."""
 
@@ -91,6 +156,7 @@ class CacheRecord(BaseModel):
     original_provider_call_timestamp: datetime
     original_attempts: tuple[AttemptProvenance, ...] = Field(min_length=1)
     estimated_cost_usd: Decimal = Field(ge=0)
+    openai_original_call_provenance: OpenAIOriginalCallProvenanceV01 | None = None
     cache_record_sha256: str = Field(pattern=SHA256_PATTERN)
 
     @field_validator("original_provider_call_timestamp")
@@ -123,6 +189,26 @@ class CacheRecord(BaseModel):
                 Stage4BErrorCode.CACHE_RECORD_INVALID,
                 "cached original attempts do not reconcile with the response",
             )
+        provenance = self.openai_original_call_provenance
+        if provenance is not None:
+            if self.response.provider_identifier != "openai":
+                raise Stage4BError(
+                    Stage4BErrorCode.CACHE_RECORD_INVALID,
+                    "OpenAI original-call provenance requires an OpenAI response",
+                )
+            projection = _openai_provenance_projection(provenance, self.response)
+            if (
+                provenance.version_provenance_source_response_id
+                != self.response.provider_response_id
+                or provenance.provider_public_metadata_field_paths
+                != tuple(projection)
+                or provenance.provider_public_metadata_sha256
+                != uppercase_sha256_bytes(canonical_json_bytes(projection))
+            ):
+                raise Stage4BError(
+                    Stage4BErrorCode.CACHE_RECORD_INVALID,
+                    "OpenAI original-call provenance does not reconcile with response",
+                )
         payload = _cache_record_payload(self, include_hash=False)
         expected_hash = uppercase_sha256_bytes(canonical_json_bytes(payload))
         if self.cache_record_sha256 != expected_hash:
@@ -164,6 +250,10 @@ def _cache_record_payload(
         ],
         "estimated_cost_usd": format(record.estimated_cost_usd, "f"),
     }
+    if record.openai_original_call_provenance is not None:
+        payload["openai_original_call_provenance"] = (
+            record.openai_original_call_provenance.model_dump(mode="json")
+        )
     if include_hash:
         payload["cache_record_sha256"] = record.cache_record_sha256
     return payload
@@ -176,6 +266,7 @@ def build_cache_record(
     original_provider_call_timestamp: datetime,
     original_attempts: tuple[AttemptProvenance, ...],
     estimated_cost_usd: Decimal,
+    openai_original_call_provenance: OpenAIOriginalCallProvenanceV01 | None = None,
 ) -> CacheRecord:
     """Create a self-hashed immutable response record."""
     payload = {
@@ -190,6 +281,10 @@ def build_cache_record(
         ],
         "estimated_cost_usd": format(estimated_cost_usd, "f"),
     }
+    if openai_original_call_provenance is not None:
+        payload["openai_original_call_provenance"] = (
+            openai_original_call_provenance.model_dump(mode="json")
+        )
     record_hash = uppercase_sha256_bytes(canonical_json_bytes(payload))
     return CacheRecord.model_validate(
         {**payload, "cache_record_sha256": record_hash}
@@ -461,6 +556,7 @@ __all__ = [
     "CACHE_SCHEMA_VERSION",
     "CacheIdentity",
     "CacheRecord",
+    "OpenAIOriginalCallProvenanceV01",
     "ResponseCache",
     "build_cache_record",
     "cache_identity_sha256",

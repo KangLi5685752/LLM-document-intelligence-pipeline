@@ -33,6 +33,9 @@ from document_intelligence.llm_extraction.prompting import (
     canonical_json_bytes,
     uppercase_sha256_bytes,
 )
+from document_intelligence.llm_extraction.openai_preflight import (
+    ProviderVersionIdentifier,
+)
 
 
 NOW = datetime(2026, 8, 3, 1, 2, 3, tzinfo=timezone.utc)
@@ -144,6 +147,29 @@ def _record_with_provider_metadata():
     )
 
 
+def _openai_original_call_provenance(response: LLMProviderResponse):
+    field_path = "response.metadata.snapshot_id"
+    value = "fictional-snapshot-2099-01-01"
+    projection = {
+        "response.id": response.provider_response_id,
+        "response.model": response.model_identifier,
+        "response._request_id": response.provider_request_id,
+        "sdk.version": response.provider_sdk_version,
+        field_path: value,
+    }
+    return cache_module.OpenAIOriginalCallProvenanceV01(
+        model_version_or_snapshot_provenance=(
+            ProviderVersionIdentifier(field_name=field_path, value=value),
+        ),
+        version_provenance_source_response_id=response.provider_response_id,
+        provider_public_metadata_sha256=uppercase_sha256_bytes(
+            canonical_json_bytes(projection)
+        ),
+        provider_public_metadata_field_paths=tuple(projection),
+        observed_from_same_provider_call=True,
+    )
+
+
 def _legacy_cache_bytes() -> tuple[CacheIdentity, bytes]:
     identity = CacheIdentity.from_request(_request())
     raw_response = _raw()
@@ -217,6 +243,7 @@ def test_pre_metadata_legacy_cache_record_remains_hash_valid(tmp_path) -> None:
     assert loaded.response.provider_response_id is None
     assert loaded.response.provider_sdk_version is None
     assert cache_record_bytes(loaded) == legacy_bytes
+    assert b"openai_original_call_provenance" not in legacy_bytes
 
 
 def test_cache_preserves_additive_provider_metadata_exactly(tmp_path) -> None:
@@ -234,6 +261,60 @@ def test_cache_preserves_additive_provider_metadata_exactly(tmp_path) -> None:
         input_tokens=23, output_tokens=11
     )
     assert loaded.response.latency_ms == 125
+
+
+def test_cache_preserves_typed_openai_original_call_provenance(tmp_path) -> None:
+    cache = ResponseCache(tmp_path / "cache")
+    base = _record_with_provider_metadata()
+    provenance = _openai_original_call_provenance(base.response)
+    record = build_cache_record(
+        identity=base.identity,
+        response=base.response,
+        original_provider_call_timestamp=base.original_provider_call_timestamp,
+        original_attempts=base.original_attempts,
+        estimated_cost_usd=base.estimated_cost_usd,
+        openai_original_call_provenance=provenance,
+    )
+
+    cache.append(record)
+    loaded = cache.read(record.identity)
+
+    assert loaded.openai_original_call_provenance == provenance
+    assert cache_record_bytes(loaded) == cache.path_for(record.identity).read_bytes()
+    assert b"fictional-snapshot-2099-01-01" in cache_record_bytes(loaded)
+
+
+def test_rehashed_cache_cannot_contradict_original_version_provenance(
+    tmp_path,
+) -> None:
+    cache = ResponseCache(tmp_path / "cache")
+    base = _record_with_provider_metadata()
+    record = build_cache_record(
+        identity=base.identity,
+        response=base.response,
+        original_provider_call_timestamp=base.original_provider_call_timestamp,
+        original_attempts=base.original_attempts,
+        estimated_cost_usd=base.estimated_cost_usd,
+        openai_original_call_provenance=(
+            _openai_original_call_provenance(base.response)
+        ),
+    )
+    cache.append(record)
+    target = cache.path_for(record.identity)
+    payload = json.loads(target.read_bytes())
+    payload["openai_original_call_provenance"][
+        "model_version_or_snapshot_provenance"
+    ] = "unavailable"
+    payload_without_hash = dict(payload)
+    payload_without_hash.pop("cache_record_sha256")
+    payload["cache_record_sha256"] = uppercase_sha256_bytes(
+        canonical_json_bytes(payload_without_hash)
+    )
+    target.write_bytes(canonical_json_bytes(payload))
+
+    with pytest.raises(Stage4BError) as captured:
+        cache.read(record.identity)
+    assert captured.value.code is Stage4BErrorCode.CACHE_RECORD_INVALID
 
 
 @pytest.mark.parametrize(
