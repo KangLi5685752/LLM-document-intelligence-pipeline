@@ -23,6 +23,7 @@ validate-public-gold = "document_intelligence.extraction.annotation_cli:main"
 run-openai-synthetic-preflight = "document_intelligence.llm_extraction.openai_preflight_cli:main"
 run-openai-development-execution = "document_intelligence.llm_extraction.openai_development_execution_cli:main"
 run-openai-development-execution-v0-2 = "document_intelligence.llm_extraction.openai_development_execution_v0_2_cli:main"
+run-openai-development-execution-v0-3 = "document_intelligence.llm_extraction.openai_development_execution_v0_3_cli:main"
 
 [project.optional-dependencies]
 dev = [
