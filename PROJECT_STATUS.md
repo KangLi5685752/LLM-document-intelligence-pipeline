@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D development-v0.3 five-source manifest frozen and independently reviewed with verdict `approved_for_evidence_commit`; repository integration next
+- **Current stage:** Stage 4D development-v0.3 manifest integrated; bounded no-call execution plan v0.3 prepared and being frozen
 - **Last updated:** 2026-08-11
-- **Latest milestone:** Independent review reproduced the frozen development-v0.3 manifest byte-for-byte from the five approved ParsedDocuments and committed v0.4 compatibility evidence; execution remains unauthorized and no development result exists
+- **Latest milestone:** The deterministic no-call execution plan was derived from the exact committed development-v0.3 manifest and binds eight retry-zero invocations, USD 1.001169 conservative cost and a USD 1.25 authorization cap; transaction implementation and execution remain unauthorized
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -68,20 +68,20 @@
 - The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
 - Synthetic-preflight v0.1, v0.2, v0.3 and v0.4 are closed historical transactions. The v0.3 and v0.4 evidence remains immutable.
 - The failed bounded development executions v0.1 and v0.2 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; neither version may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
-- The additive v0.3 alias-safe provider contract is merged, its separate v0.4 synthetic compatibility gate passed, and the development-v0.3 five-source manifest is frozen and independently approved for evidence commit. No development-v0.3 execution plan, authorization or development result exists.
+- The additive v0.3 alias-safe provider contract is merged, its separate v0.4 synthetic compatibility gate passed, and the development-v0.3 five-source manifest is frozen, independently approved and integrated. Its bounded no-call execution plan is being frozen separately; no transaction implementation, authorization or development result exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Integrate the independently approved development-v0.3 manifest evidence into the repository.
-2. Prepare and independently review a separate bounded development-v0.3 execution plan and transaction boundary without executing it.
+1. Independently review and integrate the frozen bounded development-v0.3 no-call execution plan.
+2. Implement and independently review the development-v0.3 transaction and readiness boundary as a separate change without executing it.
 3. Require a separate exact project-owner authorization before any later real development execution.
 4. Keep S005, S007 and all held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- The v0.1 and v0.2 bounded development executions remain closed after deterministic local semantic failure. Their markers, caches and failure evidence must not be modified, repaired or retried. V0.4 compatibility passed and is closed; the independently approved development-v0.3 manifest still requires repository integration followed by separate plan, transaction and authorization gates before any execution.
+- The v0.1 and v0.2 bounded development executions remain closed after deterministic local semantic failure. Their markers, caches and failure evidence must not be modified, repaired or retried. V0.4 compatibility passed and is closed; the integrated development-v0.3 manifest is followed by separate plan-freeze, transaction-review and exact-authorization gates before any execution.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
