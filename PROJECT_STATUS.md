@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D v0.1 failed development execution closed as immutable evidence; offline v0.2 semantic hardening next
+- **Current stage:** Stage 4D v0.2 failed development execution closed as immutable evidence; separate v0.3 manifest and execution planning next
 - **Last updated:** 2026-08-10
-- **Latest milestone:** The first bounded development invocation made one successful OpenAI call, installed a verified immutable cache record, then failed closed during deterministic semantic validation; invocations 2-8 were not attempted
+- **Latest milestone:** V0.2 invocation 1 made one successful OpenAI call and immutable cache installation, then failed local schema validation on the repeated alias/canonical-name casefold conflict; PR #49 merged the additive v0.3 alias-safe provider contract
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -58,27 +58,30 @@
 
 - The Stage 4D bounded development-execution transaction is implemented and independently reviewed with verdict `approved_for_evidence_commit`. It validates the exact frozen plan and manifest, reconstructs all eight requests through production builders, requires a new execution-specific owner authorization and same-day UTC terms, enforces cache-first append-only execution, installs invocation markers before credential/client/provider boundaries, permits eight calls and attempts with zero retries, caches successful provider responses before local candidate validation, preserves exact same-call model-version/snapshot provenance across cache-only recovery, stops after the first durable provider or local failure and installs a final execution record only after all eight invocations validate. Pre-attempt safety refusals do not consume an invocation, existing markers are reconciled to the current authorization and invocation, and durable marker state is assigned only after successful exclusive installation. The production CLI is default-deny and is exposed as `run-openai-development-execution`. Final transaction/CLI/cache validation passed 75 tests with 5 expected Windows link skips, the broader affected Stage 4B-4D suite passed 727 tests with 8 expected skips, and the complete offline suite passed 1834 tests with 14 expected Windows link/reparse skips and zero failures. No real authorization, API-key access, OpenAI client, provider call, network request, real development cache record, evaluation or held-out access occurred.
 - The first real Stage 4D bounded development execution v0.1 is closed as immutable failed evidence. Invocation 1, `llm-v0.1-S001-primary-001`, made exactly one OpenAI Responses API call with zero retries. The call returned `gpt-5.4-mini-2026-03-17` successfully, used 20,921 input and 638 output tokens, took 9,015 ms and incurred an estimated USD 0.01856175. Its immutable cache installation completed and verified before deterministic local parsing rejected `entities.0` because an alias equalled `canonical_name` after casefold. The failure is application-level semantic validation, not an OpenAI transport/API failure. The transaction stopped immediately; invocations 2-8 were not attempted, no final execution record exists, no LLM-versus-baseline evaluation result exists and held-out access remained zero. V0.1 must not be rerun or repaired; any recovery requires a new separately reviewed additive version.
+- The real Stage 4D bounded development execution v0.2 is closed as immutable failed evidence after invocation 1, `llm-v0.2-S001-primary-001`. One provider call completed and its immutable cache installation succeeded before local parsing failed at `entities.0` with `schema_invalid` because an alias equalled `canonical_name` after casefold. Retry count was zero, invocations 2-8 were not attempted, no final execution record or LLM-versus-deterministic evaluation exists and held-out access remained zero. The offline counterfactual removed only the one conflicting alias in memory and then passed complete candidate and allowed-evidence validation with zero remaining errors, establishing the conflict as the sole observed blocker without repairing the historical response. V0.2 must not be rerun.
+- PR #49 merged the additive v0.3 alias-safe provider contract at `c84ed618593c098b1d9ebf9bf383bc4af02b2002`. Its strict provider schema keeps `aliases` required and constrains it with `maxItems: 0`, while the local `CandidateEntity` and `CandidateExtractionResult` 0.1 contracts remain unchanged. No v0.3 development manifest, execution plan, authorization or real bounded execution exists.
 
 ## In progress
 
 - The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
 - Synthetic-preflight v0.1, v0.2 and v0.3 are closed historical transactions. The v0.3 attempt and successful record are committed evidence and remain immutable.
-- The failed bounded development execution v0.1 is being closed through sanitized evidence and semantic-contract coverage documentation. Its S001 attempt marker, failure record and cache record are immutable. Offline additive development-recovery v0.2 prompt/schema/request hardening is the next controlled task; no recovery implementation, manifest, authorization, provider call or execution exists. No development-comparison LLM result exists.
+- The failed bounded development executions v0.1 and v0.2 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; neither version may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
+- The additive v0.3 alias-safe provider contract is merged. Separate v0.3 manifest, execution-plan, transaction and authorization planning is next; no v0.3 bounded real development execution exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Independently review and integrate the immutable v0.1 failed-execution evidence closure.
-2. Create and review an additive Stage 4D v0.2 semantic-hardening plan without provider access.
-3. Implement and offline-test new prompt/schema/request identities only after that plan is frozen.
-4. Prepare a new reviewed v0.2 manifest, execution plan and authorization boundary before any future provider call is considered.
+1. Independently review and integrate the immutable v0.2 failed-execution evidence closure.
+2. Create and review a separate additive v0.3 development manifest and execution plan without provider access.
+3. Implement and independently review any v0.3 transaction and authorization boundary only after those artifacts are frozen.
+4. Consider a bounded v0.3 provider call only after complete pre-execution review and explicit project-owner authorization.
 5. Proceed to Stage 4E evaluation, error analysis and owner review only after one complete fixed versioned candidate run exists.
 6. Keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- The v0.1 bounded development execution is closed after one successful provider call and deterministic local semantic failure. Its marker, cache and failure evidence must not be modified, repaired or retried. A v0.2 provider execution cannot be considered until an additive hardening plan, implementation, manifest, execution plan and authorization receive separate review.
+- The v0.1 and v0.2 bounded development executions are closed after one successful provider call each and deterministic local semantic failure on the same alias/canonical-name casefold invariant. Their markers, caches and failure evidence must not be modified, repaired or retried. V0.3 execution cannot be considered until its separate manifest, execution plan, transaction and authorization receive complete review.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -86,4 +89,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. The v0.3 synthetic preflight verified fixed-request technical compatibility. The later v0.1 development transaction attempted only S001 and failed during deterministic local semantic validation after one successful cached provider call, so it produced no complete development extraction, LLM comparison result or held-out result. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
+Not yet eligible. The v0.3 synthetic preflight verified fixed-request technical compatibility. The later v0.1 and v0.2 development transactions each attempted only S001 and failed during deterministic local semantic validation after one successful cached provider call, so neither produced a complete development extraction, LLM comparison result or held-out result. S005 and S007 remain untouched. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
