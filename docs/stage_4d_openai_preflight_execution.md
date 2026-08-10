@@ -2,13 +2,25 @@
 
 ## Scope
 
-Stage 4D-3B originally implemented and offline-tested a separate v0.3 local
-execution boundary for one synthetic OpenAI preflight. A later separately
-authorized real v0.3 transaction completed successfully, and its attempt marker
-and successful compatibility record are now frozen as evidence. The transaction
-made one provider call with zero retries and did not access development or
-held-out documents. The implementation tests remained offline and used only
-fictional credentials and injected fake clients.
+The separately authorized synthetic preflight v0.3 completed successfully and
+is a closed historical transaction. Its one-call authorization is consumed.
+That result verified the previous provider-facing schema and configuration; it
+does not verify the later alias-safe provider boundary.
+
+Real development execution v0.2 subsequently showed that prompt-only alias
+enforcement was insufficient: the first response again failed the local
+alias-versus-canonical-name casefold invariant. PR #49 therefore introduced a
+material provider-facing schema change for development v0.3 by retaining the
+required `CandidateEntity.aliases` field while constraining it with
+`maxItems=0`.
+
+This change implements an additive, offline and default-deny synthetic
+compatibility preflight v0.4 for that exact alias-safe schema and provider
+configuration. Implementation does not authorize its real provider call, and
+no v0.4 compatibility success is claimed. No development-v0.3 five-source
+manifest may be frozen until a separately authorized v0.4 transaction succeeds
+and its compatibility evidence is closed. Held-out execution remains
+prohibited.
 
 ## Closed v0.1 incident
 
@@ -88,6 +100,27 @@ supplied evidence blocks.` This classification remained separate from the
 successful technical compatibility result. Raw provider output, prompts,
 provider bodies, headers and credentials are not stored in the frozen record.
 
+## Additive alias-safe v0.4 boundary
+
+V0.4 uses preflight ID
+`openai-gpt-5.4-mini-synthetic-preflight-v0.4`, authorization scope
+`single-synthetic-openai-preflight-v0.4`, confirmation phrase
+`EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_4` and separate attempt, success
+and failure paths. Its reserved request
+`llm-v0.3-S001-primary-999` is an `LLMExtractionRequestV03` built with prompt
+version `0.3`, harmless synthetic text only and the development-v0.3 provider
+and model identities.
+
+The plan and provider-entry checks explicitly use
+`DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_3`,
+`build_openai_candidate_schema_v0_3()` and the corresponding explicit payload
+configuration. The strict provider schema keeps aliases required, uses an
+array type and sets `maxItems=0`; the local `CandidateEntity` and
+`CandidateExtractionResult` 0.1 contracts remain unchanged. V0.4 preserves the
+compatibility-versus-semantics separation: a locally valid response is either
+`expected_abstention` or `valid_semantic_variance`, and either may support a
+technical compatibility pass.
+
 ## Readiness mode
 
 The command defaults to readiness validation. It loads exactly the three paths
@@ -123,18 +156,18 @@ checked without reopening it for JSON parsing.
 
 ## Real-mode gate
 
-V0.3 real mode requires all of the following before credential access:
+V0.4 real mode requires all of the following before credential access:
 
 - `--execute-real-preflight`;
-- the exact confirmation `EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_3`;
+- the exact confirmation `EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_4`;
 - valid authorization for the frozen one-call scope;
 - authorization no later than the captured UTC execution time;
 - pricing and data-control observations dated on that same UTC date;
-- absence of all three fixed v0.3 output artifacts.
+- absence of all three fixed v0.4 output artifacts.
 
 Only after those local gates pass may the command read `OPENAI_API_KEY`. Before
 directory creation, marker creation, client construction or provider entry,
-the v0.3 gate requires an exact string with the generic `sk-` prefix, a
+the v0.4 gate requires an exact string with the generic `sk-` prefix, a
 conservative minimum of 120 characters, a maximum of 512 characters, and only
 non-whitespace printable supported key characters. The 120-character floor is
 intentionally conservative for the current long project-scoped key profile so
@@ -158,7 +191,7 @@ override.
 
 ## One-call transaction
 
-The fixed v0.3 attempt marker is created with exclusive semantics immediately before
+The fixed v0.4 attempt marker is created with exclusive semantics immediately before
 the plan-bound provider wrapper, existing same-call metadata bridge and
 preflight runner may invoke the provider. Its state is
 `provider_call_may_have_started`. Request, schema, payload or returned-record
@@ -169,10 +202,10 @@ Its existence blocks automatic retries before credential access or client
 construction. SDK retries remain disabled, and the provider-call counter cannot
 exceed one.
 
-Only a fully validated v0.3 compatibility record is serialized to the fixed successful
+Only a fully validated v0.4 compatibility record is serialized to the fixed successful
 record path, using exclusive creation. After a marker exists, an ordinary
 client, provider, validation or success-write failure instead installs one
-exclusive immutable v0.3 failure record when filesystem state permits. The
+exclusive immutable v0.4 failure record when filesystem state permits. The
 self-hashed record binds the authorization, plan, exact installed marker-file
 hash, UTC failure time, failure stage, stable local error, retry and call counts,
 and the fact that no successful record was written. It may include only a
@@ -193,7 +226,7 @@ the transaction does not claim otherwise.
 
 ## Compatibility and semantic diagnostic
 
-V0.3 marks technical compatibility as passed only after one completed provider
+V0.4 marks technical compatibility as passed only after one completed provider
 call, strict structured-output and `validate_provider_output` success, complete
 same-call request/response/model/SDK/token metadata, zero retries, reconciled
 request/prompt/document/schema/payload hashes and exclusive success-record
@@ -208,23 +241,20 @@ warning inventory. Exact zero-candidate abstention is classified
 `valid_semantic_variance`. Non-empty semantic collections or different warnings
 cannot independently turn a technical compatibility pass into failure.
 
-When technical validation fails after a response has returned, the v0.3 failure
+When technical validation fails after a response has returned, the v0.4 failure
 record retains the available contractually valid safe metadata. It never stores
 raw output, prompts, provider bodies, headers or credentials.
 
 ## Remaining gate
 
-The separately authorized v0.3 transaction completed successfully after the
-corrective implementation and offline tests. Its one-call authorization is
-consumed, v0.3 is closed and it must not be retried. The frozen result verifies
-live Responses API and strict-schema compatibility only for the fixed synthetic
-request; its semantic variance is diagnostic evidence, not an extraction-quality
-result.
+The historical v0.3 result remains closed and immutable. The offline v0.4
+implementation is not a live result and creates no authorization, attempt
+marker or outcome evidence. A future real v0.4 call requires a new, exact-scope
+project-owner authorization and the complete default-deny gate.
 
-The successful synthetic preflight does not authorize the five-source
-development manifest or provider execution. Those steps remain separately
-blocked pending their own independent review and explicit project-owner
-authorization. Held-out access remains unauthorized behind a later separately
-reviewed guard. These controls and the preflight result do not establish model
-superiority, held-out generalization, production readiness or resistance to
-arbitrary mutation by a privileged local actor.
+Until successful v0.4 compatibility evidence is closed, a development-v0.3
+five-source manifest must not be frozen. Any later manifest, execution plan and
+provider execution remain separately reviewed and explicitly authorized.
+Held-out access remains unauthorized behind a later separately reviewed guard.
+These controls do not establish model superiority, held-out generalization or
+production readiness.

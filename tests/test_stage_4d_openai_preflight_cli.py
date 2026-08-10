@@ -15,7 +15,7 @@ import pytest
 from openai import APIStatusError
 
 import document_intelligence.llm_extraction.openai_preflight_cli as cli
-import document_intelligence.llm_extraction.openai_preflight_execution_v0_3 as execution
+import document_intelligence.llm_extraction.openai_preflight_execution_v0_4 as execution
 from document_intelligence.llm_extraction.errors import (
     Stage4BError,
     Stage4BErrorCode,
@@ -24,9 +24,9 @@ from document_intelligence.llm_extraction.openai_preflight import (
     OpenAIDataControlsObservation,
     OpenAIPricingObservation,
 )
-from document_intelligence.llm_extraction.openai_preflight_v0_3 import (
+from document_intelligence.llm_extraction.openai_preflight_v0_4 import (
     PREFLIGHT_AUTHORIZATION_SCOPE,
-    OpenAIPreflightAuthorizationV03,
+    OpenAIPreflightAuthorizationV04,
 )
 from document_intelligence.llm_extraction.prompting import canonical_json_bytes
 
@@ -47,7 +47,7 @@ def _paths(tmp_path: Path) -> tuple[Path, Path, Path]:
     controls = tmp_path / "controls.json"
     _write(
         authorization,
-        OpenAIPreflightAuthorizationV03(
+        OpenAIPreflightAuthorizationV04(
             authorization_id="fictional-cli-authorization",
             authorized_by="Fictional CLI Owner",
             authorized_at_utc=NOW - timedelta(minutes=5),
@@ -427,7 +427,12 @@ def test_invalid_cli_input_returns_two_with_typed_sanitized_error(
 
 @pytest.mark.parametrize(
     "confirmation",
-    (None, "wrong", execution.EXECUTION_CONFIRMATION.lower()),
+    (
+        None,
+        "wrong",
+        execution.EXECUTION_CONFIRMATION.lower(),
+        "EXECUTE_SINGLE_SYNTHETIC_OPENAI_PREFLIGHT_V0_3",
+    ),
 )
 def test_invalid_real_confirmation_returns_two_before_secret_read(
     tmp_path: Path,

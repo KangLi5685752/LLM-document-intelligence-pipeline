@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D v0.2 failed development execution closed as immutable evidence; separate v0.3 manifest and execution planning next
+- **Current stage:** Stage 4D alias-safe synthetic compatibility preflight v0.4 implemented offline; separate real-call authorization and evidence closure next
 - **Last updated:** 2026-08-10
-- **Latest milestone:** V0.2 invocation 1 made one successful OpenAI call and immutable cache installation, then failed local schema validation on the repeated alias/canonical-name casefold conflict; PR #49 merged the additive v0.3 alias-safe provider contract
+- **Latest milestone:** The closed v0.2 development execution repeated the alias/canonical-name failure, PR #49 merged the material alias-safe v0.3 provider-schema change, and the additive v0.4 compatibility gate now binds that exact schema offline without a real call
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -60,28 +60,29 @@
 - The first real Stage 4D bounded development execution v0.1 is closed as immutable failed evidence. Invocation 1, `llm-v0.1-S001-primary-001`, made exactly one OpenAI Responses API call with zero retries. The call returned `gpt-5.4-mini-2026-03-17` successfully, used 20,921 input and 638 output tokens, took 9,015 ms and incurred an estimated USD 0.01856175. Its immutable cache installation completed and verified before deterministic local parsing rejected `entities.0` because an alias equalled `canonical_name` after casefold. The failure is application-level semantic validation, not an OpenAI transport/API failure. The transaction stopped immediately; invocations 2-8 were not attempted, no final execution record exists, no LLM-versus-baseline evaluation result exists and held-out access remained zero. V0.1 must not be rerun or repaired; any recovery requires a new separately reviewed additive version.
 - The real Stage 4D bounded development execution v0.2 is closed as immutable failed evidence after invocation 1, `llm-v0.2-S001-primary-001`. One provider call completed and its immutable cache installation succeeded before local parsing failed at `entities.0` with `schema_invalid` because an alias equalled `canonical_name` after casefold. Retry count was zero, invocations 2-8 were not attempted, no final execution record or LLM-versus-deterministic evaluation exists and held-out access remained zero. The offline counterfactual removed only the one conflicting alias in memory and then passed complete candidate and allowed-evidence validation with zero remaining errors, establishing the conflict as the sole observed blocker without repairing the historical response. V0.2 must not be rerun.
 - PR #49 merged the additive v0.3 alias-safe provider contract at `c84ed618593c098b1d9ebf9bf383bc4af02b2002`. Its strict provider schema keeps `aliases` required and constrains it with `maxItems: 0`, while the local `CandidateEntity` and `CandidateExtractionResult` 0.1 contracts remain unchanged. No v0.3 development manifest, execution plan, authorization or real bounded execution exists.
+- The additive synthetic compatibility preflight v0.4 is implemented offline and default-deny against the exact development-v0.3 request, prompt and alias-safe provider configuration. No v0.4 authorization, real provider call, attempt marker or outcome record exists, and compatibility success is not claimed.
 
 ## In progress
 
 - The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
 - Synthetic-preflight v0.1, v0.2 and v0.3 are closed historical transactions. The v0.3 attempt and successful record are committed evidence and remain immutable.
 - The failed bounded development executions v0.1 and v0.2 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; neither version may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
-- The additive v0.3 alias-safe provider contract is merged. Separate v0.3 manifest, execution-plan, transaction and authorization planning is next; no v0.3 bounded real development execution exists.
+- The additive v0.3 alias-safe provider contract is merged. Its material provider-schema change requires the separate v0.4 synthetic compatibility result before any new development-v0.3 five-source manifest can be frozen.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Independently review and integrate the immutable v0.2 failed-execution evidence closure.
-2. Create and review a separate additive v0.3 development manifest and execution plan without provider access.
-3. Implement and independently review any v0.3 transaction and authorization boundary only after those artifacts are frozen.
-4. Consider a bounded v0.3 provider call only after complete pre-execution review and explicit project-owner authorization.
-5. Proceed to Stage 4E evaluation, error analysis and owner review only after one complete fixed versioned candidate run exists.
+1. Independently review the offline/default-deny v0.4 compatibility implementation and its exact alias-safe anchors.
+2. Create and review a separate v0.4 one-call authorization only if the project owner elects to run the compatibility preflight.
+3. Freeze no development-v0.3 five-source manifest until successful v0.4 compatibility evidence is closed.
+4. Prepare any later development-v0.3 manifest, execution plan and transaction as separate reviewed boundaries.
+5. Keep S005, S007 and all held-out execution blocked.
 6. Keep held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- The v0.1 and v0.2 bounded development executions are closed after one successful provider call each and deterministic local semantic failure on the same alias/canonical-name casefold invariant. Their markers, caches and failure evidence must not be modified, repaired or retried. V0.3 execution cannot be considered until its separate manifest, execution plan, transaction and authorization receive complete review.
+- The v0.1 and v0.2 bounded development executions are closed after one successful provider call each and deterministic local semantic failure on the same alias/canonical-name casefold invariant. Their markers, caches and failure evidence must not be modified, repaired or retried. V0.4 has no real provider result; development v0.3 remains blocked until successful v0.4 compatibility evidence and then separate manifest, plan, transaction and authorization review.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -89,4 +90,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. The v0.3 synthetic preflight verified fixed-request technical compatibility. The later v0.1 and v0.2 development transactions each attempted only S001 and failed during deterministic local semantic validation after one successful cached provider call, so neither produced a complete development extraction, LLM comparison result or held-out result. S005 and S007 remain untouched. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
+Not yet eligible. The closed v0.3 synthetic preflight verified the previous fixed-request provider boundary; the materially changed alias-safe boundary has only an offline/default-deny v0.4 implementation and no real compatibility result. The later v0.1 and v0.2 development transactions each attempted only S001 and failed during deterministic local semantic validation after one successful cached provider call, so neither produced a complete development extraction, LLM comparison result or held-out result. S005 and S007 remain untouched. Weak deterministic development quality and the lack of a final portfolio presentation also still prevent replacement.
