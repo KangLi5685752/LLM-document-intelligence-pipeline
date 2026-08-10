@@ -11,14 +11,17 @@ from typing import Any, Iterable
 from document_intelligence.llm_extraction.contracts import (
     EXPERIMENT_ID,
     EXPERIMENT_ID_V0_2,
+    EXPERIMENT_ID_V0_3,
     OUTPUT_CONTRACT_ID,
     PROMPT_VERSION,
     PROMPT_VERSION_V0_2,
+    PROMPT_VERSION_V0_3,
     ApprovedEvidenceBlock,
     InvocationRole,
     LLMExtractionRequest,
     LLMExtractionRequestAny,
     LLMExtractionRequestV02,
+    LLMExtractionRequestV03,
 )
 from document_intelligence.llm_extraction.errors import (
     Stage4BError,
@@ -31,6 +34,8 @@ SYSTEM_PROMPT_NAME = "system_v0_1.txt"
 EXTRACTION_PROMPT_NAME = "extraction_v0_1.txt"
 SYSTEM_PROMPT_NAME_V0_2 = "system_v0_2.txt"
 EXTRACTION_PROMPT_NAME_V0_2 = "extraction_v0_2.txt"
+SYSTEM_PROMPT_NAME_V0_3 = "system_v0_3.txt"
+EXTRACTION_PROMPT_NAME_V0_3 = "extraction_v0_3.txt"
 
 
 @dataclass(frozen=True)
@@ -75,6 +80,8 @@ def _prompt_asset_names(prompt_version: str) -> tuple[str, str]:
         return SYSTEM_PROMPT_NAME, EXTRACTION_PROMPT_NAME
     if prompt_version == PROMPT_VERSION_V0_2:
         return SYSTEM_PROMPT_NAME_V0_2, EXTRACTION_PROMPT_NAME_V0_2
+    if prompt_version == PROMPT_VERSION_V0_3:
+        return SYSTEM_PROMPT_NAME_V0_3, EXTRACTION_PROMPT_NAME_V0_3
     raise ValueError(f"unsupported prompt version: {prompt_version!r}")
 
 
@@ -237,6 +244,46 @@ def build_request_envelope_v0_2(
     )
 
 
+def build_request_envelope_v0_3(
+    *,
+    invocation_role: InvocationRole,
+    request_id: str,
+    source_id: str,
+    document_sha256: str,
+    provider_configuration_id: str,
+    model_configuration_id: str,
+    evidence_blocks: Iterable[ApprovedEvidenceBlock],
+) -> LLMExtractionRequestV03:
+    """Build an additive canonical alias-safe prompt-v0.3 request envelope."""
+    blocks = tuple(evidence_blocks)
+    prompt_identity = prompt_sha256(
+        evidence_blocks=blocks,
+        model_configuration_id=model_configuration_id,
+        prompt_version=PROMPT_VERSION_V0_3,
+    )
+    provisional = LLMExtractionRequestV03(
+        experiment_id=EXPERIMENT_ID_V0_3,
+        invocation_role=invocation_role,
+        request_id=request_id,
+        source_id=source_id,
+        document_sha256=document_sha256,
+        prompt_version=PROMPT_VERSION_V0_3,
+        prompt_sha256=prompt_identity,
+        canonical_request_sha256="0" * 64,
+        provider_configuration_id=provider_configuration_id,
+        model_configuration_id=model_configuration_id,
+        output_contract_id=OUTPUT_CONTRACT_ID,
+        evidence_blocks=blocks,
+    )
+    request_identity = canonical_request_sha256(provisional)
+    return LLMExtractionRequestV03.model_validate(
+        {
+            **provisional.model_dump(mode="python"),
+            "canonical_request_sha256": request_identity,
+        }
+    )
+
+
 def validate_request_identity(request: LLMExtractionRequestAny) -> None:
     """Fail closed when prompt or canonical request identity has drifted."""
     expected_prompt = prompt_sha256(
@@ -262,6 +309,7 @@ __all__ = [
     "PromptAssets",
     "build_request_envelope",
     "build_request_envelope_v0_2",
+    "build_request_envelope_v0_3",
     "canonical_json_bytes",
     "canonical_prompt_bytes",
     "canonical_request_bytes",

@@ -9,7 +9,7 @@ from collections.abc import Callable
 from copy import deepcopy
 from dataclasses import dataclass
 from importlib.metadata import version as package_version
-from typing import Any, Final, Literal, Protocol
+from typing import Any, Final, Literal, Protocol, TypeAlias
 
 from openai import (
     APIConnectionError,
@@ -26,6 +26,7 @@ from document_intelligence.llm_extraction.contracts import (
     LLMExtractionRequest,
     LLMExtractionRequestAny,
     LLMExtractionRequestV02,
+    LLMExtractionRequestV03,
     LLMProviderResponse,
     ProviderTerminalStatus,
     ProviderTokenUsage,
@@ -55,6 +56,15 @@ OPENAI_MODEL_CONFIGURATION_ID: Literal[
 OPENAI_RESPONSE_SCHEMA_NAME: Literal[
     "candidate_extraction_result_0_1"
 ] = "candidate_extraction_result_0_1"
+OPENAI_PROVIDER_CONFIGURATION_ID_V0_3: Literal[
+    "openai-responses-text-strict-json-v0.2"
+] = "openai-responses-text-strict-json-v0.2"
+OPENAI_MODEL_CONFIGURATION_ID_V0_3: Literal[
+    "openai-gpt-5.4-mini-text-strict-json-v0.2"
+] = "openai-gpt-5.4-mini-text-strict-json-v0.2"
+OPENAI_RESPONSE_SCHEMA_NAME_V0_3: Literal[
+    "candidate_extraction_result_0_1_aliases_empty_v0_3"
+] = "candidate_extraction_result_0_1_aliases_empty_v0_3"
 OPENAI_REQUIRED_SDK_VERSION: Literal["2.46.0"] = "2.46.0"
 OPENAI_INSTALLED_SDK_VERSION = package_version("openai")
 OPENAI_MAX_TIMEOUT_SECONDS = 120.0
@@ -195,6 +205,29 @@ DEFAULT_OPENAI_RESPONSES_CONFIGURATION = OpenAIResponsesConfiguration(
 )
 
 
+class OpenAIResponsesConfigurationV03(OpenAIResponsesConfiguration):
+    """Immutable additive configuration for the alias-safe v0.3 boundary."""
+
+    provider_configuration_id: Literal[
+        "openai-responses-text-strict-json-v0.2"
+    ] = OPENAI_PROVIDER_CONFIGURATION_ID_V0_3
+    model_configuration_id: Literal[
+        "openai-gpt-5.4-mini-text-strict-json-v0.2"
+    ] = OPENAI_MODEL_CONFIGURATION_ID_V0_3
+    response_schema_name: Literal[
+        "candidate_extraction_result_0_1_aliases_empty_v0_3"
+    ] = OPENAI_RESPONSE_SCHEMA_NAME_V0_3
+
+
+DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_3 = OpenAIResponsesConfigurationV03(
+    max_output_tokens=OPENAI_MAX_OUTPUT_TOKENS,
+    reasoning_effort=OPENAI_REASONING_EFFORT,
+)
+OpenAIResponsesConfigurationAny: TypeAlias = (
+    OpenAIResponsesConfiguration | OpenAIResponsesConfigurationV03
+)
+
+
 class ResponsesResource(Protocol):
     """Public-shape subset used from an injected Responses resource."""
 
@@ -235,9 +268,13 @@ def _validated_request(request: LLMExtractionRequestAny) -> LLMExtractionRequest
     validate_development_source_id(request.source_id)
     try:
         request_type = (
-            LLMExtractionRequestV02
-            if isinstance(request, LLMExtractionRequestV02)
-            else LLMExtractionRequest
+            LLMExtractionRequestV03
+            if isinstance(request, LLMExtractionRequestV03)
+            else (
+                LLMExtractionRequestV02
+                if isinstance(request, LLMExtractionRequestV02)
+                else LLMExtractionRequest
+            )
         )
         return request_type.model_validate(request.model_dump(mode="python"))
     except ValidationError as error:
@@ -386,14 +423,43 @@ def build_openai_candidate_schema() -> dict[str, Any]:
     return schema
 
 
+def build_openai_candidate_schema_v0_3() -> dict[str, Any]:
+    """Derive the additive v0.3 schema with provider aliases fixed empty."""
+    schema = deepcopy(build_openai_candidate_schema())
+    definitions = schema.get("$defs")
+    if not isinstance(definitions, dict):
+        raise ValueError("CandidateExtractionResult schema must define $defs")
+    candidate_entity = definitions.get("CandidateEntity")
+    if not isinstance(candidate_entity, dict):
+        raise ValueError("CandidateExtractionResult schema must define CandidateEntity")
+    properties = candidate_entity.get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError("CandidateEntity schema must declare properties")
+    aliases = properties.get("aliases")
+    if not isinstance(aliases, dict) or aliases.get("type") != "array":
+        raise ValueError("CandidateEntity aliases must remain an array")
+    aliases["maxItems"] = 0
+    audit_openai_strict_schema(schema)
+    return schema
+
+
 def build_openai_responses_payload(
-    request: LLMExtractionRequest,
-    configuration: OpenAIResponsesConfiguration = (
+    request: LLMExtractionRequestAny,
+    configuration: OpenAIResponsesConfigurationAny = (
         DEFAULT_OPENAI_RESPONSES_CONFIGURATION
     ),
 ) -> dict[str, Any]:
     """Build a deterministic text-only Responses payload without client access."""
     validated = _validated_request(request)
+    request_is_v0_3 = isinstance(validated, LLMExtractionRequestV03)
+    configuration_is_v0_3 = isinstance(
+        configuration, OpenAIResponsesConfigurationV03
+    )
+    if request_is_v0_3 != configuration_is_v0_3:
+        raise Stage4BError(
+            Stage4BErrorCode.PROVIDER_CONFIGURATION_MISMATCH,
+            "request version does not match the OpenAI adapter configuration",
+        )
     if (
         validated.provider_configuration_id
         != configuration.provider_configuration_id
@@ -423,7 +489,11 @@ def build_openai_responses_payload(
         f"{prompt_payload['extraction_prompt']}\n\n"
         f"Ordered evidence blocks (canonical JSON):\n{ordered_blocks}"
     )
-    output_schema = build_openai_candidate_schema()
+    output_schema = (
+        build_openai_candidate_schema_v0_3()
+        if request_is_v0_3
+        else build_openai_candidate_schema()
+    )
 
     return {
         "model": configuration.requested_model_alias,
@@ -522,7 +592,7 @@ class OpenAIResponsesProvider:
         self,
         *,
         client: OpenAIClient,
-        configuration: OpenAIResponsesConfiguration = (
+        configuration: OpenAIResponsesConfigurationAny = (
             DEFAULT_OPENAI_RESPONSES_CONFIGURATION
         ),
         clock: Callable[[], float] = time.perf_counter,
@@ -538,15 +608,17 @@ class OpenAIResponsesProvider:
         self._clock = clock
 
     @property
-    def configuration(self) -> OpenAIResponsesConfiguration:
+    def configuration(self) -> OpenAIResponsesConfigurationAny:
         """Return the immutable adapter configuration."""
         return self._configuration
 
-    def generate(self, request: LLMExtractionRequest) -> LLMProviderResponse:
+    def generate(self, request: LLMExtractionRequestAny) -> LLMProviderResponse:
         """Perform one non-retrying call after complete local request validation."""
         return self._execute(request).response
 
-    def _execute(self, request: LLMExtractionRequest) -> _OpenAIResponsesCallResult:
+    def _execute(
+        self, request: LLMExtractionRequestAny
+    ) -> _OpenAIResponsesCallResult:
         """Perform and map one call while transiently retaining its SDK response."""
         payload = build_openai_responses_payload(request, self._configuration)
         started = self._clock()
@@ -632,22 +704,29 @@ class OpenAIResponsesProvider:
 
 __all__ = [
     "DEFAULT_OPENAI_RESPONSES_CONFIGURATION",
+    "DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_3",
     "OPENAI_API_SURFACE",
     "OPENAI_INSTALLED_SDK_VERSION",
     "OPENAI_MAX_OUTPUT_TOKENS",
     "OPENAI_MAX_TIMEOUT_SECONDS",
     "OPENAI_MODEL_CONFIGURATION_ID",
+    "OPENAI_MODEL_CONFIGURATION_ID_V0_3",
     "OPENAI_PROVIDER_CONFIGURATION_ID",
+    "OPENAI_PROVIDER_CONFIGURATION_ID_V0_3",
     "OPENAI_PROVIDER_IDENTIFIER",
     "OPENAI_REQUESTED_MODEL_ALIAS",
     "OPENAI_REQUIRED_SDK_VERSION",
     "OPENAI_REASONING_EFFORT",
     "OPENAI_RESPONSE_SCHEMA_NAME",
+    "OPENAI_RESPONSE_SCHEMA_NAME_V0_3",
     "OpenAIProviderFailure",
     "OpenAIProviderFailureDiagnostics",
     "OpenAIResponsesConfiguration",
+    "OpenAIResponsesConfigurationAny",
+    "OpenAIResponsesConfigurationV03",
     "OpenAIResponsesProvider",
     "audit_openai_strict_schema",
     "build_openai_candidate_schema",
+    "build_openai_candidate_schema_v0_3",
     "build_openai_responses_payload",
 ]

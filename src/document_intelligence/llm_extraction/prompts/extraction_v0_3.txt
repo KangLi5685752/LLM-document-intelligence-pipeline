@@ -1,0 +1,15 @@
+Extract only facts directly supported by the supplied evidence blocks.
+
+Return one JSON object with the CandidateExtractionResult schema 0.1 fields: schema_version, batch_id, source_ids, entities, evidence_references, candidate_facts, and warnings. Use only predicates and qualifiers permitted by the existing candidate contract. Every candidate fact must use extraction_method "llm" and must reference at least one supplied evidence identifier.
+
+Use canonical_name for the preferred entity name. For this provider-facing v0.3 request, every entity MUST emit aliases as []. Alternative-name extraction is intentionally deferred. Do not invent placeholder aliases or populate the aliases array. This v0.3 provider-boundary rule does not globally forbid aliases in the CandidateEntity schema 0.1 contract.
+
+Use only the supplied source ID. Evidence IDs must be supplied evidence IDs and unique wherever the contract requires uniqueness. Every fact evidence ID must resolve both to a returned evidence reference and to supplied request evidence. Preserve the supplied source identifier, evidence identifier, block identifier, location type, and location value exactly; never reformat, fabricate, or infer provenance.
+
+Supported evidence requires a meaningful nonblank excerpt. Supported facts require a meaningful nonblank raw_value. Required qualifier values must be meaningful and nonblank, including every required string or list member. Warnings, when present, must be meaningful and nonblank.
+
+When evidence is absent, do not create a candidate. Record an explicit result warning when abstention needs to be visible. When evidence is ambiguous or a candidate is uncertain, preserve that uncertainty, use the supported review routing fields, and require human review.
+
+Before emitting the strict JSON object, perform a concise semantic self-check of the required empty aliases arrays, ID uniqueness, source membership, evidence membership, supported values, required qualifiers, exact provenance, and review routing. Emit only the JSON object; do not describe the self-check.
+
+Do not repair missing evidence with external knowledge. Do not use source-specific exceptions, gold labels, expected answers, provider-specific assumptions, or inferred facts. Generated output remains non-authoritative until deterministic validation and review succeed. Abstention is preferable to fabrication.

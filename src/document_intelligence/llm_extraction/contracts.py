@@ -23,8 +23,12 @@ EXPERIMENT_ID_V0_1: Literal["llm-extraction-baseline-v0.1"] = (
 EXPERIMENT_ID_V0_2: Literal["llm-extraction-baseline-v0.2"] = (
     "llm-extraction-baseline-v0.2"
 )
+EXPERIMENT_ID_V0_3: Literal["llm-extraction-baseline-v0.3"] = (
+    "llm-extraction-baseline-v0.3"
+)
 PROMPT_VERSION_V0_1: Literal["0.1"] = "0.1"
 PROMPT_VERSION_V0_2: Literal["0.2"] = "0.2"
+PROMPT_VERSION_V0_3: Literal["0.3"] = "0.3"
 EXPERIMENT_ID: Literal["llm-extraction-baseline-v0.1"] = EXPERIMENT_ID_V0_1
 PROMPT_VERSION: Literal["0.1"] = PROMPT_VERSION_V0_1
 OUTPUT_CONTRACT_ID: Literal["candidate-extraction-result-0.1"] = (
@@ -174,8 +178,33 @@ class LLMExtractionRequestV02(LLMExtractionRequest):
         return self
 
 
+class LLMExtractionRequestV03(LLMExtractionRequest):
+    """Additive alias-safe provider request without widening older models."""
+
+    experiment_id: Literal["llm-extraction-baseline-v0.3"] = EXPERIMENT_ID_V0_3
+    prompt_version: Literal["0.3"] = PROMPT_VERSION_V0_3
+
+    @model_validator(mode="after")
+    def validate_v0_3_identity(self) -> LLMExtractionRequestV03:
+        """Require exact v0.3 request and evidence identity templates."""
+        match = re.fullmatch(
+            rf"llm-v0\.3-{re.escape(self.source_id)}-"
+            rf"{self.invocation_role.value}-(\d{{3}})",
+            self.request_id,
+        )
+        if match is None or int(match.group(1)) < 1:
+            raise ValueError("request_id must use the exact v0.3 identity template")
+        for block in self.evidence_blocks:
+            expected = f"llm-evidence-v0.3-{self.source_id}-{block.block_id}"
+            if block.evidence_id != expected:
+                raise ValueError(
+                    "evidence_id must use the exact v0.3 evidence identity template"
+                )
+        return self
+
+
 LLMExtractionRequestAny: TypeAlias = (
-    LLMExtractionRequest | LLMExtractionRequestV02
+    LLMExtractionRequest | LLMExtractionRequestV02 | LLMExtractionRequestV03
 )
 
 
@@ -277,15 +306,18 @@ __all__ = [
     "EXPERIMENT_ID",
     "EXPERIMENT_ID_V0_1",
     "EXPERIMENT_ID_V0_2",
+    "EXPERIMENT_ID_V0_3",
     "OUTPUT_CONTRACT_ID",
     "PROMPT_VERSION",
     "PROMPT_VERSION_V0_1",
     "PROMPT_VERSION_V0_2",
+    "PROMPT_VERSION_V0_3",
     "ApprovedEvidenceBlock",
     "InvocationRole",
     "LLMExtractionRequest",
     "LLMExtractionRequestAny",
     "LLMExtractionRequestV02",
+    "LLMExtractionRequestV03",
     "LLMProviderResponse",
     "ProviderTerminalStatus",
     "ProviderTokenUsage",
