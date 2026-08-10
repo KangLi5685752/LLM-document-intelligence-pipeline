@@ -22,6 +22,7 @@ ingest-document = "document_intelligence.ingestion.cli:main"
 validate-public-gold = "document_intelligence.extraction.annotation_cli:main"
 run-openai-synthetic-preflight = "document_intelligence.llm_extraction.openai_preflight_cli:main"
 run-openai-development-execution = "document_intelligence.llm_extraction.openai_development_execution_cli:main"
+run-openai-development-execution-v0-2 = "document_intelligence.llm_extraction.openai_development_execution_v0_2_cli:main"
 
 [project.optional-dependencies]
 dev = [
