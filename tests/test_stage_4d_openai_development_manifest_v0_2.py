@@ -33,6 +33,7 @@ from document_intelligence.llm_extraction.openai_development_manifest import (
     build_reviewed_context_limit_observation,
     build_reviewed_observation_binding,
     build_source_route_identity,
+    canonical_lf_json_bytes,
     canonical_lf_json_sha256,
     development_manifest_bytes,
     development_manifest_bytes_v0_2,
@@ -468,4 +469,6 @@ def test_generated_v0_2_manifest_round_trips_when_present() -> None:
     if not V0_2_MANIFEST_PATH.exists():
         pytest.skip("real v0.2 manifest is generated only after offline gates pass")
     loaded = load_development_manifest_v0_2(V0_2_MANIFEST_PATH)
-    assert development_manifest_bytes_v0_2(loaded) == V0_2_MANIFEST_PATH.read_bytes()
+    assert development_manifest_bytes_v0_2(loaded) == canonical_lf_json_bytes(
+        V0_2_MANIFEST_PATH.read_bytes()
+    )
