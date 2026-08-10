@@ -76,6 +76,15 @@ from document_intelligence.llm_extraction.provenance import AttemptProvenance
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+EXACT_DEVELOPMENT_PARSED_DOCUMENT_PATHS = tuple(
+    REPOSITORY_ROOT
+    / "artifacts/stage_3b/v0_2_development_input/parsed"
+    / f"{source_id}.json"
+    for source_id in ("S001", "S002", "S003", "S004", "S006")
+)
+EXACT_DEVELOPMENT_PARSED_DOCUMENTS_AVAILABLE = all(
+    path.is_file() for path in EXACT_DEVELOPMENT_PARSED_DOCUMENT_PATHS
+)
 PLAN_SOURCE = REPOSITORY_ROOT / (
     "reports/llm_extraction/openai_development_execution_plan/"
     "openai-gpt-5.4-mini-five-source-development-execution-plan-v0.2.json"
@@ -438,6 +447,13 @@ def test_readiness_loads_exact_frozen_plan_manifest_without_side_effects(
     assert counters == {"key": 0, "client": 0, "provider": 0}
 
 
+@pytest.mark.skipif(
+    not EXACT_DEVELOPMENT_PARSED_DOCUMENTS_AVAILABLE,
+    reason=(
+        "exact ignored five-source development ParsedDocument artifacts "
+        "are unavailable"
+    ),
+)
 def test_production_reconstruction_reconciles_all_eight_frozen_requests() -> None:
     plan = execution._load_frozen_plan(REPOSITORY_ROOT)
     manifest = execution._load_frozen_manifest(REPOSITORY_ROOT, plan)
