@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D development-v0.3 manifest and bounded no-call execution plan integrated; transaction/readiness implementation being prepared and reviewed
+- **Current stage:** Stage 4D development-v0.3 bounded execution closed after immutable S001 provenance-validation failure evidence
 - **Last updated:** 2026-08-11
-- **Latest milestone:** The integrated deterministic no-call execution plan binds the exact development-v0.3 manifest, eight retry-zero invocations, USD 1.001169 conservative cost and a USD 1.25 authorization cap; the additive default-deny transaction/readiness implementation is under offline review and execution remains unauthorized
+- **Latest milestone:** After transaction integration and the mandatory pre-real audit, one authorized S001 provider attempt returned successfully and installed its immutable cache before deterministic local validation failed closed with `UNKNOWN_EVIDENCE_REFERENCE`; v0.3 is closed and invocations 2-8 were not attempted
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -63,27 +63,27 @@
 - The separately authorized synthetic compatibility preflight v0.4 passed against the exact development-v0.3 request, prompt and alias-safe provider configuration after the mandatory independent pre-real review. One provider call completed with zero retries, returned `gpt-5.4-mini-2026-03-17`, used 7,594 input and 177 output tokens, took 4,634 ms and cost an estimated USD 0.006492. The diagnostic was `valid_semantic_variance`. Its attempt marker and successful record are frozen; the authorization is consumed, v0.4 is closed and it must not be retried. This is compatibility evidence, not extraction-quality evidence.
 - The offline development-v0.3 five-source manifest is frozen and independently reviewed with verdict `approved_for_evidence_commit`. Its 90,686-byte canonical artifact has self-hash `D1044BA06EEDF235AFEDC23826F4ABFA385494ACFBD8F6D99453FB8ED5C0E327` and outer SHA-256 `EE634214A296D4CB18687F48FD241E4A64B8848C2AD80FC697F797FE527AEB6E`. Independent review reconciled all five approved ParsedDocument hashes and whole-block inventories, passed 15/15 focused tests and 32 relevant regressions, and reproduced the artifact byte-for-byte. The immutable artifact retains its historical freeze-state field `manifest_review_status=pending_independent_review`; the later external review completion is recorded in documentation. It covers seven primaries plus one deterministic S004 repeat, binds the alias-safe v0.4 compatibility evidence, records USD 0.36088575 planning cost and USD 1.001169 conservative cost below the USD 1.25 cap, and keeps execution authorization `not_provided`. No provider call, credential, cache, development result, evaluation or held-out access occurred during preparation or review.
 - The bounded development-v0.3 no-call execution plan is frozen and integrated. Its 13,077-byte canonical artifact has self-hash `12191955D5ED1F6EBF0B0BC97AA6A2EF11B164186645FD68D6270D8A241A0F0A` and outer SHA-256 `0F567327922CE7C9609CA41C8500AD39BFB3A8F09E8FD0E5BEC4F96E325F38B6`. It binds the exact frozen manifest, seven primaries plus one S004 repeat, eight retry-zero calls and attempts, the USD 1.001169 conservative ceiling and USD 1.25 authorization cap. It remains a no-call plan and does not authorize execution.
+- The development-v0.3 transaction/readiness implementation was integrated and its mandatory pre-real independent audit passed. One authorized S001 attempt then completed provider transport successfully with zero retries; the immutable response cache was installed and verified before deterministic local supplied-evidence provenance validation failed closed with `UNKNOWN_EVIDENCE_REFERENCE`. The transaction stopped after invocation 1, invocations 2-8 were not attempted, no final execution record exists, and v0.3 is closed and must not be rerun. No comparison or evaluation result exists.
 
 ## In progress
 
 - The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
 - Synthetic-preflight v0.1, v0.2, v0.3 and v0.4 are closed historical transactions. The v0.3 and v0.4 evidence remains immutable.
-- The failed bounded development executions v0.1 and v0.2 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; neither version may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
-- The additive v0.3 alias-safe provider contract is merged, its separate v0.4 synthetic compatibility gate passed, and the development-v0.3 manifest and bounded no-call execution plan are frozen and integrated. The additive default-deny transaction/readiness implementation is being prepared and reviewed offline; execution remains unauthorized, and no development-v0.3 result or evaluation exists.
+- The failed bounded development executions v0.1, v0.2 and v0.3 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; none may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
+- Additive recovery design is the next engineering step after repository closure of the v0.3 failure evidence. No recovery version, provider call or evaluation is authorized.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Complete independent review and repository integration of the development-v0.3 transaction/readiness implementation without executing it.
-2. Complete one mandatory independent pre-real ZIP audit of the integrated manifest, plan, transaction, authorization binding and current terms inputs.
-3. Require a separate exact project-owner authorization before any later real development execution.
-4. Only after every gate passes, consider one bounded development-v0.3 execution with the exact confirmation phrase and immutable evidence controls.
-5. Keep S005, S007 and all held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
+1. Integrate the immutable development-v0.3 attempt marker, failure record and evidence-closure report without changing their historical outcome.
+2. Design any recovery as a separately reviewed additive version; do not modify or rerun v0.3.
+3. Freeze and independently review any future recovery plan, transaction and authorization binding before considering another provider call.
+4. Keep S005, S007 and all held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
-- The v0.1 and v0.2 bounded development executions remain closed after deterministic local semantic failure. Their markers, caches and failure evidence must not be modified, repaired or retried. V0.4 compatibility passed and is closed; the integrated development-v0.3 manifest and no-call plan are followed by separate transaction review, mandatory pre-real audit and exact-authorization gates before any execution.
+- The v0.1, v0.2 and v0.3 bounded development executions remain closed after deterministic local semantic failures. V0.3 provider transport succeeded, but local supplied-evidence provenance validation failed closed. Their markers, caches and failure evidence must not be modified, repaired or retried; any recovery requires a separately reviewed additive version.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -91,4 +91,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. The v0.4 synthetic preflight verified technical compatibility for the alias-safe provider boundary, but it is not extraction-quality evidence. The v0.1 and v0.2 development transactions each attempted only S001 and failed during deterministic local semantic validation, so no complete development extraction, LLM comparison result or held-out result exists. S005 and S007 remain untouched and blocked. Weak deterministic development quality and the lack of a final portfolio presentation also prevent replacement.
+Not yet eligible. The v0.4 synthetic preflight verified technical compatibility for the alias-safe provider boundary, but it is not extraction-quality evidence. The v0.1, v0.2 and v0.3 development transactions each attempted only S001 and failed during deterministic local semantic validation, so no complete development extraction, LLM comparison result or held-out result exists. S005 and S007 remain untouched and blocked. Weak deterministic development quality and the lack of a final portfolio presentation also prevent replacement.
