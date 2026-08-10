@@ -14,13 +14,13 @@ material provider-facing schema change for development v0.3 by retaining the
 required `CandidateEntity.aliases` field while constraining it with
 `maxItems=0`.
 
-This change implements an additive, offline and default-deny synthetic
-compatibility preflight v0.4 for that exact alias-safe schema and provider
-configuration. Implementation does not authorize its real provider call, and
-no v0.4 compatibility success is claimed. No development-v0.3 five-source
-manifest may be frozen until a separately authorized v0.4 transaction succeeds
-and its compatibility evidence is closed. Held-out execution remains
-prohibited.
+PR #51 implemented an additive, default-deny synthetic compatibility preflight
+v0.4 for that exact alias-safe schema and provider configuration. The mandatory
+independent pre-real review passed before execution. The later separately
+authorized transaction completed successfully with one provider call and zero
+retries. Its authorization is consumed, v0.4 is closed and its attempt and
+successful record are being frozen as immutable evidence. Held-out execution
+remains prohibited.
 
 ## Closed v0.1 incident
 
@@ -100,7 +100,7 @@ supplied evidence blocks.` This classification remained separate from the
 successful technical compatibility result. Raw provider output, prompts,
 provider bodies, headers and credentials are not stored in the frozen record.
 
-## Additive alias-safe v0.4 boundary
+## Closed alias-safe v0.4 boundary
 
 V0.4 uses preflight ID
 `openai-gpt-5.4-mini-synthetic-preflight-v0.4`, authorization scope
@@ -120,6 +120,23 @@ array type and sets `maxItems=0`; the local `CandidateEntity` and
 compatibility-versus-semantics separation: a locally valid response is either
 `expected_abstention` or `valid_semantic_variance`, and either may support a
 technical compatibility pass.
+
+## Frozen v0.4 live result
+
+The successful transaction used execution-plan SHA-256
+`F68441CF6F2EA3B52AF709DD3529E755285719E04622DE9FC02F7C6608B4FD6E`.
+It returned model `gpt-5.4-mini-2026-03-17` through provider SDK `2.46.0`;
+no separate model-version or snapshot field was exposed, so provenance is
+recorded literally as `unavailable`.
+
+The call used 7,594 input tokens and 177 output tokens, took 4,634 ms and cost
+an estimated USD 0.006492. Compatibility and preflight status are `passed`, the
+alias-safe strict schema is compatible and local output validation is `valid`.
+The semantic diagnostic is `valid_semantic_variance`: zero entities, one
+evidence reference, zero candidate facts and the warning `No extractable facts
+present in the supplied evidence; abstained from emitting candidate facts.`
+This semantic variance does not negate compatibility and is not evidence of
+development extraction quality.
 
 ## Readiness mode
 
@@ -247,14 +264,13 @@ raw output, prompts, provider bodies, headers or credentials.
 
 ## Remaining gate
 
-The historical v0.3 result remains closed and immutable. The offline v0.4
-implementation is not a live result and creates no authorization, attempt
-marker or outcome evidence. A future real v0.4 call requires a new, exact-scope
-project-owner authorization and the complete default-deny gate.
+The historical v0.3 and v0.4 results are closed and immutable. V0.4 must not be
+rerun or assigned another outcome artifact. Its successful compatibility result
+does not authorize a development provider execution.
 
-Until successful v0.4 compatibility evidence is closed, a development-v0.3
-five-source manifest must not be frozen. Any later manifest, execution plan and
-provider execution remain separately reviewed and explicitly authorized.
-Held-out access remains unauthorized behind a later separately reviewed guard.
-These controls do not establish model superiority, held-out generalization or
-production readiness.
+The next controlled gate is to prepare and independently review a
+development-v0.3 five-source manifest without executing it. Any later execution
+plan and provider transaction remain separately reviewed and explicitly
+authorized. Held-out access remains unauthorized behind a later separately
+reviewed guard. These controls do not establish model superiority, extraction
+quality, held-out generalization or production readiness.
