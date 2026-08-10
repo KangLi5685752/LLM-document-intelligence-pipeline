@@ -15,7 +15,7 @@ from document_intelligence.llm_extraction.errors import (
     Stage4BErrorCode,
 )
 from document_intelligence.llm_extraction import (
-    openai_preflight_execution_v0_3 as execution,
+    openai_preflight_execution_v0_4 as execution,
 )
 
 
