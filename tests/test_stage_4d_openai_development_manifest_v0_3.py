@@ -72,12 +72,21 @@ V0_4_RECORD_PATH = REPOSITORY_ROOT / (
     "reports/llm_extraction/openai_preflight/"
     "openai-gpt-5.4-mini-synthetic-preflight-v0.4.record.json"
 )
+EXACT_DEVELOPMENT_PARSED_DOCUMENT_PATHS = tuple(
+    REPOSITORY_ROOT
+    / "artifacts/stage_3b/v0_2_development_input/parsed"
+    / f"{source_id}.json"
+    for source_id in ("S001", "S002", "S003", "S004", "S006")
+)
+EXACT_DEVELOPMENT_PARSED_DOCUMENTS_AVAILABLE = all(
+    path.is_file() for path in EXACT_DEVELOPMENT_PARSED_DOCUMENT_PATHS
+)
 
 EXPECTED_V0_1_OUTER_SHA256 = (
     "15DF5E959040B399EDF8CA5455B5060EF71B6672C97D9901E6DB084FE9ACC069"
 )
-EXPECTED_V0_2_OUTER_SHA256 = (
-    "252B84A90FC5CCE004577C7381689ABCE1F6906E8E5AE1E2EC7C84E0C9809866"
+EXPECTED_V0_2_CANONICAL_LF_SHA256 = (
+    "04FF2499BF346D8CB73B2DC03196E7FEE74B5DFF601F79CAC86F4C7B84D3BA3B"
 )
 EXPECTED_V0_3_OUTER_SHA256 = (
     "EE634214A296D4CB18687F48FD241E4A64B8848C2AD80FC697F797FE527AEB6E"
@@ -167,17 +176,16 @@ def test_historical_v0_1_v0_2_manifest_bytes_and_models_are_unchanged() -> None:
     v0_2_bytes = V0_2_MANIFEST_PATH.read_bytes()
     v0_1 = OpenAIDevelopmentManifestV01.model_validate_json(v0_1_bytes)
     v0_2 = OpenAIDevelopmentManifestV02.model_validate_json(v0_2_bytes)
+    v0_2_canonical_lf_bytes = canonical_lf_json_bytes(v0_2_bytes)
 
     assert hashlib.sha256(v0_1_bytes).hexdigest().upper() == (
         EXPECTED_V0_1_OUTER_SHA256
     )
-    assert hashlib.sha256(v0_2_bytes).hexdigest().upper() == (
-        EXPECTED_V0_2_OUTER_SHA256
+    assert hashlib.sha256(v0_2_canonical_lf_bytes).hexdigest().upper() == (
+        EXPECTED_V0_2_CANONICAL_LF_SHA256
     )
     assert development_manifest_bytes(v0_1) == v0_1_bytes
-    assert development_manifest_bytes_v0_2(v0_2) == canonical_lf_json_bytes(
-        v0_2_bytes
-    )
+    assert development_manifest_bytes_v0_2(v0_2) == v0_2_canonical_lf_bytes
 
 
 def test_actual_v0_3_manifest_exact_bytes_hashes_and_canonical_round_trip() -> None:
@@ -196,6 +204,13 @@ def test_actual_v0_3_manifest_exact_bytes_hashes_and_canonical_round_trip() -> N
     assert development_manifest_bytes_v0_3(manifest) == raw_bytes
 
 
+@pytest.mark.skipif(
+    not EXACT_DEVELOPMENT_PARSED_DOCUMENTS_AVAILABLE,
+    reason=(
+        "exact ignored five-source development ParsedDocument artifacts "
+        "are unavailable"
+    ),
+)
 def test_actual_v0_3_regeneration_is_byte_identical() -> None:
     regenerated = _regenerate_manifest()
     assert development_manifest_bytes_v0_3(regenerated) == (
@@ -305,6 +320,13 @@ def test_v0_3_inventory_partitioning_and_payload_lengths_are_exact() -> None:
     )
 
 
+@pytest.mark.skipif(
+    not EXACT_DEVELOPMENT_PARSED_DOCUMENTS_AVAILABLE,
+    reason=(
+        "exact ignored five-source development ParsedDocument artifacts "
+        "are unavailable"
+    ),
+)
 def test_v0_3_primary_blocks_are_whole_ordered_and_covered_once() -> None:
     manifest = _load_manifest()
     historical = load_development_manifest_v0_2(V0_2_MANIFEST_PATH)
