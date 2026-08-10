@@ -26,18 +26,22 @@ from document_intelligence.ingestion.models import ParsedDocument
 from document_intelligence.llm_extraction.cache import (
     CacheIdentity,
     CacheIdentityV02,
+    CacheIdentityV03,
     V0_2_OPENAI_CACHE_ROOT,
+    V0_3_OPENAI_CACHE_ROOT,
     cache_identity_from_request,
     cache_identity_sha256,
 )
 from document_intelligence.llm_extraction.contracts import (
     EXPERIMENT_ID,
     EXPERIMENT_ID_V0_2,
+    EXPERIMENT_ID_V0_3,
     ApprovedEvidenceBlock,
     InvocationRole,
     LLMExtractionRequest,
     LLMExtractionRequestAny,
     LLMExtractionRequestV02,
+    LLMExtractionRequestV03,
     SHA256_PATTERN,
     validate_development_source_id,
 )
@@ -53,6 +57,9 @@ from document_intelligence.llm_extraction.openai_preflight import (
 from document_intelligence.llm_extraction.openai_preflight_execution_v0_3 import (
     OpenAIPreflightAttemptMarkerV03,
 )
+from document_intelligence.llm_extraction.openai_preflight_execution_v0_4 import (
+    OpenAIPreflightAttemptMarkerV04,
+)
 from document_intelligence.llm_extraction.openai_preflight_execution import (
     _identities_differ,
     _open_read_only_descriptor,
@@ -60,15 +67,24 @@ from document_intelligence.llm_extraction.openai_preflight_execution import (
 from document_intelligence.llm_extraction.openai_preflight_v0_3 import (
     OpenAIPreflightRecordV03,
 )
+from document_intelligence.llm_extraction.openai_preflight_v0_4 import (
+    OpenAIPreflightRecordV04,
+)
 from document_intelligence.llm_extraction.openai_provider import (
+    DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_3,
     OPENAI_MODEL_CONFIGURATION_ID,
+    OPENAI_MODEL_CONFIGURATION_ID_V0_3,
     OPENAI_PROVIDER_CONFIGURATION_ID,
+    OPENAI_PROVIDER_CONFIGURATION_ID_V0_3,
+    OPENAI_RESPONSE_SCHEMA_NAME_V0_3,
     build_openai_candidate_schema,
+    build_openai_candidate_schema_v0_3,
     build_openai_responses_payload,
 )
 from document_intelligence.llm_extraction.prompting import (
     build_request_envelope,
     build_request_envelope_v0_2,
+    build_request_envelope_v0_3,
     canonical_json_bytes,
     canonical_prompt_bytes,
     canonical_request_bytes,
@@ -88,6 +104,9 @@ OPENAI_RETURNED_PREFLIGHT_MODEL: Literal["gpt-5.4-mini-2026-03-17"] = (
 OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256: Literal[
     "45655BF2E0824802E2361C47EED4EC86BA5388328AD0301FEC3610C6584B8D74"
 ] = "45655BF2E0824802E2361C47EED4EC86BA5388328AD0301FEC3610C6584B8D74"
+OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256_V0_3: Literal[
+    "C39E96B77BC2E9BEC3DF191071BC0C8B8F1AE545228A7D6CB6DF0CCA44E8269E"
+] = "C39E96B77BC2E9BEC3DF191071BC0C8B8F1AE545228A7D6CB6DF0CCA44E8269E"
 
 PREFLIGHT_ID: Literal["openai-gpt-5.4-mini-synthetic-preflight-v0.3"] = (
     "openai-gpt-5.4-mini-synthetic-preflight-v0.3"
@@ -107,6 +126,24 @@ PREFLIGHT_ATTEMPT_CANONICAL_LF_SHA256 = (
 PREFLIGHT_SUCCESS_CANONICAL_LF_SHA256 = (
     "C2C94A7225343896B0B263AE29E0C80054299A1F30F6CDA38E68F6C4F398A4C2"
 )
+PREFLIGHT_ID_V0_4: Literal[
+    "openai-gpt-5.4-mini-synthetic-preflight-v0.4"
+] = "openai-gpt-5.4-mini-synthetic-preflight-v0.4"
+PREFLIGHT_EXECUTION_PLAN_SHA256_V0_4 = (
+    "F68441CF6F2EA3B52AF709DD3529E755285719E04622DE9FC02F7C6608B4FD6E"
+)
+PREFLIGHT_ATTEMPT_SELF_SHA256_V0_4 = (
+    "3F4E1B1F8EFD90218262EC24C5F75269CD9CBA3C87C92570448EB187ACD7752A"
+)
+PREFLIGHT_SUCCESS_SELF_SHA256_V0_4 = (
+    "36952C89DA9D1B56462AFCA39BD0EE58A6E9F7B7AAEE6A70C2AF068D705ACECF"
+)
+PREFLIGHT_ATTEMPT_CANONICAL_LF_SHA256_V0_4 = (
+    "4E3706404B51C2BBA7218F18D26869CF05A4DBE1B2DF4C3AB761A3238DD96E1B"
+)
+PREFLIGHT_SUCCESS_CANONICAL_LF_SHA256_V0_4 = (
+    "1B4D40049671511B04B4D792A1F245D8325BE518AAB4E15CEC60683B49B504D6"
+)
 
 APPROVED_SOURCE_ORDER = ("S001", "S002", "S003", "S004", "S006")
 PROHIBITED_SOURCE_IDS = ("S005", "S007")
@@ -116,13 +153,20 @@ PARTITION_POLICY_ID: Literal[
 PARTITION_POLICY_ID_V0_2: Literal[
     "provider-payload-whole-block-greedy-v0.2"
 ] = "provider-payload-whole-block-greedy-v0.2"
+PARTITION_POLICY_ID_V0_3: Literal[
+    "provider-payload-whole-block-greedy-v0.3"
+] = "provider-payload-whole-block-greedy-v0.3"
 REPEAT_SELECTION_POLICY_ID: Literal[
     "largest-primary-provider-payload-request-id-tiebreak-v0.1"
 ] = "largest-primary-provider-payload-request-id-tiebreak-v0.1"
+REPEAT_SELECTION_POLICY_ID_V0_3: Literal[
+    "largest-primary-provider-payload-request-id-tiebreak-v0.3"
+] = "largest-primary-provider-payload-request-id-tiebreak-v0.3"
 PLANNED_CACHE_ROOT = (
     ".cache/llm_extraction/llm-extraction-baseline-v0.1/openai/"
 )
 PLANNED_CACHE_ROOT_V0_2 = V0_2_OPENAI_CACHE_ROOT
+PLANNED_CACHE_ROOT_V0_3 = V0_3_OPENAI_CACHE_ROOT
 PLANNED_AUTHORIZATION_CAP_USD = Decimal("1.25")
 BROAD_PROJECT_COST_CEILING_USD = Decimal("25")
 MAX_OUTPUT_TOKENS = 4096
@@ -282,6 +326,98 @@ def validate_successful_preflight_evidence(
         raise Stage4BError(
             Stage4BErrorCode.INVALID_MANIFEST,
             "successful preflight evidence does not match the development binding",
+        )
+
+
+class OpenAIDevelopmentPreflightBindingV03(BaseModel):
+    """Exact immutable binding to the alias-safe v0.4 compatibility evidence."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    preflight_id: Literal[
+        "openai-gpt-5.4-mini-synthetic-preflight-v0.4"
+    ] = PREFLIGHT_ID_V0_4
+    execution_plan_sha256: Literal[
+        "F68441CF6F2EA3B52AF709DD3529E755285719E04622DE9FC02F7C6608B4FD6E"
+    ] = PREFLIGHT_EXECUTION_PLAN_SHA256_V0_4
+    attempt_canonical_self_sha256: Literal[
+        "3F4E1B1F8EFD90218262EC24C5F75269CD9CBA3C87C92570448EB187ACD7752A"
+    ] = PREFLIGHT_ATTEMPT_SELF_SHA256_V0_4
+    success_record_canonical_self_sha256: Literal[
+        "36952C89DA9D1B56462AFCA39BD0EE58A6E9F7B7AAEE6A70C2AF068D705ACECF"
+    ] = PREFLIGHT_SUCCESS_SELF_SHA256_V0_4
+    attempt_canonical_lf_content_sha256: Literal[
+        "4E3706404B51C2BBA7218F18D26869CF05A4DBE1B2DF4C3AB761A3238DD96E1B"
+    ] = PREFLIGHT_ATTEMPT_CANONICAL_LF_SHA256_V0_4
+    success_record_canonical_lf_content_sha256: Literal[
+        "1B4D40049671511B04B4D792A1F245D8325BE518AAB4E15CEC60683B49B504D6"
+    ] = PREFLIGHT_SUCCESS_CANONICAL_LF_SHA256_V0_4
+
+
+def validate_successful_preflight_evidence_v0_4(
+    *,
+    attempt_content: bytes,
+    success_record_content: bytes,
+    binding: OpenAIDevelopmentPreflightBindingV03 | None = None,
+) -> None:
+    """Validate the exact alias-safe v0.4 evidence used by development v0.3."""
+    selected = binding or OpenAIDevelopmentPreflightBindingV03()
+    if canonical_lf_json_sha256(attempt_content) != (
+        selected.attempt_canonical_lf_content_sha256
+    ):
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "v0.4 preflight attempt canonical LF-content SHA-256 does not match",
+        )
+    if canonical_lf_json_sha256(success_record_content) != (
+        selected.success_record_canonical_lf_content_sha256
+    ):
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "v0.4 preflight success canonical LF-content SHA-256 does not match",
+        )
+    try:
+        attempt = OpenAIPreflightAttemptMarkerV04.model_validate_json(
+            attempt_content
+        )
+        record = OpenAIPreflightRecordV04.model_validate_json(
+            success_record_content
+        )
+    except ValidationError as error:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "v0.4 preflight evidence does not satisfy its production models",
+        ) from error
+    if (
+        attempt.preflight_id != selected.preflight_id
+        or attempt.execution_plan_sha256 != selected.execution_plan_sha256
+        or attempt.marker_sha256 != selected.attempt_canonical_self_sha256
+        or record.preflight_id != selected.preflight_id
+        or record.preflight_record_sha256
+        != selected.success_record_canonical_self_sha256
+        or record.experiment_id != EXPERIMENT_ID_V0_3
+        or record.returned_model_identifier != OPENAI_RETURNED_PREFLIGHT_MODEL
+        or record.model_version_or_snapshot_provenance != "unavailable"
+        or record.provider_sdk_version != "2.46.0"
+        or record.provider_call_count != 1
+        or record.retry_count != 0
+        or record.compatibility_status != "passed"
+        or record.preflight_status != "passed"
+        or record.strict_schema_compatible is not True
+        or record.local_output_validation_status != "valid"
+        or record.strict_schema_sha256
+        != OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256_V0_3
+        or record.provider_configuration_id
+        != OPENAI_PROVIDER_CONFIGURATION_ID_V0_3
+        or record.model_configuration_id != OPENAI_MODEL_CONFIGURATION_ID_V0_3
+        or attempt.authorization_id != record.authorization.authorization_id
+        or attempt.authorization_scope != record.authorization.scope
+        or attempt.maximum_provider_calls
+        != record.authorization.maximum_provider_calls
+    ):
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "v0.4 preflight evidence does not match the development-v0.3 binding",
         )
 
 
@@ -732,6 +868,17 @@ class OpenAIDevelopmentPartitionPolicyV02(OpenAIDevelopmentPartitionPolicyV01):
     ] = "llm-evidence-v0.2-{source_id}-{block_id}"
 
 
+class OpenAIDevelopmentPartitionPolicyV03(OpenAIDevelopmentPartitionPolicyV01):
+    """Additive whole-block rule over alias-safe prompt and payload v0.3 bytes."""
+
+    policy_id: Literal[
+        "provider-payload-whole-block-greedy-v0.3"
+    ] = PARTITION_POLICY_ID_V0_3
+    evidence_id_template: Literal[
+        "llm-evidence-v0.3-{source_id}-{block_id}"
+    ] = "llm-evidence-v0.3-{source_id}-{block_id}"
+
+
 class OpenAIDevelopmentRepeatSelectionPolicyV01(BaseModel):
     """Deterministic pre-observation repeat-selection boundary."""
 
@@ -744,6 +891,17 @@ class OpenAIDevelopmentRepeatSelectionPolicyV01(BaseModel):
     select_greatest_provider_payload_bytes: Literal[True] = True
     request_id_lexicographic_tiebreak: Literal[True] = True
     repeat_appears_after_all_primaries: Literal[True] = True
+
+
+class OpenAIDevelopmentRepeatSelectionPolicyV03(
+    OpenAIDevelopmentRepeatSelectionPolicyV01
+):
+    """Explicit repeat identity for the development-v0.3 request family."""
+
+    policy_id: Literal[
+        "largest-primary-provider-payload-request-id-tiebreak-v0.3"
+    ] = REPEAT_SELECTION_POLICY_ID_V0_3
+
 
 class OpenAIDevelopmentProviderControlsV01(BaseModel):
     """Fixed paid-request controls already verified by the adapter tests."""
@@ -802,6 +960,18 @@ class OpenAIDevelopmentCachePolicyV02(OpenAIDevelopmentCachePolicyV01):
     def validate_fixed_root(self) -> OpenAIDevelopmentCachePolicyV02:
         if self.relative_cache_root != PLANNED_CACHE_ROOT_V0_2:
             raise ValueError("relative_cache_root differs from the v0.2 cache policy")
+        return self
+
+
+class OpenAIDevelopmentCachePolicyV03(OpenAIDevelopmentCachePolicyV01):
+    """Append-only cache policy isolated under the v0.3 experiment root."""
+
+    relative_cache_root: str = PLANNED_CACHE_ROOT_V0_3
+
+    @model_validator(mode="after")
+    def validate_fixed_root(self) -> OpenAIDevelopmentCachePolicyV03:
+        if self.relative_cache_root != PLANNED_CACHE_ROOT_V0_3:
+            raise ValueError("relative_cache_root differs from the v0.3 cache policy")
         return self
 
 
@@ -1029,6 +1199,81 @@ class OpenAIDevelopmentInvocationIdentityV02(
         return self
 
 
+class OpenAIDevelopmentInvocationIdentityV03(
+    OpenAIDevelopmentInvocationIdentityV01
+):
+    """Additive hash-only invocation identity for alias-safe request v0.3."""
+
+    strict_schema_sha256: Literal[
+        "C39E96B77BC2E9BEC3DF191071BC0C8B8F1AE545228A7D6CB6DF0CCA44E8269E"
+    ] = OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256_V0_3
+
+    @model_validator(mode="after")
+    def validate_identity(self) -> OpenAIDevelopmentInvocationIdentityV03:
+        if self.block_count != len(self.ordered_evidence_blocks):
+            raise ValueError("block_count must match ordered evidence identities")
+        if any(
+            item.source_id != self.source_id
+            for item in self.ordered_evidence_blocks
+        ):
+            raise ValueError("ordered evidence identities must use one source")
+        sequences = [item.sequence for item in self.ordered_evidence_blocks]
+        if sequences != sorted(sequences) or len(sequences) != len(set(sequences)):
+            raise ValueError("ordered evidence sequences must be unique and increasing")
+        block_ids = [item.block_id for item in self.ordered_evidence_blocks]
+        evidence_ids = [item.evidence_id for item in self.ordered_evidence_blocks]
+        if len(block_ids) != len(set(block_ids)):
+            raise ValueError("ordered block IDs must be unique")
+        if len(evidence_ids) != len(set(evidence_ids)):
+            raise ValueError("ordered evidence IDs must be unique")
+        for item in self.ordered_evidence_blocks:
+            expected_evidence_id = (
+                f"llm-evidence-v0.3-{self.source_id}-{item.block_id}"
+            )
+            if item.evidence_id != expected_evidence_id:
+                raise ValueError("evidence ID does not match the v0.3 template")
+        if self.invocation_role is InvocationRole.PRIMARY:
+            expected_prefix = f"llm-v0.3-{self.source_id}-primary-"
+            suffix = self.request_id.removeprefix(expected_prefix)
+            if (
+                not self.request_id.startswith(expected_prefix)
+                or len(suffix) != 3
+                or not suffix.isdigit()
+                or suffix == "000"
+            ):
+                raise ValueError("primary request ID does not match the v0.3 format")
+            if self.repeated_primary_request_id is not None:
+                raise ValueError("primary invocations cannot repeat another request")
+        else:
+            if self.request_id != f"llm-v0.3-{self.source_id}-repeat-001":
+                raise ValueError("repeat request ID does not match the v0.3 format")
+            if not self.repeated_primary_request_id:
+                raise ValueError("repeat invocations require a primary request identity")
+        if self.planning_input_token_estimate != (
+            self.provider_payload_bytes + 3
+        ) // 4:
+            raise ValueError("planning input-token estimate does not reconcile")
+        if self.conservative_input_token_proxy != self.provider_payload_bytes:
+            raise ValueError("conservative input-token proxy does not reconcile")
+        if self.planning_cost_ceiling_usd > self.conservative_call_ceiling_usd:
+            raise ValueError("planning cost must not exceed the conservative ceiling")
+        cache_identity = CacheIdentityV03(
+            experiment_id=EXPERIMENT_ID_V0_3,
+            invocation_role=self.invocation_role,
+            request_id=self.request_id,
+            canonical_request_sha256=self.canonical_request_sha256,
+            provider_configuration_id=OPENAI_PROVIDER_CONFIGURATION_ID_V0_3,
+            model_configuration_id=OPENAI_MODEL_CONFIGURATION_ID_V0_3,
+            prompt_sha256=self.prompt_sha256,
+            document_sha256=self.document_sha256,
+        )
+        if self.cache_identity_sha256 != cache_identity_sha256(cache_identity):
+            raise ValueError(
+                "cache_identity_sha256 does not match the serialized v0.3 invocation"
+            )
+        return self
+
+
 def _evidence_identity(block: ApprovedEvidenceBlock) -> EvidenceBlockIdentity:
     return EvidenceBlockIdentity(
         source_id=block.source_id,
@@ -1052,7 +1297,14 @@ def _request_measurements(
         output_contract_id=request.output_contract_id,
     )
     request_bytes = canonical_request_bytes(request)
-    provider_payload = canonical_json_bytes(build_openai_responses_payload(request))
+    if isinstance(request, LLMExtractionRequestV03):
+        payload = build_openai_responses_payload(
+            request,
+            configuration=DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_3,
+        )
+    else:
+        payload = build_openai_responses_payload(request)
+    provider_payload = canonical_json_bytes(payload)
     return prompt, request_bytes, provider_payload
 
 
@@ -1166,6 +1418,77 @@ def build_hash_only_invocation_identity_v0_2(
             "v0.2 request did not produce a v0.2 cache identity",
         )
     return OpenAIDevelopmentInvocationIdentityV02(
+        invocation_order=invocation_order,
+        source_id=request.source_id,
+        invocation_role=request.invocation_role,
+        request_id=request.request_id,
+        repeated_primary_request_id=repeated_primary_request_id,
+        block_count=len(request.evidence_blocks),
+        ordered_evidence_blocks=tuple(
+            _evidence_identity(block) for block in request.evidence_blocks
+        ),
+        total_supplied_text_bytes=sum(
+            len(block.text.encode("utf-8")) for block in request.evidence_blocks
+        ),
+        canonical_prompt_bytes=len(prompt),
+        canonical_request_bytes=len(request_bytes),
+        provider_payload_bytes=payload_bytes,
+        document_sha256=request.document_sha256,
+        parsed_document_canonical_sha256=parsed_document_canonical_sha256,
+        prompt_sha256=uppercase_sha256_bytes(prompt),
+        canonical_request_sha256=uppercase_sha256_bytes(request_bytes),
+        strict_schema_sha256=strict_schema_sha256,
+        provider_payload_sha256=uppercase_sha256_bytes(provider_payload),
+        cache_identity_sha256=cache_identity_sha256(cache_identity),
+        planning_input_token_estimate=planning_tokens,
+        conservative_input_token_proxy=payload_bytes,
+        maximum_output_tokens=MAX_OUTPUT_TOKENS,
+        maximum_output_cost_usd=maximum_output_cost,
+        planning_cost_ceiling_usd=_token_cost(
+            input_tokens=planning_tokens,
+            output_tokens=MAX_OUTPUT_TOKENS,
+            pricing=pricing_observation,
+        ),
+        conservative_call_ceiling_usd=_token_cost(
+            input_tokens=payload_bytes,
+            output_tokens=MAX_OUTPUT_TOKENS,
+            pricing=pricing_observation,
+        ),
+    )
+
+
+def build_hash_only_invocation_identity_v0_3(
+    *,
+    request: LLMExtractionRequestV03,
+    invocation_order: int,
+    parsed_document_canonical_sha256: str,
+    pricing_observation: OpenAIPricingObservation,
+    repeated_primary_request_id: str | None = None,
+) -> OpenAIDevelopmentInvocationIdentityV03:
+    """Derive one v0.3 hash-only identity without retaining source text."""
+    prompt, request_bytes, provider_payload = _request_measurements(request)
+    strict_schema_sha256 = uppercase_sha256_bytes(
+        canonical_json_bytes(build_openai_candidate_schema_v0_3())
+    )
+    if strict_schema_sha256 != OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256_V0_3:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "production alias-safe strict-schema identity differs from v0.3",
+        )
+    payload_bytes = len(provider_payload)
+    planning_tokens = (payload_bytes + 3) // 4
+    maximum_output_cost = _token_cost(
+        input_tokens=0,
+        output_tokens=MAX_OUTPUT_TOKENS,
+        pricing=pricing_observation,
+    )
+    cache_identity = cache_identity_from_request(request)
+    if not isinstance(cache_identity, CacheIdentityV03):
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "v0.3 request did not produce a v0.3 cache identity",
+        )
+    return OpenAIDevelopmentInvocationIdentityV03(
         invocation_order=invocation_order,
         source_id=request.source_id,
         invocation_role=request.invocation_role,
@@ -1464,6 +1787,137 @@ def _repeat_request_v0_2(
     return repeated, primary_request_id
 
 
+def _approved_blocks_v0_3(
+    document: ParsedDocument,
+) -> tuple[ApprovedEvidenceBlock, ...]:
+    if document.source_id is None:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "ParsedDocument source identity is required",
+        )
+    validate_development_source_id(document.source_id)
+    blocks = tuple(
+        ApprovedEvidenceBlock(
+            source_id=document.source_id,
+            evidence_id=(
+                f"llm-evidence-v0.3-{document.source_id}-{block.block_id}"
+            ),
+            block_id=block.block_id,
+            sequence=block.sequence,
+            text=block.text,
+            location=block.location,
+        )
+        for block in document.blocks
+        if block.text.strip()
+    )
+    if not blocks:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "an approved ParsedDocument requires nonblank text blocks",
+        )
+    return blocks
+
+
+def _request_v0_3(
+    *,
+    source_id: str,
+    document_sha256: str,
+    role: InvocationRole,
+    ordinal: int,
+    blocks: Sequence[ApprovedEvidenceBlock],
+) -> LLMExtractionRequestV03:
+    return build_request_envelope_v0_3(
+        invocation_role=role,
+        request_id=f"llm-v0.3-{source_id}-{role.value}-{ordinal:03d}",
+        source_id=source_id,
+        document_sha256=document_sha256,
+        provider_configuration_id=OPENAI_PROVIDER_CONFIGURATION_ID_V0_3,
+        model_configuration_id=OPENAI_MODEL_CONFIGURATION_ID_V0_3,
+        evidence_blocks=blocks,
+    )
+
+
+def _partition_primary_requests_v0_3(
+    *,
+    document: ParsedDocument,
+    policy: OpenAIDevelopmentPartitionPolicyV03,
+) -> tuple[LLMExtractionRequestV03, ...]:
+    if document.source_id is None:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "ParsedDocument source identity is required",
+        )
+    blocks = _approved_blocks_v0_3(document)
+    partitions: list[tuple[ApprovedEvidenceBlock, ...]] = []
+    current: tuple[ApprovedEvidenceBlock, ...] = ()
+    for block in blocks:
+        trial = (*current, block)
+        ordinal = len(partitions) + 1
+        trial_request = _request_v0_3(
+            source_id=document.source_id,
+            document_sha256=document.checksum_sha256,
+            role=InvocationRole.PRIMARY,
+            ordinal=ordinal,
+            blocks=trial,
+        )
+        _, _, payload = _request_measurements(trial_request)
+        if len(payload) <= policy.maximum_provider_payload_bytes:
+            current = trial
+            continue
+        if not current:
+            raise Stage4BError(
+                Stage4BErrorCode.REQUEST_BUDGET_EXCEEDED,
+                "one complete evidence block exceeds the payload partition limit",
+            )
+        partitions.append(current)
+        current = (block,)
+        single_request = _request_v0_3(
+            source_id=document.source_id,
+            document_sha256=document.checksum_sha256,
+            role=InvocationRole.PRIMARY,
+            ordinal=len(partitions) + 1,
+            blocks=current,
+        )
+        _, _, single_payload = _request_measurements(single_request)
+        if len(single_payload) > policy.maximum_provider_payload_bytes:
+            raise Stage4BError(
+                Stage4BErrorCode.REQUEST_BUDGET_EXCEEDED,
+                "one complete evidence block exceeds the payload partition limit",
+            )
+    if current:
+        partitions.append(current)
+    return tuple(
+        _request_v0_3(
+            source_id=document.source_id,
+            document_sha256=document.checksum_sha256,
+            role=InvocationRole.PRIMARY,
+            ordinal=index,
+            blocks=partition,
+        )
+        for index, partition in enumerate(partitions, start=1)
+    )
+
+
+def _repeat_request_v0_3(
+    primary_requests: Sequence[LLMExtractionRequestV03],
+) -> tuple[LLMExtractionRequestV03, str]:
+    measured = [
+        (len(_request_measurements(request)[2]), request.request_id, request)
+        for request in primary_requests
+    ]
+    _, primary_request_id, selected = min(
+        measured, key=lambda item: (-item[0], item[1])
+    )
+    repeated = _request_v0_3(
+        source_id=selected.source_id,
+        document_sha256=selected.document_sha256,
+        role=InvocationRole.REPEAT,
+        ordinal=1,
+        blocks=selected.evidence_blocks,
+    )
+    return repeated, primary_request_id
+
+
 class ReviewedObservationBindingV01(BaseModel):
     """Review identity bound to one already-dated provider observation."""
 
@@ -1696,7 +2150,7 @@ def _validate_common_inventory(
     partition_policy: OpenAIDevelopmentPartitionPolicyV01,
     repeat_selection_policy: OpenAIDevelopmentRepeatSelectionPolicyV01,
     invocations: Sequence[OpenAIDevelopmentInvocationIdentityV01],
-    identity_version: Literal["0.1", "0.2"] = "0.1",
+    identity_version: Literal["0.1", "0.2", "0.3"] = "0.1",
 ) -> None:
     if tuple(route.source_id for route in source_routes) != APPROVED_SOURCE_ORDER:
         raise ValueError("source routes must use the exact approved source order")
@@ -1963,6 +2417,70 @@ class OpenAIDevelopmentManifestV02(OpenAIDevelopmentManifestV01):
         return self
 
 
+class OpenAIDevelopmentManifestV03(OpenAIDevelopmentManifestV01):
+    """Additive final manifest for alias-safe development request v0.3."""
+
+    experiment_id: Literal["llm-extraction-baseline-v0.3"] = EXPERIMENT_ID_V0_3
+    prompt_version: Literal["0.3"] = "0.3"
+    provider_configuration_id: Literal[
+        "openai-responses-text-strict-json-v0.2"
+    ] = OPENAI_PROVIDER_CONFIGURATION_ID_V0_3
+    model_configuration_id: Literal[
+        "openai-gpt-5.4-mini-text-strict-json-v0.2"
+    ] = OPENAI_MODEL_CONFIGURATION_ID_V0_3
+    response_schema_name: Literal[
+        "candidate_extraction_result_0_1_aliases_empty_v0_3"
+    ] = OPENAI_RESPONSE_SCHEMA_NAME_V0_3
+    strict_schema_sha256: Literal[
+        "C39E96B77BC2E9BEC3DF191071BC0C8B8F1AE545228A7D6CB6DF0CCA44E8269E"
+    ] = OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256_V0_3
+    preflight_evidence: OpenAIDevelopmentPreflightBindingV03
+    partition_policy: OpenAIDevelopmentPartitionPolicyV03
+    repeat_selection_policy: OpenAIDevelopmentRepeatSelectionPolicyV03
+    invocations: tuple[OpenAIDevelopmentInvocationIdentityV03, ...] = Field(
+        min_length=6
+    )
+    cache_policy: OpenAIDevelopmentCachePolicyV03
+
+    @model_validator(mode="after")
+    def validate_manifest(self) -> OpenAIDevelopmentManifestV03:
+        _validate_common_inventory(
+            source_routes=self.source_routes,
+            partition_policy=self.partition_policy,
+            repeat_selection_policy=self.repeat_selection_policy,
+            invocations=self.invocations,
+            identity_version="0.3",
+        )
+        required_tokens = [
+            item.provider_payload_bytes + MAX_OUTPUT_TOKENS
+            for item in self.invocations
+        ]
+        if max(required_tokens) > (
+            self.context_limit_observation.exact_context_window_tokens
+        ):
+            raise ValueError("an invocation exceeds the reviewed context boundary")
+        _validate_budget_reconciliation(
+            invocations=self.invocations,
+            budget=self.execution_budget,
+            pricing=self.pricing_observation,
+        )
+        if (
+            self.pricing_review.observation_kind != "pricing"
+            or self.pricing_review.observation_sha256
+            != _canonical_observation_hash(self.pricing_observation)
+        ):
+            raise ValueError("pricing review does not reconcile")
+        if (
+            self.data_controls_review.observation_kind != "data_controls"
+            or self.data_controls_review.observation_sha256
+            != _canonical_observation_hash(self.data_controls_observation)
+        ):
+            raise ValueError("data-control review does not reconcile")
+        if self.manifest_sha256 != _canonical_model_hash(self, "manifest_sha256"):
+            raise ValueError("manifest_sha256 does not match the canonical manifest")
+        return self
+
+
 _PREPARATION_MANIFEST_SHARED_FIELDS = (
     "source_routes",
     "partition_policy",
@@ -2095,6 +2613,76 @@ class OpenAIDevelopmentManifestPreparationV02(
             repeat_selection_policy=self.repeat_selection_policy,
             invocations=self.invocations,
             identity_version="0.2",
+        )
+        _validate_budget_reconciliation(
+            invocations=self.invocations,
+            budget=self.execution_budget,
+            pricing=self.pricing_observation,
+        )
+        if (
+            self.pricing_review.observation_kind != "pricing"
+            or self.pricing_review.observation_sha256
+            != _canonical_observation_hash(self.pricing_observation)
+        ):
+            raise ValueError("pricing review does not reconcile")
+        if (
+            self.data_controls_review.observation_kind != "data_controls"
+            or self.data_controls_review.observation_sha256
+            != _canonical_observation_hash(self.data_controls_observation)
+        ):
+            raise ValueError("data-control review does not reconcile")
+        if self.context_limit_observation is None:
+            if (
+                self.readiness_status != "blocked"
+                or self.blocking_reasons
+                != ("reviewed_context_limit_observation_missing",)
+                or self.manifest is not None
+            ):
+                raise ValueError("missing context evidence must block final readiness")
+        else:
+            if (
+                self.readiness_status != "eligible_for_independent_review"
+                or self.blocking_reasons
+                or self.manifest is None
+            ):
+                raise ValueError(
+                    "complete context evidence must produce a review manifest"
+                )
+            _validate_nested_manifest_reconciliation(
+                preparation=self,
+                manifest=self.manifest,
+            )
+        if self.preparation_sha256 != _canonical_model_hash(
+            self, "preparation_sha256"
+        ):
+            raise ValueError(
+                "preparation_sha256 does not match the canonical preparation"
+            )
+        return self
+
+
+class OpenAIDevelopmentManifestPreparationV03(
+    OpenAIDevelopmentManifestPreparationV01
+):
+    """Additive no-call preparation for alias-safe development v0.3."""
+
+    experiment_id: Literal["llm-extraction-baseline-v0.3"] = EXPERIMENT_ID_V0_3
+    prompt_version: Literal["0.3"] = "0.3"
+    partition_policy: OpenAIDevelopmentPartitionPolicyV03
+    repeat_selection_policy: OpenAIDevelopmentRepeatSelectionPolicyV03
+    invocations: tuple[OpenAIDevelopmentInvocationIdentityV03, ...]
+    preflight_evidence: OpenAIDevelopmentPreflightBindingV03
+    cache_policy: OpenAIDevelopmentCachePolicyV03
+    manifest: OpenAIDevelopmentManifestV03 | None
+
+    @model_validator(mode="after")
+    def validate_preparation(self) -> OpenAIDevelopmentManifestPreparationV03:
+        _validate_common_inventory(
+            source_routes=self.source_routes,
+            partition_policy=self.partition_policy,
+            repeat_selection_policy=self.repeat_selection_policy,
+            invocations=self.invocations,
+            identity_version="0.3",
         )
         _validate_budget_reconciliation(
             invocations=self.invocations,
@@ -2595,6 +3183,235 @@ def prepare_openai_development_manifest_v0_2(
     )
 
 
+def _build_final_manifest_v0_3(
+    *,
+    source_routes: tuple[OpenAIDevelopmentSourceRouteV01, ...],
+    partition_policy: OpenAIDevelopmentPartitionPolicyV03,
+    repeat_selection_policy: OpenAIDevelopmentRepeatSelectionPolicyV03,
+    invocations: tuple[OpenAIDevelopmentInvocationIdentityV03, ...],
+    execution_budget: OpenAIDevelopmentExecutionBudgetV01,
+    pricing_observation: OpenAIPricingObservation,
+    pricing_review: ReviewedObservationBindingV01,
+    data_controls_observation: OpenAIDataControlsObservation,
+    data_controls_review: ReviewedObservationBindingV01,
+    context_limit_observation: ReviewedContextLimitObservationV01,
+) -> OpenAIDevelopmentManifestV03:
+    values = {
+        "manifest_schema_version": DEVELOPMENT_MANIFEST_SCHEMA_VERSION,
+        "experiment_id": EXPERIMENT_ID_V0_3,
+        "prompt_version": "0.3",
+        "provider_identifier": "openai",
+        "requested_model_alias": "gpt-5.4-mini",
+        "returned_preflight_model_identifier": OPENAI_RETURNED_PREFLIGHT_MODEL,
+        "model_version_or_snapshot_provenance": "unavailable",
+        "provider_sdk_version": "2.46.0",
+        "provider_configuration_id": OPENAI_PROVIDER_CONFIGURATION_ID_V0_3,
+        "model_configuration_id": OPENAI_MODEL_CONFIGURATION_ID_V0_3,
+        "response_schema_name": OPENAI_RESPONSE_SCHEMA_NAME_V0_3,
+        "strict_schema_sha256": OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256_V0_3,
+        "preflight_evidence": OpenAIDevelopmentPreflightBindingV03(),
+        "provider_controls": OpenAIDevelopmentProviderControlsV01(),
+        "source_routes": source_routes,
+        "partition_policy": partition_policy,
+        "repeat_selection_policy": repeat_selection_policy,
+        "invocations": invocations,
+        "execution_budget": execution_budget,
+        "pricing_observation": pricing_observation,
+        "pricing_review": pricing_review,
+        "data_controls_observation": data_controls_observation,
+        "data_controls_review": data_controls_review,
+        "context_limit_observation": context_limit_observation,
+        "cache_policy": OpenAIDevelopmentCachePolicyV03(),
+        "access_policy": OpenAIDevelopmentAccessPolicyV01(),
+        "manifest_review_status": "pending_independent_review",
+        "execution_authorization_required": True,
+        "execution_authorization_status": "not_provided",
+    }
+    provisional = OpenAIDevelopmentManifestV03.model_construct(
+        **values, manifest_sha256="0" * 64
+    )
+    return OpenAIDevelopmentManifestV03.model_validate(
+        {
+            **values,
+            "manifest_sha256": _canonical_model_hash(
+                provisional, "manifest_sha256"
+            ),
+        }
+    )
+
+
+def prepare_openai_development_manifest_v0_3(
+    *,
+    source_routes: Sequence[OpenAIDevelopmentSourceRouteV01],
+    parsed_documents: Mapping[str, ParsedDocument],
+    partition_policy: OpenAIDevelopmentPartitionPolicyV03,
+    pricing_observation: OpenAIPricingObservation,
+    pricing_review: ReviewedObservationBindingV01,
+    data_controls_observation: OpenAIDataControlsObservation,
+    data_controls_review: ReviewedObservationBindingV01,
+    context_limit_observation: ReviewedContextLimitObservationV01 | None = None,
+) -> OpenAIDevelopmentManifestPreparationV03:
+    """Prepare a no-call v0.3 hash inventory from approved development inputs."""
+    routes = tuple(
+        OpenAIDevelopmentSourceRouteV01.model_validate(
+            route.model_dump(mode="python")
+        )
+        for route in source_routes
+    )
+    try:
+        validated_partition_policy = OpenAIDevelopmentPartitionPolicyV03.model_validate(
+            partition_policy.model_dump(mode="python")
+        )
+        validated_pricing = OpenAIPricingObservation.model_validate(
+            pricing_observation.model_dump(mode="python")
+        )
+        validated_pricing_review = ReviewedObservationBindingV01.model_validate(
+            pricing_review.model_dump(mode="python")
+        )
+        validated_controls = OpenAIDataControlsObservation.model_validate(
+            data_controls_observation.model_dump(mode="python")
+        )
+        validated_controls_review = ReviewedObservationBindingV01.model_validate(
+            data_controls_review.model_dump(mode="python")
+        )
+        validated_context = (
+            None
+            if context_limit_observation is None
+            else ReviewedContextLimitObservationV01.model_validate(
+                context_limit_observation.model_dump(mode="python")
+            )
+        )
+    except ValidationError as error:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "reviewed v0.3 manifest inputs do not satisfy immutable contracts",
+        ) from error
+    if tuple(route.source_id for route in routes) != APPROVED_SOURCE_ORDER:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "source routes must use the exact approved source order",
+        )
+    if set(parsed_documents) != set(APPROVED_SOURCE_ORDER):
+        raise Stage4BError(
+            Stage4BErrorCode.PROHIBITED_SOURCE,
+            "preparation requires exactly the approved development sources",
+        )
+    if (
+        validated_pricing_review.observation_kind != "pricing"
+        or validated_pricing_review.observation_sha256
+        != _canonical_observation_hash(validated_pricing)
+    ):
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "pricing review does not bind the supplied observation",
+        )
+    if (
+        validated_controls_review.observation_kind != "data_controls"
+        or validated_controls_review.observation_sha256
+        != _canonical_observation_hash(validated_controls)
+    ):
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "data-control review does not bind the supplied observation",
+        )
+
+    primary_requests: list[tuple[LLMExtractionRequestV03, str]] = []
+    for route in routes:
+        document = _validate_document_route(
+            parsed_documents[route.source_id], route
+        )
+        primary_requests.extend(
+            (
+                request,
+                route.parsed_document_canonical_sha256,
+            )
+            for request in _partition_primary_requests_v0_3(
+                document=document,
+                policy=validated_partition_policy,
+            )
+        )
+    repeated_request, repeated_primary_id = _repeat_request_v0_3(
+        [request for request, _ in primary_requests]
+    )
+    repeated_route_hash = next(
+        route_hash
+        for request, route_hash in primary_requests
+        if request.request_id == repeated_primary_id
+    )
+    ordered_requests = (*primary_requests, (repeated_request, repeated_route_hash))
+    invocations = tuple(
+        build_hash_only_invocation_identity_v0_3(
+            request=request,
+            invocation_order=index,
+            parsed_document_canonical_sha256=route_hash,
+            pricing_observation=validated_pricing,
+            repeated_primary_request_id=(
+                repeated_primary_id
+                if request.invocation_role is InvocationRole.REPEAT
+                else None
+            ),
+        )
+        for index, (request, route_hash) in enumerate(ordered_requests, start=1)
+    )
+    budget = _cost_budget(
+        invocations=invocations,
+        pricing=validated_pricing,
+    )
+    manifest = None
+    status = "blocked"
+    blocking_reasons = ("reviewed_context_limit_observation_missing",)
+    repeat_policy = OpenAIDevelopmentRepeatSelectionPolicyV03()
+    if validated_context is not None:
+        manifest = _build_final_manifest_v0_3(
+            source_routes=routes,
+            partition_policy=validated_partition_policy,
+            repeat_selection_policy=repeat_policy,
+            invocations=invocations,
+            execution_budget=budget,
+            pricing_observation=validated_pricing,
+            pricing_review=validated_pricing_review,
+            data_controls_observation=validated_controls,
+            data_controls_review=validated_controls_review,
+            context_limit_observation=validated_context,
+        )
+        status = "eligible_for_independent_review"
+        blocking_reasons = ()
+
+    values = {
+        "preparation_schema_version": DEVELOPMENT_PREPARATION_SCHEMA_VERSION,
+        "experiment_id": EXPERIMENT_ID_V0_3,
+        "prompt_version": "0.3",
+        "source_routes": routes,
+        "partition_policy": validated_partition_policy,
+        "repeat_selection_policy": repeat_policy,
+        "invocations": invocations,
+        "preflight_evidence": OpenAIDevelopmentPreflightBindingV03(),
+        "provider_controls": OpenAIDevelopmentProviderControlsV01(),
+        "execution_budget": budget,
+        "pricing_observation": validated_pricing,
+        "pricing_review": validated_pricing_review,
+        "data_controls_observation": validated_controls,
+        "data_controls_review": validated_controls_review,
+        "cache_policy": OpenAIDevelopmentCachePolicyV03(),
+        "access_policy": OpenAIDevelopmentAccessPolicyV01(),
+        "context_limit_observation": validated_context,
+        "readiness_status": status,
+        "blocking_reasons": blocking_reasons,
+        "manifest": manifest,
+    }
+    provisional = OpenAIDevelopmentManifestPreparationV03.model_construct(
+        **values, preparation_sha256="0" * 64
+    )
+    return OpenAIDevelopmentManifestPreparationV03.model_validate(
+        {
+            **values,
+            "preparation_sha256": _canonical_model_hash(
+                provisional, "preparation_sha256"
+            ),
+        }
+    )
+
+
 def development_manifest_bytes(manifest: OpenAIDevelopmentManifestV01) -> bytes:
     """Return canonical UTF-8 manifest bytes with exactly one trailing LF."""
     validated = OpenAIDevelopmentManifestV01.model_validate(
@@ -2634,33 +3451,75 @@ def load_development_manifest_v0_2(path: Path) -> OpenAIDevelopmentManifestV02:
     return manifest
 
 
+def development_manifest_bytes_v0_3(
+    manifest: OpenAIDevelopmentManifestV03,
+) -> bytes:
+    """Return canonical UTF-8 v0.3 manifest bytes with exactly one LF."""
+    validated = OpenAIDevelopmentManifestV03.model_validate(
+        manifest.model_dump(mode="python")
+    )
+    return canonical_json_bytes(validated.model_dump(mode="json")) + b"\n"
+
+
+def load_development_manifest_v0_3(path: Path) -> OpenAIDevelopmentManifestV03:
+    """Load one v0.3 manifest through canonical and self-hash validation."""
+    content = _read_validated_regular_file(path)
+    try:
+        canonical_content = canonical_lf_json_bytes(content)
+        manifest = OpenAIDevelopmentManifestV03.model_validate_json(
+            canonical_content
+        )
+    except (ValidationError, ValueError) as error:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "v0.3 development manifest is not valid canonical evidence",
+        ) from error
+    if development_manifest_bytes_v0_3(manifest) != canonical_content:
+        raise Stage4BError(
+            Stage4BErrorCode.INVALID_MANIFEST,
+            "v0.3 development manifest does not round-trip canonically",
+        )
+    return manifest
+
+
 __all__ = [
     "APPROVED_SOURCE_ORDER",
     "CONSERVATIVE_CONTEXT_SAFETY_RULE",
     "CONSERVATIVE_TOKEN_ADMISSION_METHOD",
     "PARTITION_POLICY_ID",
     "PARTITION_POLICY_ID_V0_2",
+    "PARTITION_POLICY_ID_V0_3",
     "REPEAT_SELECTION_POLICY_ID",
+    "REPEAT_SELECTION_POLICY_ID_V0_3",
     "PLANNED_AUTHORIZATION_CAP_USD",
     "OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256",
+    "OPENAI_DEVELOPMENT_STRICT_SCHEMA_SHA256_V0_3",
     "OpenAIDevelopmentCachePolicyV01",
     "OpenAIDevelopmentCachePolicyV02",
+    "OpenAIDevelopmentCachePolicyV03",
     "OpenAIDevelopmentExecutionBudgetV01",
     "OpenAIDevelopmentInvocationIdentityV01",
     "OpenAIDevelopmentInvocationIdentityV02",
+    "OpenAIDevelopmentInvocationIdentityV03",
     "OpenAIDevelopmentManifestPreparationV01",
     "OpenAIDevelopmentManifestPreparationV02",
+    "OpenAIDevelopmentManifestPreparationV03",
     "OpenAIDevelopmentManifestV01",
     "OpenAIDevelopmentManifestV02",
+    "OpenAIDevelopmentManifestV03",
     "OpenAIDevelopmentPartitionPolicyV01",
     "OpenAIDevelopmentPartitionPolicyV02",
+    "OpenAIDevelopmentPartitionPolicyV03",
+    "OpenAIDevelopmentPreflightBindingV03",
     "OpenAIDevelopmentRepeatSelectionPolicyV01",
+    "OpenAIDevelopmentRepeatSelectionPolicyV03",
     "OpenAIDevelopmentSourceRouteV01",
     "ReviewedContextLimitObservationV01",
     "ReviewedObservationBindingV01",
     "approved_parsed_document_relative_path",
     "build_hash_only_invocation_identity",
     "build_hash_only_invocation_identity_v0_2",
+    "build_hash_only_invocation_identity_v0_3",
     "build_reviewed_context_limit_observation",
     "build_reviewed_observation_binding",
     "build_source_route_identity",
@@ -2668,9 +3527,13 @@ __all__ = [
     "canonical_lf_json_sha256",
     "development_manifest_bytes",
     "development_manifest_bytes_v0_2",
+    "development_manifest_bytes_v0_3",
     "load_development_manifest_v0_2",
+    "load_development_manifest_v0_3",
     "load_approved_parsed_document",
     "prepare_openai_development_manifest",
     "prepare_openai_development_manifest_v0_2",
+    "prepare_openai_development_manifest_v0_3",
     "validate_successful_preflight_evidence",
+    "validate_successful_preflight_evidence_v0_4",
 ]
