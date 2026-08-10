@@ -32,3 +32,7 @@ reports/llm_extraction/openai_development_execution_plan/openai-gpt-5.4-mini-fiv
 # Keep immutable Stage 4D bounded-development execution evidence byte-identical across platforms.
 reports/llm_extraction/openai_development_execution/openai-gpt-5.4-mini-five-source-development-v0.1/attempts/*.attempt.json text eol=lf
 reports/llm_extraction/openai_development_execution/openai-gpt-5.4-mini-five-source-development-v0.1/failures/*.failure.json text eol=lf
+
+# Keep immutable Stage 4D v0.2 failed-execution evidence byte-identical across platforms.
+reports/llm_extraction/openai_development_execution/openai-gpt-5.4-mini-five-source-development-v0.2/attempts/*.attempt.json text eol=lf
+reports/llm_extraction/openai_development_execution/openai-gpt-5.4-mini-five-source-development-v0.2/failures/*.failure.json text eol=lf
