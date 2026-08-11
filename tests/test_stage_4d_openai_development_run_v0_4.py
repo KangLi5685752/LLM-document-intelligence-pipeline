@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
+from decimal import Decimal
 from pathlib import Path
 
 import pytest
@@ -21,6 +22,7 @@ from document_intelligence.llm_extraction.cache import (
     V0_3_OPENAI_CACHE_ROOT,
     V0_4_OPENAI_CACHE_ROOT,
     ResponseCache,
+    build_cache_record,
     cache_identity_from_request,
 )
 from document_intelligence.llm_extraction.contracts import (
@@ -46,6 +48,11 @@ from document_intelligence.llm_extraction.openai_development_run_v0_4 import (
     execute_development_run_v0_4,
     prepare_development_run_v0_4,
 )
+from document_intelligence.llm_extraction.prompting import (
+    canonical_json_bytes,
+    uppercase_sha256_bytes,
+)
+from document_intelligence.llm_extraction.provenance import AttemptProvenance
 from document_intelligence.llm_extraction import openai_development_run_v0_4_cli
 from document_intelligence.llm_extraction.openai_provider import (
     OPENAI_MODEL_CONFIGURATION_ID_V0_4,
@@ -162,6 +169,100 @@ def _authorization_path(
     path = root / "fictional-authorization.json"
     path.write_bytes(authorization_bytes_v0_4(authorization))
     return path
+
+
+def _self_hashed_bytes(payload: dict[str, object], hash_field: str) -> bytes:
+    return canonical_json_bytes(
+        {
+            **payload,
+            hash_field: uppercase_sha256_bytes(canonical_json_bytes(payload)),
+        }
+    )
+
+
+def _seed_historical_local_failure(
+    root: Path,
+    documents: dict[str, ParsedDocument],
+    *,
+    failure_stage: str = "local_validation",
+    error_code: str = "schema_invalid",
+) -> dict[str, Path]:
+    historical = prepare_development_run_v0_4(
+        repository_root=root,
+        repository_head_sha="b" * 40,
+        documents=documents,
+    )
+    authorization = build_development_authorization_v0_4(
+        spec=historical.spec,
+        authorization_id="fictional-historical-authorization-v0.4",
+        project_owner_identity="Fictional Historical Owner",
+    )
+    request = historical.requests[0]
+    invocation = historical.spec.invocations[0]
+    identity = cache_identity_from_request(request)
+    response = _semantic_response(request)
+    cache = ResponseCache(root / V0_4_OPENAI_CACHE_ROOT)
+    record = cache.append(
+        build_cache_record(
+            identity=identity,
+            response=response,
+            original_provider_call_timestamp=datetime(
+                2026, 8, 11, 10, 0, tzinfo=timezone.utc
+            ),
+            original_attempts=(
+                AttemptProvenance(
+                    attempt_number=1,
+                    terminal_status=ProviderTerminalStatus.SUCCESS,
+                    provider_call_performed=True,
+                    response_sha256=response.raw_response_sha256,
+                    latency_ms=response.latency_ms,
+                ),
+            ),
+            estimated_cost_usd=Decimal("0.0003"),
+        )
+    )
+    cache_path = cache.path_for(record.identity)
+    marker_path = root / EXECUTION_ARTIFACT_ROOT / "attempts" / (
+        f"{invocation.cache_identity_sha256}.attempt.json"
+    )
+    failure_path = root / EXECUTION_ARTIFACT_ROOT / "failures" / (
+        f"{invocation.cache_identity_sha256}.failure.json"
+    )
+    marker_path.parent.mkdir(parents=True, exist_ok=True)
+    failure_path.parent.mkdir(parents=True, exist_ok=True)
+    common = {
+        "execution_id": historical.spec.execution_id,
+        "run_spec_sha256": historical.spec.run_spec_sha256,
+        "authorization_sha256": authorization.authorization_sha256,
+        "request_id": request.request_id,
+        "cache_identity_sha256": invocation.cache_identity_sha256,
+    }
+    marker_path.write_bytes(
+        _self_hashed_bytes(
+            {"marker_schema_version": "0.1", **common},
+            "marker_sha256",
+        )
+    )
+    failure_path.write_bytes(
+        _self_hashed_bytes(
+            {
+                "failure_schema_version": "0.1",
+                **common,
+                "failure_stage": failure_stage,
+                "error_code": error_code,
+            },
+            "failure_sha256",
+        )
+    )
+    return {
+        "cache": cache_path,
+        "marker": marker_path,
+        "failure": failure_path,
+    }
+
+
+def _path_snapshot(path: Path) -> tuple[bool, bytes | None]:
+    return path.exists(), path.read_bytes() if path.is_file() else None
 
 
 def test_exact_seven_primary_v0_4_requests_are_constructed(
@@ -374,6 +475,173 @@ def test_bound_fake_run_hydrates_all_outputs_and_uses_new_cache(
     assert result.execution_record_path.is_file()
     assert (tmp_path / V0_4_OPENAI_CACHE_ROOT).is_dir()
     assert not (tmp_path / V0_3_OPENAI_CACHE_ROOT).exists()
+
+
+def test_matching_historical_local_failure_recovers_cache_then_uses_six_calls(
+    tmp_path: Path,
+    fictional_documents: dict[str, ParsedDocument],
+) -> None:
+    source_text = "A" * 239 + " " + "fictional suffix"
+    fictional_documents["S001"].blocks[0].text = source_text
+    historical_paths = _seed_historical_local_failure(
+        tmp_path, fictional_documents
+    )
+    historical_bytes = {
+        name: path.read_bytes() for name, path in historical_paths.items()
+    }
+    authorization_path = _authorization_path(tmp_path, fictional_documents)
+    counters = {"key": 0, "client": 0}
+    provider_requests: list[str] = []
+
+    def fake_key() -> str:
+        counters["key"] += 1
+        return "sk-proj-" + "A" * 120
+
+    def fake_client(value: str) -> object:
+        assert value.startswith("sk-proj-")
+        counters["client"] += 1
+        return object()
+
+    def fake_provider(
+        client: object, request: LLMExtractionRequestV04
+    ) -> LLMProviderResponse:
+        assert client is not None
+        provider_requests.append(request.request_id)
+        return _semantic_response(request)
+
+    result = execute_development_run_v0_4(
+        repository_root=tmp_path,
+        authorization_path=authorization_path,
+        execute_real_development=True,
+        confirmation=EXECUTION_CONFIRMATION,
+        repository_head_sha=_HEAD,
+        documents=fictional_documents,
+        clock=lambda: datetime(2026, 8, 11, 12, 0, tzinfo=timezone.utc),
+        api_key_reader=fake_key,
+        client_factory=fake_client,
+        provider_call=fake_provider,
+    )
+
+    record = json.loads(result.execution_record_path.read_bytes())
+    recovered_output = json.loads(result.output_paths[0].read_bytes())
+    excerpt = recovered_output["evidence_references"][0]["text_excerpt"]
+    assert result.provider_call_count == 6
+    assert result.cache_hit_count == 1
+    assert counters == {"key": 6, "client": 6}
+    assert provider_requests == list(EXPECTED_REQUEST_IDS[1:])
+    assert record["outcomes"][0]["cache_status"] == "recovered_cache"
+    assert excerpt == source_text.strip()[:240].rstrip()
+    assert excerpt == excerpt.strip()
+    assert all(
+        path.read_bytes() == historical_bytes[name]
+        for name, path in historical_paths.items()
+    )
+
+
+@pytest.mark.parametrize(
+    ("failure_stage", "error_code"),
+    (
+        ("provider_call", "schema_invalid"),
+        ("cache_install", "schema_invalid"),
+        ("credential_access", "schema_invalid"),
+        ("local_validation", "unknown_evidence_reference"),
+    ),
+)
+def test_only_historical_local_validation_schema_failure_is_recoverable(
+    tmp_path: Path,
+    fictional_documents: dict[str, ParsedDocument],
+    failure_stage: str,
+    error_code: str,
+) -> None:
+    historical_paths = _seed_historical_local_failure(
+        tmp_path,
+        fictional_documents,
+        failure_stage=failure_stage,
+        error_code=error_code,
+    )
+    historical_bytes = {
+        name: path.read_bytes() for name, path in historical_paths.items()
+    }
+    authorization_path = _authorization_path(tmp_path, fictional_documents)
+    counters = {"key": 0, "client": 0, "provider": 0}
+
+    with pytest.raises(Stage4BError) as error:
+        execute_development_run_v0_4(
+            repository_root=tmp_path,
+            authorization_path=authorization_path,
+            execute_real_development=True,
+            confirmation=EXECUTION_CONFIRMATION,
+            repository_head_sha=_HEAD,
+            documents=fictional_documents,
+            api_key_reader=lambda: counters.__setitem__("key", 1),  # type: ignore[arg-type,return-value]
+            client_factory=lambda value: counters.__setitem__("client", 1),
+            provider_call=lambda client, request: counters.__setitem__("provider", 1),  # type: ignore[arg-type,return-value]
+        )
+
+    assert error.value.code is Stage4BErrorCode.DEVELOPMENT_ATTEMPT_ALREADY_EXISTS
+    assert counters == {"key": 0, "client": 0, "provider": 0}
+    assert all(
+        path.read_bytes() == historical_bytes[name]
+        for name, path in historical_paths.items()
+    )
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        "malformed_marker",
+        "mismatched_failure",
+        "malformed_cache",
+        "missing_marker",
+        "missing_cache",
+    ),
+)
+def test_malformed_mismatched_or_incomplete_history_fails_closed(
+    tmp_path: Path,
+    fictional_documents: dict[str, ParsedDocument],
+    mutation: str,
+) -> None:
+    historical_paths = _seed_historical_local_failure(
+        tmp_path, fictional_documents
+    )
+    if mutation == "malformed_marker":
+        historical_paths["marker"].write_bytes(b"{}")
+    elif mutation == "mismatched_failure":
+        payload = json.loads(historical_paths["failure"].read_bytes())
+        payload.pop("failure_sha256")
+        payload["request_id"] = "llm-v0.4-S002-primary-001"
+        historical_paths["failure"].write_bytes(
+            _self_hashed_bytes(payload, "failure_sha256")
+        )
+    elif mutation == "malformed_cache":
+        historical_paths["cache"].write_bytes(b"{}")
+    elif mutation == "missing_marker":
+        historical_paths["marker"].unlink()
+    else:
+        historical_paths["cache"].unlink()
+    mutated_state = {
+        name: _path_snapshot(path) for name, path in historical_paths.items()
+    }
+    authorization_path = _authorization_path(tmp_path, fictional_documents)
+    counters = {"key": 0, "client": 0, "provider": 0}
+
+    with pytest.raises(Stage4BError):
+        execute_development_run_v0_4(
+            repository_root=tmp_path,
+            authorization_path=authorization_path,
+            execute_real_development=True,
+            confirmation=EXECUTION_CONFIRMATION,
+            repository_head_sha=_HEAD,
+            documents=fictional_documents,
+            api_key_reader=lambda: counters.__setitem__("key", 1),  # type: ignore[arg-type,return-value]
+            client_factory=lambda value: counters.__setitem__("client", 1),
+            provider_call=lambda client, request: counters.__setitem__("provider", 1),  # type: ignore[arg-type,return-value]
+        )
+
+    assert counters == {"key": 0, "client": 0, "provider": 0}
+    assert {
+        name: _path_snapshot(path) for name, path in historical_paths.items()
+    } == mutated_state
 
 
 def test_unknown_evidence_is_cached_then_fails_closed_without_second_call(

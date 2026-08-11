@@ -165,6 +165,42 @@ def test_v0_4_semantic_output_hydrates_exact_request_provenance() -> None:
     )
 
 
+def test_v0_4_hydrated_excerpt_remains_trimmed_after_truncation() -> None:
+    text = " \n" + "A" * 239 + " " + "fictional suffix"
+    block = ApprovedEvidenceBlock(
+        source_id="S001",
+        evidence_id="llm-evidence-v0.4-S001-DOC-S001-B0003",
+        block_id="DOC-S001-B0003",
+        sequence=1,
+        text=text,
+        location=SourceLocation(
+            location_type=LocationType.PAGE,
+            location_value="3",
+            page_number=3,
+        ),
+    )
+    request = build_request_envelope_v0_4(
+        invocation_role=InvocationRole.PRIMARY,
+        request_id="llm-v0.4-S001-primary-001",
+        source_id="S001",
+        document_sha256="A" * 64,
+        provider_configuration_id=OPENAI_PROVIDER_CONFIGURATION_ID_V0_4,
+        model_configuration_id=OPENAI_MODEL_CONFIGURATION_ID_V0_4,
+        evidence_blocks=(block,),
+    )
+    payload = _semantic_payload(
+        _semantic_fact("fictional-candidate-001", [block.evidence_id])
+    )
+
+    result = validate_provider_output_v0_4(request, _response(request, payload))
+    excerpt = result.candidate_result.evidence_references[0].text_excerpt
+
+    assert excerpt == text.strip()[:240].rstrip()
+    assert excerpt
+    assert len(excerpt) <= 240
+    assert excerpt == excerpt.strip()
+
+
 def test_v0_4_unknown_and_blank_evidence_ids_fail_closed() -> None:
     request = _request_v0_4()
     unknown = _semantic_payload(

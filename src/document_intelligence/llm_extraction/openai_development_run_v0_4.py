@@ -628,6 +628,85 @@ def _load_marker(path: Path) -> dict[str, object]:
     return payload
 
 
+def _load_historical_failure(path: Path) -> dict[str, object]:
+    try:
+        raw = path.read_bytes()
+        payload = json.loads(raw)
+    except (OSError, ValueError) as error:
+        raise Stage4BError(
+            Stage4BErrorCode.DEVELOPMENT_ATTEMPT_ALREADY_EXISTS,
+            "existing v0.4 failure record is invalid",
+        ) from error
+    if not isinstance(payload, dict) or canonical_json_bytes(payload) != raw:
+        raise Stage4BError(
+            Stage4BErrorCode.DEVELOPMENT_ATTEMPT_ALREADY_EXISTS,
+            "existing v0.4 failure record is not canonical",
+        )
+    claimed = payload.get("failure_sha256")
+    unhashed = {
+        key: value for key, value in payload.items() if key != "failure_sha256"
+    }
+    if claimed != uppercase_sha256_bytes(canonical_json_bytes(unhashed)):
+        raise Stage4BError(
+            Stage4BErrorCode.DEVELOPMENT_ATTEMPT_ALREADY_EXISTS,
+            "existing v0.4 failure record hash is invalid",
+        )
+    return payload
+
+
+def _validate_historical_local_validation_recovery(
+    *,
+    marker: Mapping[str, object],
+    failure: Mapping[str, object],
+    request_id: str,
+    cache_identity_sha256_value: str,
+) -> None:
+    marker_fields = {
+        "marker_schema_version",
+        "execution_id",
+        "run_spec_sha256",
+        "authorization_sha256",
+        "request_id",
+        "cache_identity_sha256",
+        "marker_sha256",
+    }
+    failure_fields = {
+        "failure_schema_version",
+        "execution_id",
+        "run_spec_sha256",
+        "authorization_sha256",
+        "request_id",
+        "cache_identity_sha256",
+        "failure_stage",
+        "error_code",
+        "failure_sha256",
+    }
+    exact_identity = {
+        "request_id": request_id,
+        "cache_identity_sha256": cache_identity_sha256_value,
+    }
+    if (
+        request_id != EXPECTED_REQUEST_IDS[0]
+        or set(marker) != marker_fields
+        or set(failure) != failure_fields
+        or marker.get("marker_schema_version") != "0.1"
+        or failure.get("failure_schema_version") != "0.1"
+        or marker.get("execution_id") != EXECUTION_ID
+        or failure.get("execution_id") != EXECUTION_ID
+        or any(marker.get(key) != value for key, value in exact_identity.items())
+        or any(failure.get(key) != value for key, value in exact_identity.items())
+        or marker.get("run_spec_sha256") != failure.get("run_spec_sha256")
+        or marker.get("authorization_sha256")
+        != failure.get("authorization_sha256")
+        or failure.get("failure_stage") != "local_validation"
+        or failure.get("error_code") != Stage4BErrorCode.SCHEMA_INVALID.value
+    ):
+        raise Stage4BError(
+            Stage4BErrorCode.DEVELOPMENT_ATTEMPT_ALREADY_EXISTS,
+            "historical v0.4 failure is not eligible for offline recovery",
+        )
+
+
 def _actual_response_cost(response: LLMProviderResponse) -> Decimal:
     usage = response.token_usage
     if (
@@ -736,12 +815,9 @@ def execute_development_run_v0_4(
         )
         marker: dict[str, object] | None = None
         stage = "cache_read"
+        historical_failure_exists = os.path.lexists(failure_path)
+        preserve_historical_failure = historical_failure_exists
         try:
-            if os.path.lexists(failure_path):
-                raise Stage4BError(
-                    Stage4BErrorCode.DEVELOPMENT_ATTEMPT_ALREADY_EXISTS,
-                    "a prior v0.4 failure permanently blocks this invocation",
-                )
             try:
                 cached = cache.read(identity)
             except Stage4BError as error:
@@ -749,7 +825,32 @@ def execute_development_run_v0_4(
                     raise
                 cached = None
 
-            if cached is None:
+            if historical_failure_exists:
+                stage = "historical_recovery"
+                if cached is None or not os.path.lexists(marker_path):
+                    raise Stage4BError(
+                        Stage4BErrorCode.DEVELOPMENT_ATTEMPT_ALREADY_EXISTS,
+                        "historical v0.4 failure lacks its exact cache and marker",
+                    )
+                marker = _load_marker(marker_path)
+                failure = _load_historical_failure(failure_path)
+                _validate_historical_local_validation_recovery(
+                    marker=marker,
+                    failure=failure,
+                    request_id=request.request_id,
+                    cache_identity_sha256_value=(
+                        invocation.cache_identity_sha256
+                    ),
+                )
+                cached_cost = _actual_response_cost(cached.response)
+                if cached_cost > invocation.conservative_cost_ceiling_usd:
+                    raise Stage4BError(
+                        Stage4BErrorCode.COST_BUDGET_EXCEEDED,
+                        "cached provider usage exceeds the invocation ceiling",
+                    )
+                cache_hits += 1
+                cache_status = "recovered_cache"
+            elif cached is None:
                 stage = "attempt_gate"
                 if os.path.lexists(marker_path):
                     raise Stage4BError(
@@ -887,7 +988,9 @@ def execute_development_run_v0_4(
                 if isinstance(error, Stage4BError)
                 else Stage4BErrorCode.EXECUTION_FAILED
             )
-            if marker is not None or stage != "cache_read":
+            if not preserve_historical_failure and (
+                marker is not None or stage != "cache_read"
+            ):
                 failure = _self_hashed_payload(
                     {
                         "failure_schema_version": "0.1",

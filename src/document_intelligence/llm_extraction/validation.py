@@ -251,7 +251,7 @@ def _hydrate_semantic_result_v0_4(
                 "block_id": block.block_id,
                 "location_type": block.location.location_type,
                 "location_value": block.location.location_value,
-                "text_excerpt": block.text.strip()[:240],
+                "text_excerpt": block.text.strip()[:240].rstrip(),
                 "evidence_status": EvidenceStatus.SUPPORTED,
             }
             for block in request.evidence_blocks
