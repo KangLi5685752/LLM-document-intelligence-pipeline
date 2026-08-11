@@ -9,7 +9,14 @@ from typing import Literal, TypeAlias
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from document_intelligence.extraction.models import CandidateExtractionResult
+from document_intelligence.extraction.models import (
+    CandidateExtractionResult,
+    CandidateReviewStatus,
+    NormalizedValue,
+    QualifierValue,
+    SubjectType,
+    ValueType,
+)
 from document_intelligence.ingestion.models import SourceLocation
 from document_intelligence.llm_extraction.errors import (
     Stage4BError,
@@ -26,14 +33,21 @@ EXPERIMENT_ID_V0_2: Literal["llm-extraction-baseline-v0.2"] = (
 EXPERIMENT_ID_V0_3: Literal["llm-extraction-baseline-v0.3"] = (
     "llm-extraction-baseline-v0.3"
 )
+EXPERIMENT_ID_V0_4: Literal["llm-extraction-baseline-v0.4"] = (
+    "llm-extraction-baseline-v0.4"
+)
 PROMPT_VERSION_V0_1: Literal["0.1"] = "0.1"
 PROMPT_VERSION_V0_2: Literal["0.2"] = "0.2"
 PROMPT_VERSION_V0_3: Literal["0.3"] = "0.3"
+PROMPT_VERSION_V0_4: Literal["0.4"] = "0.4"
 EXPERIMENT_ID: Literal["llm-extraction-baseline-v0.1"] = EXPERIMENT_ID_V0_1
 PROMPT_VERSION: Literal["0.1"] = PROMPT_VERSION_V0_1
 OUTPUT_CONTRACT_ID: Literal["candidate-extraction-result-0.1"] = (
     "candidate-extraction-result-0.1"
 )
+OUTPUT_CONTRACT_ID_V0_4: Literal[
+    "semantic-candidate-extraction-result-v0.4"
+] = "semantic-candidate-extraction-result-v0.4"
 APPROVED_DEVELOPMENT_SOURCE_IDS = frozenset(
     {"S001", "S002", "S003", "S004", "S006"}
 )
@@ -203,9 +217,83 @@ class LLMExtractionRequestV03(LLMExtractionRequest):
         return self
 
 
+class LLMExtractionRequestV04(LLMExtractionRequest):
+    """Additive provenance-safe semantic provider request."""
+
+    experiment_id: Literal["llm-extraction-baseline-v0.4"] = EXPERIMENT_ID_V0_4
+    prompt_version: Literal["0.4"] = PROMPT_VERSION_V0_4
+    output_contract_id: Literal[
+        "semantic-candidate-extraction-result-v0.4"
+    ] = OUTPUT_CONTRACT_ID_V0_4
+
+    @model_validator(mode="after")
+    def validate_v0_4_identity(self) -> LLMExtractionRequestV04:
+        """Require exact v0.4 request and evidence identity templates."""
+        match = re.fullmatch(
+            rf"llm-v0\.4-{re.escape(self.source_id)}-"
+            rf"{self.invocation_role.value}-(\d{{3}})",
+            self.request_id,
+        )
+        if match is None or int(match.group(1)) < 1:
+            raise ValueError("request_id must use the exact v0.4 identity template")
+        for block in self.evidence_blocks:
+            expected = f"llm-evidence-v0.4-{self.source_id}-{block.block_id}"
+            if block.evidence_id != expected:
+                raise ValueError(
+                    "evidence_id must use the exact v0.4 evidence identity template"
+                )
+        return self
+
+
 LLMExtractionRequestAny: TypeAlias = (
-    LLMExtractionRequest | LLMExtractionRequestV02 | LLMExtractionRequestV03
+    LLMExtractionRequest
+    | LLMExtractionRequestV02
+    | LLMExtractionRequestV03
+    | LLMExtractionRequestV04
 )
+
+
+class SemanticCandidateEntityV04(BaseModel):
+    """Provider-controlled entity semantics without source provenance."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    entity_id: str
+    canonical_name: str
+    entity_type: SubjectType
+    aliases: list[str] = Field(default_factory=list, max_length=0)
+
+
+class SemanticCandidateFactV04(BaseModel):
+    """Provider-controlled fact semantics plus supplied evidence selections."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    candidate_id: str
+    document_family: str
+    subject_text: str
+    subject_type: SubjectType
+    predicate: str
+    raw_value: str
+    normalized_value: NormalizedValue
+    value_type: ValueType
+    qualifiers: dict[str, QualifierValue] = Field(default_factory=dict)
+    evidence_ids: list[str]
+    confidence: float = Field(ge=0, le=1)
+    review_status: CandidateReviewStatus
+    warnings: list[str] = Field(default_factory=list)
+
+
+class SemanticCandidateExtractionResultV04(BaseModel):
+    """Strict v0.4 provider output before deterministic provenance hydration."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    schema_version: Literal["0.1"] = "0.1"
+    batch_id: str
+    entities: list[SemanticCandidateEntityV04] = Field(default_factory=list)
+    candidate_facts: list[SemanticCandidateFactV04] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
 
 
 class ProviderTokenUsage(BaseModel):
@@ -307,20 +395,27 @@ __all__ = [
     "EXPERIMENT_ID_V0_1",
     "EXPERIMENT_ID_V0_2",
     "EXPERIMENT_ID_V0_3",
+    "EXPERIMENT_ID_V0_4",
     "OUTPUT_CONTRACT_ID",
+    "OUTPUT_CONTRACT_ID_V0_4",
     "PROMPT_VERSION",
     "PROMPT_VERSION_V0_1",
     "PROMPT_VERSION_V0_2",
     "PROMPT_VERSION_V0_3",
+    "PROMPT_VERSION_V0_4",
     "ApprovedEvidenceBlock",
     "InvocationRole",
     "LLMExtractionRequest",
     "LLMExtractionRequestAny",
     "LLMExtractionRequestV02",
     "LLMExtractionRequestV03",
+    "LLMExtractionRequestV04",
     "LLMProviderResponse",
     "ProviderTerminalStatus",
     "ProviderTokenUsage",
+    "SemanticCandidateEntityV04",
+    "SemanticCandidateExtractionResultV04",
+    "SemanticCandidateFactV04",
     "ValidatedCandidateOutput",
     "absent_additive_provider_metadata",
     "uppercase_sha256",

@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D development-v0.3 bounded execution closed after immutable S001 provenance-validation failure evidence
+- **Current stage:** Stage 4D additive development-recovery v0.4 provenance-safe semantic boundary implemented offline; reviewed development run next
 - **Last updated:** 2026-08-11
-- **Latest milestone:** After transaction integration and the mandatory pre-real audit, one authorized S001 provider attempt returned successfully and installed its immutable cache before deterministic local validation failed closed with `UNKNOWN_EVIDENCE_REFERENCE`; v0.3 is closed and invocations 2-8 were not attempted
+- **Latest milestone:** The additive v0.4 provider contract limits model output to semantic candidates and supplied evidence IDs, then deterministically hydrates immutable source, block and location provenance from the request allowlist into the unchanged `CandidateExtractionResult` 0.1 contract
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -67,23 +67,24 @@
 
 ## In progress
 
-- The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged in v0.3 and are tested with fictional inputs and injected fake clients.
+- The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged; the additive v0.4 semantic boundary is tested offline with fictional inputs only.
 - Synthetic-preflight v0.1, v0.2, v0.3 and v0.4 are closed historical transactions. The v0.3 and v0.4 evidence remains immutable.
 - The failed bounded development executions v0.1, v0.2 and v0.3 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; none may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
-- Additive recovery design is the next engineering step after repository closure of the v0.3 failure evidence. No recovery version, provider call or evaluation is authorized.
+- The additive development-recovery v0.4 semantic/provider boundary is implemented offline. Immutable evidence provenance is application-controlled and hydrated exactly from request blocks after strict evidence-ID allowlist validation. No new real provider call or evaluation has occurred, and no model-quality claim exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Integrate the immutable development-v0.3 attempt marker, failure record and evidence-closure report without changing their historical outcome.
-2. Design any recovery as a separately reviewed additive version; do not modify or rerun v0.3.
-3. Freeze and independently review any future recovery plan, transaction and authorization binding before considering another provider call.
+1. Independently review the additive v0.4 semantic boundary, then prepare and conduct one bounded, reviewed five-source development run with fresh version-specific identities and authorization.
+2. Evaluate that fixed development result immediately with the unchanged matcher and complete the documented comparison and error analysis.
+3. Keep development-v0.3 permanently closed and preserve its marker, failure record and cache as immutable evidence.
 4. Keep S005, S007 and all held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
 - The v0.1, v0.2 and v0.3 bounded development executions remain closed after deterministic local semantic failures. V0.3 provider transport succeeded, but local supplied-evidence provenance validation failed closed. Their markers, caches and failure evidence must not be modified, repaired or retried; any recovery requires a separately reviewed additive version.
+- Development-recovery v0.4 has only offline contract evidence. It has no real provider output or extraction-quality result and must pass independent review before a bounded development run.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -91,4 +92,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. The v0.4 synthetic preflight verified technical compatibility for the alias-safe provider boundary, but it is not extraction-quality evidence. The v0.1, v0.2 and v0.3 development transactions each attempted only S001 and failed during deterministic local semantic validation, so no complete development extraction, LLM comparison result or held-out result exists. S005 and S007 remain untouched and blocked. Weak deterministic development quality and the lack of a final portfolio presentation also prevent replacement.
+Not yet eligible. The v0.4 synthetic preflight verified technical compatibility for the alias-safe provider boundary, and the additive development-recovery v0.4 provenance-safe contract has only offline tests; neither is extraction-quality evidence. The v0.1, v0.2 and v0.3 development transactions each attempted only S001 and failed during deterministic local semantic validation, so no complete development extraction, LLM comparison result or held-out result exists. S005 and S007 remain untouched and blocked. Weak deterministic development quality and the lack of a final portfolio presentation also prevent replacement.

@@ -9,12 +9,15 @@ from pydantic import ValidationError
 
 from document_intelligence.extraction.models import (
     CandidateExtractionResult,
+    EvidenceStatus,
     ExtractionMethod,
 )
 from document_intelligence.llm_extraction.contracts import (
     LLMExtractionRequest,
+    LLMExtractionRequestV04,
     LLMProviderResponse,
     ProviderTerminalStatus,
+    SemanticCandidateExtractionResultV04,
     ValidatedCandidateOutput,
 )
 from document_intelligence.llm_extraction.errors import (
@@ -199,4 +202,108 @@ def validate_provider_output(
     )
 
 
-__all__ = ["validate_provider_output"]
+def _hydrate_semantic_result_v0_4(
+    request: LLMExtractionRequest,
+    payload: dict[str, Any],
+) -> CandidateExtractionResult:
+    """Hydrate immutable provenance from one exact request evidence allowlist."""
+    try:
+        semantic_result = SemanticCandidateExtractionResultV04.model_validate(payload)
+    except ValidationError as error:
+        raise Stage4BError(
+            _schema_error_code(error),
+            "provider output does not satisfy the provenance-safe semantic contract",
+        ) from error
+
+    approved = {block.evidence_id: block for block in request.evidence_blocks}
+    used_evidence_ids: set[str] = set()
+    for fact in semantic_result.candidate_facts:
+        if not fact.evidence_ids or any(
+            not evidence_id.strip() for evidence_id in fact.evidence_ids
+        ):
+            raise Stage4BError(
+                Stage4BErrorCode.MISSING_EVIDENCE_REFERENCE,
+                "semantic candidate facts require non-blank evidence_ids",
+            )
+        for evidence_id in fact.evidence_ids:
+            if evidence_id not in approved:
+                raise Stage4BError(
+                    Stage4BErrorCode.UNKNOWN_EVIDENCE_REFERENCE,
+                    f"evidence {evidence_id!r} was not supplied in the request",
+                )
+            used_evidence_ids.add(evidence_id)
+
+    hydrated_payload = {
+        "schema_version": semantic_result.schema_version,
+        "batch_id": semantic_result.batch_id,
+        "source_ids": [request.source_id],
+        "entities": [
+            {
+                **entity.model_dump(mode="python"),
+                "source_ids": [request.source_id],
+            }
+            for entity in semantic_result.entities
+        ],
+        "evidence_references": [
+            {
+                "evidence_id": block.evidence_id,
+                "source_id": block.source_id,
+                "block_id": block.block_id,
+                "location_type": block.location.location_type,
+                "location_value": block.location.location_value,
+                "text_excerpt": block.text.strip()[:240],
+                "evidence_status": EvidenceStatus.SUPPORTED,
+            }
+            for block in request.evidence_blocks
+            if block.evidence_id in used_evidence_ids
+        ],
+        "candidate_facts": [
+            {
+                **fact.model_dump(mode="python"),
+                "source_id": request.source_id,
+                "extraction_method": ExtractionMethod.LLM,
+            }
+            for fact in semantic_result.candidate_facts
+        ],
+        "warnings": semantic_result.warnings,
+    }
+    try:
+        result = CandidateExtractionResult.model_validate(hydrated_payload)
+    except ValidationError as error:
+        raise Stage4BError(
+            _schema_error_code(error),
+            "hydrated output does not satisfy the existing candidate contract",
+        ) from error
+    _validate_allowed_evidence(result, request)
+    return result
+
+
+def validate_provider_output_v0_4(
+    request: LLMExtractionRequestV04,
+    response: LLMProviderResponse,
+) -> ValidatedCandidateOutput:
+    """Validate semantic v0.4 output and deterministically hydrate provenance."""
+    validate_request_identity(request)
+    if response.request_id != request.request_id:
+        raise Stage4BError(
+            Stage4BErrorCode.RESPONSE_REQUEST_MISMATCH,
+            "provider response request_id does not match the request",
+        )
+    if response.terminal_status is not ProviderTerminalStatus.SUCCESS:
+        raise Stage4BError(
+            Stage4BErrorCode.PROVIDER_NOT_SUCCESSFUL,
+            f"provider terminal status is {response.terminal_status.value!r}",
+        )
+
+    payload = _parse_strict_json(response.raw_response)
+    result = _hydrate_semantic_result_v0_4(request, payload)
+    canonical_output = canonical_json_bytes(result.model_dump(mode="json"))
+    return ValidatedCandidateOutput(
+        request_id=request.request_id,
+        source_id=request.source_id,
+        candidate_result=result,
+        canonical_output_sha256=uppercase_sha256_bytes(canonical_output),
+    )
+
+
+__all__ = ["validate_provider_output", "validate_provider_output_v0_4"]

@@ -27,6 +27,7 @@ from document_intelligence.llm_extraction.contracts import (
     LLMExtractionRequestAny,
     LLMExtractionRequestV02,
     LLMExtractionRequestV03,
+    LLMExtractionRequestV04,
     LLMProviderResponse,
     ProviderTerminalStatus,
     ProviderTokenUsage,
@@ -65,6 +66,15 @@ OPENAI_MODEL_CONFIGURATION_ID_V0_3: Literal[
 OPENAI_RESPONSE_SCHEMA_NAME_V0_3: Literal[
     "candidate_extraction_result_0_1_aliases_empty_v0_3"
 ] = "candidate_extraction_result_0_1_aliases_empty_v0_3"
+OPENAI_PROVIDER_CONFIGURATION_ID_V0_4: Literal[
+    "openai-responses-text-strict-json-v0.3"
+] = "openai-responses-text-strict-json-v0.3"
+OPENAI_MODEL_CONFIGURATION_ID_V0_4: Literal[
+    "openai-gpt-5.4-mini-text-strict-json-v0.3"
+] = "openai-gpt-5.4-mini-text-strict-json-v0.3"
+OPENAI_RESPONSE_SCHEMA_NAME_V0_4: Literal[
+    "semantic_candidate_extraction_result_v0_4"
+] = "semantic_candidate_extraction_result_v0_4"
 OPENAI_REQUIRED_SDK_VERSION: Literal["2.46.0"] = "2.46.0"
 OPENAI_INSTALLED_SDK_VERSION = package_version("openai")
 OPENAI_MAX_TIMEOUT_SECONDS = 120.0
@@ -223,8 +233,30 @@ DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_3 = OpenAIResponsesConfigurationV03(
     max_output_tokens=OPENAI_MAX_OUTPUT_TOKENS,
     reasoning_effort=OPENAI_REASONING_EFFORT,
 )
+
+
+class OpenAIResponsesConfigurationV04(OpenAIResponsesConfiguration):
+    """Immutable additive configuration for provenance-safe semantic output."""
+
+    provider_configuration_id: Literal[
+        "openai-responses-text-strict-json-v0.3"
+    ] = OPENAI_PROVIDER_CONFIGURATION_ID_V0_4
+    model_configuration_id: Literal[
+        "openai-gpt-5.4-mini-text-strict-json-v0.3"
+    ] = OPENAI_MODEL_CONFIGURATION_ID_V0_4
+    response_schema_name: Literal[
+        "semantic_candidate_extraction_result_v0_4"
+    ] = OPENAI_RESPONSE_SCHEMA_NAME_V0_4
+
+
+DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_4 = OpenAIResponsesConfigurationV04(
+    max_output_tokens=OPENAI_MAX_OUTPUT_TOKENS,
+    reasoning_effort=OPENAI_REASONING_EFFORT,
+)
 OpenAIResponsesConfigurationAny: TypeAlias = (
-    OpenAIResponsesConfiguration | OpenAIResponsesConfigurationV03
+    OpenAIResponsesConfiguration
+    | OpenAIResponsesConfigurationV03
+    | OpenAIResponsesConfigurationV04
 )
 
 
@@ -268,12 +300,16 @@ def _validated_request(request: LLMExtractionRequestAny) -> LLMExtractionRequest
     validate_development_source_id(request.source_id)
     try:
         request_type = (
-            LLMExtractionRequestV03
-            if isinstance(request, LLMExtractionRequestV03)
+            LLMExtractionRequestV04
+            if isinstance(request, LLMExtractionRequestV04)
             else (
-                LLMExtractionRequestV02
-                if isinstance(request, LLMExtractionRequestV02)
-                else LLMExtractionRequest
+                LLMExtractionRequestV03
+                if isinstance(request, LLMExtractionRequestV03)
+                else (
+                    LLMExtractionRequestV02
+                    if isinstance(request, LLMExtractionRequestV02)
+                    else LLMExtractionRequest
+                )
             )
         )
         return request_type.model_validate(request.model_dump(mode="python"))
@@ -443,6 +479,71 @@ def build_openai_candidate_schema_v0_3() -> dict[str, Any]:
     return schema
 
 
+def build_openai_candidate_schema_v0_4() -> dict[str, Any]:
+    """Remove provider control over provenance while retaining semantic fields.
+
+    Evidence IDs remain strict strings so the schema identity is stable across
+    requests; the exact request allowlist is enforced during local hydration.
+    """
+    schema = deepcopy(build_openai_candidate_schema_v0_3())
+    definitions = schema.get("$defs")
+    properties = schema.get("properties")
+    required = schema.get("required")
+    if (
+        not isinstance(definitions, dict)
+        or not isinstance(properties, dict)
+        or not isinstance(required, list)
+    ):
+        raise ValueError("strict candidate schema has an invalid root")
+
+    for field_name in ("source_ids", "evidence_references"):
+        properties.pop(field_name, None)
+        if field_name in required:
+            required.remove(field_name)
+
+    entity = definitions.get("CandidateEntity")
+    fact = definitions.get("CandidateFact")
+    if not isinstance(entity, dict) or not isinstance(fact, dict):
+        raise ValueError("strict candidate schema definitions are incomplete")
+    entity_properties = entity.get("properties")
+    entity_required = entity.get("required")
+    variants = fact.get("anyOf")
+    if (
+        not isinstance(entity_properties, dict)
+        or not isinstance(entity_required, list)
+        or not isinstance(variants, list)
+    ):
+        raise ValueError("strict semantic schema definitions are invalid")
+    entity_properties.pop("source_ids", None)
+    if "source_ids" in entity_required:
+        entity_required.remove("source_ids")
+
+    for variant in variants:
+        if not isinstance(variant, dict):
+            raise ValueError("strict candidate fact variant must be an object")
+        variant_properties = variant.get("properties")
+        variant_required = variant.get("required")
+        if not isinstance(variant_properties, dict) or not isinstance(
+            variant_required, list
+        ):
+            raise ValueError("strict candidate fact variant is invalid")
+        for field_name in ("source_id", "extraction_method"):
+            variant_properties.pop(field_name, None)
+            if field_name in variant_required:
+                variant_required.remove(field_name)
+
+    for unused_definition in (
+        "CandidateEvidenceReference",
+        "EvidenceStatus",
+        "ExtractionMethod",
+        "LocationType",
+    ):
+        definitions.pop(unused_definition, None)
+    schema["title"] = "SemanticCandidateExtractionResultV04"
+    audit_openai_strict_schema(schema)
+    return schema
+
+
 def build_openai_responses_payload(
     request: LLMExtractionRequestAny,
     configuration: OpenAIResponsesConfigurationAny = (
@@ -451,11 +552,18 @@ def build_openai_responses_payload(
 ) -> dict[str, Any]:
     """Build a deterministic text-only Responses payload without client access."""
     validated = _validated_request(request)
+    request_is_v0_4 = isinstance(validated, LLMExtractionRequestV04)
     request_is_v0_3 = isinstance(validated, LLMExtractionRequestV03)
+    configuration_is_v0_4 = isinstance(
+        configuration, OpenAIResponsesConfigurationV04
+    )
     configuration_is_v0_3 = isinstance(
         configuration, OpenAIResponsesConfigurationV03
     )
-    if request_is_v0_3 != configuration_is_v0_3:
+    if (request_is_v0_4, request_is_v0_3) != (
+        configuration_is_v0_4,
+        configuration_is_v0_3,
+    ):
         raise Stage4BError(
             Stage4BErrorCode.PROVIDER_CONFIGURATION_MISMATCH,
             "request version does not match the OpenAI adapter configuration",
@@ -490,9 +598,13 @@ def build_openai_responses_payload(
         f"Ordered evidence blocks (canonical JSON):\n{ordered_blocks}"
     )
     output_schema = (
-        build_openai_candidate_schema_v0_3()
-        if request_is_v0_3
-        else build_openai_candidate_schema()
+        build_openai_candidate_schema_v0_4()
+        if request_is_v0_4
+        else (
+            build_openai_candidate_schema_v0_3()
+            if request_is_v0_3
+            else build_openai_candidate_schema()
+        )
     )
 
     return {
@@ -705,28 +817,34 @@ class OpenAIResponsesProvider:
 __all__ = [
     "DEFAULT_OPENAI_RESPONSES_CONFIGURATION",
     "DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_3",
+    "DEFAULT_OPENAI_RESPONSES_CONFIGURATION_V0_4",
     "OPENAI_API_SURFACE",
     "OPENAI_INSTALLED_SDK_VERSION",
     "OPENAI_MAX_OUTPUT_TOKENS",
     "OPENAI_MAX_TIMEOUT_SECONDS",
     "OPENAI_MODEL_CONFIGURATION_ID",
     "OPENAI_MODEL_CONFIGURATION_ID_V0_3",
+    "OPENAI_MODEL_CONFIGURATION_ID_V0_4",
     "OPENAI_PROVIDER_CONFIGURATION_ID",
     "OPENAI_PROVIDER_CONFIGURATION_ID_V0_3",
+    "OPENAI_PROVIDER_CONFIGURATION_ID_V0_4",
     "OPENAI_PROVIDER_IDENTIFIER",
     "OPENAI_REQUESTED_MODEL_ALIAS",
     "OPENAI_REQUIRED_SDK_VERSION",
     "OPENAI_REASONING_EFFORT",
     "OPENAI_RESPONSE_SCHEMA_NAME",
     "OPENAI_RESPONSE_SCHEMA_NAME_V0_3",
+    "OPENAI_RESPONSE_SCHEMA_NAME_V0_4",
     "OpenAIProviderFailure",
     "OpenAIProviderFailureDiagnostics",
     "OpenAIResponsesConfiguration",
     "OpenAIResponsesConfigurationAny",
     "OpenAIResponsesConfigurationV03",
+    "OpenAIResponsesConfigurationV04",
     "OpenAIResponsesProvider",
     "audit_openai_strict_schema",
     "build_openai_candidate_schema",
     "build_openai_candidate_schema_v0_3",
+    "build_openai_candidate_schema_v0_4",
     "build_openai_responses_payload",
 ]
