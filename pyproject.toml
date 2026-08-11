@@ -9,10 +9,13 @@ description = "An evaluated portfolio prototype for traceable document intellige
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "numpy>=1.26,<3",
     "openai==2.46.0",
     "pydantic>=2.12,<3",
     "pypdf>=6,<7",
     "python-pptx==1.0.2",
+    "scikit-learn>=1.3,<2",
+    "sentence-transformers>=3,<6",
 ]
 
 [project.scripts]
@@ -24,6 +27,11 @@ run-openai-synthetic-preflight = "document_intelligence.llm_extraction.openai_pr
 run-openai-development-execution = "document_intelligence.llm_extraction.openai_development_execution_cli:main"
 run-openai-development-execution-v0-2 = "document_intelligence.llm_extraction.openai_development_execution_v0_2_cli:main"
 run-openai-development-execution-v0-3 = "document_intelligence.llm_extraction.openai_development_execution_v0_3_cli:main"
+extract-project-facts = "document_intelligence.portfolio.cli:main_extract"
+search-project-facts = "document_intelligence.portfolio.cli:main_search"
+rag-search = "document_intelligence.portfolio.cli:main_rag_search"
+rag-query = "document_intelligence.portfolio.cli:main_rag_query"
+evaluate-rag-retrieval = "document_intelligence.portfolio.cli:main_evaluate"
 
 [project.optional-dependencies]
 dev = [

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "RAG-DEV-001",
+    "question": "What long-term commitment is proposed for the UK's AI infrastructure needs?",
+    "expected_source_id": "S001",
+    "expected_block_ids": ["DOC-S001-B0009"]
+  },
+  {
+    "id": "RAG-DEV-002",
+    "question": "What infrastructure does AI depend on for training models and running inference?",
+    "expected_source_id": "S001",
+    "expected_block_ids": ["DOC-S001-B0008"]
+  },
+  {
+    "id": "RAG-DEV-003",
+    "question": "How should regulators build their capability to respond to AI?",
+    "expected_source_id": "S001",
+    "expected_block_ids": ["DOC-S001-B0015"]
+  },
+  {
+    "id": "RAG-DEV-004",
+    "question": "By how much does the government plan to expand sovereign compute capacity by 2030?",
+    "expected_source_id": "S002",
+    "expected_block_ids": ["DOC-S002-B0006"]
+  },
+  {
+    "id": "RAG-DEV-005",
+    "question": "What capacity is planned for the proposed UKAEA-linked AI data centre?",
+    "expected_source_id": "S002",
+    "expected_block_ids": ["DOC-S002-B0007"]
+  },
+  {
+    "id": "RAG-DEV-006",
+    "question": "What AI leadership role is proposed for each government mission?",
+    "expected_source_id": "S002",
+    "expected_block_ids": ["DOC-S002-B0020"]
+  },
+  {
+    "id": "RAG-DEV-007",
+    "question": "How many AI Opportunities Action Plan commitments had been met after one year?",
+    "expected_source_id": "S003",
+    "expected_block_ids": ["DOC-S003-B0008"]
+  },
+  {
+    "id": "RAG-DEV-008",
+    "question": "Which organisations launched the Health Data Research Service?",
+    "expected_source_id": "S003",
+    "expected_block_ids": ["DOC-S003-B0010"]
+  },
+  {
+    "id": "RAG-DEV-009",
+    "question": "When is the next phase of the Sovereign AI Unit due to launch?",
+    "expected_source_id": "S003",
+    "expected_block_ids": ["DOC-S003-B0015"]
+  },
+  {
+    "id": "RAG-DEV-010",
+    "question": "Which transparency standard must in-scope public bodies use for algorithmic tools?",
+    "expected_source_id": "S004",
+    "expected_block_ids": ["DOC-S004-B0013"]
+  },
+  {
+    "id": "RAG-DEV-011",
+    "question": "Why can prompt-injection mitigations not guarantee that an attack will fail?",
+    "expected_source_id": "S004",
+    "expected_block_ids": ["DOC-S004-B0092"]
+  },
+  {
+    "id": "RAG-DEV-012",
+    "question": "What human oversight is required before generative AI triggers irreversible actions?",
+    "expected_source_id": "S004",
+    "expected_block_ids": ["DOC-S004-B0096"]
+  },
+  {
+    "id": "RAG-DEV-013",
+    "question": "What share of medium-sized businesses expected more than half their staff to use AI?",
+    "expected_source_id": "S006",
+    "expected_block_ids": ["DOC-S006-B0024"]
+  },
+  {
+    "id": "RAG-DEV-014",
+    "question": "Which cost and data barriers were reported as hindering wider AI adoption?",
+    "expected_source_id": "S006",
+    "expected_block_ids": ["DOC-S006-B0039"]
+  },
+  {
+    "id": "RAG-DEV-015",
+    "question": "What workforce productivity benefit did current AI users report?",
+    "expected_source_id": "S006",
+    "expected_block_ids": ["DOC-S006-B0042"]
+  }
+]
