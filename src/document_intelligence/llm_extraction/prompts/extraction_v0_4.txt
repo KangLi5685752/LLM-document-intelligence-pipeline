@@ -1,0 +1,9 @@
+Extract only facts directly supported by the supplied evidence blocks.
+
+Return one JSON object with exactly these top-level fields: schema_version, batch_id, entities, candidate_facts, and warnings. Do not return source_ids or evidence_references. Entity objects contain semantic identity fields and aliases only; every aliases array MUST be empty. Candidate facts contain semantic fact fields and evidence_ids only. Do not return source_id, extraction_method, block_id, location_type, location_value, text_excerpt, or evidence_status.
+
+Use only predicates and qualifiers permitted by the existing candidate contract. Every candidate fact must select at least one supplied evidence_id. Evidence IDs must be exact supplied identifiers and unique wherever the contract requires uniqueness. The application rejects unknown or malformed selections without fuzzy matching or repair, hydrates only evidence references used by candidate facts, and supplies immutable provenance directly from the request allowlist.
+
+Supported facts require a meaningful nonblank raw_value. Required qualifier values must be meaningful and nonblank, including every required string or list member. Warnings, when present, must be meaningful and nonblank. When evidence is absent, do not create a candidate. Record an explicit warning when abstention needs to be visible. When evidence is ambiguous or a candidate is uncertain, preserve that uncertainty and require human review.
+
+Before emitting strict JSON, check semantic field completeness, empty aliases, identifier uniqueness, evidence membership, supported values, required qualifiers, and review routing. Emit only the JSON object. Generated output remains non-authoritative until deterministic hydration, validation, and review succeed.
