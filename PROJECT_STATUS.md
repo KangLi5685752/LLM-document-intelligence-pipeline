@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D additive development-recovery v0.4 provenance-safe semantic boundary implemented offline; reviewed development run next
+- **Current stage:** Stage 4D minimal bounded development-v0.4 execution path implemented offline; independent pre-real review and explicit authorization next
 - **Last updated:** 2026-08-11
-- **Latest milestone:** The additive v0.4 provider contract limits model output to semantic candidates and supplied evidence IDs, then deterministically hydrates immutable source, block and location provenance from the request allowlist into the unchanged `CandidateExtractionResult` 0.1 contract
+- **Latest milestone:** The merged provenance-safe v0.4 contract now has a compact cache-first execution path for exactly seven approved primary development requests, with zero retries, a seven-call ceiling and no historical S004 repeat; no v0.4 real provider call has occurred
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -67,24 +67,25 @@
 
 ## In progress
 
-- The pinned provider adapter, same-call metadata bridge, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged; the additive v0.4 semantic boundary is tested offline with fictional inputs only.
+- The merged provenance-safe v0.4 provider contract, deterministic evidence hydration, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged.
 - Synthetic-preflight v0.1, v0.2, v0.3 and v0.4 are closed historical transactions. The v0.3 and v0.4 evidence remains immutable.
 - The failed bounded development executions v0.1, v0.2 and v0.3 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; none may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
-- The additive development-recovery v0.4 semantic/provider boundary is implemented offline. Immutable evidence provenance is application-controlled and hydrated exactly from request blocks after strict evidence-ID allowlist validation. No new real provider call or evaluation has occurred, and no model-quality claim exists.
+- The minimal development-v0.4 execution path is implemented offline for S001, S002, S003, three S004 primary partitions and S006. It uses fresh v0.4 request/cache identities, excludes the historical repeat, permits at most seven calls and attempts with zero retries, caches successful responses before local semantic validation and stops on the first failure. No v0.4 real provider call or evaluation has occurred, and no model-quality claim exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Independently review the additive v0.4 semantic boundary, then prepare and conduct one bounded, reviewed five-source development run with fresh version-specific identities and authorization.
-2. Evaluate that fixed development result immediately with the unchanged matcher and complete the documented comparison and error analysis.
-3. Keep development-v0.3 permanently closed and preserve its marker, failure record and cache as immutable evidence.
-4. Keep S005, S007 and all held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
+1. Independently review the exact development-v0.4 run specification, transaction boundary and seven-primary inventory, then obtain explicit project-owner authorization bound to that reviewed specification.
+2. Conduct one bounded development-v0.4 run only after review and authorization.
+3. Evaluate the fixed result immediately with the unchanged matcher and complete the documented quantitative comparison and error analysis.
+4. Begin retrieval/RAG work only after the development evaluation is complete.
+5. Keep development-v0.3 permanently closed and keep S005, S007 and all held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
 
 ## Blockers
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
 - The v0.1, v0.2 and v0.3 bounded development executions remain closed after deterministic local semantic failures. V0.3 provider transport succeeded, but local supplied-evidence provenance validation failed closed. Their markers, caches and failure evidence must not be modified, repaired or retried; any recovery requires a separately reviewed additive version.
-- Development-recovery v0.4 has only offline contract evidence. It has no real provider output or extraction-quality result and must pass independent review before a bounded development run.
+- Development-recovery v0.4 has only offline contract and execution-path evidence. It has no real provider output or extraction-quality result and requires independent pre-real review plus explicit run-spec-bound authorization before the bounded run.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
