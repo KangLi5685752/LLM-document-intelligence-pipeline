@@ -1,8 +1,8 @@
 # Project Status
 
-- **Current stage:** Stage 4D minimal bounded development-v0.4 execution path implemented offline; independent pre-real review and explicit authorization next
+- **Current stage:** Stage 4D development-v0.4 deterministic hydration correction and cache-only S001 recovery implemented offline; independent recovery review and authorization next
 - **Last updated:** 2026-08-11
-- **Latest milestone:** The merged provenance-safe v0.4 contract now has a compact cache-first execution path for exactly seven approved primary development requests, with zero retries, a seven-call ceiling and no historical S004 repeat; no v0.4 real provider call has occurred
+- **Latest milestone:** The first real v0.4 S001 provider call succeeded with zero retries and its immutable response cache was installed, but deterministic evidence hydration failed because 240-character excerpt truncation could leave trailing whitespace; the narrow offline correction preserves the historical marker, cache and failure evidence
 - **AG News replacement status:** Not yet eligible
 
 ## Completed
@@ -70,13 +70,13 @@
 - The merged provenance-safe v0.4 provider contract, deterministic evidence hydration, exact 4096-token output/reasoning cap, reasoning effort `none`, credential gate and credential-aware failure boundary remain unchanged.
 - Synthetic-preflight v0.1, v0.2, v0.3 and v0.4 are closed historical transactions. The v0.3 and v0.4 evidence remains immutable.
 - The failed bounded development executions v0.1, v0.2 and v0.3 are closed historical transactions. Their S001 attempt markers, failure records and cache records are immutable; none may be rerun, repaired or assigned a retroactive successful outcome. No development-comparison LLM result exists.
-- The minimal development-v0.4 execution path is implemented offline for S001, S002, S003, three S004 primary partitions and S006. It uses fresh v0.4 request/cache identities, excludes the historical repeat, permits at most seven calls and attempts with zero retries, caches successful responses before local semantic validation and stops on the first failure. No v0.4 real provider call or evaluation has occurred, and no model-quality claim exists.
+- The first development-v0.4 S001 call completed successfully, returned 8 entities and 13 candidate facts, and was cached before deterministic local hydration failed with `schema_invalid`. The confirmed defect was local excerpt truncation leaving trailing whitespace, not provider semantic-output validation. A narrow offline recovery path now accepts only the exact verified cache plus canonical historical `local_validation/schema_invalid` marker and failure evidence, consumes no new S001 attempt, credential, client, call or cost, and preserves all historical bytes. No complete v0.4 run or evaluation exists, and no model-quality claim exists.
 - Stage 3B and `deterministic-baseline-v0.4` remain completed, frozen and immutable. Held-out execution remains unauthorized.
 
 ## Next tasks
 
-1. Independently review the exact development-v0.4 run specification, transaction boundary and seven-primary inventory, then obtain explicit project-owner authorization bound to that reviewed specification.
-2. Conduct one bounded development-v0.4 run only after review and authorization.
+1. Independently review the deterministic hydration fix and exact cache-only S001 recovery boundary, then obtain explicit project-owner authorization bound to the updated run specification.
+2. Recover S001 offline from the verified immutable cache and conduct at most six new retry-zero provider calls for the remaining primaries.
 3. Evaluate the fixed result immediately with the unchanged matcher and complete the documented quantitative comparison and error analysis.
 4. Begin retrieval/RAG work only after the development evaluation is complete.
 5. Keep development-v0.3 permanently closed and keep S005, S007 and all held-out execution blocked behind a later separately reviewed guard and explicit project-owner authorization.
@@ -85,7 +85,7 @@
 
 - Stage 3B has no remaining implementation work and its v0.4 evidence is immutable.
 - The v0.1, v0.2 and v0.3 bounded development executions remain closed after deterministic local semantic failures. V0.3 provider transport succeeded, but local supplied-evidence provenance validation failed closed. Their markers, caches and failure evidence must not be modified, repaired or retried; any recovery requires a separately reviewed additive version.
-- Development-recovery v0.4 has only offline contract and execution-path evidence. It has no real provider output or extraction-quality result and requires independent pre-real review plus explicit run-spec-bound authorization before the bounded run.
+- Development-v0.4 has one successful S001 provider response but no complete extraction or quality result. Its historical marker, cache and `local_validation/schema_invalid` failure must remain immutable; the bounded recovery requires independent review plus new run-spec-bound authorization.
 - Held-out execution remains blocked pending a separate reviewed guard and explicit authorization.
 - `deterministic-baseline-v0.4` is frozen and immutable; any later semantic change requires `deterministic-baseline-v0.5`.
 - Sparse development gold cannot independently establish exhaustive candidate precision.
@@ -93,4 +93,4 @@
 
 ## AG News replacement status
 
-Not yet eligible. The v0.4 synthetic preflight verified technical compatibility for the alias-safe provider boundary, and the additive development-recovery v0.4 provenance-safe contract has only offline tests; neither is extraction-quality evidence. The v0.1, v0.2 and v0.3 development transactions each attempted only S001 and failed during deterministic local semantic validation, so no complete development extraction, LLM comparison result or held-out result exists. S005 and S007 remain untouched and blocked. Weak deterministic development quality and the lack of a final portfolio presentation also prevent replacement.
+Not yet eligible. The v0.4 synthetic preflight verified technical compatibility, and the first development-v0.4 S001 provider response passed semantic validation but exposed a deterministic local hydration bug; neither is complete extraction-quality evidence. No complete development extraction, LLM comparison result or held-out result exists. S005 and S007 remain untouched and blocked. Weak deterministic development quality and the lack of a final portfolio presentation also prevent replacement.
