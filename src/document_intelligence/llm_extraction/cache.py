@@ -25,11 +25,13 @@ from document_intelligence.llm_extraction.contracts import (
     EXPERIMENT_ID,
     EXPERIMENT_ID_V0_2,
     EXPERIMENT_ID_V0_3,
+    EXPERIMENT_ID_V0_4,
     InvocationRole,
     LLMExtractionRequest,
     LLMExtractionRequestAny,
     LLMExtractionRequestV02,
     LLMExtractionRequestV03,
+    LLMExtractionRequestV04,
     LLMProviderResponse,
     ProviderTerminalStatus,
     SHA256_PATTERN,
@@ -56,6 +58,9 @@ V0_2_OPENAI_CACHE_ROOT = (
 )
 V0_3_OPENAI_CACHE_ROOT = (
     ".cache/llm_extraction/llm-extraction-baseline-v0.3/openai/"
+)
+V0_4_OPENAI_CACHE_ROOT = (
+    ".cache/llm_extraction/llm-extraction-baseline-v0.4/openai/"
 )
 
 
@@ -133,11 +138,34 @@ class CacheIdentityV03(CacheIdentity):
         )
 
 
-CacheIdentityAny: TypeAlias = CacheIdentity | CacheIdentityV02 | CacheIdentityV03
+class CacheIdentityV04(CacheIdentity):
+    """Additive cache identity for provenance-safe prompt-v0.4 requests."""
+
+    experiment_id: Literal["llm-extraction-baseline-v0.4"] = EXPERIMENT_ID_V0_4
+
+    @classmethod
+    def from_request(cls, request: LLMExtractionRequestV04) -> CacheIdentityV04:
+        return cls(
+            experiment_id=request.experiment_id,
+            invocation_role=request.invocation_role,
+            request_id=request.request_id,
+            canonical_request_sha256=request.canonical_request_sha256,
+            provider_configuration_id=request.provider_configuration_id,
+            model_configuration_id=request.model_configuration_id,
+            prompt_sha256=request.prompt_sha256,
+            document_sha256=request.document_sha256,
+        )
+
+
+CacheIdentityAny: TypeAlias = (
+    CacheIdentity | CacheIdentityV02 | CacheIdentityV03 | CacheIdentityV04
+)
 
 
 def cache_identity_from_request(request: LLMExtractionRequestAny) -> CacheIdentityAny:
     """Select the cache identity model from the explicit request version."""
+    if isinstance(request, LLMExtractionRequestV04):
+        return CacheIdentityV04.from_request(request)
     if isinstance(request, LLMExtractionRequestV03):
         return CacheIdentityV03.from_request(request)
     if isinstance(request, LLMExtractionRequestV02):
@@ -212,7 +240,7 @@ class CacheRecord(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     cache_schema_version: Literal["0.1"] = CACHE_SCHEMA_VERSION
-    identity: CacheIdentity | CacheIdentityV02 | CacheIdentityV03
+    identity: CacheIdentity | CacheIdentityV02 | CacheIdentityV03 | CacheIdentityV04
     response: LLMProviderResponse
     original_provider_call_timestamp: datetime
     original_attempts: tuple[AttemptProvenance, ...] = Field(min_length=1)
@@ -619,6 +647,7 @@ __all__ = [
     "CacheIdentityAny",
     "CacheIdentityV02",
     "CacheIdentityV03",
+    "CacheIdentityV04",
     "CacheRecord",
     "OpenAIOriginalCallProvenanceV01",
     "ResponseCache",
@@ -629,4 +658,5 @@ __all__ = [
     "safe_cache_path",
     "V0_2_OPENAI_CACHE_ROOT",
     "V0_3_OPENAI_CACHE_ROOT",
+    "V0_4_OPENAI_CACHE_ROOT",
 ]
