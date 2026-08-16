@@ -1,0 +1,63 @@
+[
+  {
+    "id": "AGENT-ROUTE-001",
+    "category": "direct_retrieval",
+    "question": "What long-term AI infrastructure investment commitment is proposed?",
+    "expected_status": "answered",
+    "expected_evidence_ids": ["S001:DOC-S001-B0009"],
+    "acceptable_tool_sequences": [["retrieve_evidence"]],
+    "minimal_expected_tool_calls": 1
+  },
+  {
+    "id": "AGENT-ROUTE-002",
+    "category": "structured_fact_search",
+    "question": "What investment commitment supports the long-term infrastructure plan?",
+    "expected_status": "answered",
+    "expected_evidence_ids": ["S001:DOC-S001-B0009"],
+    "acceptable_tool_sequences": [["search_project_facts", "read_evidence_block"]],
+    "minimal_expected_tool_calls": 2,
+    "fact_fixture": {
+      "query": "10-year investment commitment",
+      "fact_type": "commitment",
+      "subject": "Government",
+      "statement": "Government should set out a long-term AI infrastructure plan backed by a 10-year investment commitment.",
+      "value": "10-year investment commitment",
+      "evidence_id": "S001:DOC-S001-B0009"
+    }
+  },
+  {
+    "id": "AGENT-ROUTE-003",
+    "category": "evidence_inspection",
+    "question": "Which evidence supports the Health Data Research Service launch?",
+    "expected_status": "answered",
+    "expected_evidence_ids": ["S003:DOC-S003-B0010"],
+    "acceptable_tool_sequences": [["search_project_facts", "read_evidence_block"]],
+    "minimal_expected_tool_calls": 2,
+    "fact_fixture": {
+      "query": "Health Data Research Service",
+      "fact_type": "status",
+      "subject": "Health Data Research Service",
+      "statement": "The Health Data Research Service was launched.",
+      "value": "launched",
+      "evidence_id": "S003:DOC-S003-B0010"
+    }
+  },
+  {
+    "id": "AGENT-ROUTE-004",
+    "category": "insufficient_retrieval",
+    "question": "What does the corpus say about a fictional lunar banana registry?",
+    "expected_status": "insufficient_evidence",
+    "expected_evidence_ids": [],
+    "acceptable_tool_sequences": [["retrieve_evidence"]],
+    "minimal_expected_tool_calls": 1
+  },
+  {
+    "id": "AGENT-ROUTE-005",
+    "category": "no_match_fact_search",
+    "question": "Which fact describes the fictional zephyr registry?",
+    "expected_status": "insufficient_evidence",
+    "expected_evidence_ids": [],
+    "acceptable_tool_sequences": [["search_project_facts"]],
+    "minimal_expected_tool_calls": 1
+  }
+]

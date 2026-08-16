@@ -1,0 +1,449 @@
+{
+  "evaluation_mode": "offline_function_model",
+  "benchmark_path": "data/evaluation/rag_dev_questions.json",
+  "benchmark_sha256": "58ADD0BA53006D31267C9DA1725B655EE4CBBC352A8AFC8C996B5B5A48715030",
+  "routing_cases_path": "data/evaluation/agent_routing_cases.json",
+  "routing_cases_sha256": "93151C1C410A3F38A359AB77D3D087BFE31CFCB32B0FE3AEAFF31FB46F7C52DD",
+  "development_source_ids": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S006"
+  ],
+  "case_count": 20,
+  "aggregate_metrics": {
+    "case_count": 20,
+    "task_success_count": 18,
+    "task_success_rate": 0.9,
+    "answered_case_count": 16,
+    "citation_valid_count": 16,
+    "citation_validity_rate": 1.0,
+    "abstention_case_count": 2,
+    "appropriate_abstention_count": 2,
+    "appropriate_abstention_rate": 1.0,
+    "tool_selection_acceptable_count": 20,
+    "tool_selection_acceptable_rate": 1.0,
+    "total_tool_calls": 22,
+    "unnecessary_tool_calls": 0,
+    "unnecessary_tool_call_rate": 0.0,
+    "average_tool_calls_per_task": 1.1
+  },
+  "cases": [
+    {
+      "case_id": "RAG-DEV-001",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S001:DOC-S001-B0009"
+      ],
+      "actual_evidence_ids": [
+        "S001:DOC-S001-B0009"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-002",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S001:DOC-S001-B0008"
+      ],
+      "actual_evidence_ids": [
+        "S001:DOC-S001-B0008"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-003",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": false,
+      "expected_status": "answered",
+      "actual_status": "insufficient_evidence",
+      "expected_evidence_ids": [
+        "S001:DOC-S001-B0015"
+      ],
+      "actual_evidence_ids": [],
+      "citation_valid": null,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-004",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S002:DOC-S002-B0006"
+      ],
+      "actual_evidence_ids": [
+        "S002:DOC-S002-B0006"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-005",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S002:DOC-S002-B0007"
+      ],
+      "actual_evidence_ids": [
+        "S002:DOC-S002-B0007"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-006",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S002:DOC-S002-B0020"
+      ],
+      "actual_evidence_ids": [
+        "S002:DOC-S002-B0020"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-007",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S003:DOC-S003-B0008"
+      ],
+      "actual_evidence_ids": [
+        "S003:DOC-S003-B0008"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-008",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S003:DOC-S003-B0010"
+      ],
+      "actual_evidence_ids": [
+        "S003:DOC-S003-B0010"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-009",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S003:DOC-S003-B0015"
+      ],
+      "actual_evidence_ids": [
+        "S003:DOC-S003-B0015"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-010",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": false,
+      "expected_status": "answered",
+      "actual_status": "insufficient_evidence",
+      "expected_evidence_ids": [
+        "S004:DOC-S004-B0013"
+      ],
+      "actual_evidence_ids": [],
+      "citation_valid": null,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-011",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S004:DOC-S004-B0092"
+      ],
+      "actual_evidence_ids": [
+        "S004:DOC-S004-B0092"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-012",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S004:DOC-S004-B0096"
+      ],
+      "actual_evidence_ids": [
+        "S004:DOC-S004-B0096"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-013",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S006:DOC-S006-B0024"
+      ],
+      "actual_evidence_ids": [
+        "S006:DOC-S006-B0024"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-014",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S006:DOC-S006-B0039"
+      ],
+      "actual_evidence_ids": [
+        "S006:DOC-S006-B0039"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "RAG-DEV-015",
+      "category": "rag_evidence_availability",
+      "evaluation_group": "rag_benchmark",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S006:DOC-S006-B0042"
+      ],
+      "actual_evidence_ids": [
+        "S006:DOC-S006-B0042"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "AGENT-ROUTE-001",
+      "category": "direct_retrieval",
+      "evaluation_group": "routing",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S001:DOC-S001-B0009"
+      ],
+      "actual_evidence_ids": [
+        "S001:DOC-S001-B0009"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "AGENT-ROUTE-002",
+      "category": "structured_fact_search",
+      "evaluation_group": "routing",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S001:DOC-S001-B0009"
+      ],
+      "actual_evidence_ids": [
+        "S001:DOC-S001-B0009"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "search_project_facts",
+        "read_evidence_block"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "AGENT-ROUTE-003",
+      "category": "evidence_inspection",
+      "evaluation_group": "routing",
+      "task_success": true,
+      "expected_status": "answered",
+      "actual_status": "answered",
+      "expected_evidence_ids": [
+        "S003:DOC-S003-B0010"
+      ],
+      "actual_evidence_ids": [
+        "S003:DOC-S003-B0010"
+      ],
+      "citation_valid": true,
+      "actual_tool_sequence": [
+        "search_project_facts",
+        "read_evidence_block"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "AGENT-ROUTE-004",
+      "category": "insufficient_retrieval",
+      "evaluation_group": "routing",
+      "task_success": true,
+      "expected_status": "insufficient_evidence",
+      "actual_status": "insufficient_evidence",
+      "expected_evidence_ids": [],
+      "actual_evidence_ids": [],
+      "citation_valid": null,
+      "actual_tool_sequence": [
+        "retrieve_evidence"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    },
+    {
+      "case_id": "AGENT-ROUTE-005",
+      "category": "no_match_fact_search",
+      "evaluation_group": "routing",
+      "task_success": true,
+      "expected_status": "insufficient_evidence",
+      "actual_status": "insufficient_evidence",
+      "expected_evidence_ids": [],
+      "actual_evidence_ids": [],
+      "citation_valid": null,
+      "actual_tool_sequence": [
+        "search_project_facts"
+      ],
+      "tool_selection_acceptable": true,
+      "unnecessary_tool_calls": 0,
+      "error": null
+    }
+  ],
+  "real_smoke_performed": false,
+  "real_smoke_case_count": 0,
+  "real_latency_ms": null,
+  "real_model_usage": null,
+  "real_approximate_cost_usd": null
+}
