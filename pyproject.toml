@@ -11,6 +11,7 @@ requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.26,<3",
     "openai==2.46.0",
+    "pydantic-ai-slim[openai]==2.31.0",
     "pydantic>=2.12,<3",
     "pypdf>=6,<7",
     "python-pptx==1.0.2",
@@ -32,6 +33,7 @@ search-project-facts = "document_intelligence.portfolio.cli:main_search"
 rag-search = "document_intelligence.portfolio.cli:main_rag_search"
 rag-query = "document_intelligence.portfolio.cli:main_rag_query"
 evaluate-rag-retrieval = "document_intelligence.portfolio.cli:main_evaluate"
+agent-query = "document_intelligence.agentic.cli:main"
 
 [project.optional-dependencies]
 dev = [
