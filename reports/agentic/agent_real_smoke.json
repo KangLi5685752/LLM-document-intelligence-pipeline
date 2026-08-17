@@ -1,0 +1,136 @@
+{
+  "scope": "bounded_real_model_integration_smoke",
+  "model": "gpt-5.4-mini",
+  "run_count": 3,
+  "reruns": 0,
+  "runs": [
+    {
+      "case_id": "smoke-01-s002-compute",
+      "model": "gpt-5.4-mini",
+      "question": "By how much does the government plan to expand sovereign compute capacity by 2030?",
+      "status": "answered",
+      "answer": "The government plans to expand sovereign compute capacity by at least 20x by 2030. [S002:DOC-S002-B0006]",
+      "evidence_ids": [
+        "S002:DOC-S002-B0006"
+      ],
+      "labelled_evidence_id": "S002:DOC-S002-B0006",
+      "labelled_evidence_present": true,
+      "citations": [
+        {
+          "evidence_id": "S002:DOC-S002-B0006",
+          "source_id": "S002",
+          "block_id": "DOC-S002-B0006",
+          "location_type": "page",
+          "location_value": "6"
+        }
+      ],
+      "tool_call_summary": [
+        {
+          "tool_name": "retrieve_evidence",
+          "invocation_count": 1,
+          "high_level_result": "returned 5 evidence hits"
+        },
+        {
+          "tool_name": "read_evidence_block",
+          "invocation_count": 1,
+          "high_level_result": "returned 1 exact evidence block"
+        }
+      ],
+      "requests": 3,
+      "tool_calls": 2,
+      "input_tokens": 6938,
+      "output_tokens": 158,
+      "total_tokens": 7096,
+      "approximate_cost_usd": "0.00444570",
+      "elapsed_ms": 16676
+    },
+    {
+      "case_id": "smoke-02-s003-health-data",
+      "model": "gpt-5.4-mini",
+      "question": "Which organisations launched the Health Data Research Service?",
+      "status": "answered",
+      "answer": "The Health Data Research Service was launched by the UK government and Wellcome [S003:DOC-S003-B0010].",
+      "evidence_ids": [
+        "S003:DOC-S003-B0010"
+      ],
+      "labelled_evidence_id": "S003:DOC-S003-B0010",
+      "labelled_evidence_present": true,
+      "citations": [
+        {
+          "evidence_id": "S003:DOC-S003-B0010",
+          "source_id": "S003",
+          "block_id": "DOC-S003-B0010",
+          "location_type": "page",
+          "location_value": "10"
+        }
+      ],
+      "tool_call_summary": [
+        {
+          "tool_name": "retrieve_evidence",
+          "invocation_count": 1,
+          "high_level_result": "returned 5 evidence hits"
+        },
+        {
+          "tool_name": "read_evidence_block",
+          "invocation_count": 1,
+          "high_level_result": "returned 1 exact evidence block"
+        }
+      ],
+      "requests": 3,
+      "tool_calls": 2,
+      "input_tokens": 7306,
+      "output_tokens": 125,
+      "total_tokens": 7431,
+      "approximate_cost_usd": "0.00422760",
+      "elapsed_ms": 22295
+    },
+    {
+      "case_id": "smoke-03-s004-human-oversight",
+      "model": "gpt-5.4-mini",
+      "question": "What human oversight is required before generative AI triggers irreversible actions?",
+      "status": "answered",
+      "answer": "A human must be present to review the action before carrying it out, and generative AI responses must not automatically lead to destructive or irreversible actions such as sending emails or modifying records [S004:DOC-S004-B0083][S004:DOC-S004-B0096].",
+      "evidence_ids": [
+        "S004:DOC-S004-B0083",
+        "S004:DOC-S004-B0096"
+      ],
+      "labelled_evidence_id": "S004:DOC-S004-B0096",
+      "labelled_evidence_present": true,
+      "citations": [
+        {
+          "evidence_id": "S004:DOC-S004-B0083",
+          "source_id": "S004",
+          "block_id": "DOC-S004-B0083",
+          "location_type": "page",
+          "location_value": "83"
+        },
+        {
+          "evidence_id": "S004:DOC-S004-B0096",
+          "source_id": "S004",
+          "block_id": "DOC-S004-B0096",
+          "location_type": "page",
+          "location_value": "96"
+        }
+      ],
+      "tool_call_summary": [
+        {
+          "tool_name": "retrieve_evidence",
+          "invocation_count": 1,
+          "high_level_result": "returned 5 evidence hits"
+        },
+        {
+          "tool_name": "search_project_facts",
+          "invocation_count": 1,
+          "high_level_result": "returned 0 fact matchs"
+        }
+      ],
+      "requests": 3,
+      "tool_calls": 2,
+      "input_tokens": 7392,
+      "output_tokens": 176,
+      "total_tokens": 7568,
+      "approximate_cost_usd": "0.00633600",
+      "elapsed_ms": 16696
+    }
+  ]
+}

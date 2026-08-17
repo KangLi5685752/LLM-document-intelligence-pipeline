@@ -1,187 +1,225 @@
-# LLM Document Intelligence & RAG Pipeline
+# LLM Document Intelligence, Agentic RAG & MCP Pipeline
 
-An evaluated document-intelligence portfolio project that parses heterogeneous PDF, PowerPoint, and email-style sources, extracts schema-validated project facts with source evidence, supports local structured search, and answers questions through block-level semantic retrieval with validated citations.
+A provenance-aware document-intelligence portfolio prototype that ingests heterogeneous business documents, extracts structured facts, retrieves grounded evidence, and exposes the same deterministic capabilities to a bounded Pydantic AI agent and a read-only MCP server.
 
-## What it does
+## Portfolio highlights
 
-- Ingests PDF, PPTX, and EML sources into a common `ParsedDocument` model.
-- Extracts practical project facts with strict OpenAI Structured Outputs.
-- Hydrates source, block, page, slide, and excerpt provenance in application code.
-- Routes ambiguous facts to human review instead of presenting them as certain.
-- Searches extracted facts by type and free text without a database.
-- Retrieves evidence blocks with local sentence-transformer embeddings and cosine similarity.
-- Produces grounded GPT answers whose citations are checked against retrieved blocks.
-- Evaluates retrieval on a 15-question, development-only benchmark using Hit@K and MRR.
+- Ingests PDF, PPTX, and EML sources into typed `ParsedDocument` blocks with source, block, page, slide, and excerpt provenance.
+- Improved a 15-question development retrieval benchmark from dense-only Hit@5 of 46.7% and MRR of 0.289 to hybrid Hit@5 of 86.7% and MRR of 0.535 using Sentence Transformer embeddings, TF-IDF, and Reciprocal Rank Fusion (RRF).
+- Runs one bounded Pydantic AI document agent over exactly three deterministic read-only tools, with typed answers, application-owned citation validation, and explicit insufficient-evidence abstention.
+- Evaluated offline deterministic agent orchestration on 20 labelled cases: 18/20 task success, 16/16 valid citations, 2/2 appropriate abstentions, and 20/20 acceptable tool selections.
+- Completed a separate three-query GPT-5.4-mini development integration smoke: all three returned grounded answers containing their labelled evidence, with no reruns.
+- Exposes the same retrieval, fact-search, and evidence-inspection tools through an official MCP Python SDK v2 stdio server with no embedded LLM.
 
 ## Architecture
 
 ```mermaid
-flowchart LR
-    A["PDF / PPTX / EML"] --> B["Existing ingestion"]
-    B --> C["ParsedDocument blocks + provenance"]
-    C --> D["Strict LLM fact extraction"]
-    D --> E["Evidence-linked facts"]
-    E --> F["Structured search"]
-    C --> G["Local embedding index"]
-    G --> H["Top-k evidence blocks"]
-    H --> I["Grounded GPT answer"]
-    I --> J["Validated source/block citations"]
-    G --> K["Hit@K + MRR evaluation"]
+flowchart TD
+    A["PDF / PPTX / EML"] --> B["Typed ParsedDocument blocks + provenance"]
+    B --> C["Deterministic knowledge and retrieval layer"]
+    C --> D["Structured evidence-linked facts"]
+    C --> E["Hybrid retrieval: Sentence Transformer + TF-IDF + RRF"]
+
+    Q["User question"] --> F["One bounded Pydantic AI Agent"]
+    F --> G["Three read-only tools:<br/>retrieve_evidence<br/>search_project_facts<br/>read_evidence_block"]
+    D --> G
+    E --> G
+    B --> G
+    G --> H["Typed grounded answer or explicit abstention"]
+    H --> I["Application-owned evidence and citation validation"]
+
+    M["MCP stdio server"] --> G
+```
+
+The agent selects tools and produces a bounded final response. Parsing, embeddings, TF-IDF, RRF, fact-search semantics, provenance lookup, and citation hydration remain in the existing deterministic application layer.
+
+## Measured results
+
+| Evaluation | Scope | Metric | Result |
+|---|---|---|---:|
+| Dense-only retrieval baseline | 15-question **development** benchmark | Hit@1 | 13.3% |
+| Dense-only retrieval baseline | 15-question **development** benchmark | Hit@3 | 46.7% |
+| Dense-only retrieval baseline | 15-question **development** benchmark | Hit@5 | 46.7% |
+| Dense-only retrieval baseline | 15-question **development** benchmark | MRR | 0.289 |
+| Hybrid Sentence Transformer + TF-IDF + RRF | 15-question **development** benchmark | Hit@1 | 33.3% |
+| Hybrid Sentence Transformer + TF-IDF + RRF | 15-question **development** benchmark | Hit@3 | 66.7% |
+| Hybrid Sentence Transformer + TF-IDF + RRF | 15-question **development** benchmark | Hit@5 | 86.7% |
+| Hybrid Sentence Transformer + TF-IDF + RRF | 15-question **development** benchmark | MRR | 0.535 |
+| Agent orchestration | 20-case **offline deterministic FunctionModel** evaluation | Task success | 18/20 (90.0%) |
+| Agent orchestration | 20-case **offline deterministic FunctionModel** evaluation | Citation validity | 16/16 (100.0%) |
+| Agent orchestration | 20-case **offline deterministic FunctionModel** evaluation | Appropriate abstention | 2/2 (100.0%) |
+| Agent orchestration | 20-case **offline deterministic FunctionModel** evaluation | Acceptable tool selection | 20/20 (100.0%) |
+| Agent orchestration | 20-case **offline deterministic FunctionModel** evaluation | Unnecessary tool calls | 0/22 (0.0%) |
+| Agent orchestration | 20-case **offline deterministic FunctionModel** evaluation | Average tool calls per task | 1.10 |
+
+The two unsuccessful evidence-availability cases, `RAG-DEV-003` and `RAG-DEV-010`, safely abstained because their labelled evidence was absent from the retrieved top-five blocks.
+
+### Real-model smoke
+
+Three bounded GPT-5.4-mini development integration-smoke queries were run without reruns. All three returned grounded answers containing their labelled evidence.
+
+| Observation | Result |
+|---|---:|
+| Development integration-smoke queries | 3 |
+| Reruns | 0 |
+| Answered with labelled evidence present | 3/3 |
+| Total model requests | 9 |
+| Total tool calls | 6 |
+| Total tokens | 22,095 |
+| Approximate total model cost | USD 0.01500930 |
+| Total elapsed time | 55.667 seconds |
+| Average elapsed time | approximately 18.56 seconds/run |
+
+This is a three-query development integration smoke, not a benchmark or held-out evaluation, and it does not establish generalisation or production readiness. The evidence artifact is stored in `reports/agentic/agent_real_smoke.json`.
+
+## Agent design
+
+The project contains one agent with exactly three injected read-only tools:
+
+- `retrieve_evidence` — hybrid evidence retrieval with optional source filtering.
+- `search_project_facts` — deterministic search over existing structured facts.
+- `read_evidence_block` — exact evidence text and provenance lookup.
+
+The model handles tool selection, bounded orchestration, and the final grounded answer or abstention. The application validates every cited evidence ID and hydrates trusted provenance; unsupported evidence fails closed. Final responses are typed, while chain-of-thought is neither requested nor exposed.
+
+Verified execution bounds are:
+
+- one agent and exactly three read-only tools;
+- request limit: 4;
+- successful tool-call limit: 4;
+- output-token usage limit: 2,000;
+- per-request input-token limit: 30,000, counted before each request;
+- cost limit configured at USD 0.25;
+- model maximum output: 1,200 tokens;
+- provider retries: 0, tool retries: 0, and output retries: 0;
+- unsupported evidence fails closed and insufficient evidence produces explicit abstention.
+
+The cost limit is an execution guard based on available usage reporting, not a billing guarantee.
+
+## MCP interoperability
+
+The `document-mcp-server` entry point uses the official MCP Python SDK v2 and stdio transport. It exposes exactly:
+
+- `retrieve_evidence`
+- `search_project_facts`
+- `read_evidence_block`
+
+All three tools are annotated as read-only, non-destructive, and closed-world. The server has no MCP resources, prompts, write tools, or embedded LLM; it simply makes the existing deterministic document capabilities available to an external MCP-capable host.
+
+```powershell
+document-mcp-server `
+  --parsed-root artifacts/annotations/public_gold_parsed `
+  --source-id S001 `
+  --source-id S002 `
+  --source-id S003 `
+  --source-id S004 `
+  --source-id S006
 ```
 
 ## Quick demo
 
-These commands use locally generated development `ParsedDocument` JSON. Only the extraction and grounded-answer commands require `OPENAI_API_KEY`.
+Install the project:
 
 ```powershell
 python -m pip install -e ".[dev]"
-evaluate-rag-retrieval --parsed-root artifacts/annotations/public_gold_parsed --output artifacts/demo/rag_retrieval_metrics.json
-rag-query --parsed-root artifacts/annotations/public_gold_parsed --source-id S002 --question "What compute infrastructure is the government planning?" --top-k 5
-extract-project-facts --input artifacts/annotations/public_gold_parsed/S002.json --output artifacts/demo/S002.facts.json
 ```
 
-Search the extracted result locally:
+Run hybrid retrieval locally:
 
 ```powershell
-search-project-facts --facts artifacts/demo --type commitment --query "compute"
+rag-search `
+  --parsed-root artifacts/annotations/public_gold_parsed `
+  --source-id S001 `
+  --source-id S002 `
+  --source-id S003 `
+  --source-id S004 `
+  --source-id S006 `
+  --query "What compute infrastructure is the government planning?" `
+  --top-k 5
 ```
 
-Use retrieval without an API key:
+Regenerate the offline deterministic agent evaluation:
 
 ```powershell
-rag-search --parsed-root artifacts/annotations/public_gold_parsed --source-id S001 --source-id S002 --source-id S003 --source-id S004 --source-id S006 --query "What compute infrastructure is planned?" --top-k 5
+python -m document_intelligence.agentic.evaluation `
+  --parsed-root artifacts/annotations/public_gold_parsed `
+  --benchmark data/evaluation/rag_dev_questions.json `
+  --routing-cases data/evaluation/agent_routing_cases.json `
+  --output-json reports/agentic/agent_eval.json `
+  --output-md reports/agentic/agent_eval.md
 ```
 
-Every installed command is also available through the shared module, for example:
+Start the MCP stdio server with the command shown above. It remains a local deterministic read-only process.
+
+The real-agent command remains available for explicit reproduction. Running it makes a paid, networked OpenAI call and requires an API key and deliberate user action. The documented three-query smoke has already been performed; rerunning this command is not required to inspect or reproduce the saved report artifact.
 
 ```powershell
-python -m document_intelligence.portfolio.cli rag-search --parsed-root artifacts/annotations/public_gold_parsed --source-id S002 --query "What compute infrastructure is planned?"
+agent-query `
+  --parsed-root artifacts/annotations/public_gold_parsed `
+  --source-id S002 `
+  --question "By how much does the government plan to expand sovereign compute capacity by 2030?" `
+  --execute-real-agent `
+  --confirm-execution EXECUTE_BOUNDED_DOCUMENT_AGENT_V1
 ```
 
 ## Evaluation
 
-The historical deterministic structured baseline produced 5 true positives, 173 false positives, and 20 false negatives on its development comparison: precision `0.0281`, recall `0.2000`, and F1 `0.0493`. This was measurable but too weak for a useful product interface. A later direct ontology-aligned LLM experiment did not establish an improvement over that baseline. Those engineering results motivated the simpler evidence-ID extraction contract and block-level RAG path now presented here.
+The retrieval result is a 15-question development benchmark comparing dense-only ranking with the fixed hybrid Sentence Transformer, TF-IDF, and RRF implementation.
 
-The repository includes a labelled 15-question retrieval benchmark spanning development sources S001, S002, S003, S004, and S006. No RAG metric is claimed in this README until the benchmark is run in the target environment:
+The 20-case agent evaluation uses deterministic offline `FunctionModel` orchestration. It measures orchestration contracts, grounding, citation integrity, labelled evidence availability, tool routing, and abstention under scripted model actions. It does not measure autonomous GPT-5.4-mini accuracy, autonomous model tool selection, production reliability, or generalisation.
 
-```powershell
-evaluate-rag-retrieval --parsed-root artifacts/annotations/public_gold_parsed --output artifacts/demo/rag_retrieval_metrics.json
-```
-
-The output reports `question_count`, `hit_at_1`, `hit_at_3`, `hit_at_5`, and `mean_reciprocal_rank`. Retrieval evaluation is fully local and makes no OpenAI call.
-
-## Tech stack
-
-- Python 3.10+
-- Pydantic v2 for strict application and model-output schemas
-- OpenAI Responses API with `gpt-5.4-mini`, strict JSON Schema, `store=false`, and no tools
-- Sentence Transformers with `all-MiniLM-L6-v2`
-- NumPy normalized vectors and cosine similarity
-- PyPDF and python-pptx in the existing ingestion layer
-- Pytest with injected fake model responses and deterministic fake embeddings
-
-## Evidence-safe fact extraction
-
-The model receives a bounded list of application-generated evidence IDs and block text. It may select an evidence ID, but it cannot supply source IDs, block IDs, page numbers, slide numbers, or excerpts. After schema validation, the application rejects unknown IDs and hydrates provenance from the original `ParsedDocument`.
-
-Illustrative output shape:
-
-```json
-{
-  "fact_id": "FACT-1A2B3C4D5E6F7890",
-  "fact_type": "commitment",
-  "subject": "The government",
-  "statement": "The government will expand sovereign compute capacity by 2030.",
-  "value": "by 2030",
-  "evidence_ids": ["S002:DOC-S002-B0006"],
-  "confidence": 0.94,
-  "support_status": "supported",
-  "review_required": false,
-  "evidence": [
-    {
-      "evidence_id": "S002:DOC-S002-B0006",
-      "source_id": "S002",
-      "block_id": "DOC-S002-B0006",
-      "location_type": "page",
-      "location_value": "page 5",
-      "excerpt": "..."
-    }
-  ]
-}
-```
-
-Ambiguous facts must use `support_status="ambiguous"` and `review_required=true`. Unsupported facts are omitted.
-
-## Grounded RAG
-
-RAG operates directly on useful `ParsedDocument` text blocks rather than historical structured candidates. Blocks are embedded locally, normalized, and ranked with cosine similarity. GPT sees only the top-k blocks and must use exact citations such as `[S002:DOC-S002-B0006]`. The application rejects a citation that was not retrieved.
-
-Illustrative answer shape:
-
-```json
-{
-  "question": "What compute infrastructure is the government planning?",
-  "answer": "The plan includes expanding sovereign compute capacity by at least 20 times by 2030 [S002:DOC-S002-B0006].",
-  "citations": [
-    {
-      "evidence_id": "S002:DOC-S002-B0006",
-      "source_id": "S002",
-      "block_id": "DOC-S002-B0006",
-      "location_type": "page",
-      "location_value": "page 5"
-    }
-  ]
-}
-```
-
-If the retrieved blocks are insufficient, the model is instructed to say so explicitly and return no unsupported citation.
-
-## Testing
-
-The focused portfolio tests do not call OpenAI or download an embedding model:
-
-```powershell
-python -m pytest tests/test_portfolio_pipeline.py -q
-python -m compileall -q src
-```
-
-The tests cover schema validation, ambiguous review routing, unknown evidence rejection, provenance hydration, exact provider controls, structured search, deterministic retrieval ranking, selected-source loading, citation validation, insufficient-evidence responses, metric calculation, development-only benchmark scope, and a CLI smoke path.
+Separately, the three-query GPT-5.4-mini development integration smoke verifies that the bounded live agent, tool, and citation path worked for those three selected questions without reruns. It is not a benchmark, held-out evaluation, or evidence of generalisation or production readiness.
 
 ## Project structure
 
 ```text
 src/document_intelligence/
-  ingestion/                 # Existing PDF, PPTX and EML parsing
-  portfolio/
-    models.py                # Lightweight fact, retrieval and RAG contracts
-    extraction.py            # Strict fact extraction and evidence hydration
-    retrieval.py             # Local embedding index and retrieval metrics
-    rag.py                   # Grounded QA and citation validation
-    cli.py                   # Five user-facing commands
+  ingestion/                         # PDF, PPTX and EML ingestion
+  portfolio/                         # Fact extraction, hybrid retrieval and RAG
+  agentic/
+    models.py                        # Typed tool and final-answer contracts
+    tools.py                         # Three deterministic read-only tools
+    agent.py                         # Bounded Pydantic AI agent
+    evaluation.py                    # Offline FunctionModel evaluation
+    mcp_server.py                    # Read-only MCP v2 stdio server
+    cli.py                           # Explicitly gated real-agent entry point
 data/evaluation/
-  rag_dev_questions.json     # 15-question development retrieval benchmark
+  rag_dev_questions.json             # 15 retrieval development questions
+  agent_routing_cases.json           # Deterministic routing cases
+reports/agentic/
+  agent_eval.json                    # Machine-readable offline results
+  agent_eval.md                      # Human-readable offline results
+  agent_real_smoke.json              # Bounded three-query live integration smoke
 tests/
-  test_portfolio_pipeline.py # Focused offline portfolio tests
+  test_agentic_tools.py
+  test_agentic_agent.py
+  test_agentic_evaluation.py
+  test_agentic_mcp.py
+  test_portfolio_pipeline.py
 ```
+
+## Tech stack
+
+- Python 3.10+
+- Pydantic v2
+- Pydantic AI
+- OpenAI Responses API with `gpt-5.4-mini`
+- Sentence Transformers (`all-MiniLM-L6-v2`)
+- scikit-learn TF-IDF
+- Reciprocal Rank Fusion
+- Official MCP Python SDK v2
+- pytest
 
 ## Limitations
 
-- The 15-question retrieval set is small and development-only; it is useful for a rapid measurable demo, not a generalization claim.
-- The first retrieval run downloads the configured sentence-transformer model unless it is already cached locally.
-- LLM fact extraction and grounded QA require an OpenAI API key, network access, and paid API usage. There is no automatic retry loop.
-- The new lightweight fact contract has focused validation but has not yet been scored as a structured extractor against a dedicated labelled set.
-- Cosine search is in memory. It is appropriate for this portfolio corpus, not a large production collection.
-- Citations prove that an answer refers to retrieved blocks; human review remains necessary for ambiguous or high-impact claims.
+- The retrieval benchmark contains only 15 development questions and does not establish generalisation.
+- The agent evaluation is deterministic and offline; it is not an autonomous model evaluation.
+- The real-model result is only a three-query development integration smoke, not a benchmark or held-out evaluation.
+- Retrieval is in memory and sized for this portfolio corpus rather than a large production collection.
+- The fact-extraction contract has not been scored against its own dedicated labelled evaluation set.
+- MCP is local stdio only, with no authentication or remote hosting.
 - This is a portfolio prototype, not a production security, availability, or compliance claim.
 
-## Experimental history and engineering lessons
+## Engineering history
 
-The repository retains the earlier deterministic baselines, direct LLM experiments, manifests, transaction controls, and immutable evidence for auditability. They are historical engineering evidence rather than the product entry point. The main lessons carried into the portfolio layer are:
-
-- evaluate before claiming quality;
-- preserve block-level provenance;
-- prevent models from inventing evidence coordinates;
-- keep unsupported or ambiguous outputs reviewable;
-- prefer a small runnable interface over experiment-specific orchestration.
-
-Historical files remain available under `docs/`, `configs/`, `evaluation/`, and `reports/`; none were deleted or rewritten for this product path.
+Earlier ontology-aligned extraction experiments informed the simpler evidence-ID grounding design. Their preserved audit evidence remains engineering history rather than the current product interface.
